@@ -450,8 +450,8 @@ https://zdf-hls-16.akamaized.net/hls/live/2016499/de/high/master.m3u8
 #EXTINF:-1 tvg-id="ZDFneo.de@HD" tvg-logo="https://i.imgur.com/1JIIGgL.png" group-title="Germany â€“ Undefined",ZDFneo HD (720p) [Geo-Blocked]
 https://viamotionhsi.netplus.ch/live/eds/zdfneohd/browser-dash/zdfneohd.mpd
 
-#TINYURL:arabic-iptv:https://tinyurl.com/288e72mm
-#TINYURL:gulf-iptv:https://tinyurl.com/2y6788nu
-#TINYURL:usa-iptv:https://tinyurl.com/22xllnhv
-#TINYURL:eastblock-iptv:https://tinyurl.com/25lmqukn
-#TINYURL:germany-iptv:https://tinyurl.com/2bfom2bu
+#TINYURL:arabic:https://tinyurl.com/288e72mm
+#TINYURL:gulf:https://tinyurl.com/2y6788nu
+#TINYURL:usa:https://tinyurl.com/22xllnhv
+#TINYURL:eastblock:https://tinyurl.com/25lmqukn
+#TINYURL:germany:https://tinyurl.com/2bfom2bu
