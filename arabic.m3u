@@ -383,7 +383,7 @@ https://ch14.tv/live/ch4teenclip/playlist.m3u8
 https://ch14.tv/live/ch4teendoc/playlist.m3u8
 #EXTINF:-1 tvg-id="CharityTV.lb@SD" tvg-logo="https://i.imgur.com/U9z8WBY.png" group-title="Lebanon â€“ Religious",CharityTV (1080p) [Not 24/7]
 http://185.105.4.236:1935/live/ngrp:livestream_all/live.m3u8
-#EXTINF:-1 tvg-id="CNA.dz@SD" tvg-logo="https://i.imgur.com/Ki3ySUE.png" group-title="Morocco â€“ Religious",CNA (Chaîne Nord Africaine) (360p) [Not 24/7]
+#EXTINF:-1 tvg-id="CNA.dz@SD" tvg-logo="https://i.imgur.com/Ki3ySUE.png" group-title="Morocco â€“ Religious",CNA (ChaÃ®ne Nord Africaine) (360p) [Not 24/7]
 https://live.creacast.com/cna/smil:cna.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="CopticTV.eg@SD" tvg-logo="https://www.ctvchannel.tv/images/CTV-logo-white.png" group-title="Egypt â€“ Religious",Coptic TV (720p) [Not 24/7]
 https://ctv.icopts.app/CTV/index.fmp4.m3u8
@@ -555,3 +555,9 @@ https://mn-nl.mncdn.com/utviraqi2/64c80359/index.m3u8
 https://live.kwikmotion.com/waarmedialive/waarmedia.smil/waarmediapublish/waarmedia_source/chunks.m3u8
 #EXTINF:-1 tvg-id="WatarRadio.ae@SD" tvg-logo="https://sbauae.faulio.com/storage/mediagallery/d2/ad/fullhd_48adf2291d08266c05ed1b0c24f326c86b1095b7.png" group-title="UAE â€“ Undefined",Watar Radio (1080p)
 https://svs.itworkscdn.net/smcwatarlive/smcwatar/playlist.m3u8
+
+#TINYURL:arabic-iptv:https://tinyurl.com/288e72mm
+#TINYURL:gulf-iptv:https://tinyurl.com/2y6788nu
+#TINYURL:usa-iptv:https://tinyurl.com/22xllnhv
+#TINYURL:eastblock-iptv:https://tinyurl.com/25lmqukn
+#TINYURL:germany-iptv:https://tinyurl.com/2bfom2bu
