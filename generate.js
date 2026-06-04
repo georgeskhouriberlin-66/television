@@ -200,10 +200,6 @@ async function createTinyURLs() {
       console.log(`   âŒ ${alias}: ${e.message}`);
     }
   }
-  const outPath = path.join(__dirname, 'tinyurls.json');
-  const obj = Object.fromEntries(results.map(r => [r.alias, r.short]));
-  fs.writeFileSync(outPath, JSON.stringify(obj, null, 2) + '\n');
-  console.log(`   ðŸ“ Saved to ${outPath}`);
   return results;
 }
 
@@ -338,6 +334,14 @@ async function main() {
     for (const { alias, short } of tinyResults) {
       console.log(`   ${alias}: ${short}`);
     }
+    // Embed into each .m3u so they get committed automatically
+    const tinyBlock = '\n' + tinyResults.map(r => `#TINYURL:${r.alias}:${r.short}`).join('\n') + '\n';
+    for (const key of Object.keys(CONFIG.playlists)) {
+      const p = CONFIG.playlists[key];
+      const f = path.join(outputDir, p.output);
+      fs.appendFileSync(f, tinyBlock, 'utf-8');
+    }
+    console.log('   ðŸ“ Embedded in all .m3u files');
   }
 
   if (allValid) {
