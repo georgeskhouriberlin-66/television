@@ -1,0 +1,70 @@
+name: "Ultimate IPTV Automation"
+version: "1.0"
+
+description: >
+  Vollautomatisches IPTV-System für GitHub-Account georgeskhouriberlin-66.
+  Erzeugt und aktualisiert 5 Playlisten im Repo 'television', basierend auf iptv-org.
+
+github:
+  user: georgeskhouriberlin-66
+  repository: television
+
+playlists:
+  arabic:
+    output: arabic.m3u
+    sources: [lb, sy, eg, jo, ae, qa]
+    epg: [EG, LB, SY, JO, AE, QA]
+    group_style: "Country – Category"
+  gulf:
+    output: gulf.m3u
+    sources: [ae, qa, jo]
+    epg: [AE, QA, JO]
+    group_style: "Country – Category"
+  usa:
+    output: usa.m3u
+    sources: [us]
+    epg: [US]
+    group_style: "USA – Category"
+  eastblock:
+    output: eastblock.m3u
+    sources: [ru, ua]
+    epg: [RU, UA]
+    group_style: "Country – Category"
+  germany:
+    output: germany.m3u
+    sources: [de]
+    epg: [DE]
+    group_style: "Germany – Category"
+
+sources:
+  lb: "https://iptv-org.github.io/iptv/countries/lb.m3u"
+  sy: "https://iptv-org.github.io/iptv/countries/sy.m3u"
+  eg: "https://iptv-org.github.io/iptv/countries/eg.m3u"
+  jo: "https://iptv-org.github.io/iptv/countries/jo.m3u"
+  ae: "https://iptv-org.github.io/iptv/countries/ae.m3u"
+  qa: "https://iptv-org.github.io/iptv/countries/qa.m3u"
+  us: "https://iptv-org.github.io/iptv/countries/us.m3u"
+  ru: "https://iptv-org.github.io/iptv/countries/ru.m3u"
+  ua: "https://iptv-org.github.io/iptv/countries/ua.m3u"
+  de: "https://iptv-org.github.io/iptv/countries/de.m3u"
+
+rules:
+  remove_duplicates: true
+  ensure_utf8: true
+  ensure_tvg_ids: true
+  ensure_logos: true
+  ensure_group_titles: true
+  sort: alphabetical
+
+automation:
+  schedule: "every 12 hours"
+  rollback: true
+  steps:
+    - download sources
+    - parse & merge channels
+    - deduplicate & sort
+    - apply group titles
+    - embed EPG urls
+    - validate output
+    - rollback on error
+    - write to repo
