@@ -122,6 +122,23 @@ function validateM3U(content, name) {
   return { valid: issues.length === 0, issues, channelCount: urls.length };
 }
 
+// --- Tidy ---
+function tidyOldBackups(maxAgeDays = 7) {
+  if (!fs.existsSync(BACKUP_DIR)) return 0;
+  const now = Date.now();
+  let removed = 0;
+  for (const entry of fs.readdirSync(BACKUP_DIR)) {
+    const p = path.join(BACKUP_DIR, entry);
+    if (!fs.statSync(p).isDirectory()) continue;
+    const ageDays = (now - fs.statSync(p).mtimeMs) / 86400000;
+    if (ageDays > maxAgeDays) {
+      fs.rmSync(p, { recursive: true, force: true });
+      removed++;
+    }
+  }
+  return removed;
+}
+
 // --- Backup ---
 function backup(outputDir) {
   fs.mkdirSync(BACKUP_DIR, { recursive: true });
@@ -303,6 +320,10 @@ async function main() {
       console.log('\nðŸ§¹ Backup cleaned (all valid)');
     }
   }
+
+  // Tidy old backups
+  const tidied = tidyOldBackups();
+  if (tidied > 0) console.log(`\nðŸ§¹ Removed ${tidied} old backup(s)`);
 
   // Summary
   console.log('\nðŸ“Š Summary:');
