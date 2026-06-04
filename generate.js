@@ -25,15 +25,23 @@ const CONFIG = {
     de: 'https://iptv-org.github.io/iptv/countries/de.m3u',
   },
   playlists: {
-    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa'], epg: ['EG','LB','SY','JO','AE','QA'], style: 'Country – Category' },
-    gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Country – Category' },
-    usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA – Category' },
-    eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country – Category' },
-    germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany – Category' },
+    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa'], epg: ['EG','LB','SY','JO','AE','QA'], style: 'Country â€“ Category' },
+    gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Country â€“ Category' },
+    usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA â€“ Category' },
+    eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
+    germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
   },
 };
 
 const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany' };
+
+const TINYURL_CFG = [
+  { alias:'arabic-iptv',    target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/arabic.m3u' },
+  { alias:'gulf-iptv',      target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/gulf.m3u' },
+  { alias:'usa-iptv',       target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/usa.m3u' },
+  { alias:'eastblock-iptv', target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/eastblock.m3u' },
+  { alias:'germany-iptv',   target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/germany.m3u' },
+];
 
 // --- M3U Parsing ---
 function parseM3U(content, sourceKey) {
@@ -152,43 +160,65 @@ function sortChannels(channels) {
   });
 }
 
+// --- TinyURL ---
+async function createTinyURLs() {
+  console.log('\nðŸ”— Creating TinyURLs...');
+  const results = [];
+  for (const { alias, target } of TINYURL_CFG) {
+    try {
+      const resp = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(target)}`);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const short = (await resp.text()).trim();
+      results.push({ alias, target, short });
+      console.log(`   âœ… ${alias} â†’ ${short}`);
+    } catch (e) {
+      console.log(`   âŒ ${alias}: ${e.message}`);
+    }
+  }
+  const outPath = path.join(__dirname, 'tinyurls.json');
+  const obj = Object.fromEntries(results.map(r => [r.alias, r.short]));
+  fs.writeFileSync(outPath, JSON.stringify(obj, null, 2) + '\n');
+  console.log(`   ðŸ“ Saved to ${outPath}`);
+  return results;
+}
+
 // --- Main ---
 async function main() {
   const onlyValidate = process.argv.includes('--validate-only');
   const outputDir = __dirname;
 
-  console.log('📡 IPTV Playlist Generator\n');
+  console.log('ðŸ“¡ IPTV Playlist Generator\n');
 
   // 1. Download all sources
-  console.log('⬇️  Downloading sources...');
+  console.log('â¬‡ï¸  Downloading sources...');
   const rawData = {};
   for (const [key, url] of Object.entries(CONFIG.sources)) {
     try {
-      console.log(`   ${key} → ${url}`);
+      console.log(`   ${key} â†’ ${url}`);
       rawData[key] = await download(url);
     } catch (e) {
-      console.error(`   ❌ ${key}: ${e.message}`);
+      console.error(`   âŒ ${key}: ${e.message}`);
       if (!onlyValidate) process.exit(1);
     }
   }
 
   if (onlyValidate) {
-    console.log('\n🔍 Validation mode: checking existing playlists...');
+    console.log('\nðŸ” Validation mode: checking existing playlists...');
     let allOk = true;
     for (const key of Object.keys(CONFIG.playlists)) {
       const p = CONFIG.playlists[key];
       const f = path.join(outputDir, p.output);
       if (!fs.existsSync(f)) {
-        console.log(`   ❌ ${p.output}: file not found`);
+        console.log(`   âŒ ${p.output}: file not found`);
         allOk = false;
         continue;
       }
       const content = fs.readFileSync(f, 'utf-8');
       const result = validateM3U(content, p.output);
       if (result.valid) {
-        console.log(`   ✅ ${p.output}: ${result.channelCount} channels`);
+        console.log(`   âœ… ${p.output}: ${result.channelCount} channels`);
       } else {
-        console.log(`   ❌ ${p.output}: ${result.issues.join(', ')}`);
+        console.log(`   âŒ ${p.output}: ${result.issues.join(', ')}`);
         allOk = false;
       }
     }
@@ -196,12 +226,12 @@ async function main() {
   }
 
   // 2. Backup existing
-  console.log('\n💾 Creating backup...');
+  console.log('\nðŸ’¾ Creating backup...');
   const backupDir = backup(outputDir);
-  console.log(`   → ${backupDir}`);
+  console.log(`   â†’ ${backupDir}`);
 
   // 3. Parse sources
-  console.log('\n🔧 Parsing channels...');
+  console.log('\nðŸ”§ Parsing channels...');
   const parsed = {};
   for (const key of Object.keys(CONFIG.sources)) {
     if (rawData[key]) {
@@ -211,7 +241,7 @@ async function main() {
   }
 
   // 4. Build playlists
-  console.log('\n📦 Building playlists...');
+  console.log('\nðŸ“¦ Building playlists...');
   let allValid = true;
   const results = [];
 
@@ -231,7 +261,7 @@ async function main() {
     const afterDedup = channels.length;
     channels = sortChannels(channels);
 
-    console.log(`     = ${before} raw → ${afterDedup} unique → ${channels.length} sorted`);
+    console.log(`     = ${before} raw â†’ ${afterDedup} unique â†’ ${channels.length} sorted`);
 
     // Format
     const m3u = formatM3U(channels, cfg.epg, cfg.style);
@@ -240,9 +270,9 @@ async function main() {
     // Validate
     const result = validateM3U(m3u, cfg.output);
     if (result.valid) {
-      console.log(`     ✅ ${result.channelCount} channels, valid`);
+      console.log(`     âœ… ${result.channelCount} channels, valid`);
     } else {
-      console.log(`     ❌ ${result.issues.join(', ')}`);
+      console.log(`     âŒ ${result.issues.join(', ')}`);
       allValid = false;
     }
     results.push({ key, file: cfg.output, valid: result.valid, channels: result.channelCount });
@@ -250,32 +280,41 @@ async function main() {
 
   // 5. Rollback if invalid
   if (!allValid) {
-    console.log('\n⚠️  Validation errors detected!');
+    console.log('\nâš ï¸  Validation errors detected!');
     if (process.env.ENABLE_ROLLBACK !== 'false') {
-      console.log('↩️  Rolling back to backup...');
+      console.log('â†©ï¸  Rolling back to backup...');
       restoreBackup(backupDir, outputDir);
-      console.log('   ✅ Restored from backup');
+      console.log('   âœ… Restored from backup');
     } else {
-      console.log('   ⚠️ Rollback disabled, keeping generated files');
+      console.log('   âš ï¸ Rollback disabled, keeping generated files');
     }
   } else {
     // Remove backup if all valid
     if (fs.existsSync(backupDir)) {
       fs.rmSync(backupDir, { recursive: true, force: true });
-      console.log('\n🧹 Backup cleaned (all valid)');
+      console.log('\nðŸ§¹ Backup cleaned (all valid)');
     }
   }
 
   // Summary
-  console.log('\n📊 Summary:');
+  console.log('\nðŸ“Š Summary:');
   for (const r of results) {
-    console.log(`   ${r.valid ? '✅' : '❌'} ${r.file}: ${r.channels} channels`);
+    console.log(`   ${r.valid ? 'âœ…' : 'âŒ'} ${r.file}: ${r.channels} channels`);
+  }
+
+  // TinyURLs
+  const tinyResults = await createTinyURLs();
+  if (tinyResults.length > 0) {
+    console.log('\nðŸ”— TinyURL Summary:');
+    for (const { alias, short } of tinyResults) {
+      console.log(`   ${alias}: ${short}`);
+    }
   }
 
   if (allValid) {
-    console.log('\n✅ All playlists generated successfully!');
+    console.log('\nâœ… All playlists generated successfully!');
   } else {
-    console.log('\n❌ Some playlists have issues (rolled back)');
+    console.log('\nâŒ Some playlists have issues (rolled back)');
     process.exit(1);
   }
 }
