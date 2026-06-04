@@ -114,8 +114,8 @@ http://45.63.116.205/hls3/stream1.m3u8
 #EXTINF:-1 tvg-id="WatarRadio.ae@SD" tvg-logo="https://sbauae.faulio.com/storage/mediagallery/d2/ad/fullhd_48adf2291d08266c05ed1b0c24f326c86b1095b7.png" group-title="UAE â€“ Undefined",Watar Radio (1080p)
 https://svs.itworkscdn.net/smcwatarlive/smcwatar/playlist.m3u8
 
-#TINYURL:arabic-iptv:https://tinyurl.com/288e72mm
-#TINYURL:gulf-iptv:https://tinyurl.com/2y6788nu
-#TINYURL:usa-iptv:https://tinyurl.com/22xllnhv
-#TINYURL:eastblock-iptv:https://tinyurl.com/25lmqukn
-#TINYURL:germany-iptv:https://tinyurl.com/2bfom2bu
+#TINYURL:arabic:https://tinyurl.com/288e72mm
+#TINYURL:gulf:https://tinyurl.com/2y6788nu
+#TINYURL:usa:https://tinyurl.com/22xllnhv
+#TINYURL:eastblock:https://tinyurl.com/25lmqukn
+#TINYURL:germany:https://tinyurl.com/2bfom2bu
