@@ -43,13 +43,13 @@ const CONFIG = {
 
 const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', sa:'Saudi Arabia', iq:'Iraq', kw:'Kuwait', ps:'Palestine', bh:'Bahrain', ma:'Morocco', ly:'Libya', om:'Oman', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany' };
 
-const TINYURL_CFG = [
-  { alias:'arabic-iptv',    target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/arabic.m3u' },
-  { alias:'gulf-iptv',      target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/gulf.m3u' },
-  { alias:'usa-iptv',       target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/usa.m3u' },
-  { alias:'eastblock-iptv', target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/eastblock.m3u' },
-  { alias:'germany-iptv',   target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/germany.m3u' },
-];
+const TINYURLS = {
+  arabic:    'https://tinyurl.com/288e72mm',
+  gulf:      'https://tinyurl.com/2y6788nu',
+  usa:       'https://tinyurl.com/22xllnhv',
+  eastblock: 'https://tinyurl.com/25lmqukn',
+  germany:   'https://tinyurl.com/2bfom2bu',
+};
 
 // --- M3U Parsing ---
 function parseM3U(content, sourceKey) {
@@ -185,22 +185,12 @@ function sortChannels(channels) {
   });
 }
 
-// --- TinyURL ---
-async function createTinyURLs() {
-  console.log('\nðŸ”— Creating TinyURLs...');
-  const results = [];
-  for (const { alias, target } of TINYURL_CFG) {
-    try {
-      const resp = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(target)}`);
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const short = (await resp.text()).trim();
-      results.push({ alias, target, short });
-      console.log(`   âœ… ${alias} â†’ ${short}`);
-    } catch (e) {
-      console.log(`   âŒ ${alias}: ${e.message}`);
-    }
+function embedTinyURLs() {
+  const block = '\n' + Object.entries(TINYURLS).map(([k, v]) => `#TINYURL:${k}:${v}`).join('\n') + '\n';
+  for (const key of Object.keys(CONFIG.playlists)) {
+    const p = CONFIG.playlists[key];
+    fs.appendFileSync(path.join(__dirname, p.output), block, 'utf-8');
   }
-  return results;
 }
 
 // --- Main ---
@@ -327,21 +317,11 @@ async function main() {
     console.log(`   ${r.valid ? 'âœ…' : 'âŒ'} ${r.file}: ${r.channels} channels`);
   }
 
-  // TinyURLs
-  const tinyResults = await createTinyURLs();
-  if (tinyResults.length > 0) {
-    console.log('\nðŸ”— TinyURL Summary:');
-    for (const { alias, short } of tinyResults) {
-      console.log(`   ${alias}: ${short}`);
-    }
-    // Embed into each .m3u so they get committed automatically
-    const tinyBlock = '\n' + tinyResults.map(r => `#TINYURL:${r.alias}:${r.short}`).join('\n') + '\n';
-    for (const key of Object.keys(CONFIG.playlists)) {
-      const p = CONFIG.playlists[key];
-      const f = path.join(outputDir, p.output);
-      fs.appendFileSync(f, tinyBlock, 'utf-8');
-    }
-    console.log('   ðŸ“ Embedded in all .m3u files');
+  // Embed TinyURLs
+  embedTinyURLs();
+  console.log('\nðŸ”— TinyURLs:');
+  for (const [key, url] of Object.entries(TINYURLS)) {
+    console.log(`   ${key}: ${url}`);
   }
 
   if (allValid) {
