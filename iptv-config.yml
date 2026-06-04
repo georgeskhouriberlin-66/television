@@ -2,7 +2,7 @@ name: "Ultimate IPTV Automation"
 version: "1.0"
 
 description: >
-  Vollautomatisches IPTV-System für GitHub-Account georgeskhouriberlin-66.
+  Vollautomatisches IPTV-System fÃ¼r GitHub-Account georgeskhouriberlin-66.
   Erzeugt und aktualisiert 5 Playlisten im Repo 'television', basierend auf iptv-org.
 
 github:
@@ -14,27 +14,27 @@ playlists:
     output: arabic.m3u
     sources: [lb, sy, eg, jo, ae, qa]
     epg: [EG, LB, SY, JO, AE, QA]
-    group_style: "Country – Category"
+    group_style: "Country â€“ Category"
   gulf:
     output: gulf.m3u
     sources: [ae, qa, jo]
     epg: [AE, QA, JO]
-    group_style: "Country – Category"
+    group_style: "Country â€“ Category"
   usa:
     output: usa.m3u
     sources: [us]
     epg: [US]
-    group_style: "USA – Category"
+    group_style: "USA â€“ Category"
   eastblock:
     output: eastblock.m3u
     sources: [ru, ua]
     epg: [RU, UA]
-    group_style: "Country – Category"
+    group_style: "Country â€“ Category"
   germany:
     output: germany.m3u
     sources: [de]
     epg: [DE]
-    group_style: "Germany – Category"
+    group_style: "Germany â€“ Category"
 
 sources:
   lb: "https://iptv-org.github.io/iptv/countries/lb.m3u"
@@ -55,6 +55,19 @@ rules:
   ensure_logos: true
   ensure_group_titles: true
   sort: alphabetical
+
+tinyurl:
+  create:
+    - alias: "arabic-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/arabic.m3u"
+    - alias: "gulf-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/gulf.m3u"
+    - alias: "usa-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/usa.m3u"
+    - alias: "eastblock-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/eastblock.m3u"
+    - alias: "germany-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/germany.m3u"
 
 automation:
   schedule: "every 12 hours"
