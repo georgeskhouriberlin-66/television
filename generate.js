@@ -23,9 +23,17 @@ const CONFIG = {
     ru: 'https://iptv-org.github.io/iptv/countries/ru.m3u',
     ua: 'https://iptv-org.github.io/iptv/countries/ua.m3u',
     de: 'https://iptv-org.github.io/iptv/countries/de.m3u',
+    sa: 'https://iptv-org.github.io/iptv/countries/sa.m3u',
+    iq: 'https://iptv-org.github.io/iptv/countries/iq.m3u',
+    kw: 'https://iptv-org.github.io/iptv/countries/kw.m3u',
+    ps: 'https://iptv-org.github.io/iptv/countries/ps.m3u',
+    bh: 'https://iptv-org.github.io/iptv/countries/bh.m3u',
+    ma: 'https://iptv-org.github.io/iptv/countries/ma.m3u',
+    ly: 'https://iptv-org.github.io/iptv/countries/ly.m3u',
+    om: 'https://iptv-org.github.io/iptv/countries/om.m3u',
   },
   playlists: {
-    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa'], epg: ['EG','LB','SY','JO','AE','QA'], style: 'Country â€“ Category' },
+    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Country â€“ Category' },
     gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Country â€“ Category' },
     usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA â€“ Category' },
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
@@ -33,7 +41,7 @@ const CONFIG = {
   },
 };
 
-const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany' };
+const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', sa:'Saudi Arabia', iq:'Iraq', kw:'Kuwait', ps:'Palestine', bh:'Bahrain', ma:'Morocco', ly:'Libya', om:'Oman', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany' };
 
 const TINYURL_CFG = [
   { alias:'arabic-iptv',    target:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/arabic.m3u' },
@@ -62,7 +70,7 @@ function parseM3U(content, sourceKey) {
       current.tvgLogo = tvgLogo ? tvgLogo[1] : '';
       current.group = group ? group[1] : (COUNTRY_NAMES[sourceKey] || sourceKey);
       current.name = nameMatch ? nameMatch[1].trim() : 'Unknown';
-    } else if (line && !line.startsWith('#') && current) {
+    } else if (line && /^[a-z]+:\/\//.test(line) && current) {
       current.url = line;
       channels.push({ ...current });
       current = null;
@@ -106,7 +114,7 @@ function validateM3U(content, name) {
   const issues = [];
   if (!content.startsWith('#EXTM3U')) issues.push('Missing #EXTM3U header');
   const lines = content.split(/\r?\n/).filter(l => l.trim());
-  const urls = lines.filter(l => l.startsWith('http://') || l.startsWith('https://'));
+  const urls = lines.filter(l => /^[a-z]+:\/\//.test(l));
   if (urls.length === 0) issues.push('No channel URLs found');
   const extinfCount = lines.filter(l => l.startsWith('#EXTINF:') && !l.includes('x-tvg-url=')).length;
   if (extinfCount === 0) issues.push('No #EXTINF entries found');
