@@ -12,8 +12,8 @@ github:
 playlists:
   arabic:
     output: arabic.m3u
-    sources: [lb, sy, eg, jo, ae, qa]
-    epg: [EG, LB, SY, JO, AE, QA]
+    sources: [lb, sy, eg, jo, ae, qa, sa, iq, kw, ps, bh, ma, ly, om]
+    epg: [EG, LB, SY, JO, AE, QA, SA, IQ, KW, PS, BH, MA, LY, OM]
     group_style: "Country â€“ Category"
   gulf:
     output: gulf.m3u
@@ -47,6 +47,14 @@ sources:
   ru: "https://iptv-org.github.io/iptv/countries/ru.m3u"
   ua: "https://iptv-org.github.io/iptv/countries/ua.m3u"
   de: "https://iptv-org.github.io/iptv/countries/de.m3u"
+  sa: "https://iptv-org.github.io/iptv/countries/sa.m3u"
+  iq: "https://iptv-org.github.io/iptv/countries/iq.m3u"
+  kw: "https://iptv-org.github.io/iptv/countries/kw.m3u"
+  ps: "https://iptv-org.github.io/iptv/countries/ps.m3u"
+  bh: "https://iptv-org.github.io/iptv/countries/bh.m3u"
+  ma: "https://iptv-org.github.io/iptv/countries/ma.m3u"
+  ly: "https://iptv-org.github.io/iptv/countries/ly.m3u"
+  om: "https://iptv-org.github.io/iptv/countries/om.m3u"
 
 rules:
   remove_duplicates: true
