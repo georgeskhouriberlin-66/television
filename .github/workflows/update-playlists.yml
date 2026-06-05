@@ -10,6 +10,7 @@ on:
     paths:
       - 'iptv-config.yml'
       - 'generate.js'
+      - 'channels.json'
   repository_dispatch:
     types: [iptv-org-update, manual-trigger]
 
@@ -32,7 +33,7 @@ jobs:
         run: npm install
 
       - name: Generate playlists
-        run: npm run generate
+        run: node generate.js --validate
         env:
           ENABLE_ROLLBACK: 'true'
 
@@ -43,7 +44,7 @@ jobs:
         run: |
           git config user.name "iptv-bot"
           git config user.email "iptv-bot@users.noreply.github.com"
-          git add arabic.m3u gulf.m3u usa.m3u eastblock.m3u germany.m3u christian.m3u tinyurls.json 
+          git add arabic.m3u gulf.m3u usa.m3u eastblock.m3u germany.m3u christian.m3u tinyurls.json channels.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

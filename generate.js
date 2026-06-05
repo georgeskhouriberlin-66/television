@@ -39,30 +39,9 @@ const CONFIG = {
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
     germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
   },
-  static_channels: {
-    christian: {
-      output: 'christian.m3u',
-      channels: [
-        { name: 'NourSAT', url: 'https://svs.itworkscdn.net/nour4satlive/livestream/playlist.m3u8', tvgLogo: 'https://i.imgur.com/6Zs5rx4.png', group: 'Christian TV' },
-        { name: 'Nour Al Koddas', url: 'https://svs.itworkscdn.net/nour1satlive/livestream/playlist.m3u8', tvgLogo: 'https://i.imgur.com/dF4Mvts.png', group: 'Christian TV' },
-        { name: 'Nour Al Shabab', url: 'https://svs.itworkscdn.net/nour3satlive/livestream/playlist.m3u8', tvgLogo: 'https://i.imgur.com/cNr0vl1.png', group: 'Christian TV' },
-        { name: 'Nour Al Sharq', url: 'https://svs.itworkscdn.net/nour8satlive/livestream/playlist.m3u8', tvgLogo: 'https://i.imgur.com/EEy2dUr.png', group: 'Christian TV' },
-        { name: 'Nour Mariam', url: 'https://svs.itworkscdn.net/nour9satlive/livestream/playlist.m3u8', tvgLogo: 'https://i.imgur.com/Ow5Lqh6.jpg', group: 'Christian TV' },
-        { name: 'Noursat English', url: 'https://svs.itworkscdn.net/noursatenglive/noursateng.smil/playlist.m3u8', tvgLogo: 'https://i.imgur.com/RC5Kw82.png', group: 'Christian TV' },
-        { name: 'Nour Sat Music', url: 'https://svs.itworkscdn.net/nour5satlive/livestream/playlist.m3u8', tvgLogo: 'https://i.imgur.com/6Zs5rx4.png', group: 'Christian TV' },
-        { name: 'SAT-7 Arabic', url: 'https://svs.itworkscdn.net/sat7arabiclive/sat7arabic.smil/playlist_dvr.m3u8', group: 'Christian TV' },
-        { name: 'SAT-7 Kids', url: 'https://svs.itworkscdn.net/sat7kidslive/sat7kids.smil/playlist_dvr.m3u8', group: 'Christian TV' },
-        { name: 'SAT-7 Turk', url: 'https://svs.itworkscdn.net/sat7turklive/sat7turk.smil/playlist.m3u8', group: 'Christian TV' },
-        { name: 'SAT-7 Pars', url: 'https://svs.itworkscdn.net/sat7parslive/sat7pars.smil/sat7parspublish/sat7pars_source/chunks.m3u8', group: 'Christian TV' },
-        { name: 'BBN (Bible Broadcasting Network)', url: 'https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f', tvgLogo: 'https://bbn1.bbnradio.org/english/wp-content/uploads/sites/2/2019/01/BBNEnglish.png', group: 'Christian Radio' },
-        { name: 'Radio Maria Belgium', url: 'http://stream.radiomaria.be:8000/RadioMaria-96', tvgLogo: 'https://www.radiomaria.be/wp-content/uploads/2019/01/transparent_logo-500.png', group: 'Christian Radio' },
-        { name: 'RadioMv English', url: 'https://m3u8.radiomv.com/english-hq.m3u8', tvgLogo: 'https://en.radiomv.com/wp-content/uploads/2022/08/RadioMv-newlogo-800w-4.png', group: 'Christian Radio' },
-        { name: 'RadioMv German', url: 'https://m3u8.radiomv.com/german-hq.m3u8', tvgLogo: 'https://en.radiomv.com/wp-content/uploads/2022/08/RadioMv-newlogo-800w-4.png', group: 'Christian Radio' },
-        { name: 'Orthodox Christian Network', url: 'https://stream.radiojar.com/48cz219puzzuv', tvgLogo: 'https://myocn.net/wp-content/uploads/2023/04/blk-logo-copy.png', group: 'Christian Radio' },
-      ],
-    },
-  },
 };
+
+const STATIC_CHANNELS = JSON.parse(fs.readFileSync(path.join(__dirname, 'channels.json'), 'utf-8'));
 
 const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', sa:'Saudi Arabia', iq:'Iraq', kw:'Kuwait', ps:'Palestine', bh:'Bahrain', ma:'Morocco', ly:'Libya', om:'Oman', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany' };
 
@@ -145,8 +124,8 @@ function allOutputs() {
   for (const key of Object.keys(CONFIG.playlists)) {
     out.push({ key, output: CONFIG.playlists[key].output });
   }
-  for (const key of Object.keys(CONFIG.static_channels)) {
-    out.push({ key, output: CONFIG.static_channels[key].output });
+  for (const key of Object.keys(STATIC_CHANNELS)) {
+    out.push({ key, output: STATIC_CHANNELS[key].output });
   }
   return out;
 }
@@ -240,7 +219,7 @@ function embedTinyURLs() {
 }
 
 // --- URL Validation ---
-const VALIDATION_TIMEOUT = 8000;
+const VALIDATION_TIMEOUT = 3000;
 const VALIDATION_CONCURRENCY = 30;
 
 async function checkURL(url) {
@@ -351,9 +330,9 @@ async function main() {
 
     console.log(`     = ${before} raw → ${afterDedup} unique → ${channels.length} sorted`);
 
-    // Validate URLs
-    const skipVal = process.argv.includes('--no-validate');
-    if (!skipVal && channels.length > 0) {
+    // Validate URLs (opt-in via --validate for CI/CD)
+    const doValidate = process.argv.includes('--validate');
+    if (doValidate && channels.length > 0) {
       const beforeVal = channels.length;
       channels = await removeDeadChannels(channels, cfg.output);
       console.log(`     → ${channels.length}/${beforeVal} alive after validation`);
@@ -376,7 +355,7 @@ async function main() {
 
   // 4b. Build static playlists
   console.log('\n📻 Building static playlists...');
-  for (const [key, cfg] of Object.entries(CONFIG.static_channels)) {
+  for (const [key, cfg] of Object.entries(STATIC_CHANNELS)) {
     console.log(`   ${cfg.output}:`);
     const m3u = formatStaticM3U(cfg.channels);
     fs.writeFileSync(path.join(outputDir, cfg.output), m3u, 'utf-8');
