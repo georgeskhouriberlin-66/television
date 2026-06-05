@@ -9,16 +9,8 @@ https://svs.itworkscdn.net/asharqradiovlive/asharqradiov/playlist.m3u8
 https://rotana.hibridcdn.net/rotananet/classical_net-7Y83PP5adWixDF93/playlist.m3u8
 #EXTINF:-1 tvg-id="ThikrayatTV.sa@SD" tvg-logo="https://i.imgur.com/AKa1X9d.png" group-title="Saudi Arabia â€“ Classic",Thikrayat TV (1080p)
 https://aloula-redirect.vercel.app/3/playlist.m3u8
-#EXTINF:-1 tvg-id="JordanComedy.jo@SD" tvg-logo="https://i.imgur.com/DuwwoO2.png" group-title="Jordan â€“ Comedy",Jordan Comedy (1080p)
-https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Comedy/playlist.m3u8
 #EXTINF:-1 tvg-id="RotanaComedy.sa@SD" tvg-logo="https://i.imgur.com/IlT8U6S.png" group-title="Saudi Arabia â€“ Comedy",Rotana Comedy (1080p) [Geo-blocked]
 https://rotana.hibridcdn.net/rotananet/comedy_net-7Y83PP5adWixDF93/playlist.m3u8
-#EXTINF:-1 tvg-id="RoyaComedy.jo@SD" tvg-logo="https://i.imgur.com/oIThcM8.png" group-title="Jordan â€“ Comedy",Roya Comedy (1080p)
-https://playlist.fasttvcdn.com/pl/toa2uuhhygheuly7xtuqrg/roya-comedy/playlist.m3u8
-#EXTINF:-1 tvg-id="JordanKitchen.jo@SD" tvg-logo="https://i.imgur.com/B45qcQX.png" group-title="Jordan â€“ Cooking",Jordan Kitchen (1080p)
-https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/cooking/playlist.m3u8
-#EXTINF:-1 tvg-id="RoyaKitchen.jo@SD" tvg-logo="https://i.imgur.com/lWfh8pP.png" group-title="Jordan â€“ Cooking",Roya Kitchen (1080p)
-https://playlist.fasttvcdn.com/pl/toa2uuhhygheuly7xtuqrg/roya-kitchen/playlist.m3u8
 #EXTINF:-1 tvg-id="KTVArabe.kw@SD" tvg-logo="https://i.imgur.com/jg3VAxO.png" group-title="Kuwait â€“ Culture",KTV Arabe (1080p)
 https://kwtktvata.cdn.mangomolo.com/ktva/smil:tktva.stream.smil/chunklist.m3u8
 #EXTINF:-1 tvg-id="OmanTVCultural.om@SD" tvg-logo="https://i.imgur.com/b38wNPK.png" group-title="Oman â€“ Culture",Oman Althakafia (1080p)
@@ -39,16 +31,10 @@ https://svs.itworkscdn.net/asharqdiscoverylive/asharqd.smil/playlist_dvr.m3u8
 https://pbc.furrera.ps/PalestineEDU/index.m3u8
 #EXTINF:-1 tvg-id="FujairahTV.ae@SD" tvg-logo="https://i.imgur.com/D2tOhbE.png" group-title="UAE â€“ Entertainment",Fujairah TV (720p)
 https://live.kwikmotion.com/fujairahlive/fujairah.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="KurdMaxShow.iq@SD" tvg-logo="https://i.imgur.com/XTmyGmL.png" group-title="Iraq â€“ Entertainment",KurdMax Show (720p)
-https://6476e46b58f91.streamlock.net/liveTrans/SHOWS123/playlist.m3u8
-#EXTINF:-1 tvg-id="KurdMaxSorani.iq@SD" tvg-logo="https://i.imgur.com/JkK8HG8.png" group-title="Iraq â€“ Entertainment",KurdMax Sorani (1080p)
-https://6476e46b58f91.streamlock.net/liveTrans/KURDS2211/playlist.m3u8
 #EXTINF:-1 tvg-id="Kurdsat.iq@SD" tvg-logo="https://i.imgur.com/UAbSwYA.png" group-title="Iraq â€“ Entertainment",Kurdsat (1080p)
 https://hlspackager.akamaized.net/live/DB/KURDSAT_HD/HLS/KURDSAT_HD.m3u8
 #EXTINF:-1 tvg-id="MBCPersia.ae@SD" tvg-logo="https://i.imgur.com/4FXiyjn.png" group-title="UAE â€“ Entertainment",MBC Persia (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-persia/818ee8e4b592dc497608f066d825bfb4/index.m3u8
-#EXTINF:-1 tvg-id="NUBARPlusPlus.iq@SD" tvg-logo="https://i.ibb.co/XpgWb6B/IMG-20230628-140407.jpg" group-title="Iraq â€“ Entertainment",NUBAR Plus TV (720p)
-http://stream.nubar.tv:1935/private/NUBARPlus/playlist.m3u8
 #EXTINF:-1 tvg-id="AlSouriyaTV.sy@HD" tvg-logo="https://i.imgur.com/8FILgXT.jpeg" group-title="Syria â€“ Family",Al-Souriya TV (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-al-souriya-tv/e3150760fa5fd62776225433b8c3d406/index.m3u8
 #EXTINF:-1 tvg-id="AVAFamily.ir@SD" group-title="Iraq â€“ Family",AVA Family
@@ -61,8 +47,6 @@ https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab
 https://avr.host247.net/live/Mix-kurdy/playlist.m3u8
 #EXTINF:-1 tvg-id="2MMonde.ma@SD" tvg-logo="https://i.imgur.com/MvpntzA.png" group-title="Morocco â€“ General",2M Monde (360p)
 https://cdn-globecast.akamaized.net/live/eds/2m_monde/hls_video_ts_tuhawxpiemz257adfc/2m_monde.m3u8
-#EXTINF:-1 tvg-id="2MMonde.ma@Plus1" tvg-logo="https://i.imgur.com/MvpntzA.png" group-title="Morocco â€“ General",2M Monde +1 (1080p)
-https://d2qh3gh0k5vp3v.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-n6pess5lwbghr/2M_ES.m3u8
 #EXTINF:-1 tvg-id="AjmanTV.ae@SD" tvg-logo="https://i.imgur.com/hVNIwgE.png" group-title="UAE â€“ General",Ajman TV (1080p)
 https://cdn1.logichost.in/ajmantv/live/playlist.m3u8
 #EXTINF:-1 tvg-id="AjyalTV.ps@SD" tvg-logo="https://i.imgur.com/i6Y7beR.jpg" group-title="Palestine â€“ General",Ajyal TV (720p)
@@ -73,10 +57,6 @@ https://imn-live.esite-lab.com/hls/iraqia-general.m3u8
 http://185.105.4.151:8080/_defapp_/ittihad/index.m3u8
 #EXTINF:-1 tvg-id="AlJadeed.lb@SD" tvg-logo="https://i.imgur.com/CfxR8o3.png" group-title="Lebanon â€“ General",Al Jadeed (1080p)
 http://185.9.2.18/chid_391/mono.m3u8
-#EXTINF:-1 tvg-id="AlMaghribia.ma@SD" tvg-logo="https://i.imgur.com/7GaahYh.png" group-title="Morocco â€“ General",Al Maghribia (720p) [Geo-Blocked]
-https://viamotionhsi.netplus.ch/live/eds/almaghribia/browser-dash/almaghribia.mpd
-#EXTINF:-1 tvg-id="AlMasriyah.eg@SD" tvg-logo="https://i.ibb.co/Kx7wmXCQ/almasriya.png" group-title="Egypt â€“ General",Al Masriyah (720p) [Geo-Blocked]
-https://viamotionhsi.netplus.ch/live/eds/almasriyah/browser-HLS8/almasriyah.m3u8
 #EXTINF:-1 tvg-id="AlRasheedTV.iq@SD" tvg-logo="https://i.imgur.com/ltyRjPK.png" group-title="Iraq â€“ General",Al Rasheed TV (1080p) [Not 24/7]
 https://media1.livaat.com/static/AL-RASHEED-HD/playlist.m3u8
 #EXTINF:-1 tvg-id="AlRayyanTV.qa@SD" tvg-logo="https://i.imgur.com/Ts3RjTV.png" group-title="Qatar â€“ General",Al Rayyan (1080p)
@@ -105,8 +85,6 @@ https://flu.systemnet.tv/CBC/index.m3u8
 https://chadatv.vedge.infomaniak.com/livecast/chadatv/playlist.m3u8
 #EXTINF:-1 tvg-id="FutureTV.lb@SD" tvg-logo="https://i.imgur.com/OaqEpwe.png" group-title="Lebanon â€“ General",Future TV (1080p)
 https://live.kwikmotion.com/futurelive/ftv.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="HalaRamallah.ps@SD" tvg-logo="https://i.ibb.co/swP1FDK/halaramallah-logo.png" group-title="Palestine â€“ General",Hala Ramallah (720p)
-https://halaramallahtv.com:2053/HRamallah-Tv/HalaRamallah/playlist.m3u8
 #EXTINF:-1 tvg-id="IraqFuture.iq@SD" tvg-logo="https://i.imgur.com/Z7woTe5.png" group-title="Iraq â€“ General",Iraq Future (480p)
 https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_040/Stream/playlist.m3u8
 #EXTINF:-1 tvg-id="JordanTV.jo@SD" tvg-logo="https://i.imgur.com/0XozB5N.png" group-title="Jordan â€“ General",Jordan Satellite Channel (1080p)
@@ -173,10 +151,6 @@ https://5dcabf026b188.streamlock.net/afarinTV/livestream/playlist.m3u8
 https://65f16f0fdfc51.streamlock.net/afarinTV/livestream/playlist.m3u8
 #EXTINF:-1 tvg-id="AtfalMawahebTV.sa@SD" tvg-logo="https://i.imgur.com/Y2BqP9m.png" group-title="Saudi Arabia â€“ Kids",Atfal & Mawaheb TV (1080p)
 https://5aafcc5de91f1.streamlock.net/atfal1.com/atfal2/playlist.m3u8
-#EXTINF:-1 tvg-id="RoyaKids.jo@SD" tvg-logo="https://i.imgur.com/acuCGF8.png" group-title="Jordan â€“ Kids",Roya Kids
-https://playlist.fasttvcdn.com/pl/ptllxjd03j6g9oxxjdfapg/roya-kids/playlist.m3u8
-#EXTINF:-1 tvg-id="RoyaKidsOriginals.jo@SD" tvg-logo="https://i.imgur.com/acuCGF8.png" group-title="Jordan â€“ Kids",Roya Kids Originals (1080p)
-https://playlist.fasttvcdn.com/pl/ptllxjd03j6g9oxxjdfapg/roya-kids-originals/playlist.m3u8
 #EXTINF:-1 tvg-id="TahaTV.lb@SD" tvg-logo="https://i.imgur.com/hdsrxvX.png" group-title="Lebanon â€“ Kids",Taha TV (576p)
 https://stream.starmenajo.com/hls/app/live/ts:fhd.m3u8
 #EXTINF:-1 tvg-id="KoogiTV.eg@SD" tvg-logo="https://i.imgur.com/zojMTP9.png" group-title="Egypt â€“ Kids;Religious",Koogi TV (1080p)
@@ -191,8 +165,6 @@ https://ml-pull-hwc.myco.io/MixTV/hls/index.m3u8
 https://shd-amg-fast.edgenextcdn.net/tx011/playlist.m3u8
 #EXTINF:-1 tvg-id="MoviesThriller.sa@SD" tvg-logo="https://i.imgur.com/JWihdcl.png" group-title="Saudi Arabia â€“ Movies",Movies Thriller (1080p)
 https://shd-amg-fast.edgenextcdn.net/tx012/playlist.m3u8
-#EXTINF:-1 tvg-id="OSNMoviesAction.ae@SD" tvg-logo="https://i.imgur.com/uOzyKup.png" group-title="UAE â€“ Movies",OSN Movies Action (1080p)
-http://116.90.120.151:8000/play/a0ax/index.m3u8
 #EXTINF:-1 tvg-id="RotanaCinemaEgypt.eg@SD" tvg-logo="https://i.imgur.com/dGlKoLW.png" group-title="Egypt â€“ Movies",Rotana Cinema Egypt (1080p) [Geo-blocked]
 https://rotana.hibridcdn.net/rotananet/cinemamasr_net-7Y83PP5adWixDF93/playlist.m3u8
 #EXTINF:-1 tvg-id="RotanaCinemaKSA.sa@SD" tvg-logo="https://i.imgur.com/pGgp38I.png" group-title="Saudi Arabia â€“ Movies",Rotana Cinema KSA (1080p) [Geo-blocked]
@@ -211,20 +183,10 @@ https://shd-amg-fast.edgenextcdn.net/tx029/playlist.m3u8
 https://rp.tactivemedia.com/palestiniantv_source/live/playlist.m3u8
 #EXTINF:-1 tvg-id="JeddahRadio.sa@SD" tvg-logo="https://aloula.faulio.com/storage/mediagallery/bd/f5/fullhd_527bf54a5adb56ac17f572ac2cd0801304db3baf.png" group-title="Saudi Arabia â€“ Music",Jeddah Radio (1080p)
 https://live.kwikmotion.com/sbrksajeddahradiolive/srpksajeddahradio/chunks.m3u8
-#EXTINF:-1 tvg-id="JordanSongs.jo@SD" tvg-logo="https://i.imgur.com/1DE7Gmw.png" group-title="Jordan â€“ Music",Jordan Songs (1080p)
-https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Song/playlist.m3u8
-#EXTINF:-1 tvg-id="KurdMaxMusic.iq@SD" tvg-logo="https://i.imgur.com/otnIdEu.png" group-title="Iraq â€“ Music",KurdMax Music (720p)
-https://6476e46b58f91.streamlock.net/music/MUSIC2402/playlist.m3u8
-#EXTINF:-1 tvg-id="MPlus.sa@SD" tvg-logo="https://i.imgur.com/Ho8N310.png" group-title="Saudi Arabia â€“ Music",like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0" group-title="Music",M+ (1080p)
-https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/m-plus/master.m3u8?ads.vf=99_BajuDhjC
 #EXTINF:-1 tvg-id="MajidAlMohandis.sa@SD" tvg-logo="https://i.discogs.com/Fk9Bm8gTYJYeVXIJKX-EOGmYQ90sVQPtkIW5ZK4fydo/rs:fit/g:sm/q:90/h:372/w:412/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTE2OTY4/MzMtMTU2ODk0NjI5/MC01Njk2LmpwZWc.jpeg" group-title="Saudi Arabia â€“ Music",Majid Al Mohandis (1080p)
 https://shd-amg-fast.edgenextcdn.net/tx019/playlist.m3u8
-#EXTINF:-1 tvg-id="MarinaTV.kw@SD" tvg-logo="https://i.imgur.com/F2PzEaw.png" group-title="Kuwait â€“ Music",Marina TV (1080p)
-https://ffs.gulfsat.com/Marina-TV-HD/index.m3u8
 #EXTINF:-1 tvg-id="MBCMood.sa@HD" tvg-logo="https://shahid.mbc.net/mediaObject/c2b6a882-458b-446e-b0fe-f97f7992149a?height=auto&width=144&croppingPoint=&version=1&type=png" group-title="Saudi Arabia â€“ Music",MBC Mood (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-mood/78367bf48ccdba501d0d014a10c21031/index.m3u8
-#EXTINF:-1 tvg-id="MelodyFM.jo@SD" tvg-logo="https://i.imgur.com/J8omcNz.png" group-title="Jordan â€“ Music",Melody FM Jordan (720p) [Not 24/7]
-https://cdn3.wowza.com/1/OVRrOWxXUEswS2Yv/eGVxSWZy/hls/live/playlist.m3u8
 #EXTINF:-1 tvg-id="mfm.lb@HD" tvg-logo="https://www.mtv.com.lb/images/header/mfm-logo.svg" group-title="Lebanon â€“ Music",mfm (1080p)
 https://hms.pfs.gdn/hms/v1/broadcast/hlmvmp2hfriode891/playlist.m3u8
 #EXTINF:-1 tvg-id="MohammedAbdo.sa@SD" tvg-logo="https://assets.mbcmood.com/channels/1720184012Mohammed%20Abdo%20banner.png" group-title="Saudi Arabia â€“ Music",Mohammed Abdo (1080p)
@@ -243,8 +205,6 @@ https://d6izdil55uftn.cloudfront.net/out/v1/0a06d1d6377c47edbd48721ed724bd08/ind
 https://shd-amg-fast.edgenextcdn.net/tx004/playlist.m3u8
 #EXTINF:-1 tvg-id="RashidAlMajed.sa@SD" tvg-logo="https://assets.mbcmood.com/channels/1720177618Rashid%20AlMajed.webp" group-title="Saudi Arabia â€“ Music",Rashid AlMajed (1080p)
 https://dphwv2ufgnfsq.cloudfront.net/out/v1/59cd80dfe93a479eb8b4d79bc6f225ca/index.m3u8
-#EXTINF:-1 tvg-id="RotanaFMKSA.sa@SD" tvg-logo="https://rotanaradios.com/wp-content/uploads/2024/10/Asset-4.png" group-title="Saudi Arabia â€“ Music",Rotana FM KSA (720p)
-rtmp://live.restream.io/pull/play_320121_94512612fd0e084bd284
 #EXTINF:-1 tvg-id="RotanaKhalijia.sa@SD" tvg-logo="https://i.imgur.com/6HMluzv.png" group-title="Saudi Arabia â€“ Music",Rotana Khalijia (1080p) [Geo-blocked]
 https://rotana.hibridcdn.net/rotananet/khaleejiya_net-7Y83PP5adWixDF93/playlist.m3u8
 #EXTINF:-1 tvg-id="RotanaMusic.sa@SD" tvg-logo="https://i.imgur.com/2zFQbQi.png" group-title="Saudi Arabia â€“ Music",Rotana Music (1080p) [Geo-blocked]
@@ -261,8 +221,6 @@ https://eazyvwqssi.erbvr.com/alghadtv/alghadtv.m3u8
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-hadath/2ff87ec4c2f3ede35295a20637d9f8fd/index.m3u8
 #EXTINF:-1 tvg-id="AlIraqiaNews.iq@SD" tvg-logo="https://i.imgur.com/feQTXeZ.jpg" group-title="Iraq â€“ News",Al Iraqia News (720p)
 https://imn-live.esite-lab.com/hls/iraqia-news.m3u8
-#EXTINF:-1 tvg-id="AlManar.lb@SD" tvg-logo="https://i.imgur.com/sOQLV7L.png" group-title="Lebanon â€“ News",Al Manar (576p) [Not 24/7]
-https://edge.fastpublish.me/live/index.m3u8
 #EXTINF:-1 tvg-id="AlMasarTV.ly@SD" tvg-logo="https://play-lh.googleusercontent.com/FHPrsr391mPFqKfTq6ZdvWPZNVfsZeTAVQ8rjQF-NosnRdNipUy5xa43RWkiF4tGcQU" group-title="Libya â€“ News",Al Masar TV (576p)
 https://starmenajo.com/hls/almasar/index.m3u8
 #EXTINF:-1 tvg-id="AlMayadeenTV.lb@SD" tvg-logo="https://i.imgur.com/GtQOKeW.png" group-title="Lebanon â€“ News",Al Mayadeen (576p)
@@ -273,10 +231,6 @@ https://streaming.najah.edu:8443/hls/AlNajah.m3u8
 https://hlspackager.akamaized.net/live/DB/ALYAUM_TV/HLS/ALYAUM_TV.m3u8
 #EXTINF:-1 tvg-id="AlSharqiyaNews.iq@SD" tvg-logo="https://i.imgur.com/PeAcXB9.png" group-title="Iraq â€“ News",Al-Sharqiya News (1080p)
 https://5d94523502c2d.streamlock.net/alsharqiyalive/mystream/playlist.m3u8
-#EXTINF:-1 tvg-id="AlalamNewsChannelSyria.sy@SD" tvg-logo="https://i.imgur.com/WQKYPKD.png" group-title="Syria â€“ News",Alalam News Channel Syria (1080p)
-https://live2.alalam.ir/live/Alalam/index.m3u8
-#EXTINF:-1 tvg-id="AlhaqeqaAldawlia.jo@SD" group-title="Jordan â€“ News",Alhaqeqa Aldawlia (1080p) [Not 24/7]
-https://ghaasiflu.online/alhqeqa/index.m3u8
 #EXTINF:-1 tvg-id="Alhurra.us@SD" tvg-logo="https://i.imgur.com/tiQp2sR.png" group-title="Iraq â€“ News",Alhurra (720p)
 https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038900/MBN_Alhurra_Worldsafe_HLS/master.m3u8
 #EXTINF:-1 tvg-id="AlhurraIraq.us@SD" tvg-logo="https://i.imgur.com/fsgQDcN.png" group-title="Iraq â€“ News",Alhurra Iraq (720p)
@@ -289,14 +243,10 @@ http://alwifaklive.info:1935/live/myStream/playlist.m3u8
 https://cloud.odysee.live/content/f92670235a1ce2bce4cf77671cc4dcc2188baa1d/master.m3u8
 #EXTINF:-1 tvg-id="Channel8.iq@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Channel8corp.png/960px-Channel8corp.png" group-title="Iraq â€“ News",Channel 8 Kurdish (720p)
 https://live.channel8.com/Channel8-Kurdish/index.fmp4.m3u8
-#EXTINF:-1 tvg-id="DijlahTV.iq@SD" tvg-logo="https://i.imgur.com/kyzH3G5.png" group-title="Iraq â€“ News",Dijlah TV (1080p)
-https://ghaasiflu.online/Dijlah/index.m3u8
 #EXTINF:-1 tvg-id="HalabTodayTV.sy@SD" tvg-logo="https://pbs.twimg.com/profile_images/1779495135841075200/aPINrLwe_400x400.png" group-title="Syria â€“ News",Halab Today TV (1080p)
 https://mn-nl.mncdn.com/halabtoday/livestream/index.m3u8
 #EXTINF:-1 tvg-id="INews.iq@SD" tvg-logo="https://i.imgur.com/9lOuzHQ.png" group-title="Iraq â€“ News",iNEWS TV (1080p)
 https://live.i-news.tv/hls/stream.m3u8
-#EXTINF:-1 tvg-id="KolalnasTV.ps@SD" tvg-logo="https://i.imgur.com/OyMxcRG.png" group-title="Palestine â€“ News",Kolalnas TV
-https://htvint.mada.ps/kolalnas/index.m3u8
 #EXTINF:-1 tvg-id="KTVNews.kw@SD" tvg-logo="https://i.imgur.com/erZ0Ol1.png" group-title="Kuwait â€“ News",KTV News (1080p)
 https://kwtkbta.cdn.mangomolo.com/kb/smil:kb.stream.smil/chunklist.m3u8
 #EXTINF:-1 tvg-id="Kurdistan24.iq@SD" tvg-logo="https://i.imgur.com/9QWs2ms.png" group-title="Iraq â€“ News",Kurdistan 24 (720p)
@@ -313,12 +263,6 @@ https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-maghreb_jnbspmg/playlist.m
 https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-afrique_tm7tu45/playlist.m3u8
 #EXTINF:-1 tvg-id="MekameleenTV.tr@SD" tvg-logo="https://i.imgur.com/q7iVchl.png" group-title="Egypt â€“ News",Mekameleen TV (1080p)
 https://mn-nl.mncdn.com/mekameleen/smil:mekameleentv.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="NabaaTV.lb@SD" tvg-logo="https://i.imgur.com/p8eRgSs.png" group-title="Lebanon â€“ News",Nabaa TV (720p) [Not 24/7]
-http://31.14.40.237:1935/live/Nabaa/playlist.m3u8
-#EXTINF:-1 tvg-id="NablusTV.ps@SD" tvg-logo="https://i.imgur.com/GoLhaDK.png" group-title="Palestine â€“ News",Nablus TV (1080p)
-https://htvint.mada.ps/nabluslive/index.m3u8
-#EXTINF:-1 tvg-id="NRTTV.iq@SD" tvg-logo="https://i.imgur.com/uGKGtbW.png" group-title="Iraq â€“ News",NRT TV (720p) [Not 24/7]
-https://media.streambrothers.com:1936/8226/8226/playlist.m3u8
 #EXTINF:-1 tvg-id="OmanTVMubashir.om@SD" tvg-logo="https://i.imgur.com/UkQTR5b.png" group-title="Oman â€“ News",Oman Mubashir (1080p)
 https://partwota.cdn.mgmlcdn.com/omlive/smil:omlive.stream.smil/chunklist.m3u8
 #EXTINF:-1 tvg-id="PalestineAlYawm.lb@SD" tvg-logo="https://i.imgur.com/n8dSgx4.png" group-title="Lebanon â€“ News",Palestine Al Yawm (720p)
@@ -335,14 +279,10 @@ https://live.rudaw.net/hls/rudaw-tv/master.m3u8
 https://stream.shams.tv/hls/stream.m3u8
 #EXTINF:-1 tvg-id="SyriaTV.sy@SD" tvg-logo="https://i.imgur.com/FjuVuXF.jpeg" group-title="Syria â€“ News",Syria TV (1080p)
 https://live.kwikmotion.com/syriatvlive/syriatv.smil/playlist_dvr.m3u8
-#EXTINF:-1 tvg-id="UNews.lb@SD" group-title="Lebanon â€“ News",UNews
-https://cdn.catiacast.video/abr/9436b5ab3c1171ab04a59af11951292f/playlist.m3u8
 #EXTINF:-1 tvg-id="VoiceofLebanon.lb@SD" tvg-logo="https://i.imgur.com/f8WcqRY.png" group-title="Lebanon â€“ News",Voice of Lebanon (1080p)
 https://svs.itworkscdn.net/vdltvlive/vdltv.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="WelatTV.sy@HD" tvg-logo="https://avatars.githubusercontent.com/u/213803648?s=400&u=e27c09d39f813b9698de9c6559cbf7f196bf6fce&v=4" group-title="Syria â€“ News",Welat TV (1080i)
 https://stream.badinan.xyz/welat/tv/playlist.m3u8
-#EXTINF:-1 tvg-id="AbalfadhlTV.ir@SD" tvg-logo="https://i.ibb.co/cCmjqtQ/logo-2.png" group-title="Iraq â€“ Religious",Abalfadhl TV
-https://t.northtelecom.org/ABALFADHLTV.m3u8
 #EXTINF:-1 tvg-id="ABNsat.iq@SD" tvg-logo="https://i.imgur.com/WhPlJzh.jpeg" group-title="Iraq â€“ Religious",ABNsat (720p)
 https://mediaserver.abnvideos.com/streams/abnsat.m3u8
 #EXTINF:-1 tvg-id="AghapyTV.eg@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/en/e/eb/AghapyTV.jpg" group-title="Egypt â€“ Religious",Aghapy TV (1080p) [Not 24/7]
@@ -403,12 +343,6 @@ https://live.imamhossaintv.com/live/ih2.m3u8
 https://live.imamhossaintv.com/live/ih3.m3u8
 #EXTINF:-1 tvg-id="ImamHusseinTV4.iq@SD" tvg-logo="https://i.imgur.com/0UYcylY.png" group-title="Iraq â€“ Religious",Imam Hussein TV 4 (1080p) [Not 24/7]
 https://live.imamhossaintv.com/live/ih4.m3u8
-#EXTINF:-1 tvg-id="IqraaAfricaEurope.sa@SD" tvg-logo="https://i.imgur.com/nUlZvSe.png" group-title="Saudi Arabia â€“ Religious",Iqraa Africa & Europe (1080p)
-https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv1/playlist.m3u8
-#EXTINF:-1 tvg-id="IqraaArabic.sa@SD" tvg-logo="https://i.imgur.com/HPVsIa4.png" group-title="Saudi Arabia â€“ Religious",Iqraa Arabic (1080p) [Not 24/7]
-https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv3/playlist.m3u8
-#EXTINF:-1 tvg-id="IqraaQuran.sa@SD" tvg-logo="https://i.imgur.com/HPVsIa4.png" group-title="Saudi Arabia â€“ Religious",Iqraa Quran (1080p)
-https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv2/playlist.m3u8
 #EXTINF:-1 tvg-id="KTVAlQurain.kw@SD" tvg-logo="https://i.imgur.com/naVEZtj.png" group-title="Kuwait â€“ Religious",KTV Al Qurain (1080p)
 https://kwtktvaqta.cdn.mangomolo.com/ktvaq/smil:tktvaq.stream.smil/chunklist.m3u8
 #EXTINF:-1 tvg-id="KTVEthraa.kw@SD" tvg-logo="https://i.imgur.com/hqEbc49.png" group-title="Kuwait â€“ Religious",KTV Ethraa (1080p)
@@ -447,26 +381,18 @@ https://live.kwikmotion.com/smc1live/smc1tv.smil/playlist.m3u8
 https://shd-amg-fast.edgenextcdn.net/tx010/playlist.m3u8
 #EXTINF:-1 tvg-id="CBCDrama.eg@SD" tvg-logo="https://i.imgur.com/I8YdakH.png" group-title="Egypt â€“ Series",CBC Drama (576p)
 https://flu.systemnet.tv/CBCDrama/index.m3u8
-#EXTINF:-1 tvg-id="PNCDrama.eg@SD" tvg-logo="https://i.imgur.com/Hg34mg3.png" group-title="Egypt â€“ Series",like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0" group-title="Series",PNC Drama (1080p)
-https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/pnc-drama/master.m3u8?ads.vf=S1kySuSK58S
 #EXTINF:-1 tvg-id="Maraya.sa@HD" tvg-logo="https://shahid.mbc.net/mediaObject/d089a559-4f41-4def-a786-f98fcfbf0464?height=auto&width=288&croppingPoint=&version=1&type=png" group-title="Saudi Arabia â€“ Series",Maraya (1080p)
 https://shd-amg-fast.edgenextcdn.net/tx008/playlist.m3u8
 #EXTINF:-1 tvg-id="MBCMasrDrama.sa@SD" tvg-logo="https://media0070.elcinema.com/tvguide/1399_1.png" group-title="Egypt â€“ Series",MBC Masr Drama (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr-drama/567b703c19ede6598222de81b0e4508b/index.m3u8
 #EXTINF:-1 tvg-id="RotanaDrama.sa@SD" tvg-logo="https://i.imgur.com/btnhPjZ.png" group-title="Saudi Arabia â€“ Series",Rotana Drama (1080p) [Geo-blocked]
 https://rotana.hibridcdn.net/rotananet/drama_net-7Y83PP5adWixDF93/playlist.m3u8
-#EXTINF:-1 tvg-id="RoyaDrama.jo@SD" tvg-logo="https://i.imgur.com/V7I0MVf.png" group-title="Jordan â€“ Series",Roya Drama (1080p)
-https://playlist.fasttvcdn.com/pl/a2le4pbpa6rpzv147haf4w/drama/playlist.m3u8
 #EXTINF:-1 tvg-id="AlIraqiaSport.iq@SD" tvg-logo="https://i.imgur.com/DrrlxTO.png" group-title="Iraq â€“ Sports",Al Iraqia Sport (720p)
 https://imn-live.esite-lab.com/hls/iraqia-sports-1.m3u8
-#EXTINF:-1 tvg-id="AlkassFive.qa@SD" tvg-logo="https://i.imgur.com/6RGNGsM.png" group-title="Qatar â€“ Sports",Alkass Five (1080p)
-https://liveeu-gcp.alkassdigital.net/alkass5-p/main.m3u8
 #EXTINF:-1 tvg-id="AlkassFour.qa@SD" tvg-logo="https://i.imgur.com/iDL65Wu.png" group-title="Qatar â€“ Sports",Alkass Four (1080p)
 https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8
 #EXTINF:-1 tvg-id="AlkassOne.qa@SD" tvg-logo="https://i.imgur.com/10mmlha.png" group-title="Qatar â€“ Sports",Alkass One (1080p)
 https://liveeu-gcp.alkassdigital.net/alkass1-p/main.m3u8
-#EXTINF:-1 tvg-id="AlkassSeven.qa@SD" tvg-logo="https://i.imgur.com/3eyHP3S.png" group-title="Qatar â€“ Sports",Alkass Seven (1080p)
-https://liveeu-gcp.alkassdigital.net/alkass7-p/main.m3u8
 #EXTINF:-1 tvg-id="AlkassSHOOF.qa@SD" tvg-logo="https://shoof.alkass.net/assets/images/shoof.png" group-title="Qatar â€“ Sports",Alkass SHOOF (1080p)
 https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8
 #EXTINF:-1 tvg-id="AlkassSHOOF2.qa@SD" tvg-logo="https://shoof.alkass.net/assets/images/shoof2.png" group-title="Qatar â€“ Sports",Alkass SHOOF 2 (1080p)
@@ -501,28 +427,16 @@ https://svs.itworkscdn.net/smc4sportslive/smc4tv.smil/playlist.m3u8
 https://imn-live.esite-lab.com/hls/iraqia-kurdish.m3u8
 #EXTINF:-1 tvg-id="AlMadina.ps@SD" tvg-logo="https://i.imgur.com/NVOeM3P.png" group-title="Palestine â€“ Undefined",Al Madina (720p)
 https://streaming.zaytonatube.com:8081/AlMadinatv/almadina21/index.m3u8
-#EXTINF:-1 tvg-id="AlRiyadhRadio.sa@SD" tvg-logo="https://aloula.faulio.com/storage/mediagallery/37/1a/fullhd_399eddcc4305f34f41c7fab24c3518fab5d55d97.png" group-title="Saudi Arabia â€“ Undefined",Al Riyadh Radio (1080p)
-https://live.kwikmotion.com/sbrksariyadhradiolive/srpksariyadhradio/playlist.m3u8
 #EXTINF:-1 tvg-id="AlSaudiyaAlaan.sa@SD" tvg-logo="https://i.imgur.com/sEOjApe.png" group-title="Saudi Arabia â€“ Undefined",Al Saudiya Alaan (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-ksa-now/71ed3aa814c643306c0a8bc4fcc7d17f/index.m3u8
-#EXTINF:-1 tvg-id="AlkhuzamaRadio.sa@SD" tvg-logo="https://shahid.mbc.net/mediaObject/61010cbc-91c5-4ce1-94a4-ed40adadb97b" group-title="Saudi Arabia â€“ Undefined",Alkhuzama Radio (1080p)
-https://live.kwikmotion.com/sbrksakhuzamaradiolive/srpkhuzama/playlist.m3u8
 #EXTINF:-1 tvg-id="AvarTV.iq@HD" tvg-logo="https://i.imgur.com/JazFBkW.jpeg" group-title="Iraq â€“ Undefined",Avar TV (1080p)
 https://avr.host247.net/live/AvarTv/playlist.m3u8
 #EXTINF:-1 tvg-id="BigTimePlus.sa@SD" tvg-logo="https://shahid.mbc.net/mediaObject/4e042cb6-500b-4e4c-a8ca-21a5a7a7a71b" group-title="Saudi Arabia â€“ Undefined",Big Time Plus (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-big-time-plus/924283f994779a311c1389698ff7e736/index.m3u8
 #EXTINF:-1 tvg-id="DamascusRadio.sy@SD" group-title="Syria â€“ Undefined",Damascus Radio (720p)
 https://radiodamascus.ortas.live/RDimshq/RDimshqLive/playlist.m3u8
-#EXTINF:-1 tvg-id="JordanArchive.jo@SD" tvg-logo="https://i.imgur.com/8UrCl4k.png" group-title="Jordan â€“ Undefined",Jordan Archive (1080p)
-https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Archive/playlist.m3u8
-#EXTINF:-1 tvg-id="JordanDrama.jo@SD" tvg-logo="https://i.imgur.com/gvIAEsJ.png" group-title="Jordan â€“ Undefined",Jordan Drama (1080p)
-https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Drama/playlist.m3u8
-#EXTINF:-1 tvg-id="JordanTourism.jo@SD" tvg-logo="https://i.imgur.com/gpeIoU9.png" group-title="Jordan â€“ Undefined",Jordan Tourism (1080p)
-https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Tourism/playlist.m3u8
 #EXTINF:-1 tvg-id="KurdChannel.iq@SD" tvg-logo="https://i.imgur.com/xPwzad9.png" group-title="Iraq â€“ Undefined",Kurd Channel
 https://kurdchhls.wns.live/hls/stream.m3u8
-#EXTINF:-1 tvg-id="RotanaAflamPlus.sa@SD" tvg-logo="https://i.imgur.com/DLDfFpu.png" group-title="Saudi Arabia â€“ Undefined",like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0" group-title="Undefined",Rotana Aflam+ (1080p)
-https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/rotana-aflam-plus/master.m3u8?ads.vf=sU-keyuh83m
 #EXTINF:-1 tvg-id="Pulse95Radio.ae@SD" tvg-logo="https://maraya.faulio.com/storage/mediagallery/60/26/fullhd_d5c3c81b0562a76bc63f073a5e0947f309b0215b.png" group-title="UAE â€“ Undefined",Pulse95 Radio (1080p)
 https://svs.itworkscdn.net/pulse95live/pulse96/playlist.m3u8
 #EXTINF:-1 tvg-id="RadioFannJordanStudio.jo@SD" tvg-logo="https://cdn-profiles.tunein.com/s142626/images/logod.jpg" group-title="Jordan â€“ Undefined",Radio Fann Jordan Studio (1080p) [Not 24/7]
@@ -531,8 +445,6 @@ http://45.63.116.205/hls2/stream1.m3u8
 http://45.63.116.205/hls4/stream1.m3u8
 #EXTINF:-1 tvg-id="RajeenTV.ps@SD" tvg-logo="https://i.imgur.com/6Cx22ya.png" group-title="Palestine â€“ Undefined",Rajeen TV (1080p) [Not 24/7]
 https://mn-nl.mncdn.com/palabroad/live/playlist.m3u8
-#EXTINF:-1 tvg-id="Raya1.ps@SD" tvg-logo="https://www.rayatv.ps/images/logo_tv.png" group-title="Palestine â€“ Undefined",Raya 1 (1080p)
-https://htvmada.mada.ps:4443/raya/index.m3u8
 #EXTINF:-1 tvg-id="RonahiTV.sy@SD" tvg-logo="https://i.imgur.com/JSvJpD8.png" group-title="Syria â€“ Undefined",Ronahi TV (1080p)
 https://hlspackager.akamaized.net/live/DB/RONAHI_TV/HLS/RONAHI_TV.m3u8
 #EXTINF:-1 tvg-id="RotanaClip.sa@SD" tvg-logo="https://i.imgur.com/nhREk0o.png" group-title="Saudi Arabia â€“ Undefined",Rotana Clip (1080p) [Geo-blocked]
@@ -549,8 +461,6 @@ http://31.14.41.69:8080/hls/sensesonline/index.m3u8
 https://streaming.zaytonatube.com:8081/ShababFM/shabab/index.m3u8
 #EXTINF:-1 tvg-id="SyriaOne.sy@HD" tvg-logo="https://tv.syriaone.tv/SyriaONETVB.png" group-title="Syria â€“ Undefined",Syria One (1080p)
 https://live.syriaone.tv/live/syriaone.m3u8
-#EXTINF:-1 tvg-id="UTV.iq@SD" tvg-logo="https://i.imgur.com/9qFHjnu.png" group-title="Iraq â€“ Undefined",UTV (1080p)
-https://mn-nl.mncdn.com/utviraqi2/64c80359/index.m3u8
 #EXTINF:-1 tvg-id="WaarTV.iq@SD" tvg-logo="https://i.imgur.com/rK0y02d.png" group-title="Iraq â€“ Undefined",Waar TV (1080p)
 https://live.kwikmotion.com/waarmedialive/waarmedia.smil/waarmediapublish/waarmedia_source/chunks.m3u8
 #EXTINF:-1 tvg-id="WatarRadio.ae@SD" tvg-logo="https://sbauae.faulio.com/storage/mediagallery/d2/ad/fullhd_48adf2291d08266c05ed1b0c24f326c86b1095b7.png" group-title="UAE â€“ Undefined",Watar Radio (1080p)

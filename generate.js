@@ -239,6 +239,37 @@ function embedTinyURLs() {
   }
 }
 
+// --- URL Validation ---
+const VALIDATION_TIMEOUT = 8000;
+const VALIDATION_CONCURRENCY = 30;
+
+async function checkURL(url) {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), VALIDATION_TIMEOUT);
+    const resp = await fetch(url, { method: 'HEAD', signal: controller.signal });
+    clearTimeout(timer);
+    return resp.ok || resp.status === 403 || resp.status === 429;
+  } catch {
+    return false;
+  }
+}
+
+async function removeDeadChannels(channels, label) {
+  const alive = [];
+  for (let i = 0; i < channels.length; i += VALIDATION_CONCURRENCY) {
+    const batch = channels.slice(i, i + VALIDATION_CONCURRENCY);
+    const results = await Promise.all(batch.map(ch => checkURL(ch.url)));
+    for (let j = 0; j < batch.length; j++) {
+      if (results[j]) alive.push(batch[j]);
+    }
+    const done = Math.min(i + VALIDATION_CONCURRENCY, channels.length);
+    process.stdout.write(`\r   ${label}: testing ${done}/${channels.length}...`);
+  }
+  process.stdout.write('\n');
+  return alive;
+}
+
 // --- Main ---
 async function main() {
   const onlyValidate = process.argv.includes('--validate-only');
@@ -318,7 +349,15 @@ async function main() {
     const afterDedup = channels.length;
     channels = sortChannels(channels);
 
-    console.log(`     = ${before} raw â†’ ${afterDedup} unique â†’ ${channels.length} sorted`);
+    console.log(`     = ${before} raw → ${afterDedup} unique → ${channels.length} sorted`);
+
+    // Validate URLs
+    const skipVal = process.argv.includes('--no-validate');
+    if (!skipVal && channels.length > 0) {
+      const beforeVal = channels.length;
+      channels = await removeDeadChannels(channels, cfg.output);
+      console.log(`     → ${channels.length}/${beforeVal} alive after validation`);
+    }
 
     // Format
     const m3u = formatM3U(channels, cfg.epg, cfg.style);
