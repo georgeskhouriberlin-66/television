@@ -1,36 +1,36 @@
 #EXTM3U
-#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Noursat Lebanon
-https://live.noursat.tv/noursat/index.m3u8
-#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/nourkids.png" group-title="Christian TV",Nour Kids
-https://live.noursat.tv/nourkids/index.m3u8
-#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/nournews.png" group-title="Christian TV",Nour News
-https://live.noursat.tv/nournews/index.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",NourSAT
+https://svs.itworkscdn.net/nour4satlive/livestream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Nour Al Koddas
+https://svs.itworkscdn.net/nour1satlive/livestream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Nour Al Shabab
+https://svs.itworkscdn.net/nour3satlive/livestream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Nour Al Sharq
+https://svs.itworkscdn.net/nour8satlive/livestream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Nour Mariam
+https://svs.itworkscdn.net/nour9satlive/livestream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Noursat English
+https://svs.itworkscdn.net/noursatenglive/noursateng.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Nour Sat Music
+https://svs.itworkscdn.net/nour5satlive/livestream/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/sat7arabic.png" group-title="Christian TV",SAT-7 Arabic
-https://sat7arabic-live.akamaized.net/hls/live/2033793/SAT7Arabic/index.m3u8
+https://svs.itworkscdn.net/sat7arabiclive/sat7arabic.smil/playlist_dvr.m3u8
 #EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/sat7kids.png" group-title="Christian TV",SAT-7 Kids
-https://sat7kids-live.akamaized.net/hls/live/2033794/SAT7Kids/index.m3u8
-#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/sat7plus.png" group-title="Christian TV",SAT-7 Plus
-https://sat7plus-live.akamaized.net/hls/live/2033795/SAT7Plus/index.m3u8
-#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/noursat.png" group-title="Christian TV",Télé Lumière
-https://live.noursat.tv/telelumiere/index.m3u8
-#EXTINF:-1 group-title="Christian Radio",Charity Radio
-https://live.noursat.tv/charityradio/index.m3u8
-#EXTINF:-1 group-title="Christian Radio",Voice of Grace
-https://live.noursat.tv/voiceofgrace/index.m3u8
-#EXTINF:-1 group-title="Christian Radio",Orthodoxya Radio
-https://stream.orthodoxyaradio.com/live/stream.m3u8
-#EXTINF:-1 group-title="Christian Radio",Radio Maria Lebanon
-https://stream.radiomaria.org/lb/stream.m3u8
-#EXTINF:-1 group-title="Christian Radio",Radio Maria Arabic
-https://stream.radiomaria.org/ar/stream.m3u8
-#EXTINF:-1 group-title="Christian Radio",Bible Voice Broadcasting
-https://stream.biblevoice.org/live/stream.m3u8
-#EXTINF:-1 group-title="Christian Radio",SAT-7 Arabic Radio
-https://sat7arabic-live.akamaized.net/radio/playlist.m3u8
-#EXTINF:-1 group-title="Christian Radio",SAT-7 Kids Radio
-https://sat7kids-live.akamaized.net/radio/playlist.m3u8
-#EXTINF:-1 group-title="Christian Radio",Radio Lumiere
-https://live.noursat.tv/radiolumiere/index.m3u8
+https://svs.itworkscdn.net/sat7kidslive/sat7kids.smil/playlist_dvr.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/sat7turk.png" group-title="Christian TV",SAT-7 Turk
+https://svs.itworkscdn.net/sat7turklive/sat7turk.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://iptv-org.github.io/epg/logos/sat7pars.png" group-title="Christian TV",SAT-7 Pars
+https://svs.itworkscdn.net/sat7parslive/sat7pars.smil/sat7parspublish/sat7pars_source/chunks.m3u8
+#EXTINF:-1 group-title="Christian Radio",BBN (Bible Broadcasting Network)
+https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f
+#EXTINF:-1 group-title="Christian Radio",Radio Maria Belgium
+http://stream.radiomaria.be:8000/RadioMaria-96
+#EXTINF:-1 group-title="Christian Radio",RadioMv English
+https://m3u8.radiomv.com/english-hq.m3u8
+#EXTINF:-1 group-title="Christian Radio",RadioMv German
+https://m3u8.radiomv.com/german-hq.m3u8
+#EXTINF:-1 group-title="Christian Radio",Orthodox Christian Network
+https://stream.radiojar.com/48cz219puzzuv
 
 #TINYURL:arabic:https://tinyurl.com/288e72mm
 #TINYURL:gulf:https://tinyurl.com/2y6788nu
