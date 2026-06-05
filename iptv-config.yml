@@ -35,6 +35,11 @@ playlists:
     sources: [de]
     epg: [DE]
     group_style: "Germany â€“ Category"
+  christian:
+    output: christian.m3u
+    static: true
+    group_style: "Christian TV/Radio"
+    description: "Christliche TV-Sender und Radiosender (Noursat, SAT-7, u.a.)"
 
 sources:
   lb: "https://iptv-org.github.io/iptv/countries/lb.m3u"
@@ -76,6 +81,8 @@ tinyurl:
       target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/eastblock.m3u"
     - alias: "germany-iptv"
       target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/germany.m3u"
+    - alias: "christian-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/christian.m3u"
 
 automation:
   schedule: "every 12 hours"

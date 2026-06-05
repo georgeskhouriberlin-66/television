@@ -39,6 +39,29 @@ const CONFIG = {
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
     germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
   },
+  static_channels: {
+    christian: {
+      output: 'christian.m3u',
+      channels: [
+        { name: 'Noursat Lebanon', url: 'https://live.noursat.tv/noursat/index.m3u8', tvgLogo: 'https://iptv-org.github.io/epg/logos/noursat.png', group: 'Christian TV' },
+        { name: 'Nour Kids', url: 'https://live.noursat.tv/nourkids/index.m3u8', tvgLogo: 'https://iptv-org.github.io/epg/logos/nourkids.png', group: 'Christian TV' },
+        { name: 'Nour News', url: 'https://live.noursat.tv/nournews/index.m3u8', tvgLogo: 'https://iptv-org.github.io/epg/logos/nournews.png', group: 'Christian TV' },
+        { name: 'SAT-7 Arabic', url: 'https://sat7arabic-live.akamaized.net/hls/live/2033793/SAT7Arabic/index.m3u8', tvgLogo: 'https://iptv-org.github.io/epg/logos/sat7arabic.png', group: 'Christian TV' },
+        { name: 'SAT-7 Kids', url: 'https://sat7kids-live.akamaized.net/hls/live/2033794/SAT7Kids/index.m3u8', tvgLogo: 'https://iptv-org.github.io/epg/logos/sat7kids.png', group: 'Christian TV' },
+        { name: 'SAT-7 Plus', url: 'https://sat7plus-live.akamaized.net/hls/live/2033795/SAT7Plus/index.m3u8', tvgLogo: 'https://iptv-org.github.io/epg/logos/sat7plus.png', group: 'Christian TV' },
+        { name: 'Télé Lumière', url: 'https://live.noursat.tv/telelumiere/index.m3u8', tvgLogo: 'https://iptv-org.github.io/epg/logos/noursat.png', group: 'Christian TV' },
+        { name: 'Charity Radio', url: 'https://live.noursat.tv/charityradio/index.m3u8', group: 'Christian Radio' },
+        { name: 'Voice of Grace', url: 'https://live.noursat.tv/voiceofgrace/index.m3u8', group: 'Christian Radio' },
+        { name: 'Orthodoxya Radio', url: 'https://stream.orthodoxyaradio.com/live/stream.m3u8', group: 'Christian Radio' },
+        { name: 'Radio Maria Lebanon', url: 'https://stream.radiomaria.org/lb/stream.m3u8', group: 'Christian Radio' },
+        { name: 'Radio Maria Arabic', url: 'https://stream.radiomaria.org/ar/stream.m3u8', group: 'Christian Radio' },
+        { name: 'Bible Voice Broadcasting', url: 'https://stream.biblevoice.org/live/stream.m3u8', group: 'Christian Radio' },
+        { name: 'SAT-7 Arabic Radio', url: 'https://sat7arabic-live.akamaized.net/radio/playlist.m3u8', group: 'Christian Radio' },
+        { name: 'SAT-7 Kids Radio', url: 'https://sat7kids-live.akamaized.net/radio/playlist.m3u8', group: 'Christian Radio' },
+        { name: 'Radio Lumiere', url: 'https://live.noursat.tv/radiolumiere/index.m3u8', group: 'Christian Radio' },
+      ],
+    },
+  },
 };
 
 const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', sa:'Saudi Arabia', iq:'Iraq', kw:'Kuwait', ps:'Palestine', bh:'Bahrain', ma:'Morocco', ly:'Libya', om:'Oman', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany' };
@@ -49,6 +72,7 @@ const TINYURLS = {
   usa:       'https://tinyurl.com/22xllnhv',
   eastblock: 'https://tinyurl.com/25lmqukn',
   germany:   'https://tinyurl.com/2bfom2bu',
+  christian: 'https://tinyurl.com/christian-tv',
 };
 
 // --- M3U Parsing ---
@@ -102,6 +126,31 @@ function formatM3U(channels, epgCountries, style) {
   return output;
 }
 
+function formatStaticM3U(channels) {
+  let output = '#EXTM3U\n';
+  for (const ch of channels) {
+    let extinf = '#EXTINF:-1';
+    if (ch.tvgId) extinf += ` tvg-id="${ch.tvgId}"`;
+    if (ch.tvgName) extinf += ` tvg-name="${ch.tvgName}"`;
+    if (ch.tvgLogo) extinf += ` tvg-logo="${ch.tvgLogo}"`;
+    extinf += ` group-title="${ch.group || 'Christian'}"`;
+    extinf += `,${ch.name}`;
+    output += extinf + '\n' + ch.url + '\n';
+  }
+  return output;
+}
+
+function allOutputs() {
+  const out = [];
+  for (const key of Object.keys(CONFIG.playlists)) {
+    out.push({ key, output: CONFIG.playlists[key].output });
+  }
+  for (const key of Object.keys(CONFIG.static_channels)) {
+    out.push({ key, output: CONFIG.static_channels[key].output });
+  }
+  return out;
+}
+
 // --- Download ---
 async function download(url) {
   const resp = await fetch(url);
@@ -145,22 +194,20 @@ function backup(outputDir) {
   const ts = new Date().toISOString().replace(/[:.]/g, '-');
   const bDir = path.join(BACKUP_DIR, ts);
   fs.mkdirSync(bDir, { recursive: true });
-  for (const key of Object.keys(CONFIG.playlists)) {
-    const p = CONFIG.playlists[key];
-    const src = path.join(outputDir, p.output);
+  for (const { output } of allOutputs()) {
+    const src = path.join(outputDir, output);
     if (fs.existsSync(src)) {
-      fs.cpSync(src, path.join(bDir, p.output));
+      fs.cpSync(src, path.join(bDir, output));
     }
   }
   return bDir;
 }
 
 function restoreBackup(bDir, outputDir) {
-  for (const key of Object.keys(CONFIG.playlists)) {
-    const p = CONFIG.playlists[key];
-    const src = path.join(bDir, p.output);
+  for (const { output } of allOutputs()) {
+    const src = path.join(bDir, output);
     if (fs.existsSync(src)) {
-      fs.cpSync(src, path.join(outputDir, p.output));
+      fs.cpSync(src, path.join(outputDir, output));
     }
   }
 }
@@ -187,9 +234,8 @@ function sortChannels(channels) {
 
 function embedTinyURLs() {
   const block = '\n' + Object.entries(TINYURLS).map(([k, v]) => `#TINYURL:${k}:${v}`).join('\n') + '\n';
-  for (const key of Object.keys(CONFIG.playlists)) {
-    const p = CONFIG.playlists[key];
-    fs.appendFileSync(path.join(__dirname, p.output), block, 'utf-8');
+  for (const { output } of allOutputs()) {
+    fs.appendFileSync(path.join(__dirname, output), block, 'utf-8');
   }
 }
 
@@ -285,6 +331,21 @@ async function main() {
     } else {
       console.log(`     âŒ ${result.issues.join(', ')}`);
       allValid = false;
+    }
+    results.push({ key, file: cfg.output, valid: result.valid, channels: result.channelCount });
+  }
+
+  // 4b. Build static playlists
+  console.log('\n📻 Building static playlists...');
+  for (const [key, cfg] of Object.entries(CONFIG.static_channels)) {
+    console.log(`   ${cfg.output}:`);
+    const m3u = formatStaticM3U(cfg.channels);
+    fs.writeFileSync(path.join(outputDir, cfg.output), m3u, 'utf-8');
+    const result = validateM3U(m3u, cfg.output);
+    if (result.valid) {
+      console.log(`     ✅ ${result.channelCount} channels, valid`);
+    } else {
+      console.log(`     ❌ ${result.issues.join(', ')}`);
     }
     results.push({ key, file: cfg.output, valid: result.valid, channels: result.channelCount });
   }
