@@ -72,7 +72,7 @@ const TINYURLS = {
   usa:       'https://tinyurl.com/22xllnhv',
   eastblock: 'https://tinyurl.com/25lmqukn',
   germany:   'https://tinyurl.com/2bfom2bu',
-  christian: 'https://tinyurl.com/christian-tv',
+  christian: 'https://tinyurl.com/25cwjmur',
 };
 
 // --- M3U Parsing ---
