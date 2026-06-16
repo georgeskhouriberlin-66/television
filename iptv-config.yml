@@ -2,7 +2,7 @@ name: "Ultimate IPTV Automation"
 version: "1.0"
 
 description: >
-  Vollautomatisches IPTV-System fÃ¼r GitHub-Account georgeskhouriberlin-66.
+  Vollautomatisches IPTV-System für GitHub-Account georgeskhouriberlin-66.
   Erzeugt und aktualisiert 5 Playlisten im Repo 'television', basierend auf iptv-org.
 
 github:
@@ -14,27 +14,27 @@ playlists:
     output: arabic.m3u
     sources: [lb, sy, eg, jo, ae, qa, sa, iq, kw, ps, bh, ma, ly, om]
     epg: [EG, LB, SY, JO, AE, QA, SA, IQ, KW, PS, BH, MA, LY, OM]
-    group_style: "Country â€“ Category"
+    group_style: "Country Category"
   gulf:
     output: gulf.m3u
     sources: [ae, qa, jo]
     epg: [AE, QA, JO]
-    group_style: "Country â€“ Category"
+    group_style: "Country Category"
   usa:
     output: usa.m3u
     sources: [us]
     epg: [US]
-    group_style: "USA â€“ Category"
+    group_style: "USA Category"
   eastblock:
     output: eastblock.m3u
     sources: [ru, ua]
     epg: [RU, UA]
-    group_style: "Country â€“ Category"
+    group_style: "Country Category"
   germany:
     output: germany.m3u
     sources: [de]
     epg: [DE]
-    group_style: "Germany â€“ Category"
+    group_style: "Germany Category"
   christian:
     output: christian.m3u
     static: true
