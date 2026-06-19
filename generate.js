@@ -53,7 +53,7 @@ const TINYURLS = {
   eastblock: 'https://tinyurl.com/25lmqukn',
   germany:   'https://tinyurl.com/2bfom2bu',
   christian: 'https://tinyurl.com/25cwjmur',
-  libanon:   'https://tinyurl.com/2e6f5abc',
+  libanon:   'https://tinyurl.com/libanon-iptv',
 };
 
 // --- M3U Parsing ---
