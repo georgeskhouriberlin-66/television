@@ -332,12 +332,17 @@ async function main() {
 
     console.log(`     = ${before} raw → ${afterDedup} unique → ${channels.length} sorted`);
 
-    // Validate URLs (opt-in via --validate for CI/CD)
+    // Warn-only URL check (--validate): IPTV URLs are ephemeral, don't fail the build
     const doValidate = process.argv.includes('--validate');
     if (doValidate && channels.length > 0) {
       const beforeVal = channels.length;
-      channels = await removeDeadChannels(channels, cfg.output);
-      console.log(`     → ${channels.length}/${beforeVal} alive after validation`);
+      const alive = await removeDeadChannels(channels, cfg.output);
+      const dead = beforeVal - alive.length;
+      if (dead > 0) {
+        console.log(`     ⚠ ${alive.length}/${beforeVal} alive (${dead} dead — kept anyway, URL validation is advisory)`);
+      } else {
+        console.log(`     → ${alive.length}/${beforeVal} alive`);
+      }
     }
 
     // Format
