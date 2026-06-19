@@ -38,6 +38,7 @@ const CONFIG = {
     usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA â€“ Category' },
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
     germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
+    libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Lebanon â€“ Category' },
   },
 };
 
@@ -52,6 +53,7 @@ const TINYURLS = {
   eastblock: 'https://tinyurl.com/25lmqukn',
   germany:   'https://tinyurl.com/2bfom2bu',
   christian: 'https://tinyurl.com/25cwjmur',
+  libanon:   'https://tinyurl.com/2e6f5abc',
 };
 
 // --- M3U Parsing ---

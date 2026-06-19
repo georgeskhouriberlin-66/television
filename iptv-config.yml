@@ -40,6 +40,11 @@ playlists:
     static: true
     group_style: "Christian TV/Radio"
     description: "Christliche TV-Sender und Radiosender (Noursat, SAT-7, u.a.)"
+  libanon:
+    output: libanon.m3u
+    sources: [lb]
+    epg: [LB]
+    group_style: "Lebanon Category"
 
 sources:
   lb: "https://iptv-org.github.io/iptv/countries/lb.m3u"
@@ -83,6 +88,8 @@ tinyurl:
       target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/germany.m3u"
     - alias: "christian-iptv"
       target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/christian.m3u"
+    - alias: "libanon-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/libanon.m3u"
 
 automation:
   schedule: "every 12 hours"

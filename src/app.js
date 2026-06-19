@@ -73,7 +73,8 @@ async function loadPlaylists() {
       usa: data["usa-iptv"] || data.usa,
       eastblock: data["eastblock-iptv"] || data.eastblock,
       germany: data["germany-iptv"] || data.germany,
-      christian: data.christian || data["christian-iptv"]
+      christian: data.christian || data["christian-iptv"],
+      libanon: data.libanon || data["libanon-iptv"]
     };
 
     const valid = Object.fromEntries(Object.entries(playlists).filter(([, v]) => v));

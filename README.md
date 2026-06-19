@@ -12,6 +12,7 @@ Automatisch generierte IPTV-Playlisten, alle 12 Stunden aktualisiert.
 | `eastblock.m3u` | RU, UA | ✅ | `https://tinyurl.com/25lmqukn` |
 | `germany.m3u` | DE | ✅ | `https://tinyurl.com/2bfom2bu` |
 | `christian.m3u` | – | ✅ | `https://tinyurl.com/25cwjmur` |
+| `libanon.m3u` | LB | ✅ | `https://tinyurl.com/2e6f5abc` |
 
 ## Frontend Integration
 
