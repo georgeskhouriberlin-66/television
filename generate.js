@@ -398,10 +398,18 @@ async function main() {
 
   // Embed TinyURLs
   embedTinyURLs();
-  console.log('\nðŸ”— TinyURLs:');
+  console.log('\n\u{1F510} TinyURLs:');
   for (const [key, url] of Object.entries(TINYURLS)) {
     console.log(`   ${key}: ${url}`);
   }
+
+  // Write tinyurls.json for frontend consumption
+  const tinyurlsJson = {};
+  for (const [key, url] of Object.entries(TINYURLS)) {
+    tinyurlsJson[`${key}-iptv`] = url;
+  }
+  fs.writeFileSync(path.join(outputDir, 'tinyurls.json'), JSON.stringify(tinyurlsJson, null, 2) + '\n', 'utf-8');
+  console.log('\n\u{1F4C4} tinyurls.json written');
 
   if (allValid) {
     console.log('\nâœ… All playlists generated successfully!');
