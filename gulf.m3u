@@ -1,6 +1,14 @@
 #EXTM3U url-tvg="https://epg.pw/xmltv/epg_AE.xml.gz" url-tvg="https://epg.pw/xmltv/epg_QA.xml.gz" url-tvg="https://epg.pw/xmltv/epg_JO.xml.gz"
 #EXTINF:-1 tvg-id="CNBCArabiya.ae@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/CNBC_Arabia_2025.svg/960px-CNBC_Arabia_2025.svg.png" group-title="UAE â€“ Business",CNBC Arabiya (1080p)
 https://cnbc-live.akamaized.net/cnbc/master.m3u8
+#EXTINF:-1 tvg-id="JordanComedy.jo@SD" tvg-logo="https://i.imgur.com/DuwwoO2.png" group-title="Jordan â€“ Comedy",Jordan Comedy (1080p)
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Comedy/playlist.m3u8
+#EXTINF:-1 tvg-id="RoyaComedy.jo@SD" tvg-logo="https://i.imgur.com/oIThcM8.png" group-title="Jordan â€“ Comedy",Roya Comedy (1080p)
+https://playlist.fasttvcdn.com/pl/toa2uuhhygheuly7xtuqrg/roya-comedy/playlist.m3u8
+#EXTINF:-1 tvg-id="JordanKitchen.jo@SD" tvg-logo="https://i.imgur.com/B45qcQX.png" group-title="Jordan â€“ Cooking",Jordan Kitchen (1080p)
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/cooking/playlist.m3u8
+#EXTINF:-1 tvg-id="RoyaKitchen.jo@SD" tvg-logo="https://i.imgur.com/lWfh8pP.png" group-title="Jordan â€“ Cooking",Roya Kitchen (1080p)
+https://playlist.fasttvcdn.com/pl/toa2uuhhygheuly7xtuqrg/roya-kitchen/playlist.m3u8
 #EXTINF:-1 tvg-id="AlJazeeraDocumentary.qa@SD" tvg-logo="https://i.imgur.com/5dNJlLo.png" group-title="Qatar â€“ Documentary",Al Jazeera Documentary (1080p) [Geo-blocked]
 https://live-hls-apps-ajd-fa.getaj.net/AJD/index.m3u8
 #EXTINF:-1 tvg-id="FujairahTV.ae@SD" tvg-logo="https://i.imgur.com/D2tOhbE.png" group-title="UAE â€“ Entertainment",Fujairah TV (720p)
@@ -31,8 +39,20 @@ https://live.kwikmotion.com/qtv1live/qtv1.smil/playlist.m3u8
 https://live.kwikmotion.com/qtv2live/qtv2.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="SharjahRadio.ae@SD" tvg-logo="https://i.imgur.com/q7GGALe.png" group-title="UAE â€“ General",Sharjah Radio (1080p)
 https://svs.itworkscdn.net/smcradiolive/smcradiolive/playlist.m3u8
+#EXTINF:-1 tvg-id="RoyaKids.jo@SD" tvg-logo="https://i.imgur.com/acuCGF8.png" group-title="Jordan â€“ Kids",Roya Kids
+https://playlist.fasttvcdn.com/pl/ptllxjd03j6g9oxxjdfapg/roya-kids/playlist.m3u8
+#EXTINF:-1 tvg-id="RoyaKidsOriginals.jo@SD" tvg-logo="https://i.imgur.com/acuCGF8.png" group-title="Jordan â€“ Kids",Roya Kids Originals (1080p)
+https://playlist.fasttvcdn.com/pl/ptllxjd03j6g9oxxjdfapg/roya-kids-originals/playlist.m3u8
+#EXTINF:-1 tvg-id="OSNMoviesAction.ae@SD" tvg-logo="https://i.imgur.com/uOzyKup.png" group-title="UAE â€“ Movies",OSN Movies Action (1080p)
+http://116.90.120.151:8000/play/a0ax/index.m3u8
+#EXTINF:-1 tvg-id="JordanSongs.jo@SD" tvg-logo="https://i.imgur.com/1DE7Gmw.png" group-title="Jordan â€“ Music",Jordan Songs (1080p)
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Song/playlist.m3u8
+#EXTINF:-1 tvg-id="MelodyFM.jo@SD" tvg-logo="https://i.imgur.com/J8omcNz.png" group-title="Jordan â€“ Music",Melody FM Jordan (720p) [Not 24/7]
+https://cdn3.wowza.com/1/OVRrOWxXUEswS2Yv/eGVxSWZy/hls/live/playlist.m3u8
 #EXTINF:-1 tvg-id="AlYaumTV.ae@SD" tvg-logo="https://i.imgur.com/rBixF3P.png" group-title="UAE â€“ News",Al Yaum TV (1080p)
 https://hlspackager.akamaized.net/live/DB/ALYAUM_TV/HLS/ALYAUM_TV.m3u8
+#EXTINF:-1 tvg-id="AlhaqeqaAldawlia.jo@SD" group-title="Jordan â€“ News",Alhaqeqa Aldawlia (1080p) [Not 24/7]
+https://ghaasiflu.online/alhqeqa/index.m3u8
 #EXTINF:-1 tvg-id="AltaghierTV.jo@SD" tvg-logo="https://i.imgur.com/YTyCBvB.png" group-title="Jordan â€“ News",Altaghier TV (1080p)
 https://jmc-live.ercdn.net/altaghier/altaghier.m3u8
 #EXTINF:-1 tvg-id="LibyaAlAhrarTV.qa@SD" tvg-logo="https://i.imgur.com/xkQKVGi.png" group-title="Qatar â€“ News",Libya Al Ahrar TV (1080p)
@@ -51,10 +71,16 @@ https://svs.itworkscdn.net/smc2live/smc2tv.smil/playlist.m3u8
 https://live.kwikmotion.com/smcquranlive/quranradiolive/playlist.m3u8
 #EXTINF:-1 tvg-id="SharjahTV.ae@SD" tvg-logo="https://i.imgur.com/Oz2bPOt.png" group-title="UAE â€“ Religious",Sharjah TV (1080p)
 https://live.kwikmotion.com/smc1live/smc1tv.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="RoyaDrama.jo@SD" tvg-logo="https://i.imgur.com/V7I0MVf.png" group-title="Jordan â€“ Series",Roya Drama (1080p)
+https://playlist.fasttvcdn.com/pl/a2le4pbpa6rpzv147haf4w/drama/playlist.m3u8
+#EXTINF:-1 tvg-id="AlkassFive.qa@SD" tvg-logo="https://i.imgur.com/6RGNGsM.png" group-title="Qatar â€“ Sports",Alkass Five (1080p)
+https://liveeu-gcp.alkassdigital.net/alkass5-p/main.m3u8
 #EXTINF:-1 tvg-id="AlkassFour.qa@SD" tvg-logo="https://i.imgur.com/iDL65Wu.png" group-title="Qatar â€“ Sports",Alkass Four (1080p)
 https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8
 #EXTINF:-1 tvg-id="AlkassOne.qa@SD" tvg-logo="https://i.imgur.com/10mmlha.png" group-title="Qatar â€“ Sports",Alkass One (1080p)
 https://liveeu-gcp.alkassdigital.net/alkass1-p/main.m3u8
+#EXTINF:-1 tvg-id="AlkassSeven.qa@SD" tvg-logo="https://i.imgur.com/3eyHP3S.png" group-title="Qatar â€“ Sports",Alkass Seven (1080p)
+https://liveeu-gcp.alkassdigital.net/alkass7-p/main.m3u8
 #EXTINF:-1 tvg-id="AlkassSHOOF.qa@SD" tvg-logo="https://shoof.alkass.net/assets/images/shoof.png" group-title="Qatar â€“ Sports",Alkass SHOOF (1080p)
 https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8
 #EXTINF:-1 tvg-id="AlkassSHOOF2.qa@SD" tvg-logo="https://shoof.alkass.net/assets/images/shoof2.png" group-title="Qatar â€“ Sports",Alkass SHOOF 2 (1080p)
@@ -69,6 +95,12 @@ https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8
 http://93.184.10.248/JordanSport/index.m3u8
 #EXTINF:-1 tvg-id="SharjahSports.ae@SD" tvg-logo="https://i.imgur.com/CsEElsJ.png" group-title="UAE â€“ Sports",Sharjah Sports (1080p) [Geo-blocked]
 https://svs.itworkscdn.net/smc4sportslive/smc4tv.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="JordanArchive.jo@SD" tvg-logo="https://i.imgur.com/8UrCl4k.png" group-title="Jordan â€“ Undefined",Jordan Archive (1080p)
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Archive/playlist.m3u8
+#EXTINF:-1 tvg-id="JordanDrama.jo@SD" tvg-logo="https://i.imgur.com/gvIAEsJ.png" group-title="Jordan â€“ Undefined",Jordan Drama (1080p)
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Drama/playlist.m3u8
+#EXTINF:-1 tvg-id="JordanTourism.jo@SD" tvg-logo="https://i.imgur.com/gpeIoU9.png" group-title="Jordan â€“ Undefined",Jordan Tourism (1080p)
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Tourism/playlist.m3u8
 #EXTINF:-1 tvg-id="Pulse95Radio.ae@SD" tvg-logo="https://maraya.faulio.com/storage/mediagallery/60/26/fullhd_d5c3c81b0562a76bc63f073a5e0947f309b0215b.png" group-title="UAE â€“ Undefined",Pulse95 Radio (1080p)
 https://svs.itworkscdn.net/pulse95live/pulse96/playlist.m3u8
 #EXTINF:-1 tvg-id="RadioFannJordanStudio.jo@SD" tvg-logo="https://cdn-profiles.tunein.com/s142626/images/logod.jpg" group-title="Jordan â€“ Undefined",Radio Fann Jordan Studio (1080p) [Not 24/7]

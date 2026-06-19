@@ -1,4 +1,6 @@
 #EXTM3U url-tvg="https://epg.pw/xmltv/epg_LB.xml.gz"
+#EXTINF:-1 tvg-id="AlIttihadTV.lb@SD" tvg-logo="https://i.imgur.com/QMUjPXx.png" group-title="Lebanon â€“ General",Al Ittihad (552p) [Not 24/7]
+http://185.105.4.151:8080/_defapp_/ittihad/index.m3u8
 #EXTINF:-1 tvg-id="AlJadeed.lb@SD" tvg-logo="https://i.imgur.com/CfxR8o3.png" group-title="Lebanon â€“ General",Al Jadeed (1080p)
 http://185.9.2.18/chid_391/mono.m3u8
 #EXTINF:-1 tvg-id="FutureTV.lb@SD" tvg-logo="https://i.imgur.com/OaqEpwe.png" group-title="Lebanon â€“ General",Future TV (1080p)
@@ -9,6 +11,8 @@ https://cdn.streamlane.tv/hls/ltv/master.m3u8
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mtv-lebanon/b8ebb2a5affb812f1541712adde10e26/index.m3u8
 #EXTINF:-1 tvg-id="OTV.lb@SD" tvg-logo="https://i.imgur.com/toxFMeY.png" group-title="Lebanon â€“ General",OTV (1080p)
 https://otv.hibridcdn.net/otv/tv_abr/playlist.m3u8
+#EXTINF:-1 tvg-id="TeleLiban.lb@SD" tvg-logo="https://i.imgur.com/5VPYxJi.png" group-title="Lebanon â€“ General",Tele Liban (720p) [Not 24/7]
+https://cdn.catiacast.video/abr/ed8f807e2548db4507d2a6f4ba0c4a06/playlist.m3u8
 #EXTINF:-1 tvg-id="TahaTV.lb@SD" tvg-logo="https://i.imgur.com/hdsrxvX.png" group-title="Lebanon â€“ Kids",Taha TV (576p)
 https://stream.starmenajo.com/hls/app/live/ts:fhd.m3u8
 #EXTINF:-1 tvg-id="AghaniAghaniTV.lb@SD" tvg-logo="https://i.imgur.com/o6HSfNg.png" group-title="Lebanon â€“ Music",Aghani Aghani TV (1080p)
@@ -27,10 +31,14 @@ https://edge.fastpublish.me/live/index.m3u8
 https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="ALWifakNewsTV.lb@SD" tvg-logo="https://i.imgur.com/1vqhmNz.png" group-title="Lebanon â€“ News",ALWifak News TV (720p)
 http://alwifaklive.info:1935/live/myStream/playlist.m3u8
+#EXTINF:-1 tvg-id="NabaaTV.lb@SD" tvg-logo="https://i.imgur.com/p8eRgSs.png" group-title="Lebanon â€“ News",Nabaa TV (720p) [Not 24/7]
+http://31.14.40.237:1935/live/Nabaa/playlist.m3u8
 #EXTINF:-1 tvg-id="PalestineAlYawm.lb@SD" tvg-logo="https://i.imgur.com/n8dSgx4.png" group-title="Lebanon â€“ News",Palestine Al Yawm (720p)
 https://live.paltodaytv.com/paltv/live/playlist_sfm4s.m3u8
 #EXTINF:-1 tvg-id="RedTVLebanon.lb@HD" tvg-logo="https://i.imgur.com/bWwY885.png" group-title="Lebanon â€“ News",Red TV Lebanon (1080p)
 https://live.kwikmotion.com/redtvlive/redtv.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="UNews.lb@SD" group-title="Lebanon â€“ News",UNews
+https://cdn.catiacast.video/abr/9436b5ab3c1171ab04a59af11951292f/playlist.m3u8
 #EXTINF:-1 tvg-id="VoiceofLebanon.lb@SD" tvg-logo="https://i.imgur.com/f8WcqRY.png" group-title="Lebanon â€“ News",Voice of Lebanon (1080p)
 https://svs.itworkscdn.net/vdltvlive/vdltv.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="AlImanTV.lb@SD" tvg-logo="https://i.imgur.com/4WKQppG.png" group-title="Lebanon â€“ Religious",Aliman TV (240p) [Not 24/7]
