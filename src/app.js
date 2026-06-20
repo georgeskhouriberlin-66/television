@@ -18,6 +18,7 @@ async function detectNewPlaylists() {
       if (!localKeys.includes(name)) {
         console.log(`🔍 Neue Playlist erkannt: ${name} → ${url}`);
         detectedPlaylists.push({ name, url, detectedAt: new Date().toISOString() });
+        onNewPlaylistDetected(name, url);
       }
     }
 
@@ -43,6 +44,16 @@ function onNewPlaylistsFound(newLists) {
 function showUIFeedback(msg) {
   const el = document.getElementById("playlist-status");
   if (el) el.textContent = `📡 ${msg}`;
+}
+
+function savePlaylistUrl(name, url) {
+  currentPlaylists[name] = url;
+  localStorage.setItem("iptvPlaylists", JSON.stringify(currentPlaylists));
+}
+
+function onNewPlaylistDetected(playlistName, playlistUrl) {
+  savePlaylistUrl(playlistName, playlistUrl);
+  loadPlaylists();
 }
 
 function startAutoDetection(intervalMs = 300000) {
