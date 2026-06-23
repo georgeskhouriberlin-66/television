@@ -506,7 +506,7 @@ function tryStream(ch,idx){
   if(idx>=v.length){errMsg.textContent='Alle Streams fehlgeschlagen.';errOv.classList.add('show');nosig.style.display='flex';loadOv.classList.remove('show');return}
   const url=v[idx];
   nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');
-  if(hls){hls.destroy();hls=null}vid.src='';
+  if(hls){hls.destroy();hls=null}vid.src='';vid.load();
   if(Hls.isSupported()){
     hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:20,startLevel:-1});
     hls.loadSource(url);hls.attachMedia(vid);
