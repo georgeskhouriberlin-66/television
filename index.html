@@ -505,17 +505,17 @@ function tryStream(ch,idx){
   const v=ch._v||(ch._v=buildVariants(ch));
   if(idx>=v.length){errMsg.textContent='Alle Streams fehlgeschlagen.';errOv.classList.add('show');nosig.style.display='flex';loadOv.classList.remove('show');return}
   const url=v[idx];
-  nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');
+  nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');vid.style.opacity='0';
   if(hls){hls.destroy();hls=null}vid.src='';vid.load();
   if(Hls.isSupported()){
     hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:20,startLevel:-1});
     hls.loadSource(url);hls.attachMedia(vid);
-    hls.on(Hls.Events.MANIFEST_PARSED,()=>{const p=vid.play();if(p)p.catch(()=>document.addEventListener('click',()=>vid.play().catch(()=>{}),{once:true}));loadOv.classList.remove('show')});
+    hls.on(Hls.Events.MANIFEST_PARSED,()=>{vid.style.opacity='1';const p=vid.play();if(p)p.catch(()=>document.addEventListener('click',()=>vid.play().catch(()=>{}),{once:true}));loadOv.classList.remove('show')});
     hls.on(Hls.Events.ERROR,(_,d)=>{if(d.fatal){hls.destroy();hls=null;tryStream(ch,idx+1)}});
   }else if(vid.canPlayType('application/vnd.apple.mpegurl')){
-    vid.src=url;vid.addEventListener('loadedmetadata',()=>{vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
+    vid.src=url;vid.addEventListener('loadedmetadata',()=>{vid.style.opacity='1';vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
     vid.addEventListener('error',()=>tryStream(ch,idx+1),{once:true});
-  }else{vid.src=url;vid.play().then(()=>loadOv.classList.remove('show')).catch(()=>tryStream(ch,idx+1))}
+  }else{vid.src=url;vid.play().then(()=>{vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>tryStream(ch,idx+1))}
 }
 
 /* ── UI ── */
