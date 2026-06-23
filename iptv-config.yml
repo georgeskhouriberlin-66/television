@@ -19,7 +19,7 @@ playlists:
     output: gulf.m3u
     sources: [ae, qa, jo]
     epg: [AE, QA, JO]
-    group_style: "Country A€" Category"
+    group_style: "Country - Category"
   usa:
     output: usa.m3u
     sources: [us]

@@ -1,7 +1,7 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import crypto from 'crypto';
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CONFIG_PATH = path.join(__dirname, 'iptv-config.yml');
@@ -33,12 +33,12 @@ const CONFIG = {
     om: 'https://iptv-org.github.io/iptv/countries/om.m3u',
   },
   playlists: {
-    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Country â€“ Category' },
-    gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Country â€“ Category' },
-    usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA â€“ Category' },
-    eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
-    germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
-    libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Lebanon â€“ Category' },
+    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Country  -  Category' },
+    gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Country  -  Category' },
+    usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA  -  Category' },
+    eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country  -  Category' },
+    germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany  -  Category' },
+    libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Lebanon  -  Category' },
   },
 };
 
@@ -256,14 +256,14 @@ async function main() {
   const onlyValidate = process.argv.includes('--validate-only');
   const outputDir = __dirname;
 
-  console.log('ðŸ“¡ IPTV Playlist Generator\n');
+  console.log('ðŸ�¡ IPTV Playlist Generator\n');
 
   // 1. Download all sources
-  console.log('â¬‡ï¸  Downloading sources...');
+  console.log('â¬�ï¸  Downloading sources...');
   const rawData = {};
   for (const [key, url] of Object.entries(CONFIG.sources)) {
     try {
-      console.log(`   ${key} â†’ ${url}`);
+      console.log(`   ${key} â�� ${url}`);
       rawData[key] = await download(url);
     } catch (e) {
       console.error(`   âŒ ${key}: ${e.message}`);
@@ -272,7 +272,7 @@ async function main() {
   }
 
   if (onlyValidate) {
-    console.log('\nðŸ” Validation mode: checking existing playlists...');
+    console.log('\nðŸ� Validation mode: checking existing playlists...');
     let allOk = true;
     for (const key of Object.keys(CONFIG.playlists)) {
       const p = CONFIG.playlists[key];
@@ -285,7 +285,7 @@ async function main() {
       const content = fs.readFileSync(f, 'utf-8');
       const result = validateM3U(content, p.output);
       if (result.valid) {
-        console.log(`   âœ… ${p.output}: ${result.channelCount} channels`);
+        console.log(`   âœ� ${p.output}: ${result.channelCount} channels`);
       } else {
         console.log(`   âŒ ${p.output}: ${result.issues.join(', ')}`);
         allOk = false;
@@ -295,12 +295,12 @@ async function main() {
   }
 
   // 2. Backup existing
-  console.log('\nðŸ’¾ Creating backup...');
+  console.log('\nðŸ�¾ Creating backup...');
   const backupDir = backup(outputDir);
-  console.log(`   â†’ ${backupDir}`);
+  console.log(`   â�� ${backupDir}`);
 
   // 3. Parse sources
-  console.log('\nðŸ”§ Parsing channels...');
+  console.log('\nðŸ�§ Parsing channels...');
   const parsed = {};
   for (const key of Object.keys(CONFIG.sources)) {
     if (rawData[key]) {
@@ -310,7 +310,7 @@ async function main() {
   }
 
   // 4. Build playlists
-  console.log('\nðŸ“¦ Building playlists...');
+  console.log('\nðŸ�¦ Building playlists...');
   let allValid = true;
   const results = [];
 
@@ -339,7 +339,7 @@ async function main() {
       const alive = await removeDeadChannels(channels, cfg.output);
       const dead = beforeVal - alive.length;
       if (dead > 0) {
-        console.log(`     ⚠ ${alive.length}/${beforeVal} alive (${dead} dead — kept anyway, URL validation is advisory)`);
+        console.log(`     ⚠ ${alive.length}/${beforeVal} alive (${dead} dead � kept anyway, URL validation is advisory)`);
       } else {
         console.log(`     → ${alive.length}/${beforeVal} alive`);
       }
@@ -352,7 +352,7 @@ async function main() {
     // Validate
     const result = validateM3U(m3u, cfg.output);
     if (result.valid) {
-      console.log(`     âœ… ${result.channelCount} channels, valid`);
+      console.log(`     âœ� ${result.channelCount} channels, valid`);
     } else {
       console.log(`     âŒ ${result.issues.join(', ')}`);
       allValid = false;
@@ -379,9 +379,9 @@ async function main() {
   if (!allValid) {
     console.log('\nâš ï¸  Validation errors detected!');
     if (process.env.ENABLE_ROLLBACK !== 'false') {
-      console.log('â†©ï¸  Rolling back to backup...');
+      console.log('â�©ï¸  Rolling back to backup...');
       restoreBackup(backupDir, outputDir);
-      console.log('   âœ… Restored from backup');
+      console.log('   âœ� Restored from backup');
     } else {
       console.log('   âš ï¸ Rollback disabled, keeping generated files');
     }
@@ -398,9 +398,9 @@ async function main() {
   if (tidied > 0) console.log(`\nðŸ§¹ Removed ${tidied} old backup(s)`);
 
   // Summary
-  console.log('\nðŸ“Š Summary:');
+  console.log('\nðŸ�Š Summary:');
   for (const r of results) {
-    console.log(`   ${r.valid ? 'âœ…' : 'âŒ'} ${r.file}: ${r.channels} channels`);
+    console.log(`   ${r.valid ? 'âœ�' : 'âŒ'} ${r.file}: ${r.channels} channels`);
   }
 
   // Embed TinyURLs
@@ -419,7 +419,7 @@ async function main() {
   console.log('\n\u{1F4C4} tinyurls.json written');
 
   if (allValid) {
-    console.log('\nâœ… All playlists generated successfully!');
+    console.log('\nâœ� All playlists generated successfully!');
   } else {
     console.log('\nâŒ Some playlists have issues (rolled back)');
     process.exit(1);
