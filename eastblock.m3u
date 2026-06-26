@@ -1,6 +1,8 @@
 #EXTM3U url-tvg="https://epg.pw/xmltv/epg_RU.xml.gz" url-tvg="https://epg.pw/xmltv/epg_UA.xml.gz"
 #EXTINF:-1 tvg-id="Pro100TV.ru@SD" tvg-logo="https://i.imgur.com/YfQEflM.png" group-title="Russia  -  Animation;Classic;Entertainment;Family;Movies",Pro100TV (576p)
 https://sirius.greenhosting.ru/Pro100tvRu/video.m3u8
+#EXTINF:-1 tvg-id="Pingvin.ru@SD" tvg-logo="https://i.imgur.com/2AFGvZy.png" group-title="Russia  -  Animation;Kids",Pingvin (576p)
+https://adpnetworkhd-cmd.github.io/iptv/Pingvin.m3u8
 #EXTINF:-1 tvg-id="Multimania.ru@SD" tvg-logo="https://i.imgur.com/abh8ZBA.png" group-title="Russia  -  Animation;Kids",Мультимания (576p)
 https://sirius.greenhosting.ru/MultimaniaRu/tracks-v1a1/mono.m3u8
 #EXTINF:-1 tvg-id="Solnce.ru@SD" tvg-logo="https://i.imgur.com/HCefxaK.png" group-title="Russia  -  Animation;Kids",Солнце (576p)
@@ -15,6 +17,8 @@ http://de.russkoe-iptv.com:88/s/s-e3dc39e0/drive-hd.m3u8
 https://iptv.prosto.tv/ch392/index.m3u8
 #EXTINF:-1 tvg-id="CarsStarsTV.uk@SD" tvg-logo="https://i.imgur.com/E8SorC5.png" group-title="Ukraine  -  Auto",like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="Auto",Cars & Stars TV (1080p)
 https://iptv.prosto.tv/ch111/index.m3u8
+#EXTINF:-1 tvg-id="Pershyiavtomobilnyi.ua@SD" tvg-logo="https://i.imgur.com/ul93Lse.png" group-title="Ukraine  -  Auto",Pershyi avtomobilnyi (576p)
+https://adpnetworkhd-cmd.github.io/iptv/Pershyiavtomobilnyi.m3u8
 #EXTINF:-1 tvg-id="AutoPlus.ru@SD" tvg-logo="https://i.imgur.com/sVc8cFt.png" group-title="Russia  -  Auto",Авто Плюс (576p)
 http://31.148.48.15/Avto_Plus/index.m3u8
 #EXTINF:-1 tvg-id="CityEdenAutoGid.ru@HD" tvg-logo="https://i.imgur.com/qpe8L27.png" group-title="Russia  -  Auto",Сити Эдем АвтоГид [Not 24/7]
@@ -107,6 +111,8 @@ http://retc.educom.ru/mosobrtv/tv1/index.m3u8
 http://31.148.48.15/Doktor/index.m3u8
 #EXTINF:-1 tvg-id="black.ru@SD" tvg-logo="https://i.imgur.com/Q4A6ci4.png" group-title="Russia  -  Entertainment",.black (1080p)
 https://adpnetworkhd-cmd.github.io/iptv/Black.m3u8
+#EXTINF:-1 tvg-id="red.ru@HD" tvg-logo="https://i.imgur.com/GET9Qut.png" group-title="Russia  -  Entertainment",.red HD (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/RedHD.m3u8
 #EXTINF:-1 tvg-id="2x2.ru@SD" tvg-logo="https://i.imgur.com/fhQFLEl.png" group-title="Russia  -  Entertainment",2x2 (576i)
 https://bl.rutube.ru/livestream/392b4686b770bae2da6bf5ac4574add5/index.m3u8?e=2068731801&s=tenr-yHXUv1wibfka78s2A&scheme=https
 #EXTINF:-1 tvg-id="4everTheater.ua@SD" tvg-logo="https://i.imgur.com/kfngtev.png" group-title="Ukraine  -  Entertainment",4ever Theater
@@ -119,8 +125,10 @@ https://kino-stream.online/hls/DTRZONA1.m3u8
 https://kino-stream.online/hls/DTRZONA2.m3u8
 #EXTINF:-1 tvg-id="Friday.ru@SD" tvg-logo="https://i.imgur.com/UfmlXxe.png" group-title="Russia  -  Entertainment",Friday! (1080p)
 https://adpnetworkhd-cmd.github.io/iptv/FridayHD_Moskva.m3u8
-#EXTINF:-1 tvg-id="ICTV2.ua@SD" tvg-logo="https://i.imgur.com/J4zlRGv.png" group-title="Ukraine  -  Entertainment",ICTV2 (1080p) [Not 24/7]
-http://315e5a5d.ottrast.com/iptv/MM4E93NGF5LADZ/15235/index.m3u8
+#EXTINF:-1 tvg-id="ICTV.ua@SD" tvg-logo="https://i.imgur.com/97W1NOW.png" group-title="Ukraine  -  Entertainment",ICTV (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/ICTV.m3u8
+#EXTINF:-1 tvg-id="ICTV2.ua@SD" tvg-logo="https://i.imgur.com/J4zlRGv.png" group-title="Ukraine  -  Entertainment",ICTV2 (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/ICTV2.m3u8
 #EXTINF:-1 tvg-id="K1.ua@SD" tvg-logo="https://i.imgur.com/uuRGpEn.png" group-title="Ukraine  -  Entertainment",K1 (1080p)
 https://adpnetworkhd-cmd.github.io/iptv/K1.m3u8
 #EXTINF:-1 tvg-id="K2.ua@SD" tvg-logo="https://i.imgur.com/NMhydr5.png" group-title="Ukraine  -  Entertainment",K2 (1080p)
@@ -131,12 +139,16 @@ http://hls127.freeott.top:8080/Kluch/video.m3u8
 http://158.101.222.193:88/georgia_play.php?id=kvartal95
 #EXTINF:-1 tvg-id="FridayInternational.ru@SD" tvg-logo="https://i.imgur.com/N2z3EZC.png" group-title="Russia  -  Entertainment",like Gecko) Chrome/144.0.0.0 Safari/537.36" group-title="Entertainment",Пятница! International (576p)
 https://cdn4.skygo.mn/live/disk1/Friday/HLSv3-FTA/Friday.m3u8
-#EXTINF:-1 tvg-id="ICTV.ua@SD" tvg-logo="https://i.imgur.com/97W1NOW.png" group-title="Ukraine  -  Entertainment",like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="Entertainment",ICTV
-https://iptv.prosto.tv/ch2/index.m3u8
 #EXTINF:-1 tvg-id="Svarozhychy.ua@SD" tvg-logo="https://i.imgur.com/VnAgQA4.png" group-title="Ukraine  -  Entertainment",like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="Entertainment",Svarozhychy (576p)
 https://iptv.prosto.tv/ch168/index.m3u8
+#EXTINF:-1 tvg-id="NovyiChannel.ua@SD" tvg-logo="https://i.imgur.com/Dnfhdsm.png" group-title="Ukraine  -  Entertainment",Novyi Channel (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/NoviyKanal.m3u8
 #EXTINF:-1 tvg-id="NSCPlus.ru@HD" tvg-logo="https://i.imgur.com/6k9LYOw.png" group-title="Russia  -  Entertainment",NSC+ (720p)
 https://live.15plusmg.ru/memfs/5a03fc7a-8417-4874-b56f-91b8aeba1210.m3u8
+#EXTINF:-1 tvg-id="Oruzhie.ru@SD" tvg-logo="https://i.imgur.com/lfJQJqa.png" group-title="Russia  -  Entertainment",Oruzhie (576p)
+https://adpnetworkhd-cmd.github.io/iptv/Oruzhie.m3u8
+#EXTINF:-1 tvg-id="OTSE.ua@SD" tvg-logo="https://i.imgur.com/SeRNJIS.png" group-title="Ukraine  -  Entertainment",OTSE (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/OtseHD.m3u8
 #EXTINF:-1 tvg-id="Smotrim100Prazdnik.ru@SD" tvg-logo="https://i.imgur.com/NEcqFse.png" group-title="Russia  -  Entertainment",Smotrim 100% Prazdnik (720p)
 https://stream.smotrim.ru/hls/fasttv04/playlist_3.m3u8
 #EXTINF:-1 tvg-id="TV3.ru@SD" tvg-logo="https://i.imgur.com/JLAvq8O.png" group-title="Russia  -  Entertainment",TV-3 (576p)
@@ -217,6 +229,8 @@ http://94.230.128.107:8080/OTP/index.m3u8
 https://api-tv.ipnet.ua/api/v1/manifest/2118742505.m3u8
 #EXTINF:-1 tvg-id="RENTV.ru@SD" tvg-logo="https://i.imgur.com/0Tu5lte.png" group-title="Russia  -  General",REN TV (576p)
 http://94.230.128.107:8080/PEH_TB/index.m3u8
+#EXTINF:-1 tvg-id="RENTV.ru@HD" tvg-logo="https://i.imgur.com/0Tu5lte.png" group-title="Russia  -  General",REN TV HD (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/RENTVHD_Moskva.m3u8
 #EXTINF:-1 tvg-id="RenomeTV.ua@SD" tvg-logo="https://i.imgur.com/qL1uNlW.png" group-title="Ukraine  -  General",Renome (576p)
 http://85.238.112.40:8810/hls_sec/online/list-renome.m3u8
 #EXTINF:-1 tvg-id="RTVi.ru@SD" tvg-logo="https://i.imgur.com/1AEhXyS.png" group-title="Russia  -  General",RTVi (450p)
@@ -391,12 +405,18 @@ https://iptv.prosto.tv/ch77/index.m3u8
 https://iptv.prosto.tv/ch72/index.m3u8
 #EXTINF:-1 tvg-id="NikiKids.ua@SD" tvg-logo="https://i.imgur.com/HH4HZ2J.png" group-title="Ukraine  -  Kids",like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="Kids",Niki Kids (1080p)
 https://iptv.prosto.tv/ch71/index.m3u8
-#EXTINF:-1 tvg-id="Nicktoons.ru@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d8/Nicktoons_UK_Logo_2014.png" group-title="Russia  -  Kids",Nicktoons [Not 24/7]
-http://315e5a5d.ottrast.com/iptv/MM4E93NGF5LADZ/849/index.m3u8
+#EXTINF:-1 tvg-id="Mult.ru@HD" tvg-logo="https://i.imgur.com/xi351Fx.png" group-title="Russia  -  Kids",Mult HD (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/Mult.m3u8
+#EXTINF:-1 tvg-id="Nickelodeon.ru@SD" tvg-logo="https://i.imgur.com/w8iE8dV.png" group-title="Russia  -  Kids",Nickelodeon (576p)
+https://adpnetworkhd-cmd.github.io/iptv/NickelodeonRussia.m3u8
+#EXTINF:-1 tvg-id="Nicktoons.ru@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d8/Nicktoons_UK_Logo_2014.png" group-title="Russia  -  Kids",Nicktoons (576p)
+https://adpnetworkhd-cmd.github.io/iptv/NicktoonsRussia.m3u8
 #EXTINF:-1 tvg-id="O.ru@SD" tvg-logo="https://i.imgur.com/pDc665V.png" group-title="Russia  -  Kids",O! (1080p)
 http://de.russkoe-iptv.com:88/s/s-e3dc39e0/kanal-o-hd.m3u8
-#EXTINF:-1 tvg-id="PLUSPLUS.ua@SD" tvg-logo="https://i.imgur.com/9bPhStm.png" group-title="Ukraine  -  Kids",PLUSPLUS (720p) [Not 24/7]
-http://315e5a5d.ottrast.com/iptv/MM4E93NGF5LADZ/6379/index.m3u8
+#EXTINF:-1 tvg-id="PixelTV.ua@SD" tvg-logo="https://i.imgur.com/ECro8Ah.png" group-title="Ukraine  -  Kids",Pixel TV (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/PikselTV.m3u8
+#EXTINF:-1 tvg-id="PLUSPLUS.ua@SD" tvg-logo="https://i.imgur.com/9bPhStm.png" group-title="Ukraine  -  Kids",PLUSPLUS (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/PlusPlus.m3u8
 #EXTINF:-1 tvg-id="RadostMoya.ru@SD" tvg-logo="https://i.imgur.com/B5FA62o.png" group-title="Russia  -  Kids",Radost Moya (576p)
 http://31.148.48.15/Radost_moya/index.m3u8
 #EXTINF:-1 tvg-id="Ryzhiy.ru@SD" tvg-logo="https://i.imgur.com/acrU2IE.png" group-title="Russia  -  Kids",Ryzhiy (576i)
@@ -493,10 +513,18 @@ https://stream8.cinerama.uz/1203/tracks-v1a1/mono.m3u8
 https://iptv.prosto.tv/ch42/index.m3u8
 #EXTINF:-1 tvg-id="Lyubimoe.ru@SD" tvg-logo="https://i.imgur.com/qWK6WvG.png" group-title="Russia  -  Movies",Lyubimoe (1080p)
 https://adpnetworkhd-cmd.github.io/iptv/LubimoeHD.m3u8
-#EXTINF:-1 tvg-id="MosfilmGoldCollection.ru@SD" tvg-logo="https://i.imgur.com/95Y8jb6.png" group-title="Russia  -  Movies",Mosfilm Gold Collection (576p)
-http://31.222.235.15/mosfilm/index.m3u8
+#EXTINF:-1 tvg-id="MosfilmGoldCollection.ru@SD" tvg-logo="https://i.imgur.com/95Y8jb6.png" group-title="Russia  -  Movies",Mosfilm Gold Collection (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/MosfilmGoldCollection.m3u8
+#EXTINF:-1 tvg-id="Muzhskoy.ru@SD" tvg-logo="https://i.imgur.com/xyztpBf.png" group-title="Russia  -  Movies",Muzhskoy (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/MuzhskoyHD.m3u8
 #EXTINF:-1 tvg-id="NasheNovoeKino.ru@SD" tvg-logo="https://i.imgur.com/IOxIsPj.png" group-title="Russia  -  Movies",Nashe Novoe Kino
 https://stream8.cinerama.uz/1051/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="Ostrosyuzhetnoye.ru@SD" tvg-logo="https://i.imgur.com/NwQ7GBy.png" group-title="Russia  -  Movies",Ostrosyuzhetnoye (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/OstrosyuzhetnoyeHD.m3u8
+#EXTINF:-1 tvg-id="Premialnoe.ru@HD" tvg-logo="https://i.imgur.com/ck4aLBP.png" group-title="Russia  -  Movies",Premialnoe HD (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/PremialnoeHD.m3u8
+#EXTINF:-1 tvg-id="RusskiyIllusion.ru@SD" tvg-logo="https://i.imgur.com/RlsqFN8.png" group-title="Russia  -  Movies",Russkiy Illusion (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/RusskiyIllusion.m3u8
 #EXTINF:-1 tvg-id="StarCinema.ru@SD" tvg-logo="https://i.imgur.com/5sis895.png" group-title="Russia  -  Movies",Star Cinema
 https://dash2.antik.sk/live/test_star_cinema_atktv/playlist.m3u8
 #EXTINF:-1 tvg-id="StarFamily.ru@SD" tvg-logo="https://i.imgur.com/eGuGHnZ.png" group-title="Russia  -  Movies",Star Family (1080p)
@@ -541,8 +569,6 @@ http://31.148.48.15/Rodnoe_kino/index.m3u8
 http://31.148.48.15/Russkiy_Bestseller/index.m3u8
 #EXTINF:-1 tvg-id="RusskiyDetektiv.ru@SD" tvg-logo="https://i.imgur.com/H3qhN8S.png" group-title="Russia  -  Movies",Русский Детектив (576p)
 http://31.148.48.15/Russkiy_Detektiv/index.m3u8
-#EXTINF:-1 tvg-id="RusskiyIllusion.ru@SD" tvg-logo="https://i.imgur.com/RlsqFN8.png" group-title="Russia  -  Movies",Русский Иллюзион (576p)
-http://31.148.48.15/Russkiy_illusion/index.m3u8
 #EXTINF:-1 tvg-id="Russkiyroman.ru@SD" tvg-logo="https://i.imgur.com/cQN0P2B.png" group-title="Russia  -  Movies",Русский Роман (1080p)
 http://31.148.48.15/Russkiy_Roman_HD/index.m3u8
 #EXTINF:-1 tvg-id="CityEdenKinoAsia.ru@HD" tvg-logo="https://i.imgur.com/gaket4B.png" group-title="Russia  -  Movies",Сити Эдем КиноАзия [Not 24/7]
@@ -575,6 +601,8 @@ https://adpnetworkhd-cmd.github.io/iptv/BoltRussia.m3u8
 https://adpnetworkhd-cmd.github.io/iptv/BoltUA.m3u8
 #EXTINF:-1 tvg-id="FilmUADrama.ua@SD" tvg-logo="https://i.imgur.com/Hnwsh5d.png" group-title="Ukraine  -  Movies;Series",like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="Movies;Series",FilmUADrama (1080p)
 http://88.99.215.227/FilmUADrama/index.m3u8
+#EXTINF:-1 tvg-id="Nashe.ru@SD" tvg-logo="https://i.imgur.com/KO8dhi9.png" group-title="Russia  -  Movies;Series",Nashe (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/NasheHD.m3u8
 #EXTINF:-1 tvg-id="ViasatSerial.ua@HD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/7/7d/Viasat_Serial.svg" group-title="Ukraine  -  Movies;Series",Viasat Serial (1080p) [Not 24/7]
 http://315e5a5d.ottrast.com/iptv/MM4E93NGF5LADZ/17056/index.m3u8
 #EXTINF:-1 tvg-id="15PlusMusic.ru@HD" tvg-logo="https://i.imgur.com/kj21hwd.png" group-title="Russia  -  Music",15+ Music (1080p)
@@ -773,14 +801,16 @@ https://hls.tv.3angels.ru/stream.m3u8
 http://31.148.48.15/SONY_SCI_FI/index.m3u8
 #EXTINF:-1 tvg-id="EkoTV.ua@SD" tvg-logo="https://i.imgur.com/WovATGb.png" group-title="Ukraine  -  Science",Eko TV (720p)
 https://ext.cdn.nashnet.tv/228.0.1.60/index.m3u8
+#EXTINF:-1 tvg-id="PervyyKosmicheskiy.ru@HD" tvg-logo="https://i.imgur.com/N1Ze5IE.png" group-title="Russia  -  Science",Pervyy Kosmicheskiy HD (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/PervyyKosmicheskiy.m3u8
 #EXTINF:-1 tvg-id="4everDrama.ua@SD" tvg-logo="https://i.imgur.com/CD3vZU6.png" group-title="Ukraine  -  Series",4ever Drama (1080p)
 https://iptv.prosto.tv/ch49/index.m3u8
 #EXTINF:-1 tvg-id="A2.ru@SD" tvg-logo="https://i.imgur.com/NqHla2V.png" group-title="Russia  -  Series",Amedia 2 (576p)
 http://31.148.48.15/A2/index.m3u8
 #EXTINF:-1 tvg-id="EpicDrama.uk@Ukraine" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Epic-Drama-TV.jpg/960px-Epic-Drama-TV.jpg" group-title="Ukraine  -  Series",Epic Drama Ukraine [Not 24/7]
 http://315e5a5d.ottrast.com/iptv/8XFKA8883W9M5K/1048/index.m3u8
-#EXTINF:-1 tvg-id="NTVSeries.ru@SD" tvg-logo="https://i.imgur.com/QdVa8tl.png" group-title="Russia  -  Series",NTV Series (576p)
-https://cdn-dvr.ntv.ru/th_serial/index.m3u8
+#EXTINF:-1 tvg-id="NTVSeries.ru@SD" tvg-logo="https://i.imgur.com/QdVa8tl.png" group-title="Russia  -  Series",NTV Series (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/NTVSerial.m3u8
 #EXTINF:-1 tvg-id="NTVHit.ru@SD" tvg-logo="https://i.imgur.com/FfKBvz5.png" group-title="Russia  -  Series",NTV-Hit (1080p)
 https://cdn-dvr.ntv.ru/th_hit/index.m3u8
 #EXTINF:-1 tvg-id="Smotrim100Lyubov.ru@SD" tvg-logo="https://i.imgur.com/4EFh0nu.png" group-title="Russia  -  Series",Smotrim 100% Lyubov (720p)
@@ -849,6 +879,8 @@ http://31.148.48.15/Futbol_HD/index.m3u8
 http://cdn1.live-tv.od.ua:8081/bbb/bbbtv-abr/playlist.m3u8
 #EXTINF:-1 tvg-id="GlazamiTurista.ru@SD" tvg-logo="https://i.imgur.com/GXJKWdy.png" group-title="Russia  -  Travel",Glazami Turista (576i)
 https://stream8.cinerama.uz/1423/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="Moyastikhiya.ru@HD" tvg-logo="https://i.imgur.com/Sl8c9eB.png" group-title="Russia  -  Travel",Moya stikhiya HD (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/Moyastikhiya.m3u8
 #EXTINF:-1 tvg-id="RTGTV.ru@SD" tvg-logo="https://i.imgur.com/ZMKPAho.png" group-title="Russia  -  Travel",RTG TV (720p)
 http://31.148.48.15/RTG_HD/index.m3u8
 #EXTINF:-1 tvg-id="TravelPlusAdventure.ru@SD" tvg-logo="https://i.imgur.com/AlpdXC4.png" group-title="Russia  -  Travel",Travel+Adventure (1080p)
@@ -871,6 +903,8 @@ https://adpnetworkhd-cmd.github.io/iptv/DushevnoeHD.m3u8
 https://dash2.antik.sk/live/test_kuskus_tv_atktv/playlist.m3u8
 #EXTINF:-1 tvg-id="TVCentrInternational.ru@SD" tvg-logo="https://i.imgur.com/tsCOnBW.png" group-title="Russia  -  Undefined",like Gecko) Chrome/144.0.0.0 Safari/537.36" group-title="Undefined",ТВ Центр International (720p)
 https://cdn4.skygo.mn/live/disk1/TV_center/HLSv3-FTA/TV_center.m3u8
+#EXTINF:-1 tvg-id="Mirvokrug.ru@SD" tvg-logo="https://i.imgur.com/EdNv2vA.png" group-title="Russia  -  Undefined",Mir vokrug (1080p)
+https://adpnetworkhd-cmd.github.io/iptv/Mirvokrug.m3u8
 #EXTINF:-1 tvg-id="NST.ru@SD" tvg-logo="https://i.imgur.com/uv2yxa5.png" group-title="Russia  -  Undefined",NST (576p)
 https://vod.tuva.ru/nst/index.m3u8
 #EXTINF:-1 tvg-id="Pobeda.ru@SD" tvg-logo="https://i.imgur.com/4KiYSln.png" group-title="Russia  -  Undefined",Pobeda (1080p)
@@ -885,6 +919,8 @@ https://adpnetworkhd-cmd.github.io/iptv/AdventuresHD.m3u8
 http://hls127.freeott.top:8080/ProLubovHD/video.m3u8
 #EXTINF:-1 tvg-id="Prodvizhenie.ru@SD" tvg-logo="https://i.imgur.com/KlsnfG9.png" group-title="Russia  -  Undefined",Prodvizhenie (576p)
 http://origin5.mediacdn.ru/live/prodvizhenie_new/index.m3u8
+#EXTINF:-1 tvg-id="Psikhologiya.ru@SD" tvg-logo="https://i.imgur.com/GsfedKS.png" group-title="Russia  -  Undefined",Psikhologiya (576p)
+https://adpnetworkhd-cmd.github.io/iptv/Psikhologiya21.m3u8
 #EXTINF:-1 tvg-id="SolovyovLive.ru@SD" tvg-logo="https://i.imgur.com/v0OYe1d.png" group-title="Russia  -  Undefined",Solovyov Live (1080p)
 https://stream.smotrim.ru/hls2/solovievlive/playlist_6.m3u8
 #EXTINF:-1 tvg-id="SonataTV.ua@SD" tvg-logo="https://i.imgur.com/0IZ6pgN.png" group-title="Ukraine  -  Undefined",Sonata TV (1080p)
