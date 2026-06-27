@@ -11,8 +11,8 @@ https://jmp2.uk/plu-67f68bd2135aeda9ddf0ef54.m3u8
 https://d39g1vxj2ef6in.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-rakuten-stitched/master.m3u8?ads.xumo_channelId=88883047
 #EXTINF:-1 tvg-id="CCPlutoTV.de@DACH" tvg-logo="https://images.pluto.tv/channels/5d4947590ba40f75dc29c26b/colorLogoPNG.png" group-title="Germany  -  Comedy",CC Pluto TV
 https://jmp2.uk/plu-5d4947590ba40f75dc29c26b.m3u8
-#EXTINF:-1 tvg-id="ComedyCentral.de@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png" group-title="Germany  -  Comedy",Comedy Central [Not 24/7]
-http://c3921155.edmonst.net/iptv/42L7TCH8YYKLBRHNPV52HBRN/31302/index.m3u8
+#EXTINF:-1 tvg-id="ComedyCentral.de@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png" group-title="Germany  -  Comedy",like Gecko) Chrome/124.0.0.0 Safari/537.36" group-title="Comedy",Comedy Central
+https://lb.dstvmultimedia.com/ComedyCentral/index.m3u8
 #EXTINF:-1 tvg-id="PlutoTVComedyTherapie.de@DACH" tvg-logo="https://images.pluto.tv/channels/69b968ba255fecb01f602257/colorLogoPNG_1777380677093.png" group-title="Germany  -  Comedy",Pluto TV Comedy Therapie
 https://jmp2.uk/plu-69b968ba255fecb01f602257.m3u8
 #EXTINF:-1 tvg-id="PlutoTVDeutscheComedy.de@DACH" tvg-logo="https://images.pluto.tv/channels/6672f49f61a39900089db68e/colorLogoPNG_1748857141516.png" group-title="Germany  -  Comedy",Pluto TV Deutsche Comedy
@@ -265,6 +265,8 @@ https://bttv-live-z.r53.cdn.tv1.eu/13014bundestag-hk4/_definst_/live/video/hk4_d
 https://cb0c87cc605942ff9766a4e6744bbadc.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticTravel/playlist.m3u8
 #EXTINF:-1 tvg-id="BBCTravel.us@Germany" tvg-logo="https://i.imgur.com/QiuYWs9.png" group-title="Germany  -  Lifestyle",BBC Travel
 https://jmp2.uk/plu-60e4519e6873180007d3cddb.m3u8
+#EXTINF:-1 tvg-id="AXNBlack.de@SD" tvg-logo="https://i.imgur.com/Peo1QiZ.png" group-title="Germany  -  Movies",AXN Black
+http://xplatinmedia.com:8080/Elko/mhj8LHTJJC/79440
 #EXTINF:-1 tvg-id="GrjngoWesternMovies.de@SD" tvg-logo="https://i.imgur.com/wFqhK3p.png" group-title="Germany  -  Movies",Grjngo Western Movies (720p)
 https://amogonetworx-grjngo-3-dk.samsung.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="Moviedome.us@Germany" tvg-logo="https://i.imgur.com/8c54ycg.png" group-title="Germany  -  Movies",MOVIEDOME (720p)
