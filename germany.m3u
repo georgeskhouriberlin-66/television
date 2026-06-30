@@ -337,7 +337,7 @@ https://jmp2.uk/plu-615c1e5ce3039400070a0547.m3u8
 https://jmp2.uk/plu-65a67d572fac9c000835eb3a.m3u8
 #EXTINF:-1 tvg-id="NashKinomir.de@SD" tvg-logo="https://i.imgur.com/7M1J42A.png" group-title="Germany  -  Movies",Nash Kinomir (576p)
 http://hls127.freeott.top:8080/Nash_kinomir/video.m3u8
-#EXTINF:-1 tvg-id="PlutoTVBudTerence.de@DACH" tvg-logo="https://images.pluto.tv/channels/65b917d333ea860008598a05/colorLogoPNG.png" group-title="Germany  -  Movies",Pluto TV Bud & Terence
+#EXTINF:-1 tvg-id="PlutoTVBudTerence.de@DACH" tvg-logo="https://images.pluto.tv/channels/64be7398e4391c0008cdedfe/colorLogoPNG_1776936976930.png" group-title="Germany  -  Movies",Pluto TV Bud & Terence
 https://jmp2.uk/plu-64be7398e4391c0008cdedfe.m3u8
 #EXTINF:-1 tvg-id="PlutoTVFerneGalaxien.de@DACH" tvg-logo="https://images.pluto.tv/channels/68ada46d5190a45dc9c45af1/colorLogoPNG_1773754781519.png" group-title="Germany  -  Movies",Pluto TV Ferne Galaxien
 https://jmp2.uk/plu-68ada46d5190a45dc9c45af1.m3u8

@@ -39,6 +39,8 @@ https://stream.smotrim.ru/hls/fasttv03/playlist_3.m3u8
 http://31.148.48.15/Bridge_TV_Classic/index.m3u8
 #EXTINF:-1 tvg-id="alphaFunny.ru@HD" tvg-logo="https://i.ibb.co/ZcCXw5P/alphaf.png" group-title="Russia  -  Comedy",alpha Funny (1080p)
 https://live.15plusmg.ru/memfs/90b76c71-a86e-488a-aac4-cb66d6f88781.m3u8
+#EXTINF:-1 tvg-id="Gagsnetwork.us@SD" tvg-logo="https://i.imgur.com/ENj5GIp.png" group-title="Russia  -  Comedy",Gagsnetwork (576p)
+http://hls127.freeott.top:8080/Gagsnetwork/video.m3u8
 #EXTINF:-1 tvg-id="Kamedi.ru@SD" tvg-logo="https://i.imgur.com/UU4SGuk.png" group-title="Russia  -  Comedy",Kamedi (1080p)
 https://adpnetworkhd-cmd.github.io/iptv/Kamedi.m3u8
 #EXTINF:-1 tvg-id="Komediynoe.ru@SD" tvg-logo="https://i.imgur.com/cEKe8XC.png" group-title="Russia  -  Comedy",Komediynoe (1080p)
@@ -59,6 +61,8 @@ https://adpnetworkhd-cmd.github.io/iptv/Eda.m3u8
 https://adpnetworkhd-cmd.github.io/iptv/FoodTimeHD.m3u8
 #EXTINF:-1 tvg-id="KukhnyaTV.ru@SD" tvg-logo="https://i.imgur.com/7jxZnuS.png" group-title="Russia  -  Cooking",Kukhnya TV (576p)
 http://hls127.freeott.top:8080/Kuhnya_TV/video.m3u8
+#EXTINF:-1 tvg-id="KulinarTV.ru@SD" tvg-logo="https://smotret.tv/images/kulinar-tv.webp" group-title="Russia  -  Cooking",Kulinar TV (576p)
+https://api.alpaca.t62a.com/hls/9110/stream0.m3u8
 #EXTINF:-1 tvg-id="Telecafe.ru@SD" tvg-logo="https://i.imgur.com/1H3h1HL.png" group-title="Russia  -  Cooking",Telecafe (1080p)
 https://tchaikovsky.af-stream.com:991/s/xzztutfc/telekafe-hd/video.m3u8
 #EXTINF:-1 tvg-id="CityEdenReceptyGurmana.ru@HD" tvg-logo="https://i.imgur.com/wR0pvRc.png" group-title="Russia  -  Cooking",Сити Эдем Рецепты Гурмана [Not 24/7]
@@ -333,6 +337,14 @@ https://live-nikatv.cdnvideo.ru/nikatv/nikatv.sdp/playlist.m3u8
 https://rt-nw-novg-htlive.cdn.ngenix.net/hls/CH_R02_NOVGORODTV/variant.m3u8
 #EXTINF:-1 tvg-id="NovyVek.ru@SD" tvg-logo="https://i.imgur.com/8aYYi3r.png" group-title="Russia  -  General",Новый Век
 https://tele2dvrnat01-02.cdnvideo.ru/stream/NAT_Tambov/hls/index.m3u8
+#EXTINF:-1 tvg-id="NTV.ru@Plus1" tvg-logo="https://i.imgur.com/9r1BKzK.png" group-title="Russia  -  General",НТВ +1 (576p)
+https://cdn.ntv.ru/ntv1/playlist.m3u8
+#EXTINF:-1 tvg-id="NTV.ru@Plus2" tvg-logo="https://i.imgur.com/9r1BKzK.png" group-title="Russia  -  General",НТВ +2 (576p)
+https://cdn.ntv.ru/ntv2/playlist.m3u8
+#EXTINF:-1 tvg-id="NTV.ru@Plus4" tvg-logo="https://i.imgur.com/9r1BKzK.png" group-title="Russia  -  General",НТВ +4 (576p)
+https://cdn.ntv.ru/ntv4/playlist.m3u8
+#EXTINF:-1 tvg-id="NTV.ru@Plus7" tvg-logo="https://i.imgur.com/9r1BKzK.png" group-title="Russia  -  General",НТВ +7 (576p)
+https://cdn.ntv.ru/ntv7/playlist.m3u8
 #EXTINF:-1 tvg-id="NTK21.ru@HD" tvg-logo="https://i.imgur.com/W9s1flH.png" group-title="Russia  -  General",НТК 21 (Биробиджан) [Geo-blocked]
 https://s97982.cdn.ngenix.net/hls/CH_R79_OTT_DV_HVSK_NTK/variant.m3u8
 #EXTINF:-1 tvg-id="NTKTV.ua@SD" tvg-logo="https://www.ntktv.ua/bitrix/templates/ntk_copy/images/logo.png" group-title="Ukraine  -  General",НТК ТВ (1080p) [Not 24/7]
@@ -405,6 +417,8 @@ https://iptv.prosto.tv/ch77/index.m3u8
 https://iptv.prosto.tv/ch72/index.m3u8
 #EXTINF:-1 tvg-id="NikiKids.ua@SD" tvg-logo="https://i.imgur.com/HH4HZ2J.png" group-title="Ukraine  -  Kids",like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="Kids",Niki Kids (1080p)
 https://iptv.prosto.tv/ch71/index.m3u8
+#EXTINF:-1 tvg-id="LyubimoeTV.ru@SD" tvg-logo="https://i.imgur.com/JJv81ZP.png" group-title="Russia  -  Kids",Lyubimoe.TV (720p)
+https://istoki.tv/live/stream1/playlist.m3u8
 #EXTINF:-1 tvg-id="Mult.ru@HD" tvg-logo="https://i.imgur.com/xi351Fx.png" group-title="Russia  -  Kids",Mult HD (1080p)
 https://adpnetworkhd-cmd.github.io/iptv/Mult.m3u8
 #EXTINF:-1 tvg-id="Multimuzyka.ru@SD" tvg-logo="https://i.imgur.com/SYt6BZP.png" group-title="Russia  -  Kids",Mult i muzyka (576p)
@@ -503,14 +517,14 @@ http://176.118.197.101:80/KinoTvHD/playlist.m3u8
 https://stream8.cinerama.uz/1055/tracks-v1a1/mono.m3u8
 #EXTINF:-1 tvg-id="Kinopokaz.ru@HD" tvg-logo="https://i.imgur.com/nNjMyAq.png" group-title="Russia  -  Movies",Kinopokaz HD (1080p)
 http://hls127.freeott.top:8080/Kinopokaz_HD/video.m3u8
-#EXTINF:-1 tvg-id="Kinopremyera.ru@SD" tvg-logo="https://i.imgur.com/s0UYT8T.png" group-title="Russia  -  Movies",Kinopremyera
-https://stream8.cinerama.uz/1207/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="Kinopremyera.ru@SD" tvg-logo="https://i.imgur.com/s0UYT8T.png" group-title="Russia  -  Movies",Kinopremyera (1080p)
+http://5.188.159.128:8070/KINOPREMIERA/index.m3u8
 #EXTINF:-1 tvg-id="Kinosemja.ru@SD" tvg-logo="https://i.imgur.com/4BF5VeK.png" group-title="Russia  -  Movies",Kinosemja (1080p)
 https://adpnetworkhd-cmd.github.io/iptv/Kinosemya.m3u8
 #EXTINF:-1 tvg-id="Kinoseriya.ru@SD" tvg-logo="https://i.imgur.com/iao7zLZ.png" group-title="Russia  -  Movies",Kinoseriya (1080p)
 http://hls127.freeott.top:8080/Kinoseriya_HD/video.m3u8
-#EXTINF:-1 tvg-id="Kinosvidanie.ru@SD" tvg-logo="https://i.imgur.com/ZRaWqxj.png" group-title="Russia  -  Movies",Kinosvidanie
-https://stream8.cinerama.uz/1203/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="Kinosvidanie.ru@SD" tvg-logo="https://i.imgur.com/ZRaWqxj.png" group-title="Russia  -  Movies",Kinosvidanie (576p)
+http://5.188.159.128:8070/kinosvidanie/index.m3u8
 #EXTINF:-1 tvg-id="4everCinema.ua@SD" tvg-logo="https://i.imgur.com/vFOgVbG.png" group-title="Ukraine  -  Movies",like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="Movies",4ever Cinema (1080p)
 https://iptv.prosto.tv/ch42/index.m3u8
 #EXTINF:-1 tvg-id="Lyubimoe.ru@SD" tvg-logo="https://i.imgur.com/qWK6WvG.png" group-title="Russia  -  Movies",Lyubimoe (1080p)
