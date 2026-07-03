@@ -41,8 +41,6 @@ https://live.15plusmg.ru/memfs/3546fc09-2eba-459d-9a1f-9a2fc39e50bd.m3u8
 http://ukr.ukrainske.tv/493/keytvainua/video.m3u8
 #EXTINF:-1 tvg-id="FoodTime.ru@SD" tvg-logo="https://i.imgur.com/gxCYAwH.png" group-title="Russia  -  Cooking",FoodTime (1080p)
 http://31.148.48.15/Eda_Premium_HD/index.m3u8
-#EXTINF:-1 tvg-id="KukhnyaTV.ru@SD" tvg-logo="https://i.imgur.com/7jxZnuS.png" group-title="Russia  -  Cooking",Kukhnya TV (576p)
-http://hls127.freeott.top:8080/Kuhnya_TV/video.m3u8
 #EXTINF:-1 tvg-id="KulinarTV.ru@SD" tvg-logo="https://smotret.tv/images/kulinar-tv.webp" group-title="Russia  -  Cooking",Kulinar TV (576p)
 https://api.alpaca.t62a.com/hls/9110/stream0.m3u8
 #EXTINF:-1 tvg-id="Telecafe.ru@SD" tvg-logo="https://i.imgur.com/1H3h1HL.png" group-title="Russia  -  Cooking",Telecafe (1080p)
@@ -119,8 +117,6 @@ https://bl.rutube.ru/livestream/5c9327074e25ca86f3111d4085cbbb65/index.m3u8?e=20
 http://31.148.48.15/Zee_TV_Russia/index.m3u8
 #EXTINF:-1 tvg-id="OTVPrim.ru@SD" tvg-logo="https://i.imgur.com/2zd8trG.png" group-title="Russia  -  Entertainment",ОТВ Приморье
 https://jz2lo90hnpy.a.trbcdn.net/livemaster/yo8gr_live-5gorrrfpouq.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="Poehali.ru@SD" tvg-logo="https://i.imgur.com/ZNCpbII.png" group-title="Russia  -  Entertainment",Поехали! (1080p)
-http://31.148.48.15/Poehali/index.m3u8
 #EXTINF:-1 tvg-id="Friday.ru@SD" tvg-logo="https://i.imgur.com/UfmlXxe.png" group-title="Russia  -  Entertainment",Пятница! (576p)
 https://vod.tuva.ru/friday/index.m3u8
 #EXTINF:-1 tvg-id="TvoeTV.ru@SD" tvg-logo="https://i.imgur.com/kKAM7dP.png" group-title="Russia  -  Entertainment",Твое TV HD (1080p)
@@ -129,6 +125,8 @@ http://tvoetv.space:8080/tvoetv/index.m3u8
 http://31.148.48.15/TNT4/index.m3u8
 #EXTINF:-1 tvg-id="Che.ru@SD" tvg-logo="https://i.imgur.com/ZOcDGpB.png" group-title="Russia  -  Entertainment",Че! (576p)
 http://31.148.48.15/Che/index.m3u8
+#EXTINF:-1 tvg-id="Poehali.ru@SD" tvg-logo="https://i.imgur.com/ZNCpbII.png" group-title="Russia  -  Entertainment;Outdoor",Поехали! (1080p)
+http://31.148.48.15/Poehali/index.m3u8
 #EXTINF:-1 tvg-id="STSLove.ru@SD" tvg-logo="https://i.imgur.com/YBVZoDd.png" group-title="Russia  -  Family",like Gecko) Chrome/144.0.0.0 Safari/537.36" group-title="Family",STS Love (576i)
 https://cdn4.skygo.mn/live/disk1/Fashion_TV/HLSv3-FTA/Fashion_TV.m3u8
 #EXTINF:-1 tvg-id="STS.ru@SD" tvg-logo="https://i.imgur.com/ilUzAeb.png" group-title="Russia  -  Family",STS (576p)
@@ -187,9 +185,9 @@ https://api-tv.ipnet.ua/api/v1/manifest/2118742505.m3u8
 http://94.230.128.107:8080/PEH_TB/index.m3u8
 #EXTINF:-1 tvg-id="RenomeTV.ua@SD" tvg-logo="https://i.imgur.com/qL1uNlW.png" group-title="Ukraine  -  General",Renome (576p)
 http://85.238.112.40:8810/hls_sec/online/list-renome.m3u8
-#EXTINF:-1 tvg-id="RTVi.ru@SD" tvg-logo="https://i.imgur.com/1AEhXyS.png" group-title="Russia  -  General",RTVi (450p)
+#EXTINF:-1 tvg-id="RTVi.ru@SD" tvg-logo="https://i.imgur.com/1AEhXyS.png" group-title="Russia  -  General",RTVi (450p) [Geo-blocked]
 https://s70378.cdn.ngenix.net/rtvi/index.m3u8
-#EXTINF:-1 tvg-id="Russia1.ru@HD" tvg-logo="https://i.imgur.com/Osd2JHL.png" group-title="Russia  -  General",Russia-1 HD (1080p)
+#EXTINF:-1 tvg-id="Russia1.ru@HD" tvg-logo="https://uut-telecom.ru/wp-content/uploads/2021/12/rossiya-1-hd.png" group-title="Russia  -  General",Russia-1 HD (1080p)
 https://stream.smotrim.ru/hls2/russia_hd/playlist_6.m3u8
 #EXTINF:-1 tvg-id="Simon.ua@SD" tvg-logo="https://i.imgur.com/FfYVCJC.png" group-title="Ukraine  -  General",Simon (720p) [Geo-blocked]
 https://hls.simon.ua/live-HD/live/playlist.m3u8
@@ -529,8 +527,10 @@ https://tv.mediacp.eu:8081/happyradio/index.m3u8
 http://158.101.222.193:88/georgia_play.php?id=m1
 #EXTINF:-1 tvg-id="M2.ua@SD" tvg-logo="https://i.imgur.com/AfcBWCg.png" group-title="Ukraine  -  Music",M2 (540p)
 https://live.m2.tv/hls3/stream.m3u8
-#EXTINF:-1 tvg-id="Maidan.ru@SD" tvg-logo="https://i.imgur.com/C8CCjZK.png" group-title="Russia  -  Music",Maidan (576p)
-http://hls127.freeott.top:8080/Maydan/video.m3u8
+#EXTINF:-1 tvg-id="Maidan.ru@SD" tvg-logo="https://i.imgur.com/C8CCjZK.png" group-title="Russia  -  Music",Maidan (720p)
+https://live-maidantv.cdnvideo.ru/maidantv/maidantv.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="MCMTop.ru@SD" tvg-logo="https://i.imgur.com/EVtWQLd.png" group-title="Russia  -  Music",MCM Top (576p)
+http://46.32.176.50/mcmtop/index.m3u8
 #EXTINF:-1 tvg-id="MezzoLive.fr@SD" tvg-logo="https://i.imgur.com/H9ytKPN.png" group-title="Russia  -  Music",Mezzo Live
 https://test.946985.filegear-sg.me/proxy/749755700e4ed9c6
 #EXTINF:-1 tvg-id="MuzTV.ru@SD" tvg-logo="https://i.imgur.com/BtqrHmz.png" group-title="Russia  -  Music",Muz-TV (576p)
@@ -717,6 +717,8 @@ https://s1.tv-nano.com/Magnat_HD_5119705/video.m3u8
 https://tuso.cdn-01.cosmonova.net.ua/hls/tuso_ua.m3u8
 #EXTINF:-1 tvg-id="Yuvelirochka.ru@SD" tvg-logo="https://i.imgur.com/IcWtXCZ.png" group-title="Russia  -  Shop",Ювелирочка ТВ (576p)
 https://live-uvelirochka.cdnvideo.ru/uvelirochka/uvelirochka_720p3/playlist.m3u8
+#EXTINF:-1 tvg-id="ExtremeSportsChannel.ru@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Extreme_Sports_Channel.svg/960px-Extreme_Sports_Channel.svg.png" group-title="Russia  -  Sports",Extreme Sports Channel (576p)
+http://46.32.176.50/extremesport/index.m3u8
 #EXTINF:-1 tvg-id="KHL.ru@SD" tvg-logo="https://i.imgur.com/RgdHdOV.png" group-title="Russia  -  Sports",KHL (720p)
 http://31.148.48.15/KHL_TV/index.m3u8
 #EXTINF:-1 tvg-id="KHLPrime.ru@SD" tvg-logo="https://i.imgur.com/pwxT0ON.png" group-title="Russia  -  Sports",KHL Prime (720p)
@@ -799,6 +801,8 @@ https://televsesvit.cdn-04.cosmonova.net.ua/hls/televsesvit_ua_hi/index.m3u8
 http://315e5a5d.ottrast.com/iptv/MM4E93NGF5LADZ/6377/index.m3u8
 #EXTINF:-1 tvg-id="TISTV.ua@SD" tvg-logo="https://i.imgur.com/jDaoUt5.png" group-title="Ukraine  -  Undefined",TIS TV (720p)
 https://cdn10.live-tv.cloud/riood/tisod-abr/riood/tisod720/playlist.m3u8
+#EXTINF:-1 tvg-id="TNVTatarstan.ru@SD" tvg-logo="https://i.imgur.com/58u9TQT.png" group-title="Russia  -  Undefined",TNV-Tatarstan (720p)
+https://user91229.clients-cdnnow.ru/hls/user91229_1.m3u8
 #EXTINF:-1 tvg-id="TVCentr.ru@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/ru/7/72/TV_Tsentr_2013_Logo.svg" group-title="Russia  -  Undefined",TV Centr (576p)
 http://hls127.freeott.top:8080/Tv_Center/video.m3u8
 #EXTINF:-1 tvg-id="TVPRO.ru@SD" tvg-logo="https://i.imgur.com/sbuSefI.png" group-title="Russia  -  Undefined",TV PRO
