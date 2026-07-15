@@ -43,6 +43,20 @@ https://bcsecurelivehls-i.akamaihd.net/hls/live/621275/1539097700001/master.m3u8
 https://3abn.bozztv.com/3abn2/3abn_live/smil:3abn_live.smil/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://d9nqqwcssctr8.cloudfront.net/wp-content/uploads/2016/06/01015623/the-channel-I-see-card-hillsong-collected.jpg" group-title="Christian TV",Hillsong Channel
 https://acaooyalahd2-lh.akamaihd.net/i/TBN02_delivery@186240/master.m3u8
+#EXTINF:-1 tvg-logo="https://charityradiotv.org/images/general/voc.png" group-title="Christian Radio",Voice of Charity (صوت المحبة)
+http://cassini.shoutca.st:9496/xstream
+#EXTINF:-1 tvg-logo="http://www.orthodoxiya.fm/favicon.ico" group-title="Christian Radio",Al Orthodoxiya FM (راديو الأرثوذكسية)
+http://s5.viastreaming.net:7040/
+#EXTINF:-1 tvg-logo="https://www.radiomariam.org/favicon.ico" group-title="Christian Radio",Radio Maria Arabic (راديو ماريا عربي)
+http://dreamsiteradiocp4.com:8014/stream
+#EXTINF:-1 tvg-logo="https://www.radiomariam.org/favicon.ico" group-title="Christian Radio",Radio Maria Iraq (راديو مريم العراق)
+http://dreamsiteradiocp4.com:8046/stream
+#EXTINF:-1 tvg-logo="https://www.sanctamariaradio.com/favicon.ico" group-title="Christian Radio",Sancta Maria Radio (إذاعة سانكتا ماريا)
+https://streaming.radio.co/sa7e0251a2/listen
+#EXTINF:-1 tvg-logo="https://antiochpatriarchate.org/img/radio.png" group-title="Christian Radio",Voice of Grace – Antioch (صوت النعمة)
+https://securestreams5.reliastream.com:1820/
+#EXTINF:-1 tvg-logo="https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg" group-title="Christian Radio",Voice of Hope Middle East (صوت الرجاء)
+http://ice9.securenetsystems.net/VOH
 
 #TINYURL:arabic:https://tinyurl.com/288e72mm
 #TINYURL:gulf:https://tinyurl.com/2y6788nu
