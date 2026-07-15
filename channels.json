@@ -30,7 +30,19 @@
       { "name": "Radio Maria Iraq (راديو مريم العراق)", "url": "http://dreamsiteradiocp4.com:8046/stream", "tvgLogo": "https://www.radiomariam.org/favicon.ico", "group": "Christian Radio" },
       { "name": "Sancta Maria Radio (إذاعة سانكتا ماريا)", "url": "https://streaming.radio.co/sa7e0251a2/listen", "tvgLogo": "https://www.sanctamariaradio.com/favicon.ico", "group": "Christian Radio" },
       { "name": "Voice of Grace – Antioch (صوت النعمة)", "url": "https://securestreams5.reliastream.com:1820/", "tvgLogo": "https://antiochpatriarchate.org/img/radio.png", "group": "Christian Radio" },
-      { "name": "Voice of Hope Middle East (صوت الرجاء)", "url": "http://ice9.securenetsystems.net/VOH", "tvgLogo": "https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg", "group": "Christian Radio" }
+      { "name": "Voice of Hope Middle East (صوت الرجاء)", "url": "http://ice9.securenetsystems.net/VOH", "tvgLogo": "https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg", "group": "Christian Radio" },
+      { "name": "Εκκλησία της Ελλάδας 89.5", "url": "https://loki.mental-media.gr:8038/stream", "tvgLogo": "http://resources.live24.gr/resources/images/stations/963bef80-b381-4de6-9612-ea3a283c64e8.jpg", "group": "Greek Christian Radio" },
+      { "name": "Πειραϊκή Εκκλησία 91.2", "url": "https://impradio.bytemasters.gr/8002/stream", "tvgLogo": "http://www.piraeurchurch.gr/peir_ekklisia_logo.png", "group": "Greek Christian Radio" },
+      { "name": "Λυδία 94.2", "url": "http://eu1.radiolydia.com:1086/stream", "tvgLogo": "https://resources.live24.gr/resources/images/stations/32467e44-f554-4493-9c40-64bc44e070fb.png", "group": "Greek Christian Radio" },
+      { "name": "Kanali7 98.4 (Κύπρος)", "url": "http://live.kanali7.com:4010/", "tvgLogo": "http://new.kanali7.com/wp-content/uploads/2016/03/kanali-7-logo-low.png", "group": "Greek Christian Radio" },
+      { "name": "Ο Αληθινός Λόγος 93.3 (Λευκωσία)", "url": "http://r1.cloudskep.com/radio/agiosdemetrios/icecast.audio", "tvgLogo": "https://logosradio.com.cy/assets/images/o-alithinos-logos-1.png", "group": "Greek Christian Radio" },
+      { "name": "Ι.Μ. Λεμεσού (Κύπρος)", "url": "http://93.109.209.123:9080/stream.mp3", "tvgLogo": "https://cdn.e-radio.gr/logos/cy/big/imlemesou.png", "group": "Greek Christian Radio" },
+      { "name": "Ιερά Αρχιεπισκοπή Κρήτης 99.7", "url": "https://i7.streams.ovh/ic/iakradi1/stream", "tvgLogo": "http://resources.live24.gr/resources/images/stations/0d850655-7a34-4ce1-8a1e-37db1cd537aa.jpg", "group": "Greek Christian Radio" },
+      { "name": "Ι.Μ. Καστοριάς 97.9", "url": "http://eco.onestreaming.com:8498/", "tvgLogo": "http://resources.live24.gr/resources/images/stations/0d850655-7a34-4ce1-8a1e-37db1cd537aa.jpg", "group": "Greek Christian Radio" },
+      { "name": "Ι.Μ. Σπάρτης 88.8", "url": "http://s4.onweb.gr:8862/", "tvgLogo": "https://resources.live24.gr/resources/images/stations/d46cdeb5-a2f1-4542-8f65-e67f7e662896.png", "group": "Greek Christian Radio" },
+      { "name": "Ορθοδοξία και Παράδοση 103", "url": "http://radio.lts-group.eu:52390/ANS", "tvgLogo": "http://resources.live24.gr/resources/images/stations/c452fdf8-141d-47f2-b240-ae49f3acf345.jpg", "group": "Greek Christian Radio" },
+      { "name": "Λύχνος", "url": "https://stream.kncdn.net:8514/", "tvgLogo": "https://www.lychnos.org/wp-content/uploads/2020/05/lychnos-logo.png", "group": "Greek Christian Radio" },
+      { "name": "Μοναχική Διακονία 87.5", "url": "http://eco.onestreaming.com:8019/;stream.mp3", "tvgLogo": "http://resources.live24.gr/resources/images/stations/2e3027b2-3665-4672-99a8-8b03db094090.jpg", "group": "Greek Christian Radio" }
     ]
   }
 }
