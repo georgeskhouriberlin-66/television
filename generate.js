@@ -39,6 +39,7 @@ const CONFIG = {
     usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA â€“ Category' },
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
     germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
+    libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Lebanon – Category' },
     'free-world': { output: 'free-world.m3u', combine: ['free-tv'], epg: [], style: 'Free-TV' },
   },
 };

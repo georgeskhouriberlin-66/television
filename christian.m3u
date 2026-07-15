@@ -31,6 +31,18 @@ https://m3u8.radiomv.com/english-hq.m3u8
 https://m3u8.radiomv.com/german-hq.m3u8
 #EXTINF:-1 tvg-logo="https://myocn.net/wp-content/uploads/2023/04/blk-logo-copy.png" group-title="Christian Radio",Orthodox Christian Network
 https://stream.radiojar.com/48cz219puzzuv
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sua70RO.png" group-title="Christian TV",EWTN
+https://cdn3.wowza.com/1/ZVBYYXFLLzE0c3NC/Qk1FMURC/hls/live/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/TBN_logo.svg/512px-TBN_logo.svg.png" group-title="Christian TV",TBN
+https://acaooyalahd2-lh.akamaihd.net/i/TBN01_delivery@186239/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/QxHjHFE.png" group-title="Christian TV",TBN Enlace
+https://tbn-jw.cdn.vustreams.com/live/enlace/live.isml/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/9/93/Daystar_TV.PNG" group-title="Christian TV",Daystar
+https://bcsecurelivehls-i.akamaihd.net/hls/live/621275/1539097700001/master.m3u8
+#EXTINF:-1 tvg-logo="https://3abn.org/img/logos/tv/3ABN.png" group-title="Christian TV",3ABN
+https://3abn.bozztv.com/3abn2/3abn_live/smil:3abn_live.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://d9nqqwcssctr8.cloudfront.net/wp-content/uploads/2016/06/01015623/the-channel-I-see-card-hillsong-collected.jpg" group-title="Christian TV",Hillsong Channel
+https://acaooyalahd2-lh.akamaihd.net/i/TBN02_delivery@186240/master.m3u8
 
 #TINYURL:arabic:https://tinyurl.com/288e72mm
 #TINYURL:gulf:https://tinyurl.com/2y6788nu

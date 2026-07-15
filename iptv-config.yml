@@ -40,6 +40,11 @@ playlists:
     static: true
     group_style: "Christian TV/Radio"
     description: "Christliche TV-Sender und Radiosender (Noursat, SAT-7, u.a.)"
+  libanon:
+    output: libanon.m3u
+    sources: [lb]
+    epg: [LB]
+    group_style: "Lebanon â€“ Category"
   free-world:
     output: free-world.m3u
     sources: [free-tv]
