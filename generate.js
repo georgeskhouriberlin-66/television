@@ -31,6 +31,7 @@ const CONFIG = {
     ma: 'https://iptv-org.github.io/iptv/countries/ma.m3u',
     ly: 'https://iptv-org.github.io/iptv/countries/ly.m3u',
     om: 'https://iptv-org.github.io/iptv/countries/om.m3u',
+    'free-tv': 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8',
   },
   playlists: {
     arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Country â€“ Category' },
@@ -38,12 +39,13 @@ const CONFIG = {
     usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA â€“ Category' },
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
     germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
+    'free-world': { output: 'free-world.m3u', combine: ['free-tv'], epg: [], style: 'Free-TV' },
   },
 };
 
 const STATIC_CHANNELS = JSON.parse(fs.readFileSync(path.join(__dirname, 'channels.json'), 'utf-8'));
 
-const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', sa:'Saudi Arabia', iq:'Iraq', kw:'Kuwait', ps:'Palestine', bh:'Bahrain', ma:'Morocco', ly:'Libya', om:'Oman', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany' };
+const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', sa:'Saudi Arabia', iq:'Iraq', kw:'Kuwait', ps:'Palestine', bh:'Bahrain', ma:'Morocco', ly:'Libya', om:'Oman', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany', 'free-tv':'Free-TV' };
 
 const TINYURLS = {
   arabic:    'https://tinyurl.com/288e72mm',
@@ -52,6 +54,7 @@ const TINYURLS = {
   eastblock: 'https://tinyurl.com/25lmqukn',
   germany:   'https://tinyurl.com/2bfom2bu',
   christian: 'https://tinyurl.com/25cwjmur',
+  'free-world': null,
 };
 
 // --- M3U Parsing ---
