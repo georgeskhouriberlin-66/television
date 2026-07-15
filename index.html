@@ -198,6 +198,84 @@ video{width:100%;height:100%;object-fit:contain;display:block}
 /* Toast */
 #toast{position:fixed;top:36px;right:44px;z-index:99;background:rgba(8,12,22,.97);border:1px solid rgba(0,212,255,.25);color:#fff;font-size:16px;padding:12px 22px;border-radius:10px;opacity:0;transition:opacity .22s;pointer-events:none;font-family:var(--fm)}
 #toast.show{opacity:1}
+
+/* ── Menu Btn ── */
+#menu-btn{display:none;position:fixed;top:12px;left:12px;z-index:35;width:48px;height:48px;background:rgba(8,11,20,.92);border:1.5px solid rgba(255,255,255,.14);border-radius:12px;color:#fff;font-size:24px;cursor:pointer;align-items:center;justify-content:center;transition:opacity .2s,border-color .15s;outline:none;-webkit-tap-highlight-color:transparent}
+#menu-btn:active{border-color:var(--acc)}
+#menu-btn.hidden{opacity:0;pointer-events:none}
+#menu-btn svg{width:24px;height:24px}
+
+/* ══════════════════════════
+   RESPONSIVE
+══════════════════════════ */
+
+/* Desktop 768-1024px */
+@media (max-width:1024px){
+  body{cursor:auto}
+  :root{--sb:340px}
+  #sb-logo{height:76px;margin:8px 3% 6px}
+  .pl-tabs-wrap{margin:0 3% 8px;padding:12px 3%}
+  .sb-meta-row{margin:0 3% 8px;padding:8px 3%}
+  #ch-info{padding:14px 36px 22px}
+  .ci-name{font-size:32px}
+  .ci.focused{min-height:92px}
+  .ci.focused .cn-name{font-size:19px}
+  .ci.focused .cl{width:48px;height:36px}
+  #ch-list{padding:8px 4%;gap:4px}
+}
+
+/* Mobile <768px */
+@media (max-width:767px){
+  body{cursor:auto}
+  #ui-right{display:none}
+  #ui{background:rgba(0,0,0,.5)}
+  #sidebar{width:100vw;transform:translateX(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  #ui.show #sidebar{transform:translateX(0)}
+  #menu-btn{display:flex}
+  #sb-logo{height:56px;margin:4px 3% 4px}
+  .pl-tabs-wrap{margin:0 3% 4px;padding:8px 3%}
+  .pl-tab{padding:7px 8px;font-size:12px}
+  .sb-meta-row{margin:0 3% 4px;padding:6px 3%}
+  .sb-meta{font-size:11px}
+  .tb-btn{padding:4px 8px;font-size:12px;min-width:28px}
+  #ch-list{padding:4px 3%;gap:3px}
+  .ci{padding:10px 12px;min-height:56px;gap:10px}
+  .ci.focused{min-height:68px}
+  .ci.focused .cn-name{font-size:15px;font-weight:800}
+  .ci.focused .cl{width:40px;height:28px}
+  .ci.focused .clf{font-size:16px}
+  .ci.near{min-height:48px!important;padding:6px 12px}
+  .ci.near .cn-name{font-size:14px}
+  .ci.near .cl{width:32px;height:22px}
+  .ci.far{min-height:38px!important;padding:4px 12px}
+  .ci.far .cn-name{font-size:11px}
+  .ci.far .cl{width:24px;height:16px}
+  .cn-name{font-size:13px}
+  .cl{width:32px;height:22px;border-radius:4px}
+  .clf{font-size:13px}
+  .cn-grp{font-size:8px}
+  .cn-epg{font-size:10px}
+  .fs{font-size:14px}
+  #ch-info{padding:6px 14px 12px}
+  #ch-info .ci-name{font-size:18px}
+  .ci-dot{width:7px;height:7px}
+  .ci-epg{font-size:12px}
+  #sp{width:calc(100vw - 20px);left:10px;top:80px;right:10px}
+  .sp-hd{padding:10px 14px 8px;font-size:9px}
+  .si{padding:10px 14px}
+  .si-lbl{font-size:12px}
+  #err-msg{font-size:16px;max-width:280px}
+  .sc{padding:24px 18px;width:calc(100vw - 24px)}
+  .sc-title{font-size:22px}
+  .sc-sub{font-size:14px}
+  .builtin-grid{grid-template-columns:1fr}
+  .bl-btn{padding:10px 12px;font-size:12px}
+  .inp{padding:10px 12px;font-size:12px}
+  .btn-go{padding:13px;font-size:14px}
+  .ns-title{font-size:18px;letter-spacing:.15em}
+  .ns-ico{font-size:48px}
+  #toast{top:14px;right:14px;left:14px;font-size:13px;padding:10px 16px;text-align:center}
+}
 </style>
 </head>
 <body>
@@ -273,6 +351,8 @@ video{width:100%;height:100%;object-fit:contain;display:block}
   </div>
   <div id="ui-right"></div>
 </div>
+
+<button id="menu-btn" aria-label="Menü"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 
 <!-- Setup -->
 <div id="setup">
@@ -548,8 +628,8 @@ function tryStream(ch,idx){
 function isDead(url){const d=gs(LS.DEAD)||{};return !!d[url]}
 
 /* ── UI ── */
-function showUI(){uiOpen=true;ui.classList.add('show');renderTiles()}
-function hideUI(){if(spOpen)return;uiOpen=false;ui.classList.remove('show')}
+function showUI(){uiOpen=true;ui.classList.add('show');document.getElementById('menu-btn').classList.add('hidden');renderTiles()}
+function hideUI(){if(spOpen)return;uiOpen=false;ui.classList.remove('show');document.getElementById('menu-btn').classList.remove('hidden')}
 function toggleUI(){uiOpen?hideUI():showUI()}
 
 /* ── Settings ── */
@@ -564,6 +644,7 @@ $('sp-fav').addEventListener('click',()=>{showFavs=!showFavs;tgFav.classList.tog
 $('sp-fs').addEventListener('click',()=>{closeSP();toggleFS()});
 $('sp-upd').addEventListener('click',()=>{closeSP();const pl=allPls.find(p=>p.id===activePlId);if(pl)loadPlaylist(pl);toast('🔄 Aktualisiere…')});
 $('sp-clr').addEventListener('click',()=>{ss(LS.DEAD,{});closeSP();toast('🧹 Tote-Streams-Cache geleert')});
+document.getElementById('menu-btn').addEventListener('click',showUI);
 $('btn-fav').addEventListener('click',()=>{showFavs=!showFavs;tgFav.classList.toggle('on',showFavs);$('btn-fav').classList.toggle('active',showFavs);renderList()});
 $('btn-search').addEventListener('click',()=>{const row=$('search-row');const open=row.style.display==='none'||!row.style.display;row.style.display=open?'block':'none';$('btn-search').classList.toggle('active',open);if(open)sbSearch.focus();else{sbSearch.value='';renderList()}});
 sbSearch.addEventListener('input',renderList);
