@@ -28,7 +28,7 @@ video{width:100%;height:100%;object-fit:contain;display:block}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
-#load-ov{position:fixed;inset:0;z-index:45;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.85)}
+#load-ov{position:fixed;inset:0;z-index:15;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.85)}
 #load-ov.show{display:flex}
 #load-text{font-size:22px;font-weight:600;color:var(--txt2);animation:pulse 1.2s ease-in-out infinite;letter-spacing:.02em}
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
@@ -436,7 +436,7 @@ const togFav=u=>{let f=getFavs();if(f.includes(u)){f=f.filter(x=>x!==u)}else{f.p
 
 let allCh=[], flatCh=[], hls=null, activeCh=null, activePlId=null;
 let showFavs=false, epgOn=true, focusIdx=0, uiOpen=false, spOpen=false;
-let chInfoTimer=null, epgData={}, loadedPl={}, customPl=[], allPls=[];
+let chInfoTimer=null, epgData={}, loadedPl={}, customPl=[], allPls=[], uiTimer=null;
 
 const $=id=>document.getElementById(id);
 const vid=$('vid'), nosig=$('nosig'), loadOv=$('load-ov');
@@ -629,8 +629,8 @@ function tryStream(ch,idx){
 function isDead(url){const d=gs(LS.DEAD)||{};return !!d[url]}
 
 /* ── UI ── */
-function showUI(){uiOpen=true;ui.classList.add('show');document.getElementById('menu-btn').classList.add('hidden');renderTiles()}
-function hideUI(){if(spOpen)return;uiOpen=false;ui.classList.remove('show');document.getElementById('menu-btn').classList.remove('hidden')}
+function showUI(){uiOpen=true;ui.classList.add('show');document.getElementById('menu-btn').classList.add('hidden');renderTiles();clearTimeout(uiTimer);if(!spOpen)uiTimer=setTimeout(hideUI,4000)}
+function hideUI(){if(spOpen)return;uiOpen=false;ui.classList.remove('show');document.getElementById('menu-btn').classList.remove('hidden');clearTimeout(uiTimer)}
 function toggleUI(){uiOpen?hideUI():showUI()}
 
 /* ── Settings ── */
@@ -664,16 +664,23 @@ document.addEventListener('keydown',e=>{
   if(e.key==='f'||e.key==='F'||e.keyCode===130){const ch=flatCh[focusIdx];if(ch){togFav(ch.urls[0]);toast(isFav(ch.urls[0])?'★ Favorit':'Entfernt');renderTiles()}return}
   if(e.key==='Enter'||e.keyCode===13){if(!uiOpen){showUI();return}if(flatCh[focusIdx]){playChannel(flatCh[focusIdx]);hideUI()}return}
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){
-    e.preventDefault();if(!uiOpen)showUI();
+    e.preventDefault();if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}
     focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);
     renderTiles();return}
   if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
     e.preventDefault();if(!uiOpen){showUI();return}
+    clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000);
     const idx=allPls.findIndex(p=>p.id===activePlId);
     const next=e.key==='ArrowRight'?allPls[Math.min(idx+1,allPls.length-1)]:allPls[Math.max(idx-1,0)];
     if(next&&next.id!==activePlId)loadPlaylist(next);return}
   if(e.key==='PageDown'&&focusIdx<flatCh.length-1){focusIdx++;if(flatCh[focusIdx])playChannel(flatCh[focusIdx]);return}
   if(e.key==='PageUp'&&focusIdx>0){focusIdx--;if(flatCh[focusIdx])playChannel(flatCh[focusIdx]);return}
+});
+
+/* ── Maus-Auto-Hide ── */
+document.addEventListener('mousemove',()=>{
+  if(setup.classList.contains('off')&&!spOpen){
+    if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}}
 });
 
 /* ── EPG ── */
