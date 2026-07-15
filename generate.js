@@ -34,12 +34,12 @@ const CONFIG = {
     'free-tv': 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8',
   },
   playlists: {
-    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Country â€“ Category' },
-    gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Country â€“ Category' },
-    usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'USA â€“ Category' },
-    eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Country â€“ Category' },
-    germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Germany â€“ Category' },
-    libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Lebanon – Category' },
+    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Category' },
+    gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Category' },
+    usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'Category' },
+    eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Category' },
+    germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Category' },
+    libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Category' },
     'free-world': { output: 'free-world.m3u', combine: ['free-tv'], epg: [], style: 'Category' },
   },
 };
