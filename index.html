@@ -28,7 +28,7 @@ video{width:100%;height:100%;object-fit:contain;display:block}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
-#load-ov{position:absolute;inset:0;z-index:5;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.85)}
+#load-ov{position:fixed;inset:0;z-index:45;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.85)}
 #load-ov.show{display:flex}
 #load-text{font-size:22px;font-weight:600;color:var(--txt2);animation:pulse 1.2s ease-in-out infinite;letter-spacing:.02em}
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
@@ -284,8 +284,9 @@ video{width:100%;height:100%;object-fit:contain;display:block}
 <div id="video-bg">
   <video id="vid" playsinline autoplay></video>
   <div id="nosig"><div class="ns-ico">📡</div><div class="ns-title">Phönicia TV</div></div>
-  <div id="load-ov"><div id="load-text">📡 Verbinde …</div><div id="load-count"></div></div>
 </div>
+
+<div id="load-ov"><div id="load-text">📡 Verbinde …</div><div id="load-count"></div></div>
 
 <div id="ch-info">
   <div class="ci-name"><span class="ci-dot"></span><span id="ci-name">—</span></div>
@@ -341,8 +342,8 @@ video{width:100%;height:100%;object-fit:contain;display:block}
       <div class="sb-meta" id="ch-count">—</div>
       <div class="tb-btns">
         <button class="tb-btn" id="btn-search" title="Suchen"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
-        <button class="tb-btn" id="btn-fav">★</button>
-        <button class="tb-btn" id="btn-set">⚙</button>
+        <button class="tb-btn" id="btn-fav" title="Favoriten"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+        <button class="tb-btn" id="btn-set" title="Einstellungen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
       </div>
     </div>
     <!-- Bereich 4: Playlist (Sender-Kacheln) -->
@@ -483,8 +484,8 @@ function parseM3U(text){
     if(merged.has(key)){const ex=merged.get(key);for(const u of ch.urls)if(!ex.urls.includes(u))ex.urls.push(u);if(!ex.logo&&ch.logo)ex.logo=ch.logo}
     else{const n=ch.name.replace(/\s*\(\d{3,4}p\)/gi,'').replace(/\s*\[Not 24\/7\]/gi,'').trim();merged.set(key,{...ch,name:n||ch.name})}
   }
-  const fix=s=>{if(!s)return s;try{return decodeURIComponent(escape(s))}catch(e){return s.replace(/â€"/g,'–').replace(/â€™/g,"'").replace(/Ã©/g,'é').replace(/Ã¼/g,'ü').replace(/Ã¶/g,'ö').replace(/Ã¤/g,'ä')}};
-  return{channels:[...merged.values()].map(ch=>({...ch,name:fix(ch.name),group:fix(ch.group)})),epgUrl};
+  const utf8=s=>{if(!s)return s;try{const b=new Uint8Array([...s].map(c=>c.charCodeAt(0)));return new TextDecoder('utf-8').decode(b)}catch(e){return s}};
+  return{channels:[...merged.values()].map(ch=>({...ch,name:utf8(ch.name),group:utf8(ch.group)})),epgUrl};
 }
 
 /* ── Fetch ── */
