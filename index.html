@@ -484,7 +484,7 @@ function parseM3U(text){
     if(merged.has(key)){const ex=merged.get(key);for(const u of ch.urls)if(!ex.urls.includes(u))ex.urls.push(u);if(!ex.logo&&ch.logo)ex.logo=ch.logo}
     else{const n=ch.name.replace(/\s*\(\d{3,4}p\)/gi,'').replace(/\s*\[Not 24\/7\]/gi,'').trim();merged.set(key,{...ch,name:n||ch.name})}
   }
-  const utf8=s=>{if(!s)return s;const hasL1=[...s].some(c=>{const n=c.charCodeAt(0);return n>127&&n<256});if(!hasL1)return s;try{const b=new Uint8Array([...s].map(c=>c.charCodeAt(0)));const d=new TextDecoder('utf-8').decode(b);if(d.includes('\uFFFD'))return s;return d}catch(e){return s}};
+  const utf8=s=>{if(!s||[...s].every(c=>c.charCodeAt(0)<128))return s;try{const b=new Uint8Array([...s].map(c=>c.charCodeAt(0)));const d=new TextDecoder('utf-8').decode(b);const r1=[...s].filter(c=>c==='\uFFFD').length;const r2=[...d].filter(c=>c==='\uFFFD').length;if(r2<r1)return d;if(r2===r1&&d!==s)return d;return s}catch{return s}};
   return{channels:[...merged.values()].map(ch=>({...ch,name:utf8(ch.name),group:utf8(ch.group)})),epgUrl};
 }
 
