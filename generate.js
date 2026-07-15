@@ -31,7 +31,7 @@ const CONFIG = {
     ma: 'https://iptv-org.github.io/iptv/countries/ma.m3u',
     ly: 'https://iptv-org.github.io/iptv/countries/ly.m3u',
     om: 'https://iptv-org.github.io/iptv/countries/om.m3u',
-    'free-tv': 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8',
+    // 'free-tv': 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8',
   },
   playlists: {
     arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Category' },
@@ -40,8 +40,10 @@ const CONFIG = {
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Category' },
     germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Category' },
     libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Category' },
-    'free-world': { output: 'free-world.m3u', combine: ['free-tv'], epg: [], style: 'Category' },
   },
+  /* DISABLED — zum Reaktivieren einfach in playlists oben einfügen:
+  'free-world': { output: 'free-world.m3u', combine: ['free-tv'], epg: [], style: 'Category' },
+  */
 };
 
 const STATIC_CHANNELS = JSON.parse(fs.readFileSync(path.join(__dirname, 'channels.json'), 'utf-8'));
