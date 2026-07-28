@@ -747,10 +747,15 @@ function renderSaved(){
 }
 function setScSt(type,msg){scSt.textContent=msg;scSt.className='sc-st '+(type||'')}
 function buildAllPls(selBuiltin){allPls=[...BUILTIN.filter(p=>selBuiltin.includes(p.id)),...(gs(LS.CUSTOM)||[])]}
+const FLAGS={arabic:'🌍',gulf:'🌴',usa:'🇺🇸',eastblock:'🏛',germany:'🇩🇪',christian:'✝️',libanon:'🇱🇧',turkey:'🇹🇷',france:'🇫🇷',uk:'🇬🇧',italy:'🇮🇹',spain:'🇪🇸',poland:'🇵🇱',russia:'🇷🇺',china:'🇨🇳',india:'🇮🇳',japan:'🇯🇵',korea:'🇰🇷',brazil:'🇧🇷',mexico:'🇲🇽',canada:'🇨🇦',australia:'🇦🇺',netherlands:'🇳🇱',belgium:'🇧🇪',switzerland:'🇨🇭',austria:'🇦🇹',sweden:'🇸🇪',norway:'🇳🇴',denmark:'🇩🇰',finland:'🇫🇮',portugal:'🇵🇹',greece:'🇬🇷',czech:'🇨🇿',hungary:'🇭🇺',romania:'🇷🇴',bulgaria:'🇧🇬',ukraine:'🇺🇦',saudi:'🇸🇦',egypt:'🇪🇬',iran:'🇮🇷',iraq:'🇮🇶',israel:'🇮🇱',pakistan:'🇵🇰',bangladesh:'🇧🇩',indonesia:'🇮🇩',philippines:'🇵🇭',vietnam:'🇻🇳',thailand:'🇹🇭',malaysia:'🇲🇾',singapore:'🇸🇬',argentina:'🇦🇷',chile:'🇨🇱',colombia:'🇨🇴',peru:'🇵🇪',south_africa:'🇿🇦',nigeria:'🇳🇬',kenya:'🇰🇪',morocco:'🇲🇦',tunisia:'🇹🇳',algeria:'🇩🇿'};
+function plFlag(name,id){
+  if((name.codePointAt(0)||0)>0x1F000)return name;
+  const f=FLAGS[id.replace(/^(auto_)?/,'')];return f?f+' '+name:name;
+}
 function buildPlTabs(){
   plTabs.innerHTML='';
   allPls.forEach(pl=>{
-    const t=document.createElement('div');t.className='pl-tab'+(pl.id===activePlId?' active':'');t.textContent=pl.name;t.dataset.id=pl.id;t.tabIndex=0;
+    const t=document.createElement('div');t.className='pl-tab'+(pl.id===activePlId?' active':'');t.textContent=plFlag(pl.name,pl.id);t.dataset.id=pl.id;t.tabIndex=0;
     t.addEventListener('click',()=>loadPlaylist(pl));
     plTabs.appendChild(t);
   });
