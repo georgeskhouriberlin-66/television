@@ -728,7 +728,7 @@ function buildBuiltinGrid(){
   BUILTIN.forEach(pl=>{
     const btn=document.createElement('button');
     const isSel=sel.includes(pl.id)||!!loadedPl[pl.id];
-    btn.className='bl-btn'+(isSel?' sel':'');btn.dataset.id=pl.id;btn.textContent=pl.name;
+    btn.className='bl-btn'+(isSel?' sel':'');btn.dataset.id=pl.id;btn.innerHTML=plIcon(pl.name,pl.id);
     btn.addEventListener('click',()=>btn.classList.toggle('sel'));
     builtinGrid.appendChild(btn);
   });
@@ -747,6 +747,12 @@ function renderSaved(){
 }
 function setScSt(type,msg){scSt.textContent=msg;scSt.className='sc-st '+(type||'')}
 function buildAllPls(selBuiltin){allPls=[...BUILTIN.filter(p=>selBuiltin.includes(p.id)),...(gs(LS.CUSTOM)||[])]}
+const SYM_SVG={
+  arabic:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M2.5 8h11M5 3a10 10 0 0 0 0 10M11 3a10 10 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>`,
+  gulf:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><path d="M8 12V6M5 4.5a4 4 0 0 1 6 0M4 7a3.5 3.5 0 0 1 8 0M5 9a2.5 2.5 0 0 1 6 0M8 6l2-2.5M8 6l-2-2.5" fill="none" stroke="currentColor" stroke-width="1.1"/><rect x="7" y="12" width="2" height="1.5" fill="currentColor"/></svg>`,
+  eastblock:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><path d="M3 12.5V7.5l5-4 5 4v5M8 3.5V6" fill="none" stroke="currentColor" stroke-width="1.1"/><rect x="5" y="8.5" width="2" height="4" fill="none" stroke="currentColor" stroke-width=".9"/><rect x="9" y="8.5" width="2" height="4" fill="none" stroke="currentColor" stroke-width=".9"/></svg>`,
+  christian:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px;margin-left:1px"><path d="M8 2v12M2 8h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`
+};
 const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',turkey:'tr',france:'fr',
   uk:'gb',italy:'it',spain:'es',poland:'pl',russia:'ru',china:'cn',india:'in',
   japan:'jp',korea:'kr',brazil:'br',mexico:'mx',canada:'ca',australia:'au',
@@ -760,6 +766,7 @@ const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',turkey:'tr',france:'fr',
 function plIcon(name,id){
   const key=id.replace(/^(auto_)?/,'');
   const clean=(name.codePointAt(0)||0)>0x1F000?name.replace(/^.\s*/u,''):name;
+  if(SYM_SVG[key])return SYM_SVG[key]+esc(clean);
   const cdn=FLAG_CDN[key];
   return cdn?`<img src="https://flagcdn.com/16x12/${cdn}.png" alt="" style="width:16px;height:12px;vertical-align:middle;margin-right:5px">${esc(clean)}`:esc(clean);
 }
