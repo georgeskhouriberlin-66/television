@@ -765,7 +765,7 @@ const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',turkey:'tr',france:'fr',
   nigeria:'ng',kenya:'ke',morocco:'ma',tunisia:'tn',algeria:'dz'};
 function plIcon(name,id){
   const key=id.replace(/^(auto_)?/,'');
-  const clean=(name.codePointAt(0)||0)>0x1F000?name.replace(/^.\s*/u,''):name;
+  const clean=(name.codePointAt(0)||0)>0x1F000?name.replace(/^[\u{10000}-\u{10FFFF}]+\s*/u,''):name;
   if(SYM_SVG[key])return SYM_SVG[key]+esc(clean);
   const cdn=FLAG_CDN[key];
   return cdn?`<img src="https://flagcdn.com/16x12/${cdn}.png" alt="" style="width:16px;height:12px;vertical-align:middle;margin-right:5px">${esc(clean)}`:esc(clean);
