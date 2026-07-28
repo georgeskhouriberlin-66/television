@@ -772,10 +772,11 @@ const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',turkey:'tr',france:'fr',
   nigeria:'ng',kenya:'ke',morocco:'ma',tunisia:'tn',algeria:'dz'};
 function plIcon(name,id){
   const key=id.replace(/^(auto_)?/,'');
+  const clean=(name.codePointAt(0)||0)>0x1F000?name.replace(/^.\s*/,''):name;
   const cdn=FLAG_CDN[key];
-  if(cdn)return `<img src="https://flagcdn.com/16x12/${cdn}.png" alt="" style="width:16px;height:12px;vertical-align:middle;margin-right:5px">${esc(name)}`;
+  if(cdn)return `<img src="https://flagcdn.com/16x12/${cdn}.png" alt="" style="width:16px;height:12px;vertical-align:middle;margin-right:5px">${esc(clean)}`;
   const em=FLAG_IMG[key];
-  return em?em+' '+esc(name):esc(name);
+  return em?em+' '+esc(clean):esc(clean);
 }
 function buildPlTabs(){
   plTabs.innerHTML='';
