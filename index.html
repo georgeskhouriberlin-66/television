@@ -614,12 +614,12 @@ function tryStream(ch,idx){
   const url=v[idx];
   nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');vid.style.opacity='0';
   $('load-text').textContent='📡 Stream wird geladen …';$('load-count').textContent=`Versuch ${idx+1}/${total}`;
-  if(hls){hls.destroy();hls=null}vid.src='';vid.load();
+  if(hls){hls.destroy();hls=null}
   if(Hls.isSupported()){
     hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:20,startLevel:-1,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
-    hls.loadSource(url);hls.attachMedia(vid);
+    hls.attachMedia(vid);hls.loadSource(url);
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
-      vid.style.opacity='1';const p=vid.play();if(p)p.catch(()=>document.addEventListener('click',()=>vid.play().catch(()=>{}),{once:true}));loadOv.classList.remove('show');
+      vid.style.opacity='1';vid.play().catch(()=>{vid.muted=true;vid.play();toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play()},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play()},{once:true})});loadOv.classList.remove('show');
       let tries=0;const poll=()=>{let f=false;for(let i=0;i<vid.textTracks.length;i++){const t=vid.textTracks[i];if(t.kind==='captions'||t.kind==='subtitles'){t.mode=subOn?'showing':'hidden';f=true}}if(!f&&tries++<10)setTimeout(poll,500)};
       poll();
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
