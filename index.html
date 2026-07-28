@@ -747,15 +747,40 @@ function renderSaved(){
 }
 function setScSt(type,msg){scSt.textContent=msg;scSt.className='sc-st '+(type||'')}
 function buildAllPls(selBuiltin){allPls=[...BUILTIN.filter(p=>selBuiltin.includes(p.id)),...(gs(LS.CUSTOM)||[])]}
-const FLAGS={arabic:'🌍',gulf:'🌴',usa:'🇺🇸',eastblock:'🏛',germany:'🇩🇪',christian:'✝️',libanon:'🇱🇧',turkey:'🇹🇷',france:'🇫🇷',uk:'🇬🇧',italy:'🇮🇹',spain:'🇪🇸',poland:'🇵🇱',russia:'🇷🇺',china:'🇨🇳',india:'🇮🇳',japan:'🇯🇵',korea:'🇰🇷',brazil:'🇧🇷',mexico:'🇲🇽',canada:'🇨🇦',australia:'🇦🇺',netherlands:'🇳🇱',belgium:'🇧🇪',switzerland:'🇨🇭',austria:'🇦🇹',sweden:'🇸🇪',norway:'🇳🇴',denmark:'🇩🇰',finland:'🇫🇮',portugal:'🇵🇹',greece:'🇬🇷',czech:'🇨🇿',hungary:'🇭🇺',romania:'🇷🇴',bulgaria:'🇧🇬',ukraine:'🇺🇦',saudi:'🇸🇦',egypt:'🇪🇬',iran:'🇮🇷',iraq:'🇮🇶',israel:'🇮🇱',pakistan:'🇵🇰',bangladesh:'🇧🇩',indonesia:'🇮🇩',philippines:'🇵🇭',vietnam:'🇻🇳',thailand:'🇹🇭',malaysia:'🇲🇾',singapore:'🇸🇬',argentina:'🇦🇷',chile:'🇨🇱',colombia:'🇨🇴',peru:'🇵🇪',south_africa:'🇿🇦',nigeria:'🇳🇬',kenya:'🇰🇪',morocco:'🇲🇦',tunisia:'🇹🇳',algeria:'🇩🇿'};
-function plFlag(name,id){
-  if((name.codePointAt(0)||0)>0x1F000)return name;
-  const f=FLAGS[id.replace(/^(auto_)?/,'')];return f?f+' '+name:name;
+const FLAG_IMG={arabic:'🌍',gulf:'🌴',eastblock:'🏛',christian:'✝️',
+  usa:'🇺🇸',germany:'🇩🇪',libanon:'🇱🇧',turkey:'🇹🇷',france:'🇫🇷',uk:'🇬🇧',
+  italy:'🇮🇹',spain:'🇪🇸',poland:'🇵🇱',russia:'🇷🇺',china:'🇨🇳',india:'🇮🇳',
+  japan:'🇯🇵',korea:'🇰🇷',brazil:'🇧🇷',mexico:'🇲🇽',canada:'🇨🇦',
+  australia:'🇦🇺',netherlands:'🇳🇱',belgium:'🇧🇪',switzerland:'🇨🇭',
+  austria:'🇦🇹',sweden:'🇸🇪',norway:'🇳🇴',denmark:'🇩🇰',finland:'🇫🇮',
+  portugal:'🇵🇹',greece:'🇬🇷',czech:'🇨🇿',hungary:'🇭🇺',romania:'🇷🇴',
+  bulgaria:'🇧🇬',ukraine:'🇺🇦',saudi:'🇸🇦',egypt:'🇪🇬',iran:'🇮🇷',
+  iraq:'🇮🇶',israel:'🇮🇱',pakistan:'🇵🇰',bangladesh:'🇧🇩',indonesia:'🇮🇩',
+  philippines:'🇵🇭',vietnam:'🇻🇳',thailand:'🇹🇭',malaysia:'🇲🇾',
+  singapore:'🇸🇬',argentina:'🇦🇷',chile:'🇨🇱',colombia:'🇨🇴',peru:'🇵🇪',
+  south_africa:'🇿🇦',nigeria:'🇳🇬',kenya:'🇰🇪',morocco:'🇲🇦',tunisia:'🇹🇳',
+  algeria:'🇩🇿'};
+const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',turkey:'tr',france:'fr',
+  uk:'gb',italy:'it',spain:'es',poland:'pl',russia:'ru',china:'cn',india:'in',
+  japan:'jp',korea:'kr',brazil:'br',mexico:'mx',canada:'ca',australia:'au',
+  netherlands:'nl',belgium:'be',switzerland:'ch',austria:'at',sweden:'se',
+  norway:'no',denmark:'dk',finland:'fi',portugal:'pt',greece:'gr',czech:'cz',
+  hungary:'hu',romania:'ro',bulgaria:'bg',ukraine:'ua',saudi:'sa',egypt:'eg',
+  iran:'ir',iraq:'iq',israel:'il',pakistan:'pk',bangladesh:'bd',indonesia:'id',
+  philippines:'ph',vietnam:'vn',thailand:'th',malaysia:'my',singapore:'sg',
+  argentina:'ar',chile:'cl',colombia:'co',peru:'pe',south_africa:'za',
+  nigeria:'ng',kenya:'ke',morocco:'ma',tunisia:'tn',algeria:'dz'};
+function plIcon(name,id){
+  const key=id.replace(/^(auto_)?/,'');
+  const cdn=FLAG_CDN[key];
+  if(cdn)return `<img src="https://flagcdn.com/16x12/${cdn}.png" alt="" style="width:16px;height:12px;vertical-align:middle;margin-right:5px">${esc(name)}`;
+  const em=FLAG_IMG[key];
+  return em?em+' '+esc(name):esc(name);
 }
 function buildPlTabs(){
   plTabs.innerHTML='';
   allPls.forEach(pl=>{
-    const t=document.createElement('div');t.className='pl-tab'+(pl.id===activePlId?' active':'');t.textContent=plFlag(pl.name,pl.id);t.dataset.id=pl.id;t.tabIndex=0;
+    const t=document.createElement('div');t.className='pl-tab'+(pl.id===activePlId?' active':'');t.innerHTML=plIcon(pl.name,pl.id);t.dataset.id=pl.id;t.tabIndex=0;
     t.addEventListener('click',()=>loadPlaylist(pl));
     plTabs.appendChild(t);
   });
