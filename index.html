@@ -70,13 +70,13 @@ video{width:100%;height:100%;object-fit:cover;display:block}
 .pl-tab.active{
   position:relative;color:#000;font-weight:900;
   background:var(--acc);
-  border:1.5px solid var(--gold);
-  box-shadow:inset 0 0 0 2px #000;
+  border:2px solid var(--gold);border-radius:var(--phz-r-md);
+  box-shadow:0 0 8px rgba(245,194,24,.45),0 0 25px rgba(245,194,24,.18),inset 0 0 0 2px #000;
   overflow:visible;
 }
 .pl-tab.active::before{
-  content:'';position:absolute;inset:3px;
-  border:1.5px solid #000;border-radius:var(--phz-r-sm);
+  content:'';position:absolute;inset:2px;
+  border:2px solid #000;border-radius:calc(var(--phz-r-md) - 2px);
   pointer-events:none;
 }
 
@@ -85,7 +85,8 @@ video{width:100%;height:100%;object-fit:cover;display:block}
 .sb-meta{font-size:13px;color:var(--txt3);font-family:var(--fm);flex:1}
 .tb-btns{display:flex;gap:5px}
 .tb-btn{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:var(--phz-r-md);padding:6px 10px;color:var(--txt2);font-family:var(--f);font-size:14px;cursor:pointer;transition:all var(--phz-dur-fast);outline:none;display:flex;align-items:center;justify-content:center;min-width:32px}
-.tb-btn:hover,.tb-btn.active{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.1)}
+.tb-btn:hover{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.1)}
+.tb-btn.active{border-color:var(--gold);color:#000;background:var(--acc);box-shadow:inset 0 0 0 1.5px #000}
 
 /* Search row */
 #search-row{display:none;padding:6px 5%}
@@ -130,23 +131,25 @@ video{width:100%;height:100%;object-fit:cover;display:block}
 @media(prefers-reduced-motion){.ci,.ci .cl,.ci .cn-name,.ci .cn-epg,.ci .cn-grp{animation:none}}
 .ci.focused{
   opacity:1!important;min-height:104px;background:var(--acc);
-  border:1.5px solid var(--gold);border-radius:var(--phz-r-md);
-  box-shadow:inset 0 0 0 2px #000;
+  border:3.5px solid var(--gold);border-radius:var(--phz-r-md);
+  box-shadow:0 0 8px rgba(245,194,24,.45),0 0 25px rgba(245,194,24,.18),inset 0 0 0 2px #000;
   outline:1.5px solid transparent;
   animation:snapIn .35s cubic-bezier(.34,1.56,.64,1);
 }
 .ci.focused{overflow:visible}
 .ci.focused::before{
-  content:'';position:absolute;inset:3px;
-  border:2.5px solid #000;border-radius:var(--phz-r-sm);
+  content:'';position:absolute;inset:2px;
+  border:2px solid #000;border-radius:calc(var(--phz-r-md) - 2px);
   pointer-events:none;
 }
+
 .ci.focused .cn-name{font-size:22px;font-weight:900;color:#000!important}
 .ci.focused .cn-epg{font-size:14px;color:rgba(0,0,0,.65)}
 .ci.focused .cl{width:56px;height:40px}
 .ci.focused .clf{font-size:22px}
-.ci.focused .fs{display:flex;color:rgba(0,50,65,.45)}
-.ci.focused.fav .fs,.ci.fav .fs{color:var(--gold)}
+.ci.focused .fs{display:flex;align-items:center;color:rgba(0,50,65,.45)}
+.ci.focused.fav .fs{color:rgba(0,0,0,.5)}
+.ci.fav .fs{color:var(--gold)}
 .ci-ph{flex-shrink:0}
 
 .cl{width:46px;height:33px;flex-shrink:0;background:rgba(255,255,255,.06);border-radius:var(--phz-r-sm);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:width var(--phz-dur-med),height var(--phz-dur-med);box-shadow:0 3px 6px rgba(0,0,0,.35)}
@@ -570,9 +573,10 @@ function makeTile(ch,offset,dir){
   const logo=logoSrc?`<div class="cl"><img src="${esc(logoSrc)}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=clf>📺</span>'"></div>`:`<div class="cl"><span class="clf">📺</span></div>`;
   const grp=ch.group?`<div class="cn-grp">${esc(ch.group)}</div>`:'';
   const epg=isFocused&&epgOn?getCurrentEPG(ch.tvgId)?.title||'':'';
-  item.innerHTML=`${logo}<div class="cn">${grp}<div class="cn-name">${esc(ch.name)}</div><div class="cn-epg">${esc(epg)}</div></div><span class="fs">★</span>`;
+  const chFav=isFav(ch.urls[0]);
+  item.innerHTML=`${logo}<div class="cn">${grp}<div class="cn-name">${esc(ch.name)}</div><div class="cn-epg">${esc(epg)}</div></div><span class="fs">${chFav?'★':'☆'}</span>`;
   item.addEventListener('click',e=>{if(e.target.classList.contains('fs'))return;playChannel(ch);hideUI()});
-  item.querySelector('.fs').addEventListener('click',e=>{e.stopPropagation();togFav(ch.urls[0]);toast(isFav(ch.urls[0])?'★ Favorit':'Entfernt');renderTiles()});
+  item.querySelector('.fs').addEventListener('click',e=>{e.stopPropagation();togFav(ch.urls[0]);toast(isFav(ch.urls[0])?'★ Favorit':'☆ Entfernt');renderTiles()});
   return item;
 }
 
