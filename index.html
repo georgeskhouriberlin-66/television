@@ -95,7 +95,7 @@ video{width:100%;height:100%;object-fit:cover;display:block}
 .sb-search::placeholder{color:var(--txt3)}
 
 /* ── Kacheln ── */
-#ch-list{flex:1;overflow:hidden;display:flex;flex-direction:column;padding:8px 4%;gap:4px;justify-content:space-between}
+#ch-list{flex:1;overflow:hidden;display:flex;flex-direction:column;padding:8px 4%;gap:4px;justify-content:center}
 
 .ci{position:relative;display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;outline:none;background:rgba(8,11,20,.92);border:1px solid rgba(255,255,255,.14);border-radius:var(--phz-r-md);opacity:1;flex-shrink:0;min-height:72px;width:100%;transition:background var(--phz-dur-fast),border-color var(--phz-dur-fast),min-height var(--phz-dur-med);overflow:hidden}
 .ci:hover{background:rgba(8,11,20,.97)}
@@ -425,16 +425,14 @@ function startAutoDetection(intervalMs = 300000) {
   watchInterval = setInterval(detectNewPlaylists, intervalMs);
 }
 
-function stopAutoDetection() {
-  if (watchInterval) clearInterval(watchInterval);
-}
-
 const LS={DONE:'fs_done',CPL:'fs_cpl',CCH:'fs_cch',FAVS:'fs_favs',CUSTOM:'fs_custom',EPG:'fs_epg',SUB:'fs_sub',SEL:'fs_sel',DEAD:'fs_dead'};
 const gs=k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
 const ss=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let favSet=new Set();
 const getFavs=()=>gs(LS.FAVS)||[];
-const isFav=u=>getFavs().includes(u);
-const togFav=u=>{let f=getFavs();if(f.includes(u)){f=f.filter(x=>x!==u)}else{f.push(u)}ss(LS.FAVS,f)};
+const refreshFavSet=()=>{favSet=new Set(getFavs())};
+const isFav=u=>favSet.has(u);
+const togFav=u=>{let f=getFavs();if(f.includes(u)){f=f.filter(x=>x!==u)}else{f.push(u)}ss(LS.FAVS,f);refreshFavSet()};
 
 let allCh=[], flatCh=[], hls=null, activeCh=null, activePlId=null;
 let showFavs=false, epgOn=true, subOn=false, focusIdx=0, uiOpen=false, spOpen=false, navDir='next';
@@ -519,7 +517,7 @@ async function loadPlaylist(pl){
     loadedPl[pl.id]=channels;
     activePlId=pl.id;
     ss(LS.CPL,pl.id);
-    const epgUrl=m3uEpg||(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||'';;
+    const epgUrl=m3uEpg||(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||'';
     if(epgUrl&&epgOn)loadEPG(epgUrl);
     document.querySelectorAll('.pl-tab').forEach(t=>t.classList.toggle('active',t.dataset.id===pl.id));
     $('sp-pln').textContent=pl.name;
@@ -551,7 +549,7 @@ function renderTiles(dir){
     if(idx<0||idx>=flatCh.length){
       const ph=document.createElement('div');
       ph.className='ci-ph';
-      ph.style.minHeight=(offset===0?'104':Math.abs(offset)===1?'62':'52')+'px';
+      ph.style.minHeight=(offset===0?'92':Math.abs(offset)===1?'78':'46')+'px';
       chList.appendChild(ph);return;
     }
     chList.appendChild(makeTile(flatCh[idx],offset,dir));
@@ -584,7 +582,7 @@ function proxyLogo(url){if(!url)return'';const m=url.match(/iptv-org\.github\.io
 
 /* ── Player ── */
 function playChannel(ch){
-  activeCh=ch;ch._v=null;
+  activeCh=ch;ch._v=null;vid.muted=false;
   ss(LS.CCH,{plId:activePlId,url:ch.urls[0]});
   focusIdx=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);
   if(focusIdx<0)focusIdx=0;
@@ -609,6 +607,7 @@ function buildVariants(ch){
 }
 
 function tryStream(ch,idx){
+  vid.muted=false;
   const v=ch._v||(ch._v=buildVariants(ch));
   const total=v.length;
   if(idx>=total){
@@ -623,7 +622,7 @@ function tryStream(ch,idx){
     hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:20,startLevel:-1,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
-      vid.style.opacity='1';vid.play().catch(()=>{vid.muted=true;vid.play();toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play()},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play()},{once:true})});loadOv.classList.remove('show');
+      vid.style.opacity='1';vid.play().catch(()=>{vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play()},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play()},{once:true})});loadOv.classList.remove('show');
       let tries=0;const poll=()=>{let f=false;for(let i=0;i<vid.textTracks.length;i++){const t=vid.textTracks[i];if(t.kind==='captions'||t.kind==='subtitles'){t.mode=subOn?'showing':'hidden';f=true}}if(!f&&tries++<10)setTimeout(poll,500)};
       poll();
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
@@ -634,8 +633,6 @@ function tryStream(ch,idx){
     vid.addEventListener('error',()=>tryStream(ch,idx+1),{once:true});
   }else{vid.src=url;vid.play().then(()=>{vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>tryStream(ch,idx+1))}
 }
-
-function isDead(url){const d=gs(LS.DEAD)||{};return !!d[url]}
 
 /* ── UI ── */
 function showUI(){uiOpen=true;ui.classList.add('show');document.getElementById('menu-btn').classList.add('hidden');renderTiles();clearTimeout(uiTimer);if(!spOpen)uiTimer=setTimeout(hideUI,4000)}
@@ -698,15 +695,15 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){
     e.preventDefault();navDir=e.key==='ArrowDown'?'next':'prev';if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}
     focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);
-    renderTiles();return}
+    renderTiles(navDir);return}
   if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
     e.preventDefault();if(!uiOpen){showUI();return}
     clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000);
     const idx=allPls.findIndex(p=>p.id===activePlId);
     const next=e.key==='ArrowRight'?allPls[Math.min(idx+1,allPls.length-1)]:allPls[Math.max(idx-1,0)];
     if(next&&next.id!==activePlId)loadPlaylist(next);return}
-  if(e.key==='PageDown'&&focusIdx<flatCh.length-1){focusIdx++;if(flatCh[focusIdx])playChannel(flatCh[focusIdx]);return}
-  if(e.key==='PageUp'&&focusIdx>0){focusIdx--;if(flatCh[focusIdx])playChannel(flatCh[focusIdx]);return}
+  if(e.key==='PageDown'){e.preventDefault();focusIdx=Math.min(focusIdx+7,flatCh.length-1);renderTiles();if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}return}
+  if(e.key==='PageUp'){e.preventDefault();focusIdx=Math.max(focusIdx-7,0);renderTiles();if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}return}
 });
 
 /* ── Maus-Auto-Hide ── */
@@ -808,6 +805,7 @@ async function init(){
   tgEpg.classList.toggle('on',epgOn);
   subOn=gs(LS.SUB)!==null?gs(LS.SUB):false;
   tgSub.classList.toggle('on',subOn);
+  refreshFavSet();
   const done=gs('fs_done');
   if(!done){buildBuiltinGrid();renderSaved();return}
   setup.classList.add('off');
