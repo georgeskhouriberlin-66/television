@@ -1,11 +1,8 @@
 {
-  "name": "television-iptv",
-  "version": "1.0.0",
-  "description": "Ultimate IPTV Automation – Playlist-Generator",
-  "main": "generate.js",
+  "name": "television",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "generate": "node generate.js",
-    "validate": "node generate.js --validate-only"
-  },
-  "type": "module"
+    "generate": "node generate.js"
+  }
 }

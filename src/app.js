@@ -85,7 +85,8 @@ async function loadPlaylists() {
       eastblock: data["eastblock-iptv"] || data.eastblock,
       germany: data["germany-iptv"] || data.germany,
       christian: data.christian || data["christian-iptv"],
-      libanon: data.libanon || data["libanon-iptv"]
+      libanon: data.libanon || data["libanon-iptv"],
+      'free-world': data['free-world'] || data["free-world-iptv"]
     };
 
     const valid = Object.fromEntries(Object.entries(playlists).filter(([, v]) => v));
