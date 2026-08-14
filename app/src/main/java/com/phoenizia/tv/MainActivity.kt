@@ -38,6 +38,9 @@ class MainActivity : ComponentActivity() {
                 loadWithOverviewMode = true
                 useWideViewPort = true
                 cacheMode = WebSettings.LOAD_DEFAULT
+                @Suppress("DEPRECATION")
+                setRenderPriority(WebSettings.RenderPriority.HIGH)
+                setOffscreenPreRaster(true)
             }
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
