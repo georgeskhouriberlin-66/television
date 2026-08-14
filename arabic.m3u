@@ -227,6 +227,8 @@ https://shd-amg-fast.edgenextcdn.net/tx019/playlist.m3u8
 https://ffs.gulfsat.com/Marina-TV-HD/index.m3u8
 #EXTINF:-1 tvg-id="Mazzika.eg@SD" tvg-logo="https://i.imgur.com/P7PUHIx.png" group-title="Music",Mazzika (576p)
 http://149.100.11.235:8080/Mazzika/index.m3u8
+#EXTINF:-1 tvg-id="MBCLoud.sa@SD" tvg-logo="https://i.imgur.com/mptwwLs.png" group-title="Music",MBC Loud
+https://radio-loud-fm.mbc.net/radio-loud-fm_1.m3u8
 #EXTINF:-1 tvg-id="MBCMood.sa@HD" tvg-logo="https://shahid.mbc.net/mediaObject/c2b6a882-458b-446e-b0fe-f97f7992149a?height=auto&width=144&croppingPoint=&version=1&type=png" group-title="Music",MBC Mood (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-mood/78367bf48ccdba501d0d014a10c21031/index.m3u8
 #EXTINF:-1 tvg-id="MelodyFM.jo@SD" tvg-logo="https://i.imgur.com/J8omcNz.png" group-title="Music",Melody FM Jordan (720p) [Not 24/7]
