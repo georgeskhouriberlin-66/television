@@ -13,6 +13,8 @@ Automatisch generierte IPTV-Playlisten, alle 12 Stunden aktualisiert.
 | `germany.m3u` | DE | ✅ | `https://tinyurl.com/2bfom2bu` |
 | `christian.m3u` | – | ✅ | `https://tinyurl.com/25cwjmur` |
 | `libanon.m3u` | LB | ✅ | `https://tinyurl.com/libanon-iptv` |
+| `alle_christlichen_sender.m3u` | - | ✅ | `https:https://tinyurl.com/alle-christlichen-sender` |
+)` |
 
 ## Frontend Integration
 
