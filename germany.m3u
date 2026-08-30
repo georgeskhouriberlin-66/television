@@ -29,6 +29,8 @@ https://jmp2.uk/plu-630348a54c48ce00077eb6c7.m3u8
 https://jmp2.uk/plu-5d4947590ba40f75dc29c26b.m3u8
 #EXTINF:-1 tvg-id="Cheers.de@DACH" tvg-logo="https://images.pluto.tv/channels/611e7f224676bf00076a4d8d/colorLogoPNG.png" group-title="Comedy",Cheers
 https://jmp2.uk/plu-611e7f224676bf00076a4d8d.m3u8
+#EXTINF:-1 tvg-id="ComedyCentral.de@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png" group-title="Comedy",Comedy Central
+https://ma.anixa.tv/clips/stream/comedy_central/playlist.php
 #EXTINF:-1 tvg-id="Frasier.de@DACH" tvg-logo="https://images.pluto.tv/channels/62cebf042ffc6d0007c4e59a/colorLogoPNG.png" group-title="Comedy",Frasier
 https://jmp2.uk/plu-62cebf042ffc6d0007c4e59a.m3u8
 #EXTINF:-1 tvg-id="FrasierBeruhmteGaste.de@DACH" tvg-logo="https://images.pluto.tv/channels/6790fa9e1cfc4aa96dfadcef/colorLogoPNG.png" group-title="Comedy",Frasier: Berühmte Gäste
@@ -115,6 +117,8 @@ https://jmp2.uk/plu-6447dea7e94c380008dba94c.m3u8
 https://dash4.antik.sk/live/test_kabel_eins_tizen/playlist.m3u8
 #EXTINF:-1 tvg-id="MCTV.de@HD" tvg-logo="https://upload.wikimedia.org/wikipedia/tr/c/ca/MC_TV_logosu.png" group-title="Entertainment",MC TV (720p)
 https://rrr.sz.xlcdn.com/?account=mceutv&file=mc2&output=playlist.m3u8&protocol=https&service=wowza&type=live
+#EXTINF:-1 tvg-id="MTV.de@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/MTV_2021_%28brand_version%29.svg/960px-MTV_2021_%28brand_version%29.svg.png" group-title="Entertainment",MTV
+https://ma.anixa.tv/clips/stream/mtv/playlist.php
 #EXTINF:-1 tvg-id="MTVCatfishTVShow.de@DACH" tvg-logo="https://images.pluto.tv/channels/6093f9ed2c75660007322bb7/colorLogoPNG_1750862971704.png" group-title="Entertainment",MTV Catfish TV Show (720p)
 https://jmp2.uk/plu-5db6a697d5f34a000934cd13.m3u8
 #EXTINF:-1 tvg-id="MTVDating.de@DACH" tvg-logo="https://images.pluto.tv/channels/5caf330ea5068259a32320fd/colorLogoPNG.png" group-title="Entertainment",MTV Dating (720p)
