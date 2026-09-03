@@ -1,0 +1,111 @@
+name: "Ultimate IPTV Automation"
+version: "1.0"
+
+description: >
+  Vollautomatisches IPTV-System fÃ¼r GitHub-Account georgeskhouriberlin-66.
+  Erzeugt und aktualisiert 5 Playlisten im Repo 'television', basierend auf iptv-org.
+
+github:
+  user: georgeskhouriberlin-66
+  repository: television
+
+playlists:
+  arabic:
+    output: arabic.m3u
+    sources: [lb, sy, eg, jo, ae, qa, sa, iq, kw, ps, bh, ma, ly, om]
+    epg: [EG, LB, SY, JO, AE, QA, SA, IQ, KW, PS, BH, MA, LY, OM]
+    group_style: "Country â€“ Category"
+  gulf:
+    output: gulf.m3u
+    sources: [ae, qa, jo]
+    epg: [AE, QA, JO]
+    group_style: "Country â€“ Category"
+  usa:
+    output: usa.m3u
+    sources: [us]
+    epg: [US]
+    group_style: "USA â€“ Category"
+  eastblock:
+    output: eastblock.m3u
+    sources: [ru, ua]
+    epg: [RU, UA]
+    group_style: "Country â€“ Category"
+  germany:
+    output: germany.m3u
+    sources: [de]
+    epg: [DE]
+    group_style: "Germany â€“ Category"
+  christian:
+    output: christian.m3u
+    static: true
+    group_style: "Christian TV/Radio"
+    description: "Christliche TV-Sender und Radiosender (Noursat, SAT-7, u.a.)"
+  libanon:
+    output: libanon.m3u
+    sources: [lb]
+    epg: [LB]
+    group_style: "Lebanon â€“ Category"
+  free-world:
+    output: free-world.m3u
+    sources: [free-tv]
+    epg: []
+    group_style: "Free-TV"
+
+sources:
+  lb: "https://iptv-org.github.io/iptv/countries/lb.m3u"
+  sy: "https://iptv-org.github.io/iptv/countries/sy.m3u"
+  eg: "https://iptv-org.github.io/iptv/countries/eg.m3u"
+  jo: "https://iptv-org.github.io/iptv/countries/jo.m3u"
+  ae: "https://iptv-org.github.io/iptv/countries/ae.m3u"
+  qa: "https://iptv-org.github.io/iptv/countries/qa.m3u"
+  us: "https://iptv-org.github.io/iptv/countries/us.m3u"
+  ru: "https://iptv-org.github.io/iptv/countries/ru.m3u"
+  ua: "https://iptv-org.github.io/iptv/countries/ua.m3u"
+  de: "https://iptv-org.github.io/iptv/countries/de.m3u"
+  sa: "https://iptv-org.github.io/iptv/countries/sa.m3u"
+  iq: "https://iptv-org.github.io/iptv/countries/iq.m3u"
+  kw: "https://iptv-org.github.io/iptv/countries/kw.m3u"
+  ps: "https://iptv-org.github.io/iptv/countries/ps.m3u"
+  bh: "https://iptv-org.github.io/iptv/countries/bh.m3u"
+  ma: "https://iptv-org.github.io/iptv/countries/ma.m3u"
+  ly: "https://iptv-org.github.io/iptv/countries/ly.m3u"
+  om: "https://iptv-org.github.io/iptv/countries/om.m3u"
+  free-tv: "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"
+
+rules:
+  remove_duplicates: true
+  ensure_utf8: true
+  ensure_tvg_ids: true
+  ensure_logos: true
+  ensure_group_titles: true
+  sort: alphabetical
+
+tinyurl:
+  create:
+    - alias: "arabic-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/arabic.m3u"
+    - alias: "gulf-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/gulf.m3u"
+    - alias: "usa-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/usa.m3u"
+    - alias: "eastblock-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/eastblock.m3u"
+    - alias: "germany-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/germany.m3u"
+    - alias: "christian-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/christian.m3u"
+    - alias: "free-world-iptv"
+      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/free-world.m3u"
+
+automation:
+  schedule: "every 12 hours"
+  rollback: true
+  steps:
+    - download sources
+    - parse & merge channels
+    - deduplicate & sort
+    - apply group titles
+    - embed EPG urls
+    - validate output
+    - rollback on error
+    - write to repo

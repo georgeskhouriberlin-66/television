@@ -1,0 +1,8 @@
+{
+  "name": "television",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node generate.js"
+  }
+}

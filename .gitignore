@@ -12,3 +12,7 @@ keystore.properties
 *.keystore
 *.jks
 app/build/
+node_modules/
+temp/
+backups/
+*.log
