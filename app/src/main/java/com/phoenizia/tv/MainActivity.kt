@@ -1,17 +1,22 @@
 package com.phoenizia.tv
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.view.inputmethod.InputMethodManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 
 class MainActivity : ComponentActivity() {
 
@@ -21,8 +26,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        webView = WebView(this)
-        webView.apply {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                dpad("Escape", "Escape", 27)
+            }
+        })
+
+        webView = WebView(this).apply {
             layoutParams = android.widget.FrameLayout.LayoutParams(
                 android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
                 android.widget.FrameLayout.LayoutParams.MATCH_PARENT
@@ -30,7 +40,6 @@ class MainActivity : ComponentActivity() {
             settings.apply {
                 javaScriptEnabled = true
                 domStorageEnabled = true
-                databaseEnabled = true
                 mediaPlaybackRequiresUserGesture = false
                 mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                 allowFileAccess = true
@@ -38,8 +47,6 @@ class MainActivity : ComponentActivity() {
                 loadWithOverviewMode = true
                 useWideViewPort = true
                 cacheMode = WebSettings.LOAD_DEFAULT
-                @Suppress("DEPRECATION")
-                setRenderPriority(WebSettings.RenderPriority.HIGH)
                 setOffscreenPreRaster(true)
             }
             webViewClient = object : WebViewClient() {
@@ -50,7 +57,9 @@ class MainActivity : ComponentActivity() {
                 override fun onReceivedError(
                     view: WebView?, errorCode: Int, description: String?, failingUrl: String?
                 ) {
-                    android.util.Log.e("PVTV", "onReceivedError $errorCode $description $failingUrl")
+                    if (BuildConfig.DEBUG) {
+                        android.util.Log.e("PVTV", "onReceivedError $errorCode $description $failingUrl")
+                    }
                     super.onReceivedError(view, errorCode, description, failingUrl)
                 }
                 override fun onPageFinished(view: WebView?, url: String?) {
@@ -58,26 +67,30 @@ class MainActivity : ComponentActivity() {
                 }
             }
             webChromeClient = object : WebChromeClient() {
+                @Suppress("DEPRECATION")
                 override fun onConsoleMessage(message: String, lineNumber: Int, sourceID: String?) {
-                    android.util.Log.i("PVTV-JS", "console[$lineNumber] $message  <- $sourceID")
+                    if (BuildConfig.DEBUG) {
+                        android.util.Log.i("PVTV-JS", "console[$lineNumber] $message  <- $sourceID")
+                    }
                     super.onConsoleMessage(message, lineNumber, sourceID)
                 }
                 override fun onConsoleMessage(message: android.webkit.ConsoleMessage): Boolean {
-                    android.util.Log.i("PVTV-JS", "console[${message.messageLevel()}] ${message.message()}")
+                    if (BuildConfig.DEBUG) {
+                        android.util.Log.i("PVTV-JS", "console[${message.messageLevel()}] ${message.message()}")
+                    }
                     return super.onConsoleMessage(message)
                 }
             }
             isFocusable = true
             isFocusableInTouchMode = true
             setBackgroundColor(android.graphics.Color.BLACK)
-            addJavascriptInterface(KeyboardBridge(), "Android")
-            // Try loading from external files dir first (allows hot-swap via ADB push)
+            addJavascriptInterface(KeyboardBridge(this@MainActivity), "Android")
             val extFile = java.io.File(filesDir, "index.html")
             if (extFile.exists()) {
-                android.util.Log.i("PVTV", "Loading from filesDir: ${extFile.absolutePath}")
+                if (BuildConfig.DEBUG) android.util.Log.i("PVTV", "Loading from filesDir")
                 loadUrl("file://" + extFile.absolutePath)
             } else {
-                android.util.Log.i("PVTV", "Loading from assets (no override found)")
+                if (BuildConfig.DEBUG) android.util.Log.i("PVTV", "Loading from assets")
                 loadUrl("file:///android_asset/index.html")
             }
         }
@@ -94,21 +107,6 @@ class MainActivity : ComponentActivity() {
             )
         }
         return true
-    }
-
-    inner class KeyboardBridge {
-        @JavascriptInterface
-        fun showKeyboard(show: Boolean) {
-            runOnUiThread {
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                if (show) {
-                    webView.requestFocus()
-                    imm.showSoftInput(webView, InputMethodManager.SHOW_IMPLICIT)
-                } else {
-                    imm.hideSoftInputFromWindow(webView.windowToken, 0)
-                }
-            }
-        }
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -132,32 +130,102 @@ class MainActivity : ComponentActivity() {
         return super.dispatchKeyEvent(event)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (!dpad("Escape", "Escape", 27)) {
-            super.onBackPressed()
-        }
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        when (keyCode) {
-            KeyEvent.KEYCODE_BACK -> return dpad("Escape", "Escape", 27)
-            KeyEvent.KEYCODE_MENU -> return dpad("m", "m", 77)
-        }
-        return super.onKeyDown(keyCode, event)
-    }
-
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
-            window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                window.insetsController?.let { controller ->
+                    controller.hide(WindowInsets.Type.systemBars())
+                    controller.systemBarsBehavior =
+                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                }
+            } else {
+                @Suppress("DEPRECATION")
+                window.decorView.systemUiVisibility = (
+                    android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        or android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    )
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::webView.isInitialized) {
+            webView.onResume()
+        }
+    }
+
+    override fun onPause() {
+        if (::webView.isInitialized) {
+            webView.onPause()
+        }
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        if (::webView.isInitialized) {
+            webView.stopLoading()
+            webView.removeJavascriptInterface("Android")
+            webView.removeAllViews()
+            webView.destroy()
+        }
+        super.onDestroy()
+    }
+
+    class KeyboardBridge(private val activity: MainActivity) {
+        @JavascriptInterface
+        fun showKeyboard(show: Boolean) {
+            activity.runOnUiThread {
+                val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                if (show) {
+                    activity.webView.requestFocus()
+                    imm.showSoftInput(activity.webView, InputMethodManager.SHOW_IMPLICIT)
+                } else {
+                    imm.hideSoftInputFromWindow(activity.webView.windowToken, 0)
+                }
+            }
+        }
+
+        @JavascriptInterface
+        fun checkForUpdate() {
+            activity.runOnUiThread {
+                Toast.makeText(activity, "Prüfe auf Updates...", Toast.LENGTH_SHORT).show()
+            }
+            UpdateChecker.checkForUpdate(activity, object : UpdateChecker.Callback {
+                override fun onUpdateAvailable(update: UpdateChecker.UpdateInfo) {
+                    activity.runOnUiThread {
+                        UpdateDialog(
+                            activity,
+                            update,
+                            onUpdate = {
+                                UpdateInstaller.downloadAndInstall(
+                                    activity,
+                                    update.apkDownloadUrl,
+                                    onComplete = { }
+                                )
+                            },
+                            onDismiss = { }
+                        ).show()
+                    }
+                }
+
+                override fun onNoUpdate() {
+                    activity.runOnUiThread {
+                        Toast.makeText(activity, "Kein Update verfügbar", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onError(message: String) {
+                    activity.runOnUiThread {
+                        Toast.makeText(activity, "Update-Prüfung fehlgeschlagen: $message", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
         }
     }
 }
