@@ -23,7 +23,7 @@ html,body{height:100%;overflow:hidden;background:#000;color:var(--txt);font-fami
 
 /* ── Video ── */
 #video-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;background:#000}
-video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
+video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
@@ -225,15 +225,8 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   border-radius:var(--phz-r-lg);padding:14px 14px 12px;
   border:2px solid transparent;cursor:pointer;outline:none;
   transition:all var(--phz-dur-fast);position:relative;overflow:visible;
-  opacity:1;
+  opacity:0
 }
-.sc-card:nth-child(1){animation-delay:.05s}
-.sc-card:nth-child(2){animation-delay:.1s}
-.sc-card:nth-child(3){animation-delay:.15s}
-.sc-card:nth-child(4){animation-delay:.2s}
-.sc-card:nth-child(5){animation-delay:.25s}
-.sc-card:nth-child(6){animation-delay:.3s}
-.sc-card:nth-child(7){animation-delay:.35s}
 .sc-card::before{content:'';position:absolute;inset:0;opacity:.18;transition:opacity var(--phz-dur-fast);pointer-events:none}
 .sc-card:hover::before{opacity:.28}
 .sc-card.focused{border-color:#fff;box-shadow:0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5);transform:scale(1.04)}
@@ -335,7 +328,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   border-radius:var(--phz-r-lg);padding:14px 14px 12px;
   border:2px solid transparent;cursor:pointer;outline:none;
   transition:all var(--phz-dur-fast);position:relative;overflow:visible;
-  background:linear-gradient(135deg,#333 0%,#111 100%);
+  background:linear-gradient(135deg,#333 0%,#111 100%);opacity:0
 }
 .mm-card::before{content:'';position:absolute;inset:0;opacity:.18;transition:opacity var(--phz-dur-fast);pointer-events:none}
 .mm-card:hover::before{opacity:.28}
@@ -1011,7 +1004,7 @@ function spFocusUpdate(){const items=spItems();items.forEach((s,i)=>{s.classList
 function spFocusDir(dir){const items=spItems();if(!items.length)return;if(spFocusIdx<0)spFocusIdx=0;else spFocusIdx=Math.max(0,Math.min(items.length-1,spFocusIdx+dir));spFocusUpdate()}
 function spActivate(){const items=spItems();if(spFocusIdx>=0&&spFocusIdx<items.length)items[spFocusIdx].click()}
 document.addEventListener('click',e=>{if(spOpen&&!sp.contains(e.target))closeSP()});
-$('sp-pl').addEventListener('click',()=>{closeSP();hideUI();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit()});
+$('sp-pl').addEventListener('click',()=>{closeSP();hideUI();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();triggerCardIn(builtinGrid,'.sc-card')});
 $('sp-epg').addEventListener('click',()=>{epgOn=!epgOn;ss(LS.EPG,epgOn);tgEpg.classList.toggle('on',epgOn);toast(epgOn?'EPG aktiv':'EPG aus')});
 $('sp-epg-reload').addEventListener('click',()=>{const pl=allPls.find(p=>p.id===activePlId);const epgUrl=pl?.epgUrl||BUILTIN.find(p=>p.id===activePlId)?.epgUrl||'';if(epgUrl)loadEPG(epgUrl);else toast('Keine EPG-Quelle für aktuelle Playlist')});
 $('sp-sub').addEventListener('click',()=>{subOn=!subOn;ss(LS.SUB,subOn);tgSub.classList.toggle('on',subOn);toggleSubs();toast(subOn?'Untertitel an':'Untertitel aus')});
@@ -1262,7 +1255,7 @@ function buildMainMenu(){
   if(mmSecIdx>=mmSections.length)mmSecIdx=mmSections.length-1;
   if(mmItemIdx>=mmSections[mmSecIdx].length)mmItemIdx=mmSections[mmSecIdx].length-1;
 }
-function openMainMenu(){navHistory.push('menu');buildMainMenu();mainMenu.classList.add('open');mmSecIdx=0;mmItemIdx=0;mmFocus()}
+function openMainMenu(){navHistory.push('menu');buildMainMenu();mainMenu.classList.add('open');mmSecIdx=0;mmItemIdx=0;mmFocus();triggerCardIn(mmActionCards,'.mm-card');triggerCardIn(mmPlaylistCards,'.mm-card')}
 function closeMainMenu(){mainMenu.classList.remove('open');clearZoneFocus();if(!uiOpen)showUI();navZone='list';renderTiles();navHistory=navHistory.filter(s=>s!=='menu')}
 function mmFocus(){mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>{
   const focused=si===mmSecIdx&&ii===mmItemIdx;
@@ -1409,6 +1402,15 @@ function parseXMLTV(xml){const data={},doc=new DOMParser().parseFromString(xml,'
 function getCurrentEPG(tvgId){if(!epgOn||!tvgId||!epgData[tvgId])return null;const now=Date.now();return epgData[tvgId].find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e})||null}
 function parseET(t){if(!t)return null;const m=t.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s*([+-]\d{4})?/);if(!m)return null;return new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${m[7]||'+0000'}`).getTime()}
 
+/* ── Card-in animation helper ── */
+function triggerCardIn(container,sel,stagger){
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    container.querySelectorAll(sel).forEach((c,i)=>{
+      c.style.animation='cardIn .4s ease '+(i*(stagger||50))+'ms both';
+    });
+  }));
+}
+
 /* ── Setup ── */
 function buildBuiltinGrid(){
   builtinGrid.innerHTML='';
@@ -1506,7 +1508,7 @@ async function init(){
   tgSub.classList.toggle('on',subOn);
   refreshFavSet();
   const done=gs('fs_done');
-  if(!done){buildBuiltinGrid();renderSaved();setupFocusInit();const sv=document.getElementById('startup-vid');if(sv){sv.pause();sv.removeAttribute('src');sv.load()}startup.style.display='none';ui.classList.add('show');console.log('PVTV DEBUG: setup classes='+setup.className+' ui classes='+ui.className+' cards='+builtinGrid.children.length+' setup display='+getComputedStyle(setup).display+' ui opacity='+getComputedStyle(ui).opacity);return}
+  if(!done){buildBuiltinGrid();renderSaved();setupFocusInit();triggerCardIn(builtinGrid,'.sc-card');const sv=document.getElementById('startup-vid');if(sv){sv.pause();sv.removeAttribute('src');sv.load()}startup.style.display='none';ui.classList.add('show');console.log('PVTV DEBUG: setup classes='+setup.className+' ui classes='+ui.className+' cards='+builtinGrid.children.length+' setup display='+getComputedStyle(setup).display+' ui opacity='+getComputedStyle(ui).opacity);return}
   setup.classList.add('off');
   const selBuiltin=gs(LS.SEL)||BUILTIN.map(p=>p.id);
   buildAllPls(selBuiltin);
