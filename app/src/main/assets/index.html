@@ -908,7 +908,7 @@ function makeTile(ch,offset,dir){
   const chFav=isFav(ch.urls[0]);
   const chIdx=flatCh.indexOf(ch);
   const num=chIdx>=0?chIdx+1:'';
-  const starHtml=(isFocused||chFav)?`<span class="fs">${chFav?'★':'★'}</span>`:'';
+  const starHtml=(isFocused||chFav)?`<span class="fs">${chFav?'★':'☆'}</span>`:'';
   item.innerHTML=`${logo}<div class="cn"><div class="cn-name">${esc(ch.name)}</div><div class="cn-epg">${esc(epgText)}</div></div><span class="cn-num">${num}</span>${starHtml}`;
   item.addEventListener('click',e=>{if(e.target.classList.contains('fs'))return;playChannel(ch);hideUI()});
   const fsEl=item.querySelector('.fs');
