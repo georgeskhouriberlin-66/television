@@ -1007,7 +1007,7 @@ function openSP(){navHistory.push('settings');spOpen=true;spFocusIdx=-1;sp.class
 function closeSP(){spOpen=false;spFocusIdx=-1;sp.classList.remove('open');sp.querySelectorAll('.si').forEach(s=>s.classList.remove('focused'));navHistory=navHistory.filter(s=>s!=='settings')}
 function toggleSP(e){e?.stopPropagation();spOpen?closeSP():openSP()}
 function spItems(){return Array.from(sp.querySelectorAll('.si'))}
-function spFocusUpdate(){const items=spItems();items.forEach((s,i)=>s.classList.toggle('focused',i===spFocusIdx))}
+function spFocusUpdate(){const items=spItems();items.forEach((s,i)=>{s.classList.toggle('focused',i===spFocusIdx);if(i===spFocusIdx)s.scrollIntoView({block:'nearest',behavior:'smooth'})})}
 function spFocusDir(dir){const items=spItems();if(!items.length)return;if(spFocusIdx<0)spFocusIdx=0;else spFocusIdx=Math.max(0,Math.min(items.length-1,spFocusIdx+dir));spFocusUpdate()}
 function spActivate(){const items=spItems();if(spFocusIdx>=0&&spFocusIdx<items.length)items[spFocusIdx].click()}
 document.addEventListener('click',e=>{if(spOpen&&!sp.contains(e.target))closeSP()});
