@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        android.util.Log.i("PVTV", "TEST from onCreate pid=${android.os.Process.myPid()}")
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -62,21 +63,25 @@ class MainActivity : ComponentActivity() {
                     }
                     super.onReceivedError(view, errorCode, description, failingUrl)
                 }
+                override fun onPageStarted(view: WebView?, url: String?, favicon: android.graphics.Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                    android.util.Log.i("PVTV", "onPageStarted url=$url")
+                }
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
+                    android.util.Log.i("PVTV", "onPageFinished url=$url")
+                    view?.requestFocus()
                 }
             }
             webChromeClient = object : WebChromeClient() {
                 @Suppress("DEPRECATION")
                 override fun onConsoleMessage(message: String, lineNumber: Int, sourceID: String?) {
-                    if (BuildConfig.DEBUG) {
-                        android.util.Log.i("PVTV-JS", "console[$lineNumber] $message  <- $sourceID")
-                    }
+                    android.util.Log.i("PVTV-JS", "console[$lineNumber] $message  <- $sourceID")
                     super.onConsoleMessage(message, lineNumber, sourceID)
                 }
                 override fun onConsoleMessage(message: android.webkit.ConsoleMessage): Boolean {
                     if (BuildConfig.DEBUG) {
-                        android.util.Log.i("PVTV-JS", "console[${message.messageLevel()}] ${message.message()}")
+                        android.util.Log.d("PVTV-JS", "console[${message.messageLevel()}] ${message.message()}")
                     }
                     return super.onConsoleMessage(message)
                 }
@@ -192,6 +197,165 @@ class MainActivity : ComponentActivity() {
         }
 
         @JavascriptInterface
+        fun fetchUrl(url: String, callbackId: String) {
+            Thread {
+                try {
+                    android.util.Log.i("PVTV", "fetchUrl: $url")
+                    val conn = java.net.URL(url).openConnection() as java.net.HttpURLConnection
+                    conn.connectTimeout = 15000
+                    conn.readTimeout = 60000
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0")
+                    conn.setRequestProperty("Accept-Encoding", "gzip")
+                    conn.connect()
+                    val code = conn.responseCode
+                    if (code != 200) {
+                        conn.disconnect()
+                        val err = "HTTP $code from $url"
+                        android.util.Log.e("PVTV", err)
+                        activity.runOnUiThread {
+                            activity.webView.evaluateJavascript(
+                                "window.__fetchResult && window.__fetchResult('$callbackId',null,'$err')",
+                                null
+                            )
+                        }
+                        return@Thread
+                    }
+                    val rawStream = conn.inputStream
+                    val inputStream = if (conn.contentEncoding == "gzip") java.util.zip.GZIPInputStream(rawStream) else rawStream
+                    val bytes = inputStream.buffered().use { it.readBytes() }
+                    conn.disconnect()
+                    val size = bytes.size
+                    android.util.Log.i("PVTV", "fetchUrl OK: ${size} bytes from $url (gzip=${conn.contentEncoding})")
+                    if (size > 512 * 1024) {
+                        // Large body: save to temp file, let loadEpgFile parse it natively
+                        val tempFile = java.io.File(activity.cacheDir, "fetch_${System.currentTimeMillis()}.tmp")
+                        tempFile.writeBytes(bytes)
+                        android.util.Log.i("PVTV", "fetchUrl: saved ${size} bytes to ${tempFile.absolutePath}")
+                        activity.runOnUiThread {
+                            activity.webView.evaluateJavascript(
+                                "window.__fetchResult && window.__fetchResult('$callbackId',{file:'${tempFile.absolutePath}'},null)",
+                                null
+                            )
+                        }
+                    } else {
+                        val body = bytes.toString(Charsets.UTF_8)
+                        val escaped = body.replace("\\", "\\\\")
+                            .replace("'", "\\'")
+                            .replace("\n", "\\n")
+                            .replace("\r", "")
+                        activity.runOnUiThread {
+                            activity.webView.evaluateJavascript(
+                                "window.__fetchResult && window.__fetchResult('$callbackId','$escaped',null)",
+                                null
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    val msg = e.message ?: "unknown error"
+                    android.util.Log.e("PVTV", "fetchUrl error: $msg (url=$url)")
+                    val safe = msg.replace("\\", "\\\\").replace("'", "\\'")
+                    activity.runOnUiThread {
+                        activity.webView.evaluateJavascript(
+                            "window.__fetchResult && window.__fetchResult('$callbackId',null,'$safe')",
+                            null
+                        )
+                    }
+                }
+            }.start()
+        }
+
+        @JavascriptInterface
+        fun loadEpgFile(path: String, callbackId: String) {
+            Thread {
+                try {
+                    android.util.Log.i("PVTV", "loadEpgFile: $path")
+                    val parser = android.util.Xml.newPullParser()
+                    val inputStream = java.io.FileInputStream(path)
+                    parser.setInput(inputStream, "UTF-8")
+
+                    val epgMap = mutableMapOf<String, MutableList<Map<String, String>>>()
+                    var eventType = parser.eventType
+                    var inProgramme = false
+                    var channel = ""
+                    var start = ""
+                    var stop = ""
+                    var title = ""
+                    var inTitle = false
+
+                    while (eventType != org.xmlpull.v1.XmlPullParser.END_DOCUMENT) {
+                        when (eventType) {
+                            org.xmlpull.v1.XmlPullParser.START_TAG -> {
+                                when (parser.name) {
+                                    "programme" -> {
+                                        inProgramme = true
+                                        channel = parser.getAttributeValue(null, "channel") ?: ""
+                                        start = parser.getAttributeValue(null, "start") ?: ""
+                                        stop = parser.getAttributeValue(null, "stop") ?: ""
+                                        title = ""
+                                    }
+                                    "title" -> if (inProgramme) inTitle = true
+                                }
+                            }
+                            org.xmlpull.v1.XmlPullParser.TEXT -> {
+                                if (inTitle) title = parser.text ?: ""
+                            }
+                            org.xmlpull.v1.XmlPullParser.END_TAG -> {
+                                when (parser.name) {
+                                    "programme" -> {
+                                        if (inProgramme && channel.isNotEmpty()) {
+                                            epgMap.getOrPut(channel) { mutableListOf() }
+                                                .add(mapOf("start" to start, "stop" to stop, "title" to title))
+                                        }
+                                        inProgramme = false
+                                    }
+                                    "title" -> inTitle = false
+                                }
+                            }
+                        }
+                        eventType = parser.next()
+                    }
+                    inputStream.close()
+                    java.io.File(path).delete()
+
+                    val channelCount = epgMap.size
+                    val totalProgrammes = epgMap.values.sumOf { it.size }
+                    android.util.Log.i("PVTV", "EPG parsed: $channelCount channels, $totalProgrammes programmes")
+
+                    val json = org.json.JSONObject(epgMap.mapValues { (_, programmes) ->
+                        org.json.JSONArray().apply {
+                            programmes.forEach { p ->
+                                put(org.json.JSONObject().apply {
+                                    put("start", p["start"] ?: "")
+                                    put("stop", p["stop"] ?: "")
+                                    put("title", p["title"] ?: "")
+                                })
+                            }
+                        }
+                    }).toString()
+
+                    android.util.Log.i("PVTV", "EPG JSON: ${json.length} chars")
+                    val safeJson = json.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n").replace("\r", "")
+                    activity.runOnUiThread {
+                        activity.webView.evaluateJavascript(
+                            "window.__fetchResult && window.__fetchResult('$callbackId','$safeJson',null)",
+                            null
+                        )
+                    }
+                } catch (e: Exception) {
+                    val msg = e.message ?: "EPG parse error"
+                    android.util.Log.e("PVTV", "loadEpgFile error: $msg")
+                    val safe = msg.replace("\\", "\\\\").replace("'", "\\'")
+                    activity.runOnUiThread {
+                        activity.webView.evaluateJavascript(
+                            "window.__fetchResult && window.__fetchResult('$callbackId',null,'$safe')",
+                            null
+                        )
+                    }
+                }
+            }.start()
+        }
+
+        @JavascriptInterface
         fun checkForUpdate() {
             activity.runOnUiThread {
                 Toast.makeText(activity, "Prüfe auf Updates...", Toast.LENGTH_SHORT).show()
@@ -199,6 +363,7 @@ class MainActivity : ComponentActivity() {
             UpdateChecker.checkForUpdate(activity, object : UpdateChecker.Callback {
                 override fun onUpdateAvailable(update: UpdateChecker.UpdateInfo) {
                     activity.runOnUiThread {
+                        activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='v${update.versionName} verfügbar'", null)
                         UpdateDialog(
                             activity,
                             update,
@@ -216,12 +381,14 @@ class MainActivity : ComponentActivity() {
 
                 override fun onNoUpdate() {
                     activity.runOnUiThread {
+                        activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='Aktuell'", null)
                         Toast.makeText(activity, "Kein Update verfügbar", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onError(message: String) {
                     activity.runOnUiThread {
+                        activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='Fehler'", null)
                         Toast.makeText(activity, "Update-Prüfung fehlgeschlagen: $message", Toast.LENGTH_SHORT).show()
                     }
                 }
