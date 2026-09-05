@@ -11,8 +11,8 @@ android {
         applicationId = "com.phoenizia.tv"
         minSdk = 23
         targetSdk = 35
-        versionCode = 3
-        versionName = "2.1.2"
+        versionCode = 20300
+        versionName = "2.3.0"
     }
 
     buildTypes {
