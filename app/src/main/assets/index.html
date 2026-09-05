@@ -456,7 +456,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 </head>
 <body>
 <div id="video-bg">
-  <video id="vid" tabindex="-1" playsinline autoplay></video>
+  <video id="vid" tabindex="-1" playsinline webkit-playsinline x5-playsinline autoplay></video>
   <div id="nosig"><div class="ns-ico">📡</div><div class="ns-title">Phönicia TV</div></div>
 </div>
 
@@ -646,7 +646,7 @@ function nativeFetch(url) {
 const BUILTIN = [
   {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://tinyurl.com/libanon-iptv', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
   {id:'christian',            name:'✝️ Christian',            url:'https://tinyurl.com/25cwjmur', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
-  {id:'christliche_sender',   name:'⛪ Alle Christlichen',    url:'https://tinyurl.com/alle-christlichen-sender', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
+  {id:'christliche_sender',   name:'⛪ Alle Christlichen',    url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christliche_sender.m3u', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
   {id:'gulf',                 name:'🌴 Gulf',                 url:'https://tinyurl.com/2y6788nu'},
   {id:'arabic',               name:'🌍 Arabic',               url:'https://tinyurl.com/288e72mm'},
 ];
@@ -920,6 +920,7 @@ function playChannel(ch){
   document.querySelectorAll('.ci').forEach(el=>el.classList.toggle('active',el.dataset.url===ch.urls[0]));
   showChInfo(ch);
   if(!startupDone){vid.muted=true;return}
+  try{vid.requestFullscreen()}catch(e){}
   tryStream(ch,0);
 }
 
@@ -972,7 +973,7 @@ function tryStream(ch,idx){
   }else if(vid.canPlayType('application/vnd.apple.mpegurl')){
     vid.src=url;    vid.addEventListener('loadedmetadata',()=>{tryStream._skipCount=0;vid.style.opacity='1';vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
     vid.addEventListener('error',()=>tryStream(ch,idx+1),{once:true});
-  }else{vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>tryStream(ch,idx+1))}
+  }else{vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');document.addEventListener('click',()=>{loadOv.classList.remove('show');vid.play()},{once:true});document.addEventListener('keydown',()=>{loadOv.classList.remove('show');vid.play()},{once:true})})}
 }
 
 /* ── Channel Number ── */
@@ -1402,13 +1403,21 @@ function parseXMLTV(xml){const data={},doc=new DOMParser().parseFromString(xml,'
 function getCurrentEPG(tvgId){if(!epgOn||!tvgId||!epgData[tvgId])return null;const now=Date.now();return epgData[tvgId].find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e})||null}
 function parseET(t){if(!t)return null;const m=t.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s*([+-]\d{4})?/);if(!m)return null;return new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${m[7]||'+0000'}`).getTime()}
 
-/* ── Card-in animation helper ── */
+/* ── Card-in animation helper (transition-based, Fire OS compatible) ── */
 function triggerCardIn(container,sel,stagger){
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    container.querySelectorAll(sel).forEach((c,i)=>{
-      c.style.animation='cardIn .4s ease '+(i*(stagger||50))+'ms both';
-    });
-  }));
+  const cards=container.querySelectorAll(sel);
+  if(!cards.length){console.log('PVTV ANIM: no cards found for',sel);return}
+  console.log('PVTV ANIM: animating',cards.length,'cards');
+  cards.forEach((c,i)=>{
+    c.style.opacity='0';
+    c.style.transform='translateY(14px) scale(.96)';
+    c.style.transition='none';
+    setTimeout(()=>{
+      c.style.transition='opacity .4s ease, transform .4s ease';
+      c.style.opacity='1';
+      c.style.transform='none';
+    },50+(i*(stagger||50)));
+  });
 }
 
 /* ── Setup ── */

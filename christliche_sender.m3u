@@ -1,0 +1,28 @@
+#EXTM3U
+#PLAYLIST:Alle Christlichen Sender
+#EXTINF:-1 tvg-name="Bibel TV" tvg-id="BibelTV.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/bibeltv.png",Bibel TV
+https://bibeltv01.iptv-playoutcenter.de/bibeltv01/bibeltv01.stream_all/playlist.m3u8
+#EXTINF:-1 tvg-name="Bibel TV Impuls" tvg-id="BibelTVImpuls.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/bibeltv.png",Bibel TV Impuls
+https://bibeltv02.iptv-playoutcenter.de/bibeltv02/bibeltv02.stream_all/playlist.m3u8
+#EXTINF:-1 tvg-name="Bibel TV Musik" tvg-id="BibelTVMusik.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/bibeltv.png",Bibel TV Musik
+http://bibeltv03.iptv-playoutcenter.de/bibeltv03/bibeltv03.stream_all/playlist.m3u8
+#EXTINF:-1 tvg-name="K-TV" tvg-id="KTV.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/ktv.png",K-TV
+https://streamcdnf34-a19bf41486254a3485a864c8b0c14fe1.msvdn.net/live/S28743697/LpD0q2aoyujI/playlist.m3u8
+#EXTINF:-1 tvg-name="ERF 1" tvg-id="ERFeins.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/erf1.png",ERF 1
+https://erf1-interaktiv.iptv-playoutcenter.de/erf1-interaktiv/erf1-interaktiv.stream_all/playlist.m3u8
+#EXTINF:-1 tvg-name="EWTN katholisches TV" tvg-id="EWTN.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/ewtnkatholischestv.png",EWTN katholisches TV
+https://d2zvsb1gu2hdsk.cloudfront.net/dash/vod/c010a485a7ec4c3d9e0e1c250a35ca3e/CATV-EWTNAT-de.mpd
+#EXTINF:-1 tvg-name="EWTN Europe" tvg-id="EWTNEurope.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/ewtnkatholischestv.png",EWTN Europe
+https://live4.ewtn.com/live/smil/europesmil.smil/playlist.m3u8
+#EXTINF:-1 tvg-name="EWTN USA" tvg-id="EWTNUSA.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/ewtnkatholischestv.png",EWTN USA
+https://live4.ewtn.com/live/smil/usasmil.smil/playlist.m3u8
+#EXTINF:-1 tvg-name="Salve TV" tvg-id="SalveTV.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/salvetv.png",Salve TV
+https://58de7a369a9c4.streamlock.net/salvetv/ngrp:stream_720p_web/playlist.m3u8
+#EXTINF:-1 tvg-name="Sophia TV" tvg-id="SophiaTV.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/sophiatv.png",Sophia TV
+https://bild-und-ton.stream/sophiatv-en/smil:sophia-tv-en.smil/playlist.m3u8
+#EXTINF:-1 tvg-name="Sender Neu Jerusalem" tvg-id="SenderNeuJerusalem.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/sendernwjerusalem.png",Sender Neu Jerusalem
+https://bild-und-ton.stream/snj-de/snj-de.smil/.m3u8
+#EXTINF:-1 tvg-name="Sonnenklar TV" tvg-id="SonnenklarTV.de" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/sonnenklartv.png",Sonnenklar TV
+http://euvia.cdn.ses-ps.com/HLS-Live/index.m3u8
+#EXTINF:-1 tvg-name="TRT World" tvg-id="TRTWorld.int" group-title="Religion" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/trtworld.png",TRT World
+https://tv-trtworld.medya.trt.com.tr/master_720.m3u8
