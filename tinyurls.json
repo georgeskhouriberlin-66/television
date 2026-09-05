@@ -1,10 +1,10 @@
 {
-  "libanon-iptv": "https://tinyurl.com/libanon-iptv",
-  "christian-iptv": "https://tinyurl.com/25cwjmur",
+  "libanon-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u",
+  "christian-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christian.m3u",
   "alle_christlichen_sender-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/alle_christlichen_sender.m3u",
-  "arabic-iptv": "https://tinyurl.com/288e72mm",
-  "gulf-iptv": "https://tinyurl.com/2y6788nu",
-  "usa-iptv": "https://tinyurl.com/22xllnhv",
-  "eastblock-iptv": "https://tinyurl.com/25lmqukn",
-  "germany-iptv": "https://tinyurl.com/2bfom2bu"
+  "arabic-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/arabic.m3u",
+  "gulf-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/gulf.m3u",
+  "usa-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/usa.m3u",
+  "eastblock-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/eastblock.m3u",
+  "germany-iptv": "https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/germany.m3u"
 }
