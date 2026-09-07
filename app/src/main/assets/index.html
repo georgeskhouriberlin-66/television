@@ -244,6 +244,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 .card-christian{background:linear-gradient(135deg,#5c3d8f 0%,#3a2560 100%)}
 .card-christliche_sender{background:linear-gradient(135deg,#7b4dbf 0%,#4a2d7a 100%)}
 .card-libanon{background:linear-gradient(135deg,#1a6b5c 0%,#0d4a3a 100%)}
+.card-radio{background:linear-gradient(135deg,#c0392b 0%,#8b1a1a 100%)}
 
 /* ── Select all bar ── */
 .sc-selectbar{display:flex;gap:8px;margin-top:12px}
@@ -1433,7 +1434,7 @@ function triggerCardIn(container,sel,stagger){
 function buildBuiltinGrid(){
   builtinGrid.innerHTML='';
   const sel=gs(LS.SEL)||BUILTIN.map(p=>p.id);
-  const icons={arabic:'\u{1F30D}',gulf:'\u{1F3DC}\u{FE0F}',usa:'\u{1F1FA}\u{1F1F8}',eastblock:'\u{1F3D7}\u{FE0F}',germany:'\u{1F1E9}\u{1F1EA}',christian:'\u271D\u{FE0F}',christliche_sender:'\u26EA',libanon:'\u{1F1F1}\u{1F1E7}'};
+  const icons={arabic:'\u{1F30D}',gulf:'\u{1F3DC}\u{FE0F}',usa:'\u{1F1FA}\u{1F1F8}',eastblock:'\u{1F3D7}\u{FE0F}',germany:'\u{1F1E9}\u{1F1EA}',christian:'\u271D\u{FE0F}',christliche_sender:'\u26EA',libanon:'\u{1F1F1}\u{1F1E7}',radio:'\u{1F4FB}'};
   BUILTIN.forEach(pl=>{
     const card=document.createElement('div');
     const isSel=sel.includes(pl.id)||!!loadedPl[pl.id];
