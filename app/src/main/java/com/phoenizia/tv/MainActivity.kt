@@ -91,17 +91,40 @@ class MainActivity : ComponentActivity() {
             setBackgroundColor(android.graphics.Color.BLACK)
             addJavascriptInterface(KeyboardBridge(this@MainActivity), "Android")
             val extFile = java.io.File(filesDir, "index.html")
-            if (extFile.exists()) {
-                if (BuildConfig.DEBUG) android.util.Log.i("PVTV", "Loading from filesDir")
+            val assetVersion = readAssetVersion()
+            val extVersion = if (extFile.exists()) readFileVersion(extFile) else ""
+            if (extFile.exists() && extVersion >= assetVersion) {
+                android.util.Log.i("PVTV", "Loading from filesDir (v$extVersion)")
                 loadUrl("file://" + extFile.absolutePath)
             } else {
-                if (BuildConfig.DEBUG) android.util.Log.i("PVTV", "Loading from assets")
+                if (extFile.exists() && assetVersion > extVersion) {
+                    android.util.Log.i("PVTV", "Assets v$assetVersion > filesDir v$extVersion, overwriting")
+                    assets.open("index.html").use { input -> extFile.outputStream().use { input.copyTo(it) } }
+                }
+                android.util.Log.i("PVTV", "Loading from assets (v$assetVersion)")
                 loadUrl("file:///android_asset/index.html")
             }
         }
 
         setContentView(webView)
         webView.requestFocus()
+    }
+
+    private fun readAssetVersion(): String {
+        return try {
+            assets.open("index.html").bufferedReader().use { extractVersion(it.readText()) }
+        } catch (_: Exception) { "" }
+    }
+
+    private fun readFileVersion(file: java.io.File): String {
+        return try {
+            file.bufferedReader().use { extractVersion(it.readText()) }
+        } catch (_: Exception) { "" }
+    }
+
+    private fun extractVersion(html: String): String {
+        val m = Regex("""Phoenicia Television v(\d+\.\d+\.\d+)""").find(html)
+        return m?.groupValues?.get(1) ?: ""
     }
 
     private fun dpad(key: String, code: String, keyCode: Int): Boolean {
