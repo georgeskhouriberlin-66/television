@@ -61,3 +61,13 @@ http://54.37.84.199:8002/stream/1/
 
 #EXTINF:-1 tvg-name="Canal Luz Radio" tvg-id="CanalLuz.ar" group-title="Spanisch" tvg-logo="https://i.imgur.com/GnY6dNT.png",Canal Luz Radio
 https://g4.vxral-hor.transport.edge-access.net/a11/ngrp:canal_luz01-100009_all/Playlist.m3u8
+
+##############################
+# Arabisch – Libanon / Jordan
+##############################
+
+#EXTINF:-1 tvg-name="Voice of Grace" tvg-id="VoiceOfGrace.lb" group-title="Arabisch" tvg-logo="https://i.imgur.com/placeholder.png",صوت النعمة – Voice of Grace
+https://securestreams5.reliastream.com:1820/;
+
+#EXTINF:-1 tvg-name="Al Orthodoxiya" tvg-id="AlOrthodoxiya.jo" group-title="Arabisch" tvg-logo="https://i.imgur.com/placeholder.png",الارثوذكسيه – Al Orthodoxiya
+http://s5.viastreaming.net:7040/;
