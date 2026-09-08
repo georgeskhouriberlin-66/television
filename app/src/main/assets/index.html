@@ -808,6 +808,7 @@ async function fetchText(url,timeoutMs=12000){
 }
 function showSidebarError(msg){
   if(!chList)return;
+  _tileCache=[];
   const dbg=window._dbg||[];
   const dbgHtml=dbg.length?'<div id="sb-dbg-toggle" style="margin-top:12px;padding:6px 12px;background:#12192a;border:1px solid #2a3a5c;border-radius:8px;cursor:pointer;font-size:11px;color:#5a6a80;text-align:center">🔍 Debug-Log</div><div id="sb-dbg" style="display:none;margin-top:8px;padding:8px;background:#0c1018;border:1px solid #1a2744;border-radius:6px;font-size:10px;color:#6a7a90;max-height:120px;overflow-y:auto;text-align:left;word-break:break-all">'+dbg.map(d=>'<div>'+d+'</div>').join('')+'</div>':'';
   chList.innerHTML='<div style="padding:24px 16px;text-align:center;color:#8a9aaf;font-size:13px;line-height:1.6">'
@@ -858,7 +859,31 @@ async function loadPlaylist(pl,autoPlay=true){
   }
 }
 
-/* ── Kanalliste ── */
+/* ── Kanalliste (Performance-optimiert für Fire Stick) ── */
+let _tileCache=[];
+const _TILE_COUNT=7;
+function _initTileCache(){
+  _tileCache=[];
+  const frag=document.createDocumentFragment();
+  for(let i=0;i<_TILE_COUNT;i++){
+    const wrap=document.createElement('div');wrap.className='ci';
+    const logo=document.createElement('div');logo.className='cl';
+    const logoImg=document.createElement('img');logoImg.loading='lazy';logoImg.onerror=function(){logo.innerHTML='';const s=document.createElement('span');s.className='clf';s.textContent='📺';logo.appendChild(s)};logo.appendChild(logoImg);
+    const logoFallback=document.createElement('span');logoFallback.className='clf';logoFallback.textContent='📺';logo.appendChild(logoFallback);
+    const cn=document.createElement('div');cn.className='cn';
+    const cnName=document.createElement('div');cnName.className='cn-name';cn.appendChild(cnName);
+    const cnEpg=document.createElement('div');cnEpg.className='cn-epg';cn.appendChild(cnEpg);
+    const num=document.createElement('span');num.className='cn-num';
+    const star=document.createElement('span');star.className='fs';
+    wrap.appendChild(logo);wrap.appendChild(cn);wrap.appendChild(num);wrap.appendChild(star);
+    const offset=i-3;
+    wrap.style.minHeight=(offset===0?'92':Math.abs(offset)===1?'78':'46')+'px';
+    wrap._offset=offset;wrap._ch=null;wrap._active=false;
+    frag.appendChild(wrap);
+    _tileCache.push(wrap);
+  }
+  chList.appendChild(frag);
+}
 function renderList(){
   let chs=allCh;
   if(showFavs)chs=chs.filter(c=>isFav(c.urls[0]));
@@ -866,48 +891,59 @@ function renderList(){
   flatCh=[...chs].sort((a,b)=>{const g=(a.group||'Weitere').localeCompare(b.group||'Weitere');return g!==0?g:a.name.localeCompare(b.name)});
   const fi=flatCh.findIndex(c=>c.urls[0]===activeCh?.urls[0]);
   focusIdx=fi>=0?fi:0;
+  _initTileCache();
   renderTiles();
 }
-
 function renderTiles(dir){
-  chList.innerHTML='';
-  if(!flatCh.length){chList.innerHTML=`<div style="padding:24px;text-align:center;color:var(--txt3);font-size:16px">${showFavs?'Keine Favoriten.':'Nichts gefunden.'}</div>`;return}
-  [-3,-2,-1,0,1,2,3].forEach(offset=>{
+  if(!_tileCache.length)_initTileCache();
+  if(!flatCh.length){chList.innerHTML='<div style="padding:24px;text-align:center;color:var(--txt3);font-size:16px">'+(showFavs?'Keine Favoriten.':'Nichts gefunden.')+'</div>';_tileCache=[];return}
+  for(let i=0;i<_TILE_COUNT;i++){
+    const wrap=_tileCache[i];
+    const offset=i-3;
     const idx=focusIdx+offset;
     if(idx<0||idx>=flatCh.length){
-      const ph=document.createElement('div');
-      ph.className='ci-ph';
-      ph.style.minHeight=(offset===0?'92':Math.abs(offset)===1?'78':'46')+'px';
-      chList.appendChild(ph);return;
+      wrap.style.display='none';continue;
     }
-    chList.appendChild(makeTile(flatCh[idx],offset===0&&navZone==='list'?0:offset,dir));
-  });
-}
-
-function makeTile(ch,offset,dir){
-  const isFocused=offset===0,isNear=Math.abs(offset)===1,isFar=Math.abs(offset)>=2;
-  const item=document.createElement('div');
-  let cls='ci';
-  if(isFocused)cls+=' focused';
-  else if(isNear)cls+=' near';
-  else if(isFar)cls+=' far';
-  if(dir)item.dataset.dir=dir;
-  if(isFav(ch.urls[0]))cls+=' fav';
-  if(activeCh?.urls[0]===ch.urls[0])cls+=' active';
-  item.className=cls;item.dataset.url=ch.urls[0];
-  const logoSrc=ch.logo?proxyLogo(ch.logo):'';
-  const logo=logoSrc?`<div class="cl"><img src="${esc(logoSrc)}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=clf>📺</span>'"></div>`:`<div class="cl"><span class="clf">📺</span></div>`;
-  const epg=(isFocused||isNear)&&epgOn?getCurrentEPG(ch.tvgId):null;
-  const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const fmt=t=>{if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};const time=s&&e?`${fmt(s)}–${fmt(e)} `:'';return time+epg.title})():'';
-  const chFav=isFav(ch.urls[0]);
-  const chIdx=flatCh.indexOf(ch);
-  const num=chIdx>=0?chIdx+1:'';
-  const starHtml=(isFocused||chFav)?`<span class="fs">${chFav?'★':'☆'}</span>`:'';
-  item.innerHTML=`${logo}<div class="cn"><div class="cn-name">${esc(ch.name)}</div><div class="cn-epg">${esc(epgText)}</div></div><span class="cn-num">${num}</span>${starHtml}`;
-  item.addEventListener('click',e=>{if(e.target.classList.contains('fs'))return;playChannel(ch);hideUI()});
-  const fsEl=item.querySelector('.fs');
-  if(fsEl)fsEl.addEventListener('click',e=>{e.stopPropagation();togFav(ch.urls[0]);toast(isFav(ch.urls[0])?'★ Favorit':'☆ Entfernt');renderTiles()});
-  return item;
+    wrap.style.display='';
+    const ch=flatCh[idx];
+    const isFocused=offset===0,isNear=Math.abs(offset)===1;
+    const logoSrc=ch.logo?proxyLogo(ch.logo):'';
+    const logoImg=wrap.querySelector('.cl img');
+    const logoFallback=wrap.querySelector('.cl .clf');
+    if(logoSrc){
+      if(logoImg.src!==logoSrc){logoImg.src=logoSrc;logoImg.style.display=''}
+      if(logoFallback)logoFallback.style.display='none';
+    }else{
+      logoImg.style.display='none';
+      if(logoFallback)logoFallback.style.display='';
+    }
+    wrap.querySelector('.cn-name').textContent=ch.name;
+    const epg=(isFocused||isNear)&&epgOn?getCurrentEPG(ch.tvgId):null;
+    const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const fmt=t=>{if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};const time=s&&e?`${fmt(s)}–${fmt(e)} `:'';return time+epg.title})():'';
+    wrap.querySelector('.cn-epg').textContent=epgText;
+    const chIdx=flatCh.indexOf(ch);
+    wrap.querySelector('.cn-num').textContent=chIdx>=0?chIdx+1:'';
+    const chFav=isFav(ch.urls[0]);
+    const star=wrap.querySelector('.fs');
+    if(isFocused||chFav){star.textContent=chFav?'★':'☆';star.style.display=''}else{star.style.display='none'}
+    const wasActive=wrap._active;
+    const isActive=activeCh?.urls[0]===ch.urls[0];
+    let cls='ci';
+    if(isFocused&&navZone==='list')cls+=' focused';
+    else if(isNear)cls+=' near';
+    else cls+=' far';
+    if(chFav)cls+=' fav';
+    if(isActive)cls+=' active';
+    if(dir)wrap.dataset.dir=dir;
+    wrap.className=cls;wrap.dataset.url=ch.urls[0];
+    if(wrap._ch!==ch||wasActive!==isActive){
+      wrap._ch=ch;wrap._active=isActive;
+      wrap.onclick=null;
+      wrap.onclick=e=>{if(e.target.classList.contains('fs'))return;playChannel(ch);hideUI()};
+      star.onclick=null;
+      star.onclick=e=>{e.stopPropagation();togFav(ch.urls[0]);toast(isFav(ch.urls[0])?'★ Favorit':'☆ Entfernt');renderTiles()};
+    }
+  }
 }
 
 function proxyLogo(url){if(!url)return'';const m=url.match(/iptv-org\.github\.io\/epg\/logos\/(.+)/);if(m)return`https://cdn.jsdelivr.net/gh/iptv-org/epg@master/logos/${m[1]}`;return url}
