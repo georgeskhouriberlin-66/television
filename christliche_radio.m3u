@@ -67,7 +67,82 @@ https://g4.vxral-hor.transport.edge-access.net/a11/ngrp:canal_luz01-100009_all/P
 ##############################
 
 #EXTINF:-1 tvg-name="Voice of Grace" tvg-id="VoiceOfGrace.lb" group-title="Arabisch" tvg-logo="https://i.imgur.com/placeholder.png",صوت النعمة – Voice of Grace
-https://securestreams5.reliastream.com:1820/;
+https://securestreams5.reliastream.com:1820/
 
 #EXTINF:-1 tvg-name="Al Orthodoxiya" tvg-id="AlOrthodoxiya.jo" group-title="Arabisch" tvg-logo="https://i.imgur.com/placeholder.png",الارثوذكسيه – Al Orthodoxiya
-http://s5.viastreaming.net:7040/;
+http://s5.viastreaming.net:7040/
+
+##############################
+# International – Englisch (Christian Radio)
+##############################
+
+#EXTINF:-1 tvg-name="BBN" tvg-id="BBN.us" group-title="Englisch" tvg-logo="https://bbn1.bbnradio.org/english/wp-content/uploads/sites/2/2019/01/BBNEnglish.png",BBN (Bible Broadcasting Network)
+https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f
+
+#EXTINF:-1 tvg-name="Radio Maria Belgium" tvg-id="RadioMaria.be" group-title="Englisch" tvg-logo="https://www.radiomaria.be/wp-content/uploads/2019/01/transparent_logo-500.png",Radio Maria Belgium
+http://stream.radiomaria.be:8000/RadioMaria-96
+
+#EXTINF:-1 tvg-name="RadioMv English" tvg-id="RadioMv.en" group-title="Englisch" tvg-logo="https://en.radiomv.com/wp-content/uploads/2022/08/RadioMv-newlogo-800w-4.png",RadioMv English
+https://m3u8.radiomv.com/english-hq.m3u8
+
+#EXTINF:-1 tvg-name="Orthodox Christian Network" tvg-id="OCN.us" group-title="Englisch" tvg-logo="https://myocn.net/wp-content/uploads/2023/04/blk-logo-copy.png",Orthodox Christian Network
+https://stream.radiojar.com/48cz219puzzuv
+
+#EXTINF:-1 tvg-name="Voice of Charity" tvg-id="VoiceOfCharity" group-title="Englisch" tvg-logo="https://charityradiotv.org/images/general/voc.png",Voice of Charity (صوت المحبة)
+http://cassini.shoutca.st:9496/xstream
+
+#EXTINF:-1 tvg-name="Sancta Maria Radio" tvg-id="SanctaMaria.int" group-title="Englisch" tvg-logo="https://www.sanctamariaradio.com/favicon.ico",Sancta Maria Radio (إذاعة سانكتا ماريا)
+https://streaming.radio.co/sa7e0251a2/listen
+
+#EXTINF:-1 tvg-name="Voice of Hope Middle East" tvg-id="VoiceOfHope.me" group-title="Englisch" tvg-logo="https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg",Voice of Hope Middle East (صوت الرجاء)
+http://ice9.securenetsystems.net/VOH
+
+##############################
+# Arabisch – Radiosender
+##############################
+
+#EXTINF:-1 tvg-name="Radio Maria Arabic" tvg-id="RadioMaria.ar" group-title="Arabisch" tvg-logo="https://www.radiomariam.org/favicon.ico",Radio Maria Arabic (راديو ماريا عربي)
+http://dreamsiteradiocp4.com:8014/stream
+
+#EXTINF:-1 tvg-name="Radio Maria Iraq" tvg-id="RadioMaria.iq" group-title="Arabisch" tvg-logo="https://www.radiomariam.org/favicon.ico",Radio Maria Iraq (راديو مريم العراق)
+http://dreamsiteradiocp4.com:8046/stream
+
+##############################
+# Griechisch – Orthodoxe Radiosender
+##############################
+
+#EXTINF:-1 tvg-name="Εκκλησία της Ελλάδας" tvg-id="Ekklisia.gr" group-title="Griechisch" tvg-logo="http://resources.live24.gr/resources/images/stations/963bef80-b381-4de6-9612-ea3a283c64e8.jpg",Εκκλησία της Ελλάδας 89.5
+https://loki.mental-media.gr:8038/stream
+
+#EXTINF:-1 tvg-name="Πειραϊκή Εκκλησία" tvg-id="Peiraiaki.gr" group-title="Griechisch" tvg-logo="http://www.piraeurchurch.gr/peir_ekklisia_logo.png",Πειραϊκή Εκκλησία 91.2
+https://impradio.bytemasters.gr/8002/stream
+
+#EXTINF:-1 tvg-name="Λυδία" tvg-id="Lydia.gr" group-title="Griechisch" tvg-logo="https://resources.live24.gr/resources/images/stations/32467e44-f554-4493-9c40-64bc44e070fb.png",Λυδία 94.2
+http://eu1.radiolydia.com:1086/stream
+
+#EXTINF:-1 tvg-name="Kanali7" tvg-id="Kanali7.cy" group-title="Griechisch" tvg-logo="http://new.kanali7.com/wp-content/uploads/2016/03/kanali-7-logo-low.png",Kanali7 98.4 (Κύπρος)
+http://live.kanali7.com:4010/
+
+#EXTINF:-1 tvg-name="Ο Αληθινός Λόγος" tvg-id="AlithinosLogos.cy" group-title="Griechisch" tvg-logo="https://logosradio.com.cy/assets/images/o-alithinos-logos-1.png",Ο Αληθινός Λόγος 93.3 (Λευκωσία)
+http://r1.cloudskep.com/radio/agiosdemetrios/icecast.audio
+
+#EXTINF:-1 tvg-name="Ι.Μ. Λεμεσού" tvg-id="IMLemesou.cy" group-title="Griechisch" tvg-logo="https://cdn.e-radio.gr/logos/cy/big/imlemesou.png",Ι.Μ. Λεμεσού (Κύπρος)
+http://93.109.209.123:9080/stream.mp3
+
+#EXTINF:-1 tvg-name="Ιερά Αρχιεπισκοπή Κρήτης" tvg-id="Ierarch.gr" group-title="Griechisch" tvg-logo="http://resources.live24.gr/resources/images/stations/0d850655-7a34-4ce1-8a1e-37db1cd537aa.jpg",Ιερά Αρχιεπισκοπή Κρήτης 99.7
+https://i7.streams.ovh/ic/iakradi1/stream
+
+#EXTINF:-1 tvg-name="Ι.Μ. Καστοριάς" tvg-id="IMKastorias.gr" group-title="Griechisch" tvg-logo="http://resources.live24.gr/resources/images/stations/0d850655-7a34-4ce1-8a1e-37db1cd537aa.jpg",Ι.Μ. Καστοριάς 97.9
+http://eco.onestreaming.com:8498/
+
+#EXTINF:-1 tvg-name="Ι.Μ. Σπάρτης" tvg-id="IMSpartis.gr" group-title="Griechisch" tvg-logo="https://resources.live24.gr/resources/images/stations/d46cdeb5-a2f1-4542-8f65-e67f7e662896.png",Ι.Μ. Σπάρτης 88.8
+http://s4.onweb.gr:8862/
+
+#EXTINF:-1 tvg-name="Ορθοδοξία και Παράδοση" tvg-id="Orthodoxia.gr" group-title="Griechisch" tvg-logo="http://resources.live24.gr/resources/images/stations/c452fdf8-141d-47f2-b240-ae49f3acf345.jpg",Ορθοδοξία και Παράδοση 103
+http://radio.lts-group.eu:52390/ANS
+
+#EXTINF:-1 tvg-name="Λύχνος" tvg-id="Lychnos.gr" group-title="Griechisch" tvg-logo="https://www.lychnos.org/wp-content/uploads/2020/05/lychnos-logo.png",Λύχνος
+https://stream.kncdn.net:8514/
+
+#EXTINF:-1 tvg-name="Μοναχική Διακονία" tvg-id="Monachiiki.gr" group-title="Griechisch" tvg-logo="http://resources.live24.gr/resources/images/stations/2e3027b2-3665-4672-99a8-8b03db094090.jpg",Μοναχική Διακονία 87.5
+http://eco.onestreaming.com:8019/;stream.mp3
