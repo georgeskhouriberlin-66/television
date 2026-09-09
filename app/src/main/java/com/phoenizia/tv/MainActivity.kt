@@ -21,6 +21,7 @@ import androidx.activity.OnBackPressedCallback
 class MainActivity : ComponentActivity() {
 
     private lateinit var webView: WebView
+    private var mediaPlayer: android.media.MediaPlayer? = null
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -376,6 +377,58 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }.start()
+        }
+
+        @JavascriptInterface
+        fun playAudio(url: String) {
+            android.util.Log.i("PVTV", "MediaPlayer: playAudio $url")
+            activity.runOnUiThread {
+                try {
+                    activity.mediaPlayer?.release()
+                    val mp = android.media.MediaPlayer()
+                    mp.setDataSource(url)
+                    mp.setAudioAttributes(
+                        android.media.AudioAttributes.Builder()
+                            .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
+                            .setContentType(android.media.AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build()
+                    )
+                    mp.prepareAsync()
+                    mp.setOnPreparedListener { mp ->
+                        android.util.Log.i("PVTV", "MediaPlayer: prepared, starting")
+                        mp.start()
+                        activity.webView.evaluateJavascript("window.__onAudioStart && window.__onAudioStart()", null)
+                    }
+                    mp.setOnErrorListener { _, what, extra ->
+                        android.util.Log.e("PVTV", "MediaPlayer: error what=$what extra=$extra")
+                        activity.webView.evaluateJavascript("window.__onAudioError && window.__onAudioError('error $what')", null)
+                        true
+                    }
+                    mp.setOnCompletionListener {
+                        android.util.Log.i("PVTV", "MediaPlayer: completed")
+                        activity.webView.evaluateJavascript("window.__onAudioEnd && window.__onAudioEnd()", null)
+                    }
+                    activity.mediaPlayer = mp
+                } catch (e: Exception) {
+                    android.util.Log.e("PVTV", "MediaPlayer: exception ${e.message}")
+                    val safe = (e.message ?: "unknown").replace("'", "\\'")
+                    activity.webView.evaluateJavascript("window.__onAudioError && window.__onAudioError('$safe')", null)
+                }
+            }
+        }
+
+        @JavascriptInterface
+        fun stopAudio() {
+            android.util.Log.i("PVTV", "MediaPlayer: stopAudio")
+            activity.runOnUiThread {
+                activity.mediaPlayer?.release()
+                activity.mediaPlayer = null
+            }
+        }
+
+        @JavascriptInterface
+        fun isAudioPlaying(): Boolean {
+            return activity.mediaPlayer?.isPlaying == true
         }
 
         @JavascriptInterface

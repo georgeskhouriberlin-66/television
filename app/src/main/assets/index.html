@@ -460,6 +460,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 <body>
 <div id="video-bg">
   <video id="vid" tabindex="-1" playsinline webkit-playsinline x5-playsinline autoplay></video>
+  <audio id="aud" preload="auto"></audio>
   <div id="nosig"><div class="ns-ico">📡</div><div class="ns-title">Phönicia TV</div></div>
 </div>
 
@@ -700,7 +701,7 @@ let chNumInput='', chNumTimer=null, spFocusIdx=-1, navHistory=[];
 const CH_NUM_DELAY=800;
 
 const $=id=>document.getElementById(id);
-const vid=$('vid'), nosig=$('nosig'), loadOv=$('load-ov');
+const vid=$('vid'), aud=$('aud'), nosig=$('nosig'), loadOv=$('load-ov');
 const chInfo=$('ch-info'), ciName=$('ci-name'), ciEpg=$('ci-epg');
 const errOv=$('err-ov'), errMsg=$('err-msg');
 const ui=$('ui'), sp=$('sp');
@@ -913,10 +914,10 @@ function renderTiles(dir){
     const logoImg=wrap.querySelector('.cl img');
     const logoFallback=wrap.querySelector('.cl .clf');
     if(logoSrc){
-      if(logoImg.src!==logoSrc){logoImg.src=logoSrc;logoImg.style.display=''}
+      if(logoImg&&logoImg.src!==logoSrc){logoImg.src=logoSrc;logoImg.style.display=''}
       if(logoFallback)logoFallback.style.display='none';
     }else{
-      logoImg.style.display='none';
+      if(logoImg)logoImg.style.display='none';
       if(logoFallback)logoFallback.style.display='';
     }
     wrap.querySelector('.cn-name').textContent=ch.name;
@@ -953,7 +954,7 @@ function proxyLogo(url){if(!url)return'';const m=url.match(/iptv-org\.github\.io
 /* ── Player ── */
 function playChannel(ch){
   console.log('PVTV PLAY: name='+(ch?ch.name:'null')+' urls='+(ch&&ch.urls?ch.urls.length:0));
-  activeCh=ch;ch._v=null;vid.muted=false;
+  activeCh=ch;ch._v=null;vid.muted=false;aud.pause();aud.src='';if(typeof Android!=='undefined')Android.stopAudio();
   ss(LS.CCH,{plId:activePlId,url:ch.urls[0]});
   focusIdx=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);
   if(focusIdx<0)focusIdx=0;
@@ -981,9 +982,7 @@ function showChInfo(ch){
 }
 
 function buildVariants(ch){
-  const all=[];
-  for(const u of ch.urls)all.push(u,...corsify(u));
-  return all;
+  return [...ch.urls];
 }
 
 function tryStream(ch,idx){
@@ -1004,9 +1003,11 @@ function tryStream(ch,idx){
   nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');vid.style.opacity='0';
   let domain='';try{domain=new URL(url).hostname}catch(e){domain=url.substring(0,30)}$('load-text').textContent=`📡 ${domain}`;$('load-count').textContent=`Versuch ${idx+1}/${total}`;
   if(hls){hls.destroy();hls=null}
+  aud.pause();aud.src='';if(typeof Android!=='undefined')Android.stopAudio();
+  const isHLS=/\.(m3u8)(\?|$)/i.test(url);
   try{
-  if(typeof Hls!=='undefined'&&Hls.isSupported()){
-    console.log('PVTV TRY: HLS supported, creating instance');
+  if(isHLS&&typeof Hls!=='undefined'&&Hls.isSupported()){
+    console.log('PVTV TRY: HLS detected, creating instance for '+url);
     hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
@@ -1017,10 +1018,10 @@ function tryStream(ch,idx){
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     });
     hls.on(Hls.Events.ERROR,(_,d)=>{console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type);if(d.fatal){hls.destroy();hls=null;tryStream(ch,idx+1)}});
-  }else if(typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(vid.canPlayType('application/vnd.apple.mpegurl')){
+  }else if(isHLS&&typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(isHLS&&vid.canPlayType('application/vnd.apple.mpegurl')){
     vid.src=url;    vid.addEventListener('loadedmetadata',()=>{tryStream._skipCount=0;vid.style.opacity='1';vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
     vid.addEventListener('error',()=>tryStream(ch,idx+1),{once:true});
-  }else{console.log('PVTV TRY: native fallback');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');document.addEventListener('click',()=>{loadOv.classList.remove('show');vid.play()},{once:true});document.addEventListener('keydown',()=>{loadOv.classList.remove('show');vid.play()},{once:true})})}
+  }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show');aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show');chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture')}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
   }catch(e){console.log('PVTV TRY: EXCEPTION: '+e.message);$('load-text').textContent='❌ '+e.message;$('load-count').textContent='';loadOv.classList.add('show')}
 }
 
