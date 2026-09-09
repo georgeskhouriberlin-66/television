@@ -454,6 +454,8 @@ let allCh=[], flatCh=[], hls=null, activeCh=null, activePlId=null, activeCat='';
 let showFavs=false, epgOn=true, subOn=false, focusIdx=0, uiOpen=false, spOpen=false, navDir='next';
 let chInfoTimer=null, epgData={}, loadedPl={}, customPl=[], allPls=[], uiTimer=null;
 let chNumInput='', chNumTimer=null;
+let touchActive=false;
+let touchResetTimer=null;
 const CH_NUM_DELAY=800;
 
 const $=id=>document.getElementById(id);
@@ -741,7 +743,10 @@ function toggleSubs(){
   poll();
 }
 $('video-bg').addEventListener('dblclick',toggleFS);
-$('video-bg').addEventListener('click',e=>{if(e.detail===1&&setup.classList.contains('off'))setTimeout(()=>{if(e.detail===1)toggleUI()},200)});
+$('video-bg').addEventListener('click',e=>{
+  if(touchActive)return;
+  if(e.detail===1&&setup.classList.contains('off'))setTimeout(()=>{if(e.detail===1)toggleUI()},200)
+});
 
 /* ── Keyboard ── */
 document.addEventListener('keydown',e=>{
@@ -783,14 +788,17 @@ document.addEventListener('mousemove',()=>{
 
   let touchStartX=0, touchStartY=0, touchStartTime=0;
   let longPressTimer=null, longPressFired=false;
+  let lastTap=0;
 
-  function isMobile(){
-    return 'ontouchstart' in window||navigator.maxTouchPoints>0;
+  function resetTouchActive(){
+    clearTimeout(touchResetTimer);
+    touchResetTimer=setTimeout(()=>{touchActive=false},350);
   }
 
-  /* ── Swipe on video area (navigate channels + playlists) ── */
+  /* ── All touch logic on #video-bg in ONE handler ── */
   $('video-bg').addEventListener('touchstart',e=>{
     if(!setup.classList.contains('off'))return;
+    touchActive=true;
     const t=e.touches[0];
     touchStartX=t.clientX;
     touchStartY=t.clientY;
@@ -820,48 +828,63 @@ document.addEventListener('mousemove',()=>{
 
   $('video-bg').addEventListener('touchend',e=>{
     clearTimeout(longPressTimer);
-    if(longPressFired)return;
+    if(longPressFired){resetTouchActive();return}
     const t=e.changedTouches[0];
     const dx=t.clientX-touchStartX;
     const dy=t.clientY-touchStartY;
     const dt=Date.now()-touchStartTime;
-    if(dt>300)return;
 
     const absDx=Math.abs(dx), absDy=Math.abs(dy);
+
+    /* Double-tap: fullscreen */
+    const now=Date.now();
+    if(absDx<15&&absDy<15&&now-lastTap<300){
+      toggleFS();
+      lastTap=0;
+      resetTouchActive();
+      return;
+    }
+    lastTap=now;
+
+    /* Slow touch (>400ms) — ignore as scroll/hold */
+    if(dt>400){resetTouchActive();return}
 
     /* Tap: toggle UI */
     if(absDx<15&&absDy<15){
       if(!uiOpen)showUI();else hideUI();
+      resetTouchActive();
       return;
     }
 
     /* Swipe vertical: navigate channels */
     if(absDy>SWIPE_THRESHOLD&&absDy>absDx&&absDx<SWIPE_MAX_Y){
-      if(!setup.classList.contains('off'))return;
+      e.preventDefault();
       if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}
       if(dy<0){
-        /* Swipe up → next channel */
         navDir='next';
         focusIdx=Math.min(focusIdx+1,flatCh.length-1);
       }else{
-        /* Swipe down → prev channel */
         navDir='prev';
         focusIdx=Math.max(focusIdx-1,0);
       }
       renderTiles(navDir);
+      resetTouchActive();
       return;
     }
 
     /* Swipe horizontal: switch playlist */
     if(absDx>SWIPE_THRESHOLD&&absDx>absDy&&absDy<SWIPE_MAX_Y){
-      if(!setup.classList.contains('off'))return;
+      e.preventDefault();
       if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}
       const idx=allPls.findIndex(p=>p.id===activePlId);
       const next=dx<0?allPls[Math.min(idx+1,allPls.length-1)]:allPls[Math.max(idx-1,0)];
       if(next&&next.id!==activePlId)loadPlaylist(next);
+      resetTouchActive();
       return;
     }
-  },{passive:true});
+
+    resetTouchActive();
+  },{passive:false});
 
   /* ── Swipe on sidebar to close (mobile) ── */
   let sbSwipeStartX=0;
@@ -886,6 +909,7 @@ document.addEventListener('mousemove',()=>{
   chList.addEventListener('touchend',e=>{
     const dy=e.changedTouches[0].clientY-chListStartY;
     if(Math.abs(dy)>30){
+      e.preventDefault();
       clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000);
       if(dy<0){
         navDir='next';
@@ -896,21 +920,11 @@ document.addEventListener('mousemove',()=>{
       }
       renderTiles(navDir);
     }
-  },{passive:true});
-
-  /* ── Double-tap on video for fullscreen ── */
-  let lastTap=0;
-  $('video-bg').addEventListener('touchend',e=>{
-    const now=Date.now();
-    if(now-lastTap<300){
-      clearTimeout(longPressTimer);
-      toggleFS();
-    }
-    lastTap=now;
-  },{passive:true});
+  },{passive:false});
 
   /* ── Prevent double-tap zoom on iOS ── */
   document.addEventListener('touchend',e=>{
+    if(e.target.closest&&e.target.closest('#video-bg'))return;
     const now=Date.now();
     if(now-lastTap<=300)e.preventDefault();
   },{passive:false});
