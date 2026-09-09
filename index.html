@@ -773,6 +773,152 @@ document.addEventListener('mousemove',()=>{
     if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}}
 });
 
+/* ══════════════════════════
+   TOUCH / MOBILE GESTURES
+══════════════════════════ */
+(()=>{
+  const SWIPE_THRESHOLD=40;
+  const SWIPE_MAX_Y=80;
+  const LONGPRESS_MS=500;
+
+  let touchStartX=0, touchStartY=0, touchStartTime=0;
+  let longPressTimer=null, longPressFired=false;
+
+  function isMobile(){
+    return 'ontouchstart' in window||navigator.maxTouchPoints>0;
+  }
+
+  /* ── Swipe on video area (navigate channels + playlists) ── */
+  $('video-bg').addEventListener('touchstart',e=>{
+    if(!setup.classList.contains('off'))return;
+    const t=e.touches[0];
+    touchStartX=t.clientX;
+    touchStartY=t.clientY;
+    touchStartTime=Date.now();
+    longPressFired=false;
+
+    /* Long-press: toggle favorite on current channel */
+    const ch=flatCh[focusIdx];
+    if(ch){
+      longPressTimer=setTimeout(()=>{
+        longPressFired=true;
+        togFav(ch.urls[0]);
+        toast(isFav(ch.urls[0])?'★ Favorit':'☆ Entfernt');
+        renderTiles();
+        if(navigator.vibrate)navigator.vibrate(30);
+      },LONGPRESS_MS);
+    }
+  },{passive:true});
+
+  $('video-bg').addEventListener('touchmove',e=>{
+    clearTimeout(longPressTimer);
+    const t=e.touches[0];
+    const dx=Math.abs(t.clientX-touchStartX);
+    const dy=Math.abs(t.clientY-touchStartY);
+    if(dx>10||dy>10)clearTimeout(longPressTimer);
+  },{passive:true});
+
+  $('video-bg').addEventListener('touchend',e=>{
+    clearTimeout(longPressTimer);
+    if(longPressFired)return;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-touchStartX;
+    const dy=t.clientY-touchStartY;
+    const dt=Date.now()-touchStartTime;
+    if(dt>300)return;
+
+    const absDx=Math.abs(dx), absDy=Math.abs(dy);
+
+    /* Tap: toggle UI */
+    if(absDx<15&&absDy<15){
+      if(!uiOpen)showUI();else hideUI();
+      return;
+    }
+
+    /* Swipe vertical: navigate channels */
+    if(absDy>SWIPE_THRESHOLD&&absDy>absDx&&absDx<SWIPE_MAX_Y){
+      if(!setup.classList.contains('off'))return;
+      if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}
+      if(dy<0){
+        /* Swipe up → next channel */
+        navDir='next';
+        focusIdx=Math.min(focusIdx+1,flatCh.length-1);
+      }else{
+        /* Swipe down → prev channel */
+        navDir='prev';
+        focusIdx=Math.max(focusIdx-1,0);
+      }
+      renderTiles(navDir);
+      return;
+    }
+
+    /* Swipe horizontal: switch playlist */
+    if(absDx>SWIPE_THRESHOLD&&absDx>absDy&&absDy<SWIPE_MAX_Y){
+      if(!setup.classList.contains('off'))return;
+      if(!uiOpen)showUI();else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}
+      const idx=allPls.findIndex(p=>p.id===activePlId);
+      const next=dx<0?allPls[Math.min(idx+1,allPls.length-1)]:allPls[Math.max(idx-1,0)];
+      if(next&&next.id!==activePlId)loadPlaylist(next);
+      return;
+    }
+  },{passive:true});
+
+  /* ── Swipe on sidebar to close (mobile) ── */
+  let sbSwipeStartX=0;
+  const sidebar=$('sidebar');
+  if(sidebar){
+    sidebar.addEventListener('touchstart',e=>{
+      sbSwipeStartX=e.touches[0].clientX;
+    },{passive:true});
+    sidebar.addEventListener('touchend',e=>{
+      const dx=e.changedTouches[0].clientX-sbSwipeStartX;
+      if(dx<-60&&window.innerWidth<=767&&uiOpen){
+        hideUI();
+      }
+    },{passive:true});
+  }
+
+  /* ── Swipe on channel list for scrolling focus ── */
+  let chListStartY=0;
+  chList.addEventListener('touchstart',e=>{
+    chListStartY=e.touches[0].clientY;
+  },{passive:true});
+  chList.addEventListener('touchend',e=>{
+    const dy=e.changedTouches[0].clientY-chListStartY;
+    if(Math.abs(dy)>30){
+      clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000);
+      if(dy<0){
+        navDir='next';
+        focusIdx=Math.min(focusIdx+1,flatCh.length-1);
+      }else{
+        navDir='prev';
+        focusIdx=Math.max(focusIdx-1,0);
+      }
+      renderTiles(navDir);
+    }
+  },{passive:true});
+
+  /* ── Double-tap on video for fullscreen ── */
+  let lastTap=0;
+  $('video-bg').addEventListener('touchend',e=>{
+    const now=Date.now();
+    if(now-lastTap<300){
+      clearTimeout(longPressTimer);
+      toggleFS();
+    }
+    lastTap=now;
+  },{passive:true});
+
+  /* ── Prevent double-tap zoom on iOS ── */
+  document.addEventListener('touchend',e=>{
+    const now=Date.now();
+    if(now-lastTap<=300)e.preventDefault();
+  },{passive:false});
+
+  /* ── Pinch-to-zoom prevention (keep UI stable) ── */
+  document.addEventListener('gesturestart',e=>e.preventDefault(),{passive:false});
+})();
+
 /* ── EPG ── */
 async function loadEPG(url){try{const t=await fetchText(url);epgData=parseXMLTV(t)}catch(e){console.warn('EPG:',e.message)}}
 function parseXMLTV(xml){const data={},doc=new DOMParser().parseFromString(xml,'text/xml');doc.querySelectorAll('programme').forEach(p=>{const ch=p.getAttribute('channel');if(!ch)return;if(!data[ch])data[ch]=[];data[ch].push({start:p.getAttribute('start'),stop:p.getAttribute('stop'),title:(p.querySelector('title')||{}).textContent||''})});return data}
