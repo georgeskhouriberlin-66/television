@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#000">
 <title>Phoenicia Television</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.7/hls.min.js"></script>
+<script src="hls.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Cinzel:wght@700;900&family=DM+Mono:wght@400;500&display=swap');
 :root{
@@ -1005,7 +1005,7 @@ function tryStream(ch,idx){
   let domain='';try{domain=new URL(url).hostname}catch(e){domain=url.substring(0,30)}$('load-text').textContent=`📡 ${domain}`;$('load-count').textContent=`Versuch ${idx+1}/${total}`;
   if(hls){hls.destroy();hls=null}
   try{
-  if(Hls.isSupported()){
+  if(typeof Hls!=='undefined'&&Hls.isSupported()){
     console.log('PVTV TRY: HLS supported, creating instance');
     hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);
@@ -1017,7 +1017,7 @@ function tryStream(ch,idx){
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     });
     hls.on(Hls.Events.ERROR,(_,d)=>{console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type);if(d.fatal){hls.destroy();hls=null;tryStream(ch,idx+1)}});
-  }else if(vid.canPlayType('application/vnd.apple.mpegurl')){
+  }else if(typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(vid.canPlayType('application/vnd.apple.mpegurl')){
     vid.src=url;    vid.addEventListener('loadedmetadata',()=>{tryStream._skipCount=0;vid.style.opacity='1';vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
     vid.addEventListener('error',()=>tryStream(ch,idx+1),{once:true});
   }else{console.log('PVTV TRY: native fallback');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;vid.style.opacity='1';loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');document.addEventListener('click',()=>{loadOv.classList.remove('show');vid.play()},{once:true});document.addEventListener('keydown',()=>{loadOv.classList.remove('show');vid.play()},{once:true})})}
