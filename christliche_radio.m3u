@@ -13,9 +13,6 @@ https://m3u8.radiomv.com/german-hq-ot.m3u8
 #EXTINF:-1 tvg-name="K-TV Radio" tvg-id="KTVRadio.de" group-title="Deutsch" tvg-logo="https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/ktv.png",K-TV Radio
 https://streamcdnf34-a19bf41486254a3485a864c8b0c14fe1.msvdn.net/live/S28743697/LpD0q2aoyujI/playlist.m3u8
 
-#EXTINF:-1 tvg-name="Evangeliumsfunk" tvg-id="Evangeliumsfunk.de" group-title="Deutsch" tvg-logo="https://www.evang.de/das-evangelium-hoeren/evangeliumsfunk/picture/12017618/1200x675/evangeliumsfunk-logo.jpg",Evangeliumsfunk
-https://www.evang.de/das-evangelium-hoeren/evangeliumsfunk/stream.mp3
-
 ##############################
 # International – Englisch
 ##############################
@@ -26,41 +23,12 @@ https://war.streamguys1.com:7185/live
 #EXTINF:-1 tvg-name="3ABN Radio Music" tvg-id="3ABNMusic.us" group-title="Englisch" tvg-logo="https://i.imgur.com/zUMUNhe.png",3ABN Radio Music
 https://streamer1.streamhost.org/salive/logosa/playlist.m3u8
 
-#EXTINF:-1 tvg-name="Gospel Star Radio" tvg-id="GospelStar.us" group-title="Englisch" tvg-logo="https://i.imgur.com/6lklsyN.png",Gospel Star Radio
-http://streaming.gospelstar.com:8012/stream
-
-#EXTINF:-1 tvg-name="The Faithful Road" tvg-id="FaithfulRoad.us" group-title="Englisch" tvg-logo="https://i.imgur.com/4d65Bev.png",The Faithful Road
-http://198.101.86.99:999/stream/1/
-
-#EXTINF:-1 tvg-name="Z88.3 Radio" tvg-id="Z883.us" group-title="Englisch" tvg-logo="https://i.imgur.com/IecOZHR.png",Z88.3 Radio
-https://live.z883.org/stream
-
-#EXTINF:-1 tvg-name="Moody Radio" tvg-id="MoodyRadio.us" group-title="Englisch" tvg-logo="https://www.moodyradio.org/globalassets/moodyradio/logos/moody-radio-logo.png",Moody Radio
-https://players.streamtheworld.com/api/livestream-redirect/KMBIAAC
-
-#EXTINF:-1 tvg-name="Life 102.5" tvg-id="Life1025.us" group-title="Englisch" tvg-logo="https://i.imgur.com/OWI7Y0l.png",Life 102.5
-http://n0a.streamguys1.com/life1025
-
-##############################
-# International – Französisch
-##############################
-
-#EXTINF:-1 tvg-name="Radio Vatican" tvg-id="RadioVatican.va" group-title="Französisch" tvg-logo="https://i.imgur.com/n3FffgF.png",Radio Vatican (Français)
-https://live4.ewtn.com/live/smil/europesmil.smil/playlist.m3u8
-
 ##############################
 # International – Italienisch
 ##############################
 
 #EXTINF:-1 tvg-name="Radio Maria Italia" tvg-id="RadioMaria.it" group-title="Italienisch" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Radio_Maria_Logo.svg/200px-Radio_Maria_Logo.svg.png",Radio Maria Italia
 http://54.37.84.199:8002/stream/1/
-
-##############################
-# International – Spanisch
-##############################
-
-#EXTINF:-1 tvg-name="Canal Luz Radio" tvg-id="CanalLuz.ar" group-title="Spanisch" tvg-logo="https://i.imgur.com/GnY6dNT.png",Canal Luz Radio
-https://g4.vxral-hor.transport.edge-access.net/a11/ngrp:canal_luz01-100009_all/Playlist.m3u8
 
 ##############################
 # Arabisch – Libanon / Jordan
@@ -122,9 +90,6 @@ http://eu1.radiolydia.com:1086/stream
 
 #EXTINF:-1 tvg-name="Kanali7" tvg-id="Kanali7.cy" group-title="Griechisch" tvg-logo="http://new.kanali7.com/wp-content/uploads/2016/03/kanali-7-logo-low.png",Kanali7 98.4 (Κύπρος)
 http://live.kanali7.com:4010/
-
-#EXTINF:-1 tvg-name="Ο Αληθινός Λόγος" tvg-id="AlithinosLogos.cy" group-title="Griechisch" tvg-logo="https://logosradio.com.cy/assets/images/o-alithinos-logos-1.png",Ο Αληθινός Λόγος 93.3 (Λευκωσία)
-http://r1.cloudskep.com/radio/agiosdemetrios/icecast.audio
 
 #EXTINF:-1 tvg-name="Ι.Μ. Λεμεσού" tvg-id="IMLemesou.cy" group-title="Griechisch" tvg-logo="https://cdn.e-radio.gr/logos/cy/big/imlemesou.png",Ι.Μ. Λεμεσού (Κύπρος)
 http://93.109.209.123:9080/stream.mp3
