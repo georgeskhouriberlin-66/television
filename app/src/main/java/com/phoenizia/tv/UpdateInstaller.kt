@@ -1,13 +1,9 @@
 package com.phoenizia.tv
 
-import android.app.DownloadManager
-import android.content.BroadcastReceiver
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import java.io.File
@@ -16,111 +12,40 @@ import java.net.URL
 
 object UpdateInstaller {
 
-    private var downloadId: Long = -1
-    private var receiver: BroadcastReceiver? = null
+    interface ProgressCallback {
+        fun onProgress(percent: Int)
+        fun onComplete(file: File)
+        fun onError(message: String)
+    }
 
-    fun downloadAndInstall(activity: android.app.Activity, apkUrl: String, onComplete: () -> Unit) {
+    fun downloadAndInstall(activity: Activity, apkUrl: String, callback: ProgressCallback) {
         android.util.Log.i("PVTV", "Update: starting download from $apkUrl")
         activity.runOnUiThread {
             Toast.makeText(activity, "Download gestartet...", Toast.LENGTH_SHORT).show()
         }
 
-        val dm = activity.getSystemService(android.app.DownloadManager::class.java)
-        if (dm != null) {
-            android.util.Log.i("PVTV", "Update: using DownloadManager")
-            downloadViaManager(activity, apkUrl, dm, onComplete)
-        } else {
-            android.util.Log.w("PVTV", "Update: DownloadManager not available, falling back to HTTP")
-            downloadViaHttp(activity, apkUrl, onComplete)
-        }
-    }
-
-    // ── Tier 1: Android DownloadManager (handles redirects, SSL, notifications) ──
-
-    private fun downloadViaManager(
-        activity: android.app.Activity,
-        apkUrl: String,
-        dm: DownloadManager,
-        onComplete: () -> Unit
-    ) {
-        val apkFile = File(activity.cacheDir, "phoenicia-update.apk")
-        if (apkFile.exists()) apkFile.delete()
-
-        val request = DownloadManager.Request(Uri.parse(apkUrl))
-            .setTitle("PhoeniciaTV Update")
-            .setDescription("APK wird heruntergeladen...")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationUri(Uri.fromFile(apkFile))
-            .addRequestHeader("User-Agent", "PhoeniciaTV/2.4.3 (Android)")
-            .addRequestHeader("Accept", "*/*")
-
-        android.util.Log.i("PVTV", "Update: enqueueing DownloadManager request")
-        downloadId = dm.enqueue(request)
-
-        receiver = object : BroadcastReceiver() {
-            override fun onReceive(ctx: Context, intent: Intent) {
-                val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-                if (id != downloadId) return
-
-                android.util.Log.i("PVTV", "Update: DownloadManager broadcast received for id=$id")
-
-                val query = DownloadManager.Query().setFilterById(downloadId)
-                val cursor = dm.query(query)
-                var status = -1
-                if (cursor != null && cursor.moveToFirst()) {
-                    status = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS))
-                    cursor.close()
-                }
-                android.util.Log.i("PVTV", "Update: download status=$status")
-
-                if (status == DownloadManager.STATUS_SUCCESSFUL) {
-                    activity.runOnUiThread { installApk(activity, apkFile) }
-                } else {
-                    activity.runOnUiThread {
-                        Toast.makeText(activity, "Download fehlgeschlagen", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                try { activity.unregisterReceiver(this) } catch (_: Exception) {}
-            }
-        }
-
-        val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            activity.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
-        } else {
-            activity.registerReceiver(receiver, filter)
-        }
-    }
-
-    // ── Tier 2: Manual HTTP with explicit redirect handling (fallback) ──
-
-    private fun downloadViaHttp(
-        activity: android.app.Activity,
-        apkUrl: String,
-        onComplete: () -> Unit
-    ) {
         Thread {
             try {
                 val apkFile = File(activity.cacheDir, "phoenicia-update.apk")
                 if (apkFile.exists()) apkFile.delete()
 
-                downloadApkWithRedirects(apkUrl, apkFile)
+                downloadWithProgress(apkUrl, apkFile, callback)
 
                 activity.runOnUiThread {
+                    callback.onComplete(apkFile)
                     installApk(activity, apkFile)
-                    onComplete()
                 }
             } catch (e: Exception) {
                 android.util.Log.e("PVTV", "Update download failed: ${e.message}", e)
                 activity.runOnUiThread {
+                    callback.onError(e.message ?: "Unbekannter Fehler")
                     Toast.makeText(activity, "Download fehlgeschlagen: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }.start()
     }
 
-    private fun downloadApkWithRedirects(urlStr: String, targetFile: File) {
+    private fun downloadWithProgress(urlStr: String, targetFile: File, callback: ProgressCallback) {
         var currentUrl = urlStr
         val maxRedirects = 10
 
@@ -130,8 +55,8 @@ object UpdateInstaller {
             val conn = URL(currentUrl).openConnection() as HttpURLConnection
             conn.connectTimeout = 30_000
             conn.readTimeout = 60_000
-            conn.instanceFollowRedirects = false  // handle redirects manually
-            conn.setRequestProperty("User-Agent", "PhoeniciaTV/2.4.3 (Android)")
+            conn.instanceFollowRedirects = false
+            conn.setRequestProperty("User-Agent", "PhoeniciaTV/Android")
             conn.setRequestProperty("Accept", "*/*")
             conn.connect()
 
@@ -153,9 +78,8 @@ object UpdateInstaller {
                 throw Exception("HTTP $code from $currentUrl")
             }
 
-            // Got 200 — download the file
-            val total = conn.contentLength
-            android.util.Log.i("PVTV", "Update HTTP: downloading ${total ?: "unknown"} bytes")
+            val total = conn.contentLength.toLong()
+            android.util.Log.i("PVTV", "Update HTTP: downloading $total bytes")
 
             conn.inputStream.use { input ->
                 targetFile.outputStream().use { output ->
@@ -165,8 +89,13 @@ object UpdateInstaller {
                     while (input.read(buffer).also { bytesRead = it } != -1) {
                         output.write(buffer, 0, bytesRead)
                         totalRead += bytesRead
+                        if (total > 0) {
+                            val percent = ((totalRead * 100) / total).toInt()
+                            callback.onProgress(percent.coerceAtMost(99))
+                        }
                     }
                     android.util.Log.i("PVTV", "Update HTTP: downloaded $totalRead bytes to ${targetFile.absolutePath}")
+                    callback.onProgress(100)
                 }
             }
             conn.disconnect()
@@ -175,8 +104,6 @@ object UpdateInstaller {
 
         throw Exception("Too many redirects (>$maxRedirects)")
     }
-
-    // ── Shared install logic ──
 
     private fun installApk(context: Context, apkFile: File) {
         if (!apkFile.exists() || apkFile.length() == 0L) {

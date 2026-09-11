@@ -440,18 +440,30 @@ class MainActivity : ComponentActivity() {
                 override fun onUpdateAvailable(update: UpdateChecker.UpdateInfo) {
                     activity.runOnUiThread {
                         activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='v${update.versionName} verfügbar'", null)
-                        UpdateDialog(
+                        val dialog = UpdateDialog(
                             activity,
                             update,
-                            onUpdate = {
+                            onUpdate = { dlg ->
+                                dlg.showProgress()
                                 UpdateInstaller.downloadAndInstall(
                                     activity,
                                     update.apkDownloadUrl,
-                                    onComplete = { }
+                                    object : UpdateInstaller.ProgressCallback {
+                                        override fun onProgress(percent: Int) {
+                                            activity.runOnUiThread { dlg.updateProgress(percent) }
+                                        }
+                                        override fun onComplete(file: java.io.File) {
+                                            activity.runOnUiThread { dlg.showInstallButton() }
+                                        }
+                                        override fun onError(message: String) {
+                                            activity.runOnUiThread { dlg.showError(message) }
+                                        }
+                                    }
                                 )
                             },
                             onDismiss = { }
-                        ).show()
+                        )
+                        dialog.show()
                     }
                 }
 
