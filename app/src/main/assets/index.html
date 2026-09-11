@@ -874,6 +874,7 @@ let _tileCache=[];
 const _TILE_COUNT=7;
 function _initTileCache(){
   _tileCache=[];
+  chList.innerHTML='';
   const frag=document.createDocumentFragment();
   for(let i=0;i<_TILE_COUNT;i++){
     const wrap=document.createElement('div');wrap.className='ci';
