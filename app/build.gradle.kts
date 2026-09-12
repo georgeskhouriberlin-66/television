@@ -18,8 +18,8 @@ android {
         applicationId = "com.phoenizia.tv"
         minSdk = 23
         targetSdk = 35
-        versionCode = 20409
-        versionName = "2.4.9"
+        versionCode = 20410
+        versionName = "2.4.10"
     }
 
     signingConfigs {
