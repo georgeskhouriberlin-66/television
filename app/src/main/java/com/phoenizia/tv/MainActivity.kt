@@ -444,22 +444,27 @@ class MainActivity : ComponentActivity() {
                             activity,
                             update,
                             onUpdate = { dlg ->
-                                dlg.showProgress()
-                                UpdateInstaller.downloadAndInstall(
-                                    activity,
-                                    update.apkDownloadUrl,
-                                    object : UpdateInstaller.ProgressCallback {
-                                        override fun onProgress(percent: Int) {
-                                            activity.runOnUiThread { dlg.updateProgress(percent) }
+                                try {
+                                    dlg.showProgress()
+                                    UpdateInstaller.downloadAndInstall(
+                                        activity,
+                                        update.apkDownloadUrl,
+                                        object : UpdateInstaller.ProgressCallback {
+                                            override fun onProgress(percent: Int) {
+                                                try { activity.runOnUiThread { dlg.updateProgress(percent) } } catch (_: Exception) {}
+                                            }
+                                            override fun onComplete(file: java.io.File) {
+                                                try { activity.runOnUiThread { dlg.showInstallButton() } } catch (_: Exception) {}
+                                            }
+                                            override fun onError(message: String) {
+                                                try { activity.runOnUiThread { dlg.showError(message) } } catch (_: Exception) {}
+                                            }
                                         }
-                                        override fun onComplete(file: java.io.File) {
-                                            activity.runOnUiThread { dlg.showInstallButton() }
-                                        }
-                                        override fun onError(message: String) {
-                                            activity.runOnUiThread { dlg.showError(message) }
-                                        }
-                                    }
-                                )
+                                    )
+                                } catch (e: Exception) {
+                                    android.util.Log.e("PVTV", "Update button failed: ${e.message}", e)
+                                    try { dlg.showError(e.message ?: "Unbekannter Fehler") } catch (_: Exception) {}
+                                }
                             },
                             onDismiss = { }
                         )

@@ -29,17 +29,24 @@ object UpdateInstaller {
                 val apkFile = File(activity.cacheDir, "phoenicia-update.apk")
                 if (apkFile.exists()) apkFile.delete()
 
+                android.util.Log.i("PVTV", "Update: downloading to ${apkFile.absolutePath}")
                 downloadWithProgress(apkUrl, apkFile, callback)
+                android.util.Log.i("PVTV", "Update: download complete, size=${apkFile.length()}")
 
                 activity.runOnUiThread {
-                    callback.onComplete(apkFile)
-                    installApk(activity, apkFile)
+                    try {
+                        callback.onComplete(apkFile)
+                        installApk(activity, apkFile)
+                    } catch (e: Exception) {
+                        android.util.Log.e("PVTV", "Update install UI failed: ${e.message}", e)
+                    }
                 }
             } catch (e: Exception) {
                 android.util.Log.e("PVTV", "Update download failed: ${e.message}", e)
                 activity.runOnUiThread {
-                    callback.onError(e.message ?: "Unbekannter Fehler")
-                    Toast.makeText(activity, "Download fehlgeschlagen: ${e.message}", Toast.LENGTH_LONG).show()
+                    try {
+                        callback.onError(e.message ?: "Unbekannter Fehler")
+                    } catch (_: Exception) {}
                 }
             }
         }.start()
