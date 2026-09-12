@@ -16,6 +16,7 @@ class UpdateDialog(
     private val onDismiss: () -> Unit
 ) : Dialog(context) {
 
+    private lateinit var progressSection: LinearLayout
     private lateinit var statusText: TextView
     private lateinit var progressBar: ProgressBar
     private lateinit var percentText: TextView
@@ -67,7 +68,7 @@ class UpdateDialog(
         }
 
         // Progress section (hidden initially)
-        val progressSection = LinearLayout(context).apply {
+        progressSection = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(0, (8 * dp).toInt(), 0, (8 * dp).toInt())
             visibility = android.view.View.GONE
@@ -159,6 +160,7 @@ class UpdateDialog(
         btnUpdate.text = "Wird heruntergeladen..."
         btnLater.isEnabled = false
         btnLater.alpha = 0.5f
+        progressSection.visibility = android.view.View.VISIBLE
         statusText.visibility = android.view.View.VISIBLE
         progressBar.visibility = android.view.View.VISIBLE
         percentText.visibility = android.view.View.VISIBLE
