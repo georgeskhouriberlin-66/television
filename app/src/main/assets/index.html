@@ -491,8 +491,8 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   <div class="si" id="sp-fs"><span class="si-ico">⛶</span><span class="si-lbl">Vollbild</span><span class="si-val">F2 · Doppelklick</span></div>
   <div class="si" id="sp-upd"><span class="si-ico">🔄</span><span class="si-lbl">Playlist aktualisieren</span><span class="si-val" id="sp-upd-v">—</span></div>
   <div class="si" id="sp-clr"><span class="si-ico">🧹</span><span class="si-lbl">Tote Streams zurücksetzen</span><span class="si-val">Cache leeren</span></div>
-  <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.4.3</span></div>
-  <div class="sp-v">Phoenicia Television v2.4.3</div>
+  <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.4.9</span></div>
+  <div class="sp-v">Phoenicia Television v2.4.9</div>
 </div>
 
 <!-- Startup Screen -->
@@ -1081,6 +1081,7 @@ $('sp-fs').addEventListener('click',()=>{closeSP();toggleFS()});
 $('sp-upd').addEventListener('click',()=>{closeSP();const pl=allPls.find(p=>p.id===activePlId);if(pl)loadPlaylist(pl);toast('🔄 Aktualisiere…')});
 $('sp-clr').addEventListener('click',()=>{ss(LS.DEAD,{});closeSP();toast('🧹 Tote-Streams-Cache geleert')});
 $('sp-appupd').addEventListener('click',()=>{if(typeof Android!=='undefined'&&Android.checkForUpdate){$('sp-appupd-v').textContent='Suche…';Android.checkForUpdate()}else toast('⚠ Update-Check nicht verfügbar')});
+try{if(typeof Android!=='undefined'&&Android.getAppVersion){const av=Android.getAppVersion();if(av){$('sp-appupd-v').textContent='v'+av;const sv=document.querySelector('.sp-v');if(sv)sv.textContent='Phoenicia Television v'+av;}}}catch(e){}
 document.getElementById('menu-btn').addEventListener('click',()=>{showUI();openSidebar()});
 const sbNavHint=document.getElementById('sb-nav-hint');
 if(sbNavHint)sbNavHint.addEventListener('click',()=>{openSidebar();openMainMenu()});

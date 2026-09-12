@@ -432,6 +432,23 @@ class MainActivity : ComponentActivity() {
         }
 
         @JavascriptInterface
+        fun getAppVersion(): String {
+            return try {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                    activity.packageManager.getPackageInfo(
+                        activity.packageName,
+                        android.content.pm.PackageManager.PackageInfoFlags.of(0)
+                    ).versionName ?: ""
+                } else {
+                    @Suppress("DEPRECATION")
+                    activity.packageManager.getPackageInfo(activity.packageName, 0).versionName ?: ""
+                }
+            } catch (_: Exception) {
+                ""
+            }
+        }
+
+        @JavascriptInterface
         fun checkForUpdate() {
             activity.runOnUiThread {
                 Toast.makeText(activity, "Prüfe auf Updates...", Toast.LENGTH_SHORT).show()
