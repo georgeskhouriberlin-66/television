@@ -1,0 +1,5 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="AVAFamily.ir@SD" group-title="Family",AVA Family
+https://familyhls.avatv.live/hls/stream.m3u8
+#EXTINF:-1 tvg-id="AssiratTV.ir@SD" tvg-logo="https://i.imgur.com/ps4Gtj0.png" group-title="Religious",Assirat TV (576p)
+https://softverse.b-cdn.net/Assirat/assiratobs/playlist.m3u8
