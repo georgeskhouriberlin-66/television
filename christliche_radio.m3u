@@ -117,3 +117,6 @@ https://stream.kncdn.net:8514/
 
 #EXTINF:-1 tvg-name="Μοναχική Διακονία" tvg-id="Monachiiki.gr" group-title="Griechisch" tvg-logo="http://resources.live24.gr/resources/images/stations/2e3027b2-3665-4672-99a8-8b03db094090.jpg",Μοναχική Διακονία 87.5
 http://eco.onestreaming.com:8019/;stream.mp3
+
+#EXTINF:-1 tvg-name="Alithinos Logos" tvg-id="AlithinosLogos.cy" group-title="Griechisch" tvg-logo="https://logosradio.com.cy/assets/images/o-alithinos-logos-1.png",Ο Αληθινός Λόγος 93.3 (Λευκωσία)
+http://r1.cloudskep.com/radio/agiosdemetrios/icecast.audio
