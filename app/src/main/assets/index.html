@@ -654,7 +654,7 @@ function nativeFetch(url) {
 }
 
 const BUILTIN = [
-  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
+  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u'},
   {id:'christian',            name:'✝️ Christian',            url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christian.m3u', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
   {id:'christliche_sender',   name:'⛪ Alle Christlichen',    url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/alle_christlichen_sender.m3u', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
   {id:'gulf',                 name:'🌴 Gulf',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/gulf.m3u'},
@@ -776,7 +776,7 @@ function parseM3U(text){
   for(const line of lines){
     const l=line.trim();
     if(!l){flush();continue}
-    if(l.startsWith('#EXTM3U')){const em=l.match(/x-tvg-url="([^"]+)"/i);if(em)epgUrl=em[1];continue}
+    if(l.startsWith('#EXTM3U')){const em=l.match(/(?:x-tvg-url|url-tvg)="([^"]+)"/i);if(em)epgUrl=em[1];continue}
     if(l.startsWith('#')&&!l.startsWith('#EXTINF')){flush();continue}
     if(l.startsWith('#EXTINF')){
       flush();meta={name:'',logo:'',group:'',tvgId:'',urls:[]};
@@ -1494,7 +1494,7 @@ async function loadEPG(url){
   }
 }
 function parseXMLTV(xml){const data={},doc=new DOMParser().parseFromString(xml,'text/xml');doc.querySelectorAll('programme').forEach(p=>{const ch=p.getAttribute('channel');if(!ch)return;if(!data[ch])data[ch]=[];data[ch].push({start:p.getAttribute('start'),stop:p.getAttribute('stop'),title:(p.querySelector('title')||{}).textContent||''})});return data}
-function getCurrentEPG(tvgId){if(!epgOn||!tvgId||!epgData[tvgId])return null;const now=Date.now();return epgData[tvgId].find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e})||null}
+function getCurrentEPG(tvgId){if(!epgOn||!tvgId)return null;const ids=[tvgId];const m=/^(.+)@[^@]+$/.exec(tvgId);if(m)ids.push(m[1]);const now=Date.now();for(const id of ids){const l=epgData[id];if(!l)continue;const f=l.find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e});if(f)return f}return null}
 function parseET(t){if(!t)return null;const m=t.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s*([+-]\d{4})?/);if(!m)return null;return new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${m[7]||'+0000'}`).getTime()}
 
 /* ── Card-in animation helper (transition-based, Fire OS compatible) ── */
