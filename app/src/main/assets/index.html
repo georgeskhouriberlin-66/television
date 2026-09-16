@@ -683,7 +683,7 @@ let watchInterval = null;
 
 async function detectNewPlaylists() {
   try {
-    const res = await fetch(TINYURL_SOURCE);
+    const res = await fetch(TINYURL_SOURCE,{cache:'no-store'});
     const remote = await res.json();
     const known = new Set(allPls.map(p => p.url));
     for (const [name, url] of Object.entries(remote)) {
@@ -806,14 +806,15 @@ function buildUrls(raw){
   out.push(url,...corsify(url));
   return[...new Set(out)];
 }
-async function fetchText(url,timeoutMs=12000){
+async function fetchText(url,timeoutMs=12000,fresh=false){
   const log=window._dbg||[];
   for(const u of buildUrls(url)){
     const t0=Date.now();
     try{
+      const fu=fresh?u+((u.includes('?'))?'&':'?')+'_='+Date.now():u;
       const ctrl=new AbortController();
       const tid=setTimeout(()=>ctrl.abort(),timeoutMs);
-      const r=await fetch(u,{signal:ctrl.signal});
+      const r=await fetch(fu,{signal:ctrl.signal,cache:'no-store'});
       clearTimeout(tid);
       if(!r.ok)throw new Error('HTTP '+r.status);
       const t=await r.text();
@@ -859,7 +860,7 @@ async function loadPlaylist(pl,autoPlay=true){
   console.log('PVTV LOAD: starting playlist '+pl.name+' url='+pl.url);
   setScSt('ld','⏳ Lade '+pl.name+'…');
   try{
-    const text=await fetchText(pl.url);
+    const text=await fetchText(pl.url,12000,true);
     const{channels,epgUrl:m3uEpg}=parseM3U(text);
     if(!channels.length)throw new Error('Keine Kanäle.');
     loadedPl[pl.id]=channels;
@@ -1626,6 +1627,7 @@ async function init(){
   updateChCounterTotal();
   if(flatCh.length){playChannel(flatCh[0]);showUI()}
   startAutoDetection();
+  setTimeout(()=>{try{if(typeof Android!=='undefined'&&Android.checkForUpdateAuto)Android.checkForUpdateAuto()}catch(e){}},6000);
 }
 init();
 </script>
