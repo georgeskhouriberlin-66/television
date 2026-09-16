@@ -808,10 +808,13 @@ function buildUrls(raw){
 }
 async function fetchText(url,timeoutMs=12000,fresh=false){
   const log=window._dbg||[];
-  for(const u of buildUrls(url)){
+  const all=buildUrls(url);
+  const ordered=fresh?[url,...all.filter(u=>u!==url)]:all;
+  for(const u of ordered){
     const t0=Date.now();
     try{
-      const fu=fresh?u+((u.includes('?'))?'&':'?')+'_='+Date.now():u;
+      const direct=u===url;
+      const fu=(fresh&&direct)?u+((u.includes('?'))?'&':'?')+'_='+Date.now():u;
       const ctrl=new AbortController();
       const tid=setTimeout(()=>ctrl.abort(),timeoutMs);
       const r=await fetch(fu,{signal:ctrl.signal,cache:'no-store'});
@@ -986,7 +989,8 @@ function showRadioLogo(ch){
   gr.textContent=ch.group||'';
   el.classList.add('show');vid.style.display='none';
 }
-function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback').style.display='none';$('radio-logo-img').style.display='none';vid.style.display='';vid.style.opacity='1'}
+function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback').style.display='none';$('radio-logo-img').style.display='none';vid.style.display=''}
+function showVideoOnFirstFrame(){vid.addEventListener('playing',()=>{vid.style.opacity='1'},{once:true})}
 
 /* ── Player ── */
 function playChannel(ch){
@@ -1053,16 +1057,16 @@ function tryStream(ch,idx){
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
       clearTimeout(tryStream._watchdog);
       console.log('PVTV TRY: MANIFEST_PARSED');
-      tryStream._skipCount=0;hideRadioLogo();vid.style.opacity='1';vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});loadOv.classList.remove('show');
+      tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});loadOv.classList.remove('show');
       let tries=0;const poll=()=>{let f=false;for(let i=0;i<vid.textTracks.length;i++){const t=vid.textTracks[i];if(t.kind==='captions'||t.kind==='subtitles'){t.mode=subOn?'showing':'hidden';f=true}}if(!f&&tries++<10)setTimeout(poll,500)};
       poll();
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     });
     hls.on(Hls.Events.ERROR,(_,d)=>{console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type);if(d.fatal){clearTimeout(tryStream._watchdog);hls.destroy();hls=null;tryStream(ch,idx+1)}});
   }else if(isHLS&&typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(isHLS&&vid.canPlayType('application/vnd.apple.mpegurl')){
-    vid.src=url;armWatchdog();    vid.addEventListener('loadedmetadata',()=>{clearTimeout(tryStream._watchdog);tryStream._skipCount=0;hideRadioLogo();vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
+    vid.src=url;armWatchdog();    vid.addEventListener('loadedmetadata',()=>{clearTimeout(tryStream._watchdog);tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
     vid.addEventListener('error',()=>{clearTimeout(tryStream._watchdog);tryStream(ch,idx+1)},{once:true});
-  }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show')}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture');showRadioLogo(ch)}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
+  }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();loadOv.classList.remove('show')}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture');showRadioLogo(ch)}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
   }catch(e){console.log('PVTV TRY: EXCEPTION: '+e.message);$('load-text').textContent='❌ '+e.message;$('load-count').textContent='';loadOv.classList.add('show')}
 }
 
