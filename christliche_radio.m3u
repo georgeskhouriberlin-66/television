@@ -34,14 +34,17 @@ http://54.37.84.199:8002/stream/1/
 # Arabisch – Libanon / Jordan
 ##############################
 
-#EXTINF:-1 tvg-name="Voice of Grace" tvg-id="VoiceOfGrace.lb" group-title="Arabisch",صوت النعمة – Voice of Grace
+#EXTINF:-1 tvg-name="Voice of Grace" tvg-id="VoiceOfGrace.lb" group-title="Arabisch" tvg-logo="http://www.antiochpatriarchate.org/images/logo2.png",Voice of Grace - صوت النعمة
 https://securestreams5.reliastream.com:1820/
 
-#EXTINF:-1 tvg-name="Voice of Grace" tvg-id="VoiceOfGrace.lb" group-title="Arabisch",صوت النعمة – Voice of Grace (Fallback)
+#EXTINF:-1 tvg-name="Voice of Grace" tvg-id="VoiceOfGrace.lb" group-title="Arabisch" tvg-logo="http://www.antiochpatriarchate.org/images/logo2.png",Voice of Grace - صوت النعمة
 https://securestreams5.reliastream.com:1820/;l
 
-#EXTINF:-1 tvg-name="Al Orthodoxiya" tvg-id="AlOrthodoxiya.jo" group-title="Arabisch",الارثوذكسيه – Al Orthodoxiya
+#EXTINF:-1 tvg-name="Al Orthodoxiya" tvg-id="AlOrthodoxiya.jo" group-title="Arabisch" tvg-logo="https://orthodoxiya.net/favicons/3cbb7d70-319c-4bbc-b9a9-9bf7eec5d5da/favicon-180x180.png",Al Orthodoxiya - الارثوذكسيه
 http://s5.viastreaming.net:7040/
+
+#EXTINF:-1 tvg-name="Al Orthodoxiya" tvg-id="AlOrthodoxiya.jo" group-title="Arabisch" tvg-logo="https://orthodoxiya.net/favicons/3cbb7d70-319c-4bbc-b9a9-9bf7eec5d5da/favicon-180x180.png",Al Orthodoxiya - الارثوذكسيه
+https://s1.viastreaming.net:7040/stream
 
 ##############################
 # International – Englisch (Christian Radio)
@@ -59,23 +62,23 @@ https://m3u8.radiomv.com/english-hq.m3u8
 #EXTINF:-1 tvg-name="Orthodox Christian Network" tvg-id="OCN.us" group-title="Englisch" tvg-logo="https://myocn.net/wp-content/uploads/2023/04/blk-logo-copy.png",Orthodox Christian Network
 https://stream.radiojar.com/48cz219puzzuv
 
-#EXTINF:-1 tvg-name="Voice of Charity" tvg-id="VoiceOfCharity" group-title="Englisch" tvg-logo="https://charityradiotv.org/images/general/voc.png",Voice of Charity (صوت المحبة)
+#EXTINF:-1 tvg-name="Voice of Charity" tvg-id="VoiceOfCharity" group-title="Englisch" tvg-logo="https://charityradiotv.org/images/general/voc.png",Voice of Charity - صوت المحبة
 http://cassini.shoutca.st:9496/xstream
 
-#EXTINF:-1 tvg-name="Sancta Maria Radio" tvg-id="SanctaMaria.int" group-title="Englisch" tvg-logo="https://www.sanctamariaradio.com/favicon.ico",Sancta Maria Radio (إذاعة سانكتا ماريا)
+#EXTINF:-1 tvg-name="Sancta Maria Radio" tvg-id="SanctaMaria.int" group-title="Englisch" tvg-logo="https://www.sanctamariaradio.com/favicon.ico",Sancta Maria Radio - إذاعة سانكتا ماريا
 https://streaming.radio.co/sa7e0251a2/listen
 
-#EXTINF:-1 tvg-name="Voice of Hope Middle East" tvg-id="VoiceOfHope.me" group-title="Englisch" tvg-logo="https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg",Voice of Hope Middle East (صوت الرجاء)
+#EXTINF:-1 tvg-name="Voice of Hope Middle East" tvg-id="VoiceOfHope.me" group-title="Englisch" tvg-logo="https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg",Voice of Hope Middle East - صوت الرجاء
 http://ice9.securenetsystems.net/VOH
 
 ##############################
 # Arabisch – Radiosender
 ##############################
 
-#EXTINF:-1 tvg-name="Radio Maria Arabic" tvg-id="RadioMaria.ar" group-title="Arabisch" tvg-logo="https://www.radiomariam.org/favicon.ico",Radio Maria Arabic (راديو ماريا عربي)
+#EXTINF:-1 tvg-name="Radio Maria Arabic" tvg-id="RadioMaria.ar" group-title="Arabisch" tvg-logo="https://www.radiomariam.org/favicon.ico",Radio Maria Arabic - راديو ماريا عربي
 http://dreamsiteradiocp4.com:8014/stream
 
-#EXTINF:-1 tvg-name="Radio Maria Iraq" tvg-id="RadioMaria.iq" group-title="Arabisch" tvg-logo="https://www.radiomariam.org/favicon.ico",Radio Maria Iraq (راديو مريم العراق)
+#EXTINF:-1 tvg-name="Radio Maria Iraq" tvg-id="RadioMaria.iq" group-title="Arabisch" tvg-logo="https://www.radiomariam.org/favicon.ico",Radio Maria Iraq - راديو مريم العراق
 http://dreamsiteradiocp4.com:8046/stream
 
 ##############################
