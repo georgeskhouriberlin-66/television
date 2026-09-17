@@ -10,11 +10,6 @@ github:
   repository: television
 
 playlists:
-  arabic:
-    output: arabic.m3u
-    sources: [lb, sy, eg, jo, ae, qa, sa, iq, kw, ps, bh, ma, ly, om]
-    epg: [EG, LB, SY, JO, AE, QA, SA, IQ, KW, PS, BH, MA, LY, OM]
-    group_style: "Country â€“ Category"
   gulf:
     output: gulf.m3u
     sources: [ae, qa, jo]
@@ -82,8 +77,6 @@ rules:
 
 tinyurl:
   create:
-    - alias: "arabic-iptv"
-      target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/arabic.m3u"
     - alias: "gulf-iptv"
       target: "https://raw.githubusercontent.com/${github_user}/${repo_name}/main/gulf.m3u"
     - alias: "usa-iptv"

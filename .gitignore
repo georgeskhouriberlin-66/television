@@ -16,3 +16,10 @@ node_modules/
 temp/
 backups/
 *.log
+.kotlin/
+*.apk
+*.idsig
+screenshot*.png
+radio-logo-test*.png
+commit_msg.txt
+release_notes.txt

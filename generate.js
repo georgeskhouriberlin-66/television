@@ -14,8 +14,6 @@ const CONFIG = {
   repo_name: 'television',
   sources: {
     lb: 'https://iptv-org.github.io/iptv/countries/lb.m3u',
-    sy: 'https://iptv-org.github.io/iptv/countries/sy.m3u',
-    eg: 'https://iptv-org.github.io/iptv/countries/eg.m3u',
     jo: 'https://iptv-org.github.io/iptv/countries/jo.m3u',
     ae: 'https://iptv-org.github.io/iptv/countries/ae.m3u',
     qa: 'https://iptv-org.github.io/iptv/countries/qa.m3u',
@@ -23,18 +21,9 @@ const CONFIG = {
     ru: 'https://iptv-org.github.io/iptv/countries/ru.m3u',
     ua: 'https://iptv-org.github.io/iptv/countries/ua.m3u',
     de: 'https://iptv-org.github.io/iptv/countries/de.m3u',
-    sa: 'https://iptv-org.github.io/iptv/countries/sa.m3u',
-    iq: 'https://iptv-org.github.io/iptv/countries/iq.m3u',
-    kw: 'https://iptv-org.github.io/iptv/countries/kw.m3u',
-    ps: 'https://iptv-org.github.io/iptv/countries/ps.m3u',
-    bh: 'https://iptv-org.github.io/iptv/countries/bh.m3u',
-    ma: 'https://iptv-org.github.io/iptv/countries/ma.m3u',
-    ly: 'https://iptv-org.github.io/iptv/countries/ly.m3u',
-    om: 'https://iptv-org.github.io/iptv/countries/om.m3u',
     // 'free-tv': 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8',
   },
   playlists: {
-    arabic: { output: 'arabic.m3u', combine: ['lb','sy','eg','jo','ae','qa','sa','iq','kw','ps','bh','ma','ly','om'], epg: ['EG','LB','SY','JO','AE','QA','SA','IQ','KW','PS','BH','MA','LY','OM'], style: 'Category' },
     gulf: { output: 'gulf.m3u', combine: ['ae','qa','jo'], epg: ['AE','QA','JO'], style: 'Category' },
     usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'Category' },
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Category' },
@@ -48,10 +37,9 @@ const CONFIG = {
 
 const STATIC_CHANNELS = JSON.parse(fs.readFileSync(path.join(__dirname, 'channels.json'), 'utf-8'));
 
-const COUNTRY_NAMES = { lb:'Lebanon', sy:'Syria', eg:'Egypt', jo:'Jordan', ae:'UAE', qa:'Qatar', sa:'Saudi Arabia', iq:'Iraq', kw:'Kuwait', ps:'Palestine', bh:'Bahrain', ma:'Morocco', ly:'Libya', om:'Oman', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany', 'free-tv':'Free-TV' };
+const COUNTRY_NAMES = { lb:'Lebanon', jo:'Jordan', ae:'UAE', qa:'Qatar', us:'USA', ru:'Russia', ua:'Ukraine', de:'Germany', 'free-tv':'Free-TV' };
 
 const TINYURLS = {
-  arabic:    'https://tinyurl.com/288e72mm',
   gulf:      'https://tinyurl.com/2y6788nu',
   usa:       'https://tinyurl.com/22xllnhv',
   eastblock: 'https://tinyurl.com/25lmqukn',

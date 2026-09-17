@@ -79,7 +79,6 @@ async function loadPlaylists() {
     const data = await response.json();
 
     const playlists = {
-      arabic: data["arabic-iptv"] || data.arabic,
       gulf: data["gulf-iptv"] || data.gulf,
       usa: data["usa-iptv"] || data.usa,
       eastblock: data["eastblock-iptv"] || data.eastblock,
