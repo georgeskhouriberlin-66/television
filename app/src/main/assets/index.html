@@ -716,6 +716,7 @@ window._dbg=[];
 window._dbgPush=(msg)=>{window._dbg.push(msg);if(window._dbg.length>50)window._dbg.shift()};
 
 let allCh=[], flatCh=[], hls=null, activeCh=null, activePlId=null, activeCat='';
+let lastTuneTs=0,lastAutoFix=0;
 let showFavs=false, epgOn=true, subOn=false, focusIdx=0, uiOpen=false, spOpen=false, navDir='next';
 let chInfoTimer=null, epgData={}, loadedPl={}, customPl=[], allPls=[], uiTimer=null;
 let chNumInput='', chNumTimer=null, spFocusIdx=-1, navHistory=[];
@@ -1007,6 +1008,7 @@ function playChannel(ch){
   vid.requestFullscreen?.().catch(()=>{});
   console.log('PVTV PLAY: calling tryStream');
   tryStream(ch,0);
+  lastTuneTs=Date.now();
 }
 
 function showChInfo(ch){
@@ -1052,7 +1054,7 @@ function tryStream(ch,idx){
   try{
   if(isHLS&&typeof Hls!=='undefined'&&Hls.isSupported()){
     console.log('PVTV TRY: HLS detected, creating instance for '+url);
-    hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
+    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);armWatchdog();
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
       clearTimeout(tryStream._watchdog);
@@ -1466,6 +1468,21 @@ document.addEventListener('keydown',e=>{
     return}
   if(e.key==='PageDown'){e.preventDefault();focusIdx=Math.min(focusIdx+7,flatCh.length-1);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}return}
   if(e.key==='PageUp'){e.preventDefault();focusIdx=Math.max(focusIdx-7,0);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}return}
+});
+
+/* ── Green-Plane-Watchdog: Resize mitten in der Wiedergabe = Hardware-Ebene
+   verklemmt (kleines Bild + Grün, siehe Foto). Still neu tunen, mit Loop-Schutz. */
+vid.addEventListener('resize',()=>{
+  try{
+    if(vid.paused||vid.ended||!activeCh)return;
+    const now=Date.now();
+    if(now-lastTuneTs<8000)return;
+    if(now-lastAutoFix<30000)return;
+    lastAutoFix=now;
+    console.log('PVTV FIX: mid-playback resize, re-tuning '+activeCh.name);
+    toast('🔄 Bild wird neu aufgebaut…');
+    playChannel(activeCh);
+  }catch(e){}
 });
 
 /* ── Remote Bridge ── */
