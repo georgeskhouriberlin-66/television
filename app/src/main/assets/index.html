@@ -23,7 +23,7 @@ html,body{height:100%;overflow:hidden;background:#000;color:var(--txt);font-fami
 
 /* ── Video ── */
 #video-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;background:#000}
-video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
+video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;display:block;background:#000;transform:scale(1.04)}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
@@ -231,6 +231,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   border-radius:var(--phz-r-lg);padding:14px 14px 12px;
   border:2px solid transparent;cursor:pointer;outline:none;
   transition:all var(--phz-dur-fast);position:relative;overflow:visible;
+  background:linear-gradient(135deg,#333 0%,#111 100%);
   opacity:0
 }
 .sc-card::before{content:'';position:absolute;inset:0;opacity:.18;transition:opacity var(--phz-dur-fast);pointer-events:none}
@@ -241,16 +242,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 .sc-card .card-chk{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;transition:all var(--phz-dur-fast);z-index:2}
 .sc-card.sel .card-chk{background:var(--acc);border-color:var(--acc);color:#000}
 
-/* Card color themes */
-.card-arabic{background:linear-gradient(135deg,#1a6b3c 0%,#0d4a2a 100%)}
-.card-gulf{background:linear-gradient(135deg,#8b6914 0%,#5c4510 100%)}
-.card-usa{background:linear-gradient(135deg,#1a3a6b 0%,#0d2244 100%)}
-.card-eastblock{background:linear-gradient(135deg,#6b1a2a 0%,#44101a 100%)}
-.card-germany{background:linear-gradient(135deg,#2a2a2a 0%,#1a1a1a 100%)}
-.card-christian{background:linear-gradient(135deg,#5c3d8f 0%,#3a2560 100%)}
-.card-christliche_sender{background:linear-gradient(135deg,#7b4dbf 0%,#4a2d7a 100%)}
-.card-libanon{background:linear-gradient(135deg,#1a6b5c 0%,#0d4a3a 100%)}
-.card-radio{background:linear-gradient(135deg,#c0392b 0%,#8b1a1a 100%)}
+/* Einheitlich: alle Kacheln gleiche Farbe (keine Farben pro Playlist) */
 
 /* ── Select all bar ── */
 .sc-selectbar{display:flex;gap:8px;margin-top:12px}
@@ -307,6 +299,12 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 #toast{position:fixed;top:36px;right:44px;z-index:99;background:rgba(8,12,22,.97);border:1px solid rgba(0,212,255,.25);color:#fff;font-size:16px;padding:12px 22px;border-radius:var(--phz-r-md);opacity:0;transition:opacity var(--phz-dur-med);pointer-events:none;font-family:var(--fm)}
 #toast.show{opacity:1}
 
+/* ── Sidebar-Tile Badges (Geo / Not 24/7) ── */
+.ci-badge{font-size:10px;font-weight:700;white-space:nowrap;margin-left:6px;padding:1px 7px;border-radius:8px;border:1px solid transparent}
+.ci-badge:empty{display:none}
+.ci-badge.geo{color:#ff8a80;border-color:rgba(255,138,128,.5);background:rgba(255,138,128,.08)}
+.ci-badge.part{color:#ffd54a;border-color:rgba(255,213,74,.45);background:rgba(255,213,74,.07)}
+
 /* ── Menu Btn ── */
 #menu-btn{display:none;position:fixed;top:12px;left:12px;z-index:35;width:48px;height:48px;background:rgba(8,11,20,.92);border:1.5px solid rgba(255,255,255,.14);border-radius:var(--phz-r-lg);color:#fff;font-size:24px;cursor:pointer;align-items:center;justify-content:center;transition:opacity var(--phz-dur-med),border-color var(--phz-dur-fast);outline:none;-webkit-tap-highlight-color:transparent}
 #menu-btn:active{border-color:var(--acc)}
@@ -346,20 +344,21 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 .mm-card .card-badge{position:absolute;top:8px;right:8px;min-width:22px;height:22px;border-radius:11px;background:rgba(0,0,0,.5);border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;padding:0 5px}
 .mm-card.active-pl{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
 
-/* Card color themes */
-.mm-card.card-search{background:linear-gradient(135deg,#1a3a6b 0%,#0d2244 100%)}
-.mm-card.card-fav{background:linear-gradient(135deg,#6b5c1a 0%,#443d10 100%)}
-.mm-card.card-settings{background:linear-gradient(135deg,#3a3a3a 0%,#1a1a1a 100%)}
-.mm-card.card-pl-arabic{background:linear-gradient(135deg,#1a6b3c 0%,#0d4a2a 100%)}
-.mm-card.card-pl-gulf{background:linear-gradient(135deg,#8b6914 0%,#5c4510 100%)}
-.mm-card.card-pl-usa{background:linear-gradient(135deg,#1a3a6b 0%,#0d2244 100%)}
-.mm-card.card-pl-eastblock{background:linear-gradient(135deg,#6b1a2a 0%,#44101a 100%)}
-.mm-card.card-pl-germany{background:linear-gradient(135deg,#3d4a5a 0%,#232b35 100%)}
-.mm-card.card-pl-christian{background:linear-gradient(135deg,#5c3d8f 0%,#3a2560 100%)}
-.mm-card.card-pl-libanon{background:linear-gradient(135deg,#1a6b5c 0%,#0d4a3a 100%)}
-.mm-card.card-pl-custom{background:linear-gradient(135deg,#444 0%,#222 100%)}
-.mm-card.card-pl-christliche_sender{background:linear-gradient(135deg,#7b4fa0 0%,#5a3578 100%)}
-.mm-card.card-pl-radio{background:linear-gradient(135deg,#1a5c6b 0%,#0d3a4a 100%)}
+/* Einheitlich: alle Kacheln gleiche Farbe (keine Farben pro Playlist/Aktion) */
+
+/* ── Playlist-Kacheln: klein, Umbruch statt Seitwärts-Scroll ── */
+#mm-playlist-cards{flex-wrap:wrap;overflow-x:visible;scroll-snap-type:none}
+#mm-playlist-cards .mm-card{flex:0 0 86px;min-height:58px;padding:8px 8px 7px;scroll-snap-align:none}
+#mm-playlist-cards .mm-card .card-ico{font-size:18px;margin-bottom:3px}
+#mm-playlist-cards .mm-card .card-name{font-size:11px}
+#mm-playlist-cards .mm-card .card-badge{top:4px;right:4px;min-width:18px;height:18px;border-radius:9px;font-size:10px;padding:0 4px}
+
+/* ── Setup-Grid: Umbruch für viele Playlisten ── */
+#builtin-grid{flex-wrap:wrap}
+#builtin-grid .sc-card{flex:0 0 108px;min-height:74px;padding:10px 10px 8px;scroll-snap-align:none}
+#builtin-grid .sc-card .card-ico{font-size:22px;margin-bottom:4px}
+#builtin-grid .sc-card .card-name{font-size:11px}
+#builtin-grid .sc-card .card-chk{width:20px;height:20px;font-size:11px;top:6px;right:6px}
 
 /* ── Accordion ── */
 .mm-accordion{width:100%}
@@ -491,8 +490,8 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   <div class="si" id="sp-fs"><span class="si-ico">⛶</span><span class="si-lbl">Vollbild</span><span class="si-val">F2 · Doppelklick</span></div>
   <div class="si" id="sp-upd"><span class="si-ico">🔄</span><span class="si-lbl">Playlist aktualisieren</span><span class="si-val" id="sp-upd-v">—</span></div>
   <div class="si" id="sp-clr"><span class="si-ico">🧹</span><span class="si-lbl">Tote Streams zurücksetzen</span><span class="si-val">Cache leeren</span></div>
-  <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.4.11</span></div>
-  <div class="sp-v">Phoenicia Television v2.4.11</div>
+  <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.5.0</span></div>
+  <div class="sp-v">Phoenicia Television v2.5.0</div>
 </div>
 
 <!-- Startup Screen -->
@@ -655,11 +654,26 @@ function nativeFetch(url) {
 }
 
 const BUILTIN = [
-  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
+  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u'},
   {id:'christian',            name:'✝️ Christian',            url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christian.m3u', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
   {id:'christliche_sender',   name:'⛪ Alle Christlichen',    url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/alle_christlichen_sender.m3u', epgUrl:'https://iptv-epg.org/files/epg-de.xml'},
   {id:'gulf',                 name:'🌴 Gulf',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/gulf.m3u'},
-  {id:'arabic',               name:'🌍 Arabic',               url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/arabic.m3u'},
+  {id:'ar_iq',                name:'🇮🇶 Irak',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_iq.m3u'},
+  {id:'ar_sa',                name:'🇸🇦 Saudi-Arabien',        url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_sa.m3u'},
+  {id:'ar_ae',                name:'🇦🇪 VAE',                  url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_ae.m3u'},
+  {id:'ar_ps',                name:'🇵🇸 Palästina',            url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_ps.m3u'},
+  {id:'ar_eg',                name:'🇪🇬 Ägypten',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_eg.m3u'},
+  {id:'ar_jo',                name:'🇯🇴 Jordanien',            url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_jo.m3u'},
+  {id:'ar_qa',                name:'🇶🇦 Katar',                url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_qa.m3u'},
+  {id:'ar_kw',                name:'🇰🇼 Kuwait',               url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_kw.m3u'},
+  {id:'ar_sy',                name:'🇸🇾 Syrien',               url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_sy.m3u'},
+  {id:'ar_ma',                name:'🇲🇦 Marokko',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_ma.m3u'},
+  {id:'ar_om',                name:'🇴🇲 Oman',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_om.m3u'},
+  {id:'ar_bh',                name:'🇧🇭 Bahrain',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_bh.m3u'},
+  {id:'ar_ly',                name:'🇱🇾 Libyen',               url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_ly.m3u'},
+  {id:'ar_us',                name:'🇺🇸 USA (arabisch)',       url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_us.m3u'},
+  {id:'ar_ir',                name:'🇮🇷 Iran',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_ir.m3u'},
+  {id:'ar_dz',                name:'🇩🇿 Algerien',             url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_dz.m3u'},
   {id:'radio',                name:'📻 Radio Sender',          url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christliche_radio.m3u'},
 ];
 
@@ -668,7 +682,7 @@ let watchInterval = null;
 
 async function detectNewPlaylists() {
   try {
-    const res = await fetch(TINYURL_SOURCE);
+    const res = await fetch(TINYURL_SOURCE,{cache:'no-store'});
     const remote = await res.json();
     const known = new Set(allPls.map(p => p.url));
     for (const [name, url] of Object.entries(remote)) {
@@ -702,6 +716,7 @@ window._dbg=[];
 window._dbgPush=(msg)=>{window._dbg.push(msg);if(window._dbg.length>50)window._dbg.shift()};
 
 let allCh=[], flatCh=[], hls=null, activeCh=null, activePlId=null, activeCat='';
+let lastTuneTs=0,lastAutoFix=0;
 let showFavs=false, epgOn=true, subOn=false, focusIdx=0, uiOpen=false, spOpen=false, navDir='next';
 let chInfoTimer=null, epgData={}, loadedPl={}, customPl=[], allPls=[], uiTimer=null;
 let chNumInput='', chNumTimer=null, spFocusIdx=-1, navHistory=[];
@@ -761,7 +776,7 @@ function parseM3U(text){
   for(const line of lines){
     const l=line.trim();
     if(!l){flush();continue}
-    if(l.startsWith('#EXTM3U')){const em=l.match(/x-tvg-url="([^"]+)"/i);if(em)epgUrl=em[1];continue}
+    if(l.startsWith('#EXTM3U')){const em=l.match(/(?:x-tvg-url|url-tvg)="([^"]+)"/i);if(em)epgUrl=em[1];continue}
     if(l.startsWith('#')&&!l.startsWith('#EXTINF')){flush();continue}
     if(l.startsWith('#EXTINF')){
       flush();meta={name:'',logo:'',group:'',tvgId:'',urls:[]};
@@ -776,7 +791,7 @@ function parseM3U(text){
   for(const ch of raw){
     const key=ch.tvgId||ch.name;
     if(merged.has(key)){const ex=merged.get(key);for(const u of ch.urls)if(!ex.urls.includes(u))ex.urls.push(u);if(!ex.logo&&ch.logo)ex.logo=ch.logo}
-    else{const n=ch.name.replace(/\s*\(\d{3,4}p\)/gi,'').replace(/\s*\[Not 24\/7\]/gi,'').trim();merged.set(key,{...ch,name:n||ch.name})}
+    else{const geo=/\[Geo-blocked\]/i.test(ch.name),part=/\[Not 24\/7\]/i.test(ch.name);const n=ch.name.replace(/\s*\(\d{3,4}p\)/gi,'').replace(/\s*\[Not 24\/7\]/gi,'').replace(/\s*\[Geo-blocked\]/gi,'').trim();merged.set(key,{...ch,name:n||ch.name,geo,part})}
   }
   const utf8=s=>{if(!s||[...s].every(c=>c.charCodeAt(0)<128))return s;try{const b=new Uint8Array([...s].map(c=>c.charCodeAt(0)));const d=new TextDecoder('utf-8').decode(b);const r1=[...s].filter(c=>c==='\uFFFD').length;const r2=[...d].filter(c=>c==='\uFFFD').length;if(r2<r1)return d;if(r2===r1&&d!==s)return d;return s}catch{return s}};
   return{channels:[...merged.values()].map(ch=>({...ch,name:utf8(ch.name),group:utf8(ch.group)})),epgUrl};
@@ -791,14 +806,18 @@ function buildUrls(raw){
   out.push(url,...corsify(url));
   return[...new Set(out)];
 }
-async function fetchText(url,timeoutMs=12000){
+async function fetchText(url,timeoutMs=12000,fresh=false){
   const log=window._dbg||[];
-  for(const u of buildUrls(url)){
+  const all=buildUrls(url);
+  const ordered=fresh?[url,...all.filter(u=>u!==url)]:all;
+  for(const u of ordered){
     const t0=Date.now();
     try{
+      const direct=u===url;
+      const fu=(fresh&&direct)?u+((u.includes('?'))?'&':'?')+'_='+Date.now():u;
       const ctrl=new AbortController();
       const tid=setTimeout(()=>ctrl.abort(),timeoutMs);
-      const r=await fetch(u,{signal:ctrl.signal});
+      const r=await fetch(fu,{signal:ctrl.signal,cache:'no-store'});
       clearTimeout(tid);
       if(!r.ok)throw new Error('HTTP '+r.status);
       const t=await r.text();
@@ -844,10 +863,11 @@ async function loadPlaylist(pl,autoPlay=true){
   console.log('PVTV LOAD: starting playlist '+pl.name+' url='+pl.url);
   setScSt('ld','⏳ Lade '+pl.name+'…');
   try{
-    const text=await fetchText(pl.url);
+    const text=await fetchText(pl.url,12000,true);
     const{channels,epgUrl:m3uEpg}=parseM3U(text);
     if(!channels.length)throw new Error('Keine Kanäle.');
     loadedPl[pl.id]=channels;
+    try{const pc=gs('pl_counts')||{};pc[pl.id]=channels.length;ss('pl_counts',pc)}catch(_){}
     activePlId=pl.id;
     ss(LS.CPL,pl.id);
     const epgUrl=m3uEpg||(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||'';
@@ -886,7 +906,8 @@ function _initTileCache(){
     const cnEpg=document.createElement('div');cnEpg.className='cn-epg';cn.appendChild(cnEpg);
     const num=document.createElement('span');num.className='cn-num';
     const star=document.createElement('span');star.className='fs';
-    wrap.appendChild(logo);wrap.appendChild(cn);wrap.appendChild(num);wrap.appendChild(star);
+    const bdg=document.createElement('span');bdg.className='ci-badge';
+    wrap.appendChild(logo);wrap.appendChild(cn);wrap.appendChild(num);wrap.appendChild(star);wrap.appendChild(bdg);
     const offset=i-3;
     wrap.style.minHeight=(offset===0?'92':Math.abs(offset)===1?'78':'46')+'px';
     wrap._offset=offset;wrap._ch=null;wrap._active=false;
@@ -937,6 +958,8 @@ function renderTiles(dir){
     const chFav=isFav(ch.urls[0]);
     const star=wrap.querySelector('.fs');
     if(isFocused||chFav){star.textContent=chFav?'★':'☆';star.style.display=''}else{star.style.display='none'}
+    const bdg=wrap.querySelector('.ci-badge');
+    if(bdg){const fl=[];if(ch.geo)fl.push('Geo');if(ch.part)fl.push('Not 24/7');bdg.textContent=fl.join(' · ');bdg.className='ci-badge'+(ch.geo?' geo':fl.length?' part':'')}
     const wasActive=wrap._active;
     const isActive=activeCh?.urls[0]===ch.urls[0];
     let cls='ci';
@@ -966,7 +989,8 @@ function showRadioLogo(ch){
   gr.textContent=ch.group||'';
   el.classList.add('show');vid.style.display='none';
 }
-function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback').style.display='none';$('radio-logo-img').style.display='none';vid.style.display='';vid.style.opacity='1'}
+function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback').style.display='none';$('radio-logo-img').style.display='none';vid.style.display=''}
+function showVideoOnFirstFrame(){clearTimeout(vid._showT);vid.addEventListener('playing',()=>{clearTimeout(vid._showT);vid._showT=setTimeout(()=>{vid.style.opacity='1'},350)},{once:true})}
 
 /* ── Player ── */
 function playChannel(ch){
@@ -984,6 +1008,7 @@ function playChannel(ch){
   vid.requestFullscreen?.().catch(()=>{});
   console.log('PVTV PLAY: calling tryStream');
   tryStream(ch,0);
+  lastTuneTs=Date.now();
 }
 
 function showChInfo(ch){
@@ -1018,6 +1043,9 @@ function tryStream(ch,idx){
     if(next){toast('⏭ Kein Stream – weiter…',3000);setTimeout(()=>playChannel(next),1500);return}
     tryStream._skipCount=0;$('load-text').textContent='❌ Kein Stream verfügbar';$('load-count').textContent='';loadOv.classList.remove('show');errMsg.textContent='Alle Streams fehlgeschlagen.';errOv.classList.add('show');nosig.style.display='flex';return}
   const url=v[idx];
+  clearTimeout(vid._showT);
+  clearTimeout(tryStream._watchdog);
+  const armWatchdog=()=>{clearTimeout(tryStream._watchdog);tryStream._watchdog=setTimeout(()=>{console.log('PVTV TRY: watchdog 6s, next variant');try{vid.pause()}catch(_){}tryStream(ch,idx+1)},6000)};
   nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');vid.style.opacity='0';
   let domain='';try{domain=new URL(url).hostname}catch(e){domain=url.substring(0,30)}$('load-text').textContent=`📡 ${domain}`;$('load-count').textContent=`Versuch ${idx+1}/${total}`;
   if(hls){hls.destroy();hls=null}
@@ -1026,20 +1054,21 @@ function tryStream(ch,idx){
   try{
   if(isHLS&&typeof Hls!=='undefined'&&Hls.isSupported()){
     console.log('PVTV TRY: HLS detected, creating instance for '+url);
-    hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
-    hls.attachMedia(vid);hls.loadSource(url);
+    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
+    hls.attachMedia(vid);hls.loadSource(url);armWatchdog();
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
+      clearTimeout(tryStream._watchdog);
       console.log('PVTV TRY: MANIFEST_PARSED');
-      tryStream._skipCount=0;hideRadioLogo();vid.style.opacity='1';vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});loadOv.classList.remove('show');
+      tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});loadOv.classList.remove('show');
       let tries=0;const poll=()=>{let f=false;for(let i=0;i<vid.textTracks.length;i++){const t=vid.textTracks[i];if(t.kind==='captions'||t.kind==='subtitles'){t.mode=subOn?'showing':'hidden';f=true}}if(!f&&tries++<10)setTimeout(poll,500)};
       poll();
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     });
-    hls.on(Hls.Events.ERROR,(_,d)=>{console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type);if(d.fatal){hls.destroy();hls=null;tryStream(ch,idx+1)}});
+    hls.on(Hls.Events.ERROR,(_,d)=>{console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type);if(d.fatal){clearTimeout(tryStream._watchdog);hls.destroy();hls=null;tryStream(ch,idx+1)}});
   }else if(isHLS&&typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(isHLS&&vid.canPlayType('application/vnd.apple.mpegurl')){
-    vid.src=url;    vid.addEventListener('loadedmetadata',()=>{tryStream._skipCount=0;hideRadioLogo();vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
-    vid.addEventListener('error',()=>tryStream(ch,idx+1),{once:true});
-  }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show')}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture');showRadioLogo(ch)}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
+    vid.src=url;armWatchdog();    vid.addEventListener('loadedmetadata',()=>{clearTimeout(tryStream._watchdog);tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
+    vid.addEventListener('error',()=>{clearTimeout(tryStream._watchdog);tryStream(ch,idx+1)},{once:true});
+  }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();loadOv.classList.remove('show')}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture');showRadioLogo(ch)}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
   }catch(e){console.log('PVTV TRY: EXCEPTION: '+e.message);$('load-text').textContent='❌ '+e.message;$('load-count').textContent='';loadOv.classList.add('show')}
 }
 
@@ -1276,7 +1305,7 @@ function buildMainMenu(){
   });
   // Playlist cards (filtered by LS.SEL)
   const sel=gs(LS.SEL)||BUILTIN.map(p=>p.id);
-  const mmOrder=['libanon','christian','christliche_sender','gulf','arabic','radio','germany','usa','eastblock'];
+  const mmOrder=['libanon','christian','christliche_sender','gulf','ar_iq','ar_sa','ar_ae','ar_ps','ar_eg','ar_jo','ar_qa','ar_kw','ar_sy','ar_ma','ar_om','ar_bh','ar_ly','ar_us','ar_ir','ar_dz','radio','germany','usa','eastblock'];
   const ordered=[...allPls.filter(p=>sel.includes(p.id))].sort((a,b)=>{
     const ia=mmOrder.indexOf(a.id),ib=mmOrder.indexOf(b.id);
     if(ia===-1&&ib===-1)return 0;
@@ -1289,6 +1318,8 @@ function buildMainMenu(){
     const plCls=(pl.id.startsWith('c_')||pl.id.startsWith('auto_'))?'custom':pl.id;
     t.className='mm-card card-pl-'+plCls+(pl.id===activePlId?' active-pl':'');
     t.innerHTML=`<span class="card-ico">${plIcon(pl.name,pl.id)}</span><span class="card-name">${esc(pl.name)}</span>`;
+    const _cnt=(gs('pl_counts')||{})[pl.id];
+    if(_cnt)t.innerHTML+=`<span class="card-badge">${_cnt}</span>`;
     t.dataset.plId=pl.id;
     t.addEventListener('click',()=>mmAction(t));
     mmPlaylistCards.appendChild(t);
@@ -1439,6 +1470,21 @@ document.addEventListener('keydown',e=>{
   if(e.key==='PageUp'){e.preventDefault();focusIdx=Math.max(focusIdx-7,0);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{clearTimeout(uiTimer);uiTimer=setTimeout(hideUI,4000)}return}
 });
 
+/* ── Green-Plane-Watchdog: Resize mitten in der Wiedergabe = Hardware-Ebene
+   verklemmt (kleines Bild + Grün, siehe Foto). Still neu tunen, mit Loop-Schutz. */
+vid.addEventListener('resize',()=>{
+  try{
+    if(vid.paused||vid.ended||!activeCh)return;
+    const now=Date.now();
+    if(now-lastTuneTs<8000)return;
+    if(now-lastAutoFix<30000)return;
+    lastAutoFix=now;
+    console.log('PVTV FIX: mid-playback resize, re-tuning '+activeCh.name);
+    toast('🔄 Bild wird neu aufgebaut…');
+    playChannel(activeCh);
+  }catch(e){}
+});
+
 /* ── Remote Bridge ── */
 window.__dpad = function(k, code, kc){
   const ev = new KeyboardEvent('keydown', { key:k, code:code, keyCode:kc, which:kc, bubbles:true, cancelable:true });
@@ -1469,7 +1515,7 @@ async function loadEPG(url){
   }
 }
 function parseXMLTV(xml){const data={},doc=new DOMParser().parseFromString(xml,'text/xml');doc.querySelectorAll('programme').forEach(p=>{const ch=p.getAttribute('channel');if(!ch)return;if(!data[ch])data[ch]=[];data[ch].push({start:p.getAttribute('start'),stop:p.getAttribute('stop'),title:(p.querySelector('title')||{}).textContent||''})});return data}
-function getCurrentEPG(tvgId){if(!epgOn||!tvgId||!epgData[tvgId])return null;const now=Date.now();return epgData[tvgId].find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e})||null}
+function getCurrentEPG(tvgId){if(!epgOn||!tvgId)return null;const ids=[tvgId];const m=/^(.+)@[^@]+$/.exec(tvgId);if(m)ids.push(m[1]);const now=Date.now();for(const id of ids){const l=epgData[id];if(!l)continue;const f=l.find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e});if(f)return f}return null}
 function parseET(t){if(!t)return null;const m=t.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s*([+-]\d{4})?/);if(!m)return null;return new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${m[7]||'+0000'}`).getTime()}
 
 /* ── Card-in animation helper (transition-based, Fire OS compatible) ── */
@@ -1493,7 +1539,7 @@ function triggerCardIn(container,sel,stagger){
 function buildBuiltinGrid(){
   builtinGrid.innerHTML='';
   const sel=gs(LS.SEL)||BUILTIN.map(p=>p.id);
-  const icons={arabic:'\u{1F30D}',gulf:'\u{1F3DC}\u{FE0F}',usa:'\u{1F1FA}\u{1F1F8}',eastblock:'\u{1F3D7}\u{FE0F}',germany:'\u{1F1E9}\u{1F1EA}',christian:'\u271D\u{FE0F}',christliche_sender:'\u26EA',libanon:'\u{1F1F1}\u{1F1E7}',radio:'\u{1F4FB}'};
+  const icons={arabic:'\u{1F30D}',gulf:'\u{1F3DC}\u{FE0F}',usa:'\u{1F1FA}\u{1F1F8}',eastblock:'\u{1F3D7}\u{FE0F}',germany:'\u{1F1E9}\u{1F1EA}',christian:'\u271D\u{FE0F}',christliche_sender:'\u26EA',libanon:'\u{1F1F1}\u{1F1E7}',radio:'\u{1F4FB}',ar_ae:'\u{1F1E6}\u{1F1EA}',ar_bh:'\u{1F1E7}\u{1F1ED}',ar_dz:'\u{1F1E9}\u{1F1FF}',ar_eg:'\u{1F1EA}\u{1F1EC}',ar_iq:'\u{1F1EE}\u{1F1F6}',ar_ir:'\u{1F1EE}\u{1F1F7}',ar_jo:'\u{1F1EF}\u{1F1F4}',ar_kw:'\u{1F1F0}\u{1F1FC}',ar_ly:'\u{1F1F1}\u{1F1FE}',ar_ma:'\u{1F1F2}\u{1F1E6}',ar_om:'\u{1F1F4}\u{1F1F2}',ar_ps:'\u{1F1F5}\u{1F1F8}',ar_qa:'\u{1F1F6}\u{1F1E6}',ar_sa:'\u{1F1F8}\u{1F1E6}',ar_sy:'\u{1F1F8}\u{1F1FE}',ar_us:'\u{1F1FA}\u{1F1F8}'};
   BUILTIN.forEach(pl=>{
     const card=document.createElement('div');
     const isSel=sel.includes(pl.id)||!!loadedPl[pl.id];
@@ -1548,7 +1594,7 @@ const SYM_SVG={
   christliche_sender:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><circle cx="8" cy="4.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M8 7v7M5 10h6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   radio:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><rect x="2" y="8" width="12" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 4l4-2v5l-4 2z" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="5.5" cy="10.5" r="1" fill="currentColor"/></svg>`
 };
-const FLAG_CDN={usa:'us',germany:'de',libanon:'lb'};
+const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',ar_ae:'ae',ar_bh:'bh',ar_dz:'dz',ar_eg:'eg',ar_iq:'iq',ar_ir:'ir',ar_jo:'jo',ar_kw:'kw',ar_ly:'ly',ar_ma:'ma',ar_om:'om',ar_ps:'ps',ar_qa:'qa',ar_sa:'sa',ar_sy:'sy',ar_us:'us'};
 function plIcon(name,id){
   const key=id.replace(/^(auto_)?/,'');
   const svg=SYM_SVG[key];
@@ -1602,6 +1648,7 @@ async function init(){
   updateChCounterTotal();
   if(flatCh.length){playChannel(flatCh[0]);showUI()}
   startAutoDetection();
+  setTimeout(()=>{try{if(typeof Android!=='undefined'&&Android.checkForUpdateAuto)Android.checkForUpdateAuto()}catch(e){}},6000);
 }
 init();
 </script>

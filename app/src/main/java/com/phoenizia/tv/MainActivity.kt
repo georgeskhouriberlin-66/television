@@ -450,12 +450,28 @@ class MainActivity : ComponentActivity() {
 
         @JavascriptInterface
         fun checkForUpdate() {
-            activity.runOnUiThread {
-                Toast.makeText(activity, "Prüfe auf Updates...", Toast.LENGTH_SHORT).show()
+            doUpdateCheck(silent = false)
+        }
+
+        @JavascriptInterface
+        fun checkForUpdateAuto() {
+            doUpdateCheck(silent = true)
+        }
+
+        private fun doUpdateCheck(silent: Boolean) {
+            if (!silent) {
+                activity.runOnUiThread {
+                    Toast.makeText(activity, "Prüfe auf Updates...", Toast.LENGTH_SHORT).show()
+                }
             }
             UpdateChecker.checkForUpdate(activity, object : UpdateChecker.Callback {
                 override fun onUpdateAvailable(update: UpdateChecker.UpdateInfo) {
                     activity.runOnUiThread {
+                        if (silent) {
+                            activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='Neues Update v${update.versionName}'", null)
+                            Toast.makeText(activity, "Neues Update verfügbar: v${update.versionName}", Toast.LENGTH_LONG).show()
+                            return@runOnUiThread
+                        }
                         activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='v${update.versionName} verfügbar'", null)
                         val dialog = UpdateDialog(
                             activity,
@@ -490,6 +506,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 override fun onNoUpdate() {
+                    if (silent) return
                     activity.runOnUiThread {
                         activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='Aktuell'", null)
                         Toast.makeText(activity, "Kein Update verfügbar", Toast.LENGTH_SHORT).show()
@@ -497,6 +514,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 override fun onError(message: String) {
+                    if (silent) return
                     activity.runOnUiThread {
                         activity.webView.evaluateJavascript("document.getElementById('sp-appupd-v').textContent='Fehler'", null)
                         Toast.makeText(activity, "Update-Prüfung fehlgeschlagen: $message", Toast.LENGTH_SHORT).show()
