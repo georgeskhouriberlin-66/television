@@ -3,37 +3,6 @@
 # Diese Datei wird vom Bot NICHT geschrieben, nur gelesen und an die
 # libanon.m3u-Ausgabe angehaengt (siehe generate.js: cfg.extra).
 # Format: Standard-M3U. group-title = Kategorie (Bot macht daraus "Lebanon - X").
-#EXTINF:-1 tvg-id="AlImanTV.lb@SD" tvg-logo="https://i.imgur.com/4WKQppG.png" group-title="Religious",Aliman TV (240p) [Not 24/7]
-https://live.aliman.tv/hls/live.m3u8
-#EXTINF:-1 tvg-id="almenbar.lb" group-title="Culture",Al Menbar
-https://svs.itworkscdn.net/almenbar/live/playlist.m3u8
-#EXTINF:-1 tvg-id="mouda.lb" group-title="Culture",Mouda TV
-https://mouda-live.catiacast.video/mouda/index.m3u8
-#EXTINF:-1 tvg-id="arabwomen.lb" group-title="Culture",Arabischer Frauenkanal
-https://svs.itworkscdn.net/arabwomen/live/playlist.m3u8
-#EXTINF:-1 tvg-id="althabat.lb" group-title="Religious",Al Thabat
-https://svs.itworkscdn.net/althabat/live/playlist.m3u8
-#EXTINF:-1 tvg-id="tvlight.lb" group-title="Religious",TV Light
-https://noursat.cdn.octivid.com/tvlight/index.m3u8
-#EXTINF:-1 tvg-id="nourmusic.lb" group-title="Religious",Nour Music
-https://noursat.cdn.octivid.com/nourmusic/index.m3u8
-#EXTINF:-1 tvg-id="nourspirit.lb" group-title="Religious",Nour Spirit
-https://noursat.cdn.octivid.com/nourspirit/index.m3u8
-#EXTINF:-1 tvg-id="mariam.lb" group-title="Religious",Mariam TV
-https://noursat.cdn.octivid.com/mariam/index.m3u8
-#EXTINF:-1 tvg-id="nrj.lb" group-title="Music",NRJ Lebanon
-https://svs.itworkscdn.net/nrjlebanon/live/playlist.m3u8
-#EXTINF:-1 tvg-id="mazzika.lb" group-title="Music",Mazzika
-https://mazzika-live.catiacast.video/mazzika/index.m3u8
-#EXTINF:-1 tvg-id="hawacom.lb" group-title="Music",Hawacom
-https://svs.itworkscdn.net/hawacom/live/playlist.m3u8
-#EXTINF:-1 tvg-id="maestro.lb" group-title="Music",Maestro TV
-https://maestro-live.catiacast.video/maestro/index.m3u8
-#EXTINF:-1 tvg-id="naytv.lb" group-title="Music",Nay TV
-https://svs.itworkscdn.net/naytv/live/playlist.m3u8
-#EXTINF:-1 tvg-id="naymusic.lb" group-title="Music",Nay Music TV
-https://svs.itworkscdn.net/naymusic/live/playlist.m3u8
-#EXTINF:-1 tvg-id="naylebanon.lb" group-title="Music",Nay Lebanon
-https://svs.itworkscdn.net/naylebanon/live/playlist.m3u8
-#EXTINF:-1 tvg-id="mmusic.lb" group-title="Music",M Music TV
-https://svs.itworkscdn.net/mmusic/live/playlist.m3u8
+#
+# 2026-09-17: 17 recherchierte URLs geprueft, alle tot (Parkseiten/404/DNS),
+# wieder entfernt. Nur verifizierte Eintraege hier ablegen.
