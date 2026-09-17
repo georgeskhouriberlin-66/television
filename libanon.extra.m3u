@@ -1,0 +1,8 @@
+#EXTM3U
+# Manuell kuratierte Extra-Sender fuer libanon.m3u (Bot-sicher).
+# Diese Datei wird vom Bot NICHT geschrieben, nur gelesen und an die
+# libanon.m3u-Ausgabe angehaengt (siehe generate.js: cfg.extra).
+# Format: Standard-M3U. group-title = Kategorie (Bot macht daraus "Lebanon - X").
+#
+# 2026-09-17: 17 recherchierte URLs geprueft, alle tot (Parkseiten/404/DNS),
+# wieder entfernt. Nur verifizierte Eintraege hier ablegen.

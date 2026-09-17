@@ -39,7 +39,7 @@ const CONFIG = {
     usa: { output: 'usa.m3u', combine: ['us'], epg: ['US'], style: 'Category' },
     eastblock: { output: 'eastblock.m3u', combine: ['ru','ua'], epg: ['RU','UA'], style: 'Category' },
     germany: { output: 'germany.m3u', combine: ['de'], epg: ['DE'], style: 'Category' },
-    libanon: { output: 'libanon.m3u', combine: ['lb'], epg: ['LB'], style: 'Category' },
+    libanon: { output: 'libanon.m3u', combine: ['lb'], extra: 'libanon.extra.m3u', block: 'libanon.block.m3u', epg: ['LB'], style: 'Category' },
   },
   /* DISABLED — zum Reaktivieren einfach in playlists oben einfügen:
   'free-world': { output: 'free-world.m3u', combine: ['free-tv'], epg: [], style: 'Category' },
@@ -325,6 +325,33 @@ async function main() {
       if (parsed[src]) {
         channels = channels.concat(parsed[src]);
         console.log(`     + ${src} (${parsed[src].length})`);
+      }
+    }
+
+    // Manual extras (bot-proof curation, e.g. libanon.extra.m3u):
+    // appended before dedup/sort so manual entries survive every run
+    if (cfg.extra) {
+      const extraPath = path.join(outputDir, cfg.extra);
+      if (fs.existsSync(extraPath)) {
+        const extra = parseM3U(fs.readFileSync(extraPath, 'utf-8'), cfg.combine[0] || 'custom');
+        channels = channels.concat(extra);
+        console.log(`     + extra ${cfg.extra} (${extra.length})`);
+      } else {
+        console.log(`     (extra ${cfg.extra} not found, skipped)`);
+      }
+    }
+
+    // Manual blocklist (bot-proof curation, e.g. libanon.block.m3u):
+    // one URL per line, # comments allowed; matching channels are dropped
+    if (cfg.block) {
+      const blockPath = path.join(outputDir, cfg.block);
+      if (fs.existsSync(blockPath)) {
+        const blocked = new Set(fs.readFileSync(blockPath, 'utf-8').split(/\r?\n/).map(l => l.trim()).filter(l => l && !l.startsWith('#')));
+        const beforeBlock = channels.length;
+        channels = channels.filter(ch => !blocked.has((ch.url || '').trim()));
+        console.log(`     - block ${cfg.block} (${beforeBlock - channels.length} removed)`);
+      } else {
+        console.log(`     (block ${cfg.block} not found, skipped)`);
       }
     }
 
