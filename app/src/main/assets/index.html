@@ -673,7 +673,6 @@ const BUILTIN = [
   {id:'ar_ly',                name:'🇱🇾 Libyen',               url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_ly.m3u'},
   {id:'ar_us',                name:'🇺🇸 USA (arabisch)',       url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_us.m3u'},
   {id:'ar_ir',                name:'🇮🇷 Iran',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_ir.m3u'},
-  {id:'ar_tr',                name:'🇹🇷 Türkei',               url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_tr.m3u'},
   {id:'ar_dz',                name:'🇩🇿 Algerien',             url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_dz.m3u'},
   {id:'radio',                name:'📻 Radio Sender',          url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christliche_radio.m3u'},
 ];
@@ -1304,7 +1303,7 @@ function buildMainMenu(){
   });
   // Playlist cards (filtered by LS.SEL)
   const sel=gs(LS.SEL)||BUILTIN.map(p=>p.id);
-  const mmOrder=['libanon','christian','christliche_sender','gulf','ar_iq','ar_sa','ar_ae','ar_ps','ar_eg','ar_jo','ar_qa','ar_kw','ar_sy','ar_ma','ar_om','ar_bh','ar_ly','ar_us','ar_ir','ar_tr','ar_dz','radio','germany','usa','eastblock'];
+  const mmOrder=['libanon','christian','christliche_sender','gulf','ar_iq','ar_sa','ar_ae','ar_ps','ar_eg','ar_jo','ar_qa','ar_kw','ar_sy','ar_ma','ar_om','ar_bh','ar_ly','ar_us','ar_ir','ar_dz','radio','germany','usa','eastblock'];
   const ordered=[...allPls.filter(p=>sel.includes(p.id))].sort((a,b)=>{
     const ia=mmOrder.indexOf(a.id),ib=mmOrder.indexOf(b.id);
     if(ia===-1&&ib===-1)return 0;
@@ -1523,7 +1522,7 @@ function triggerCardIn(container,sel,stagger){
 function buildBuiltinGrid(){
   builtinGrid.innerHTML='';
   const sel=gs(LS.SEL)||BUILTIN.map(p=>p.id);
-  const icons={arabic:'\u{1F30D}',gulf:'\u{1F3DC}\u{FE0F}',usa:'\u{1F1FA}\u{1F1F8}',eastblock:'\u{1F3D7}\u{FE0F}',germany:'\u{1F1E9}\u{1F1EA}',christian:'\u271D\u{FE0F}',christliche_sender:'\u26EA',libanon:'\u{1F1F1}\u{1F1E7}',radio:'\u{1F4FB}',ar_ae:'\u{1F1E6}\u{1F1EA}',ar_bh:'\u{1F1E7}\u{1F1ED}',ar_dz:'\u{1F1E9}\u{1F1FF}',ar_eg:'\u{1F1EA}\u{1F1EC}',ar_iq:'\u{1F1EE}\u{1F1F6}',ar_ir:'\u{1F1EE}\u{1F1F7}',ar_jo:'\u{1F1EF}\u{1F1F4}',ar_kw:'\u{1F1F0}\u{1F1FC}',ar_ly:'\u{1F1F1}\u{1F1FE}',ar_ma:'\u{1F1F2}\u{1F1E6}',ar_om:'\u{1F1F4}\u{1F1F2}',ar_ps:'\u{1F1F5}\u{1F1F8}',ar_qa:'\u{1F1F6}\u{1F1E6}',ar_sa:'\u{1F1F8}\u{1F1E6}',ar_sy:'\u{1F1F8}\u{1F1FE}',ar_tr:'\u{1F1F9}\u{1F1F7}',ar_us:'\u{1F1FA}\u{1F1F8}'};
+  const icons={arabic:'\u{1F30D}',gulf:'\u{1F3DC}\u{FE0F}',usa:'\u{1F1FA}\u{1F1F8}',eastblock:'\u{1F3D7}\u{FE0F}',germany:'\u{1F1E9}\u{1F1EA}',christian:'\u271D\u{FE0F}',christliche_sender:'\u26EA',libanon:'\u{1F1F1}\u{1F1E7}',radio:'\u{1F4FB}',ar_ae:'\u{1F1E6}\u{1F1EA}',ar_bh:'\u{1F1E7}\u{1F1ED}',ar_dz:'\u{1F1E9}\u{1F1FF}',ar_eg:'\u{1F1EA}\u{1F1EC}',ar_iq:'\u{1F1EE}\u{1F1F6}',ar_ir:'\u{1F1EE}\u{1F1F7}',ar_jo:'\u{1F1EF}\u{1F1F4}',ar_kw:'\u{1F1F0}\u{1F1FC}',ar_ly:'\u{1F1F1}\u{1F1FE}',ar_ma:'\u{1F1F2}\u{1F1E6}',ar_om:'\u{1F1F4}\u{1F1F2}',ar_ps:'\u{1F1F5}\u{1F1F8}',ar_qa:'\u{1F1F6}\u{1F1E6}',ar_sa:'\u{1F1F8}\u{1F1E6}',ar_sy:'\u{1F1F8}\u{1F1FE}',ar_us:'\u{1F1FA}\u{1F1F8}'};
   BUILTIN.forEach(pl=>{
     const card=document.createElement('div');
     const isSel=sel.includes(pl.id)||!!loadedPl[pl.id];
@@ -1578,7 +1577,7 @@ const SYM_SVG={
   christliche_sender:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><circle cx="8" cy="4.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M8 7v7M5 10h6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   radio:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><rect x="2" y="8" width="12" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 4l4-2v5l-4 2z" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="5.5" cy="10.5" r="1" fill="currentColor"/></svg>`
 };
-const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',ar_ae:'ae',ar_bh:'bh',ar_dz:'dz',ar_eg:'eg',ar_iq:'iq',ar_ir:'ir',ar_jo:'jo',ar_kw:'kw',ar_ly:'ly',ar_ma:'ma',ar_om:'om',ar_ps:'ps',ar_qa:'qa',ar_sa:'sa',ar_sy:'sy',ar_tr:'tr',ar_us:'us'};
+const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',ar_ae:'ae',ar_bh:'bh',ar_dz:'dz',ar_eg:'eg',ar_iq:'iq',ar_ir:'ir',ar_jo:'jo',ar_kw:'kw',ar_ly:'ly',ar_ma:'ma',ar_om:'om',ar_ps:'ps',ar_qa:'qa',ar_sa:'sa',ar_sy:'sy',ar_us:'us'};
 function plIcon(name,id){
   const key=id.replace(/^(auto_)?/,'');
   const svg=SYM_SVG[key];
