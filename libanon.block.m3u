@@ -1,0 +1,8 @@
+# Blocklist fuer libanon.m3u (Bot-sicher).
+# Eine URL pro Zeile, # = Kommentar. Passende Kanaele werden bei jedem
+# Bot-Lauf aus der generierten libanon.m3u entfernt (siehe generate.js: cfg.block).
+# Nur nach 3-Pass-Validierung + Freigabe eintragen!
+# Nour Mariam: Parkseite (White Peaks), 3x verifiziert 2026-09-14/16/17
+https://svs.itworkscdn.net/nour9satlive/livestream/playlist.m3u8
+# Nour El Shabeb: Parkseite (White Peaks), 3x verifiziert 2026-09-14/16/17
+https://svs.itworkscdn.net/nour3satlive/livestream/playlist.m3u8
