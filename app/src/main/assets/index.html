@@ -654,7 +654,7 @@ function nativeFetch(url) {
 }
 
 const BUILTIN = [
-  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u'},
+  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u', epgUrl:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/epg-lb.xml'},
   {id:'christian',            name:'✝️ Christian',            url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christian.m3u'},
   {id:'christliche_sender',   name:'⛪ Alle Christlichen',    url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/alle_christlichen_sender.m3u'},
   {id:'gulf',                 name:'🌴 Gulf',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/gulf.m3u'},
@@ -870,7 +870,7 @@ async function loadPlaylist(pl,autoPlay=true){
     try{const pc=gs('pl_counts')||{};pc[pl.id]=channels.length;ss('pl_counts',pc)}catch(_){}
     activePlId=pl.id;
     ss(LS.CPL,pl.id);
-    const epgUrl=m3uEpg||(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||'';
+    const epgUrl=(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||m3uEpg||'';
     if(epgUrl&&epgOn)loadEPG(epgUrl);
     $('sp-pln').textContent=pl.name;
     $('sp-upd-v').textContent=pl.name;
