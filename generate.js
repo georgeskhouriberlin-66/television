@@ -78,8 +78,12 @@ function parseM3U(content, sourceKey) {
   return channels;
 }
 
+const EPG_URL_OVERRIDE = {
+  // Eigene EPG-Dateien (EPG-Eigenbau) statt toter Per-Country-Files
+  LB: 'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/epg-lb.xml',
+};
 function formatM3U(channels, epgCountries, style) {
-  const epgUrls = epgCountries.map(c => `https://epg.pw/xmltv/epg_${c}.xml.gz`);
+  const epgUrls = epgCountries.map(c => EPG_URL_OVERRIDE[c] || `https://epg.pw/xmltv/epg_${c}.xml.gz`);
   let output = '#EXTM3U';
   if (epgUrls.length > 0) {
     output += ' url-tvg="' + epgUrls.join('" url-tvg="') + '"';
