@@ -2,15 +2,6 @@
 <tv generator-info-name="PhoeniciaTV-EPG">
   <channel id="AlJadeed.lb"><display-name>Al Jadeed</display-name></channel>
   <channel id="SAT7Arabic.us"><display-name>SAT-7 Arabic</display-name></channel>
-  <programme start="20260920012500 +0300" stop="20260920013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
-  <programme start="20260920013000 +0300" stop="20260920023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
-  <programme start="20260920023000 +0300" stop="20260920043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
-  <programme start="20260920043000 +0300" stop="20260920044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
-  <programme start="20260920050000 +0300" stop="20260920060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
-  <programme start="20260920060000 +0300" stop="20260920061000 +0300" channel="AlJadeed.lb"><title>12:00 PM News Brief</title></programme>
-  <programme start="20260920070000 +0300" stop="20260920080000 +0300" channel="AlJadeed.lb"><title>Tahet sebeh ared</title></programme>
-  <programme start="20260920083000 +0300" stop="20260920090000 +0300" channel="AlJadeed.lb"><title>Midday News Bulletin</title></programme>
-  <programme start="20260920090000 +0300" stop="20260920100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
   <programme start="20260920113000 +0300" stop="20260920114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
   <programme start="20260920125000 +0300" stop="20260920134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
   <programme start="20260920134500 +0300" stop="20260920143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
