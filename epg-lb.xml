@@ -2,23 +2,10 @@
 <tv generator-info-name="PhoeniciaTV-EPG">
   <channel id="AlJadeed.lb"><display-name>Al Jadeed</display-name></channel>
   <channel id="SAT7Arabic.us"><display-name>SAT-7 Arabic</display-name></channel>
-  <programme start="20260921010000 +0300" stop="20260921012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
-  <programme start="20260921012500 +0300" stop="20260921013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
-  <programme start="20260921013000 +0300" stop="20260921023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
-  <programme start="20260921023000 +0300" stop="20260921043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
-  <programme start="20260921043000 +0300" stop="20260921044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
-  <programme start="20260921050000 +0300" stop="20260921060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
-  <programme start="20260921060000 +0300" stop="20260921061000 +0300" channel="AlJadeed.lb"><title>12:00 PM News Brief</title></programme>
-  <programme start="20260921070000 +0300" stop="20260921080000 +0300" channel="AlJadeed.lb"><title>Tahet sebeh ared</title></programme>
-  <programme start="20260921073000 +0300" stop="20260921083000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20260921083000 +0300" stop="20260921090000 +0300" channel="AlJadeed.lb"><title>Midday News Bulletin</title></programme>
-  <programme start="20260921090000 +0300" stop="20260921100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
-  <programme start="20260921100000 +0300" stop="20260921123000 +0300" channel="AlJadeed.lb"><title>W Halla’ Shu?</title></programme>
-  <programme start="20260921113000 +0300" stop="20260921114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
-  <programme start="20260921125000 +0300" stop="20260921134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
   <programme start="20260921134500 +0300" stop="20260921143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20260921163000 +0300" stop="20260921173000 +0300" channel="AlJadeed.lb"><title>Mafroum Feke</title></programme>
   <programme start="20260921173000 +0300" stop="20260921175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
+  <programme start="20260922134500 +0300" stop="20260922143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20260922010000 +0300" stop="20260922012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
   <programme start="20260922012500 +0300" stop="20260922013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
   <programme start="20260922013000 +0300" stop="20260922023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
@@ -32,9 +19,9 @@
   <programme start="20260922090000 +0300" stop="20260922100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
   <programme start="20260922113000 +0300" stop="20260922114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
   <programme start="20260922125000 +0300" stop="20260922134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20260922134500 +0300" stop="20260922143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20260922163000 +0300" stop="20260922173000 +0300" channel="AlJadeed.lb"><title>Mafroum Feke</title></programme>
   <programme start="20260922173000 +0300" stop="20260922175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
+  <programme start="20260923134500 +0300" stop="20260923143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20260923010000 +0300" stop="20260923012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
   <programme start="20260923012500 +0300" stop="20260923013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
   <programme start="20260923013000 +0300" stop="20260923023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
@@ -47,7 +34,6 @@
   <programme start="20260923090000 +0300" stop="20260923100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
   <programme start="20260923113000 +0300" stop="20260923114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
   <programme start="20260923125000 +0300" stop="20260923134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20260923134500 +0300" stop="20260923143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20260923163000 +0300" stop="20260923173000 +0300" channel="AlJadeed.lb"><title>Mafroum Feke</title></programme>
   <programme start="20260923173000 +0300" stop="20260923175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
   <programme start="20260921220000 +0300" stop="20260922000000 +0300" channel="SAT7Arabic.us"><title>The Reason</title></programme>
