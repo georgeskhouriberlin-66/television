@@ -1649,6 +1649,26 @@ async function init(){
   if(flatCh.length){playChannel(flatCh[0]);showUI()}
   startAutoDetection();
   setTimeout(()=>{try{if(typeof Android!=='undefined'&&Android.checkForUpdateAuto)Android.checkForUpdateAuto()}catch(e){}},6000);
+  setTimeout(debugEPG,10000);
+}
+async function debugEPG(){
+  const lines=[];
+  const put=s=>{lines.push(s);let el=document.getElementById('dbg-ov');if(!el){el=document.createElement('div');el.id='dbg-ov';el.style.cssText='position:fixed;inset:auto 0 0 0;z-index:9999;background:rgba(0,0,0,.9);color:#0f0;font:14px monospace;padding:10px;white-space:pre-wrap;max-height:45vh;overflow:auto';document.body.appendChild(el)}el.textContent=lines.join('\n')};
+  try{
+    put('DBG start epgOn='+epgOn+' activePlId='+activePlId);
+    const bl=BUILTIN.find(p=>p.id==='libanon');
+    put('DBG builtin epgUrl='+(bl&&bl.epgUrl?bl.epgUrl:'LEER'));
+    const url='https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/epg-lb.xml';
+    put('DBG fetch start');
+    const t=await nativeFetch(url);
+    put('DBG fetch ok len='+t.length);
+    const d=parseXMLTV(t);
+    put('DBG parsed channels='+Object.keys(d).join(','));
+    const g=getCurrentEPG('AlJadeed.lb@SD');
+    put('DBG Jadeed now='+(g?g.title+' '+JSON.stringify(g):'NULL'));
+    const s=getCurrentEPG('SAT7Arabic.us@SD');
+    put('DBG SAT7 now='+(s?s.title:'NULL (evtl. andere Playlist)'));
+  }catch(e){put('DBG FEHLER: '+(e&&e.message||e))}
 }
 init();
 </script>
