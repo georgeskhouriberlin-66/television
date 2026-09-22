@@ -951,7 +951,8 @@ function renderTiles(dir){
     }
     wrap.querySelector('.cn-name').textContent=ch.name;
     const epg=(isFocused||isNear)&&epgOn?getCurrentEPG(ch.tvgId):null;
-    const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const fmt=t=>{if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};const time=s&&e?`${fmt(s)}–${fmt(e)} `:'';return time+epg.title})():'';
+    const epgNext=(!epg&&(isFocused||isNear)&&epgOn)?getNextEPG(ch.tvgId):null;
+    const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const fmt=t=>{if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};const time=s&&e?`${fmt(s)}–${fmt(e)} `:'';return time+epg.title})():(epgNext?(()=>{const s=parseET(epgNext.start);return`▸ ${fmtEPGTime(s)} ${epgNext.title}`})():'');
     wrap.querySelector('.cn-epg').textContent=epgText;
     const chIdx=flatCh.indexOf(ch);
     wrap.querySelector('.cn-num').textContent=chIdx>=0?chIdx+1:'';
@@ -1016,11 +1017,14 @@ function showChInfo(ch){
   const epg=getCurrentEPG(ch.tvgId);
   if(epg){
     const s=parseET(epg.start),e=parseET(epg.stop);
-    const fmt=t=>{if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
-    const time=s&&e?`${fmt(s)}–${fmt(e)}`:'';
-    const next=epgData[ch.tvgId]?epgData[ch.tvgId].find(p=>{const ps=parseET(p.start);return ps&&ps>Date.now()})||null:null;
+    const time=s&&e?`${fmtEPGTime(s)}–${fmtEPGTime(e)}`:'';
+    const next=getNextEPG(ch.tvgId);
     ciEpg.innerHTML=`${time?`<span style="color:var(--acc)">${time}</span> `:''}${esc(epg.title)}${next?` <span style="color:var(--txt3);margin-left:8px">→ ${esc(next.title)}</span>`:''}`;
-  }else{ciEpg.textContent=''}
+  }else{
+    const next=getNextEPG(ch.tvgId);
+    if(next){const s=parseET(next.start);ciEpg.innerHTML=`<span style="color:var(--txt3)">Demnächst ${fmtEPGTime(s)}:</span> ${esc(next.title)}`}
+    else{ciEpg.textContent=''}
+  }
   chInfo.classList.add('show');clearTimeout(chInfoTimer);if(!uiOpen)chInfoTimer=setTimeout(()=>chInfo.classList.remove('show'),4000);
 }
 
@@ -1516,6 +1520,9 @@ async function loadEPG(url){
 }
 function parseXMLTV(xml){const data={},doc=new DOMParser().parseFromString(xml,'text/xml');doc.querySelectorAll('programme').forEach(p=>{const ch=p.getAttribute('channel');if(!ch)return;if(!data[ch])data[ch]=[];data[ch].push({start:p.getAttribute('start'),stop:p.getAttribute('stop'),title:(p.querySelector('title')||{}).textContent||''})});return data}
 function getCurrentEPG(tvgId){if(!epgOn||!tvgId)return null;const ids=[tvgId];const m=/^(.+)@[^@]+$/.exec(tvgId);if(m)ids.push(m[1]);const now=Date.now();for(const id of ids){const l=epgData[id];if(!l)continue;const f=l.find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e});if(f)return f}return null}
+function epgIds(tvgId){const ids=[tvgId];const m=/^(.+)@[^@]+$/.exec(tvgId||'');if(m)ids.push(m[1]);return ids}
+function getNextEPG(tvgId){if(!epgOn||!tvgId)return null;const now=Date.now();for(const id of epgIds(tvgId)){const l=epgData[id];if(!l)continue;const f=l.find(p=>{const s=parseET(p.start);return s&&s>now});if(f)return f}return null}
+function fmtEPGTime(t){if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}
 function parseET(t){if(!t)return null;const m=t.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s*([+-]\d{4})?/);if(!m)return null;return new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${m[7]||'+0000'}`).getTime()}
 
 /* ── Card-in animation helper (transition-based, Fire OS compatible) ── */
