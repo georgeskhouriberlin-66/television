@@ -1058,7 +1058,7 @@ function tryStream(ch,idx){
   try{
   if(isHLS&&typeof Hls!=='undefined'&&Hls.isSupported()){
     console.log('PVTV TRY: HLS detected, creating instance for '+url);
-    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
+    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:120,maxMaxBufferLength:240,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);armWatchdog();
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
       clearTimeout(tryStream._watchdog);
