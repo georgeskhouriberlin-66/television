@@ -85,3 +85,31 @@ jobs:
           else
             echo "Alarm-Issue bereits offen"
           fi
+
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Web-Player nach gh-pages spiegeln
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          cp app/src/main/assets/index.html /tmp/pv-index.html
+          cp app/src/main/assets/hls.min.js /tmp/pv-hls.min.js
+          git fetch origin gh-pages
+          git checkout gh-pages
+          cp /tmp/pv-index.html index.html
+          cp /tmp/pv-hls.min.js hls.min.js
+          git add index.html hls.min.js
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "Pages aktuell"
+            exit 0
+          fi
+          git commit -m "chore: update Pages [skip ci]"
+          git push origin gh-pages

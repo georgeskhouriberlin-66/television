@@ -22,7 +22,7 @@
 html,body{height:100%;overflow:hidden;background:#000;color:var(--txt);font-family:var(--f);-webkit-font-smoothing:antialiased;cursor:none}
 
 /* ── Video ── */
-#video-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;background:#000}
+#video-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;background:#000;touch-action:none}
 video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#000;transform:scale(1.04);transform-origin:center}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
@@ -314,6 +314,9 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 #menu-btn{display:none;position:fixed;top:12px;left:12px;z-index:35;width:48px;height:48px;background:rgba(8,11,20,.92);border:1.5px solid rgba(255,255,255,.14);border-radius:var(--phz-r-lg);color:#fff;font-size:24px;cursor:pointer;align-items:center;justify-content:center;transition:opacity var(--phz-dur-med),border-color var(--phz-dur-fast);outline:none;-webkit-tap-highlight-color:transparent}
 #menu-btn:active{border-color:var(--acc)}
 #menu-btn.hidden{opacity:0;pointer-events:none}
+/* ── Web-Modus (Browser ohne Android-Bridge): Cursor an, Menü-Button sichtbar ── */
+body.webmode,body.webmode *{cursor:auto}
+body.webmode #menu-btn{display:flex}
 #menu-btn svg{width:24px;height:24px}
 
 /* ══════════════════════════
@@ -491,8 +494,8 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   <div class="si" id="sp-epg"><span class="si-ico">📺</span><span class="si-lbl">EPG anzeigen</span><div class="tog" id="tg-epg"></div></div>
   <div class="si" id="sp-sub"><span class="si-ico">💬</span><span class="si-lbl">Untertitel</span><div class="tog" id="tg-sub"></div></div>
   <div class="si" id="sp-upd"><span class="si-ico">🔄</span><span class="si-lbl">Playlist aktualisieren</span><span class="si-val" id="sp-upd-v">—</span></div>
-  <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.5.2</span></div>
-  <div class="sp-v">Phoenicia Television v2.5.2</div>
+  <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.5.3</span></div>
+  <div class="sp-v">Phoenicia Television v2.5.3</div>
 </div>
 
 <!-- Startup Screen -->
@@ -1113,6 +1116,8 @@ $('sp-sub').addEventListener('click',()=>{subOn=!subOn;ss(LS.SUB,subOn);tgSub.cl
 $('sp-upd').addEventListener('click',()=>{ss(LS.DEAD,{});closeSP();const pl=allPls.find(p=>p.id===activePlId);if(pl)loadPlaylist(pl);toast('🔄 Aktualisiere…')});
 $('sp-appupd').addEventListener('click',()=>{if(typeof Android!=='undefined'&&Android.checkForUpdate){$('sp-appupd-v').textContent='Suche…';Android.checkForUpdate()}else toast('⚠ Update-Check nicht verfügbar')});
 try{if(typeof Android!=='undefined'&&Android.getAppVersion){const av=Android.getAppVersion();if(av){$('sp-appupd-v').textContent='v'+av;const sv=document.querySelector('.sp-v');if(sv)sv.textContent='Phoenicia Television v'+av;}}}catch(e){}
+const WEBMODE=(typeof Android==='undefined');
+if(WEBMODE){document.body.classList.add('webmode');const au=$('sp-appupd');if(au)au.style.display='none';}
 document.getElementById('menu-btn').addEventListener('click',()=>{showUI();openSidebar()});
 const sbNavHint=document.getElementById('sb-nav-hint');
 if(sbNavHint)sbNavHint.addEventListener('click',()=>{openSidebar();openMainMenu()});
@@ -1143,6 +1148,15 @@ function toggleSubs(){
   poll();
 }
 $('video-bg').addEventListener('dblclick',toggleFS);
+let tchSX=0,tchSY=0;
+$('video-bg').addEventListener('touchstart',e=>{if(e.touches.length===1){tchSX=e.touches[0].clientX;tchSY=e.touches[0].clientY}},{passive:true});
+$('video-bg').addEventListener('touchend',e=>{
+  if(e.changedTouches.length!==1)return;
+  const dx=e.changedTouches[0].clientX-tchSX,dy=e.changedTouches[0].clientY-tchSY;
+  if(Math.abs(dx)<60||Math.abs(dx)<Math.abs(dy)*1.5)return;
+  e.preventDefault();
+  document.dispatchEvent(new KeyboardEvent('keydown',{key:dx<0?'ArrowRight':'ArrowLeft',bubbles:true,cancelable:true}));
+});
 $('video-bg').addEventListener('click',e=>{if(e.detail===1&&setup.classList.contains('off'))setTimeout(()=>{if(e.detail===1)toggleUI()},200)});
 
 /* ── Setup Fokus-Navigation (Fernbedienung) ── */
