@@ -1,5 +1,6 @@
-// epg-generate.js — EPG-Eigenbau MVP.
-// Scrapt Al Jadeed + SAT-7 Arabic, mappt auf UNSERE tvg-ids und schreibt epg-lb.xml.
+// epg-generate.js — EPG-Eigenbau (Phase 2).
+// Scrapt Al Jadeed + SAT-7 Arabic + elcinema.com (MTV, Manar),
+// mappt auf UNSERE tvg-ids und schreibt epg-lb.xml.
 // Aufruf: node epg-generate.js [--days N] [--out path]
 // Exit 1 bei leerem/zu kleinem Ergebnis (Bot-Alarm via Workflow-Fail).
 // Nur Node-Builtins (keine npm-Abhängigkeiten).
@@ -108,13 +109,68 @@ async function scrapeSat7() {
   return out;
 }
 
+const AR_MONTHS = { 'يناير': 1, 'فبراير': 2, 'مارس': 3, 'أبريل': 4, 'ابريل': 4, 'مايو': 5, 'يونيو': 6, 'يوليو': 7, 'أغسطس': 8, 'اغسطس': 8, 'سبتمبر': 9, 'أكتوبر': 10, 'اكتوبر': 10, 'نوفمبر': 11, 'ديسمبر': 12 };
+
+// --- elcinema.com: https://elcinema.com/tvguide/<site_id>/ (Tages-Abschnitte, Beirut-Wandzeit) ---
+const ELCINEMA = [
+  { id: 'MTVLebanon.lb', name: 'MTV Lebanon', site: '1296', expect: ['إم تي في', 'MTV'] },
+  // Al Manar (1321): Seite ohne Programmdaten (Stub) — ausgelassen bis Quelle existiert
+];
+async function scrapeElcinemaOne(cfg) {
+  const html = await fetchText(`https://elcinema.com/tvguide/${cfg.site}/`);
+  const low = html.toLowerCase();
+  if (!cfg.expect.some(k => low.includes(k.toLowerCase()))) {
+    throw new Error(`elcinema ${cfg.site}: Kanalname nicht auf Seite (${cfg.id})`);
+  }
+  const sections = html.split(/<div class=" dates">/).slice(1);
+  const out = [];
+  const today = dayParts(0);
+  for (const sec of sections) {
+    const hm = sec.match(/^\s*(\S+)\s+(\d{1,2})\s+(\S+)\s*</);
+    if (!hm) continue;
+    const d = parseInt(hm[2], 10);
+    const mo = AR_MONTHS[hm[3].trim()];
+    if (!mo) { console.log(`   elcinema ${cfg.site}: unbekannter Monat ${hm[3].trim()}`); continue; }
+    let y = today.y;
+    if (mo === 1 && today.mo === 12) y += 1;
+    const re = /<li>([^<]+?)<\/li>\s*<li>\s*(\d{1,2}):(\d{2})\s*(صباحًا|مساءًا|صباحا|مساءا)[\s\S]{0,300}?\[([^\]]+?)\]/g;
+    const to24 = (h, ap) => { const pm = ap.startsWith('مساء'); if (h === 12) return pm ? 12 : 0; return pm ? h + 12 : h; };
+    let m, n = 0;
+    while ((m = re.exec(sec)) !== null) {
+      const title = decodeEntities(m[1]).trim().replace(/\s+/g, ' ');
+      if (!title) continue;
+      const durM = m[5].match(/(\d+)\s*دقيقة/);
+      const durH = m[5].match(/(\d+)\s*ساعة/);
+      const isTwoH = /ساعتين/.test(m[5]);
+      const mins = durM ? parseInt(durM[1], 10) : (durH ? parseInt(durH[1], 10) * 60 : (isTwoH ? 120 : 0));
+      if (!(mins > 0)) continue;
+      const hh = to24(parseInt(m[2], 10), m[4]), mm = parseInt(m[3], 10);
+      const start = new Date(Date.UTC(y, mo - 1, d, hh, mm, 0));
+      const stop = new Date(start.getTime() + mins * 60000);
+      const f = d2 => ({ y: d2.getUTCFullYear(), mo: d2.getUTCMonth() + 1, d: d2.getUTCDate(), hh: d2.getUTCHours(), mm: d2.getUTCMinutes() });
+      const s = f(start), e = f(stop);
+      out.push({ start: xmltvTime(s.y, s.mo, s.d, s.hh, s.mm), stop: xmltvTime(e.y, e.mo, e.d, e.hh, e.mm), title });
+      n++;
+    }
+    console.log(`   elcinema ${cfg.site} (${cfg.id}) ${y}-${mo}-${d}: ${n} Sendungen`);
+  }
+  return out;
+}
+async function scrapeElcinema() {
+  const res = {};
+  for (const cfg of ELCINEMA) res[cfg.id] = await scrapeElcinemaOne(cfg);
+  return res;
+}
+
 async function main() {
-  console.log('📺 EPG-Eigenbau MVP: Al Jadeed + SAT-7 Arabic, Tage:', DAYS);
+  console.log('📺 EPG-Eigenbau Phase 2: Al Jadeed + SAT-7 Arabic + elcinema (MTV, Manar), Tage:', DAYS);
   const jadeed = await scrapeJadeed();
   const sat7 = await scrapeSat7();
+  const elc = await scrapeElcinema();
   const channels = [
     { id: CH_JADEED, name: 'Al Jadeed', progs: jadeed },
     { id: CH_SAT7, name: 'SAT-7 Arabic', progs: sat7 },
+    { id: 'MTVLebanon.lb', name: 'MTV Lebanon', progs: elc['MTVLebanon.lb'] || [] },
   ];
   for (const c of channels) {
     if (c.progs.length < 3) throw new Error(`Zu wenig EPG-Daten für ${c.id}: ${c.progs.length}`);
