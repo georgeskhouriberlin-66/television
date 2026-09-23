@@ -1057,9 +1057,12 @@ function tryStream(ch,idx){
     console.log('PVTV TRY: HLS detected, creating instance for '+url);
     hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:120,maxMaxBufferLength:240,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);armWatchdog();
+    const pvHls=hls;
+    hls.on(Hls.Events.LEVEL_SWITCHED,(_,d)=>{console.log('PVTV TRY: LEVEL_SWITCHED level='+d.level)});
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
       console.log('PVTV TRY: MANIFEST_PARSED');
-      tryStream._skipCount=0;hideRadioLogo();armWatchdog(15000);showVideoOnFirstFrame();vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});
+      tryStream._skipCount=0;hideRadioLogo();armWatchdog(15000);showVideoOnFirstFrame();
+      setTimeout(()=>{try{if(hls===pvHls&&hls){hls.autoLevelEnabled=false;console.log('PVTV TRY: level locked at '+hls.currentLevel)}}catch(e){}},20000);vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});
       let tries=0;const poll=()=>{let f=false;for(let i=0;i<vid.textTracks.length;i++){const t=vid.textTracks[i];if(t.kind==='captions'||t.kind==='subtitles'){t.mode=subOn?'showing':'hidden';f=true}}if(!f&&tries++<10)setTimeout(poll,500)};
       poll();
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
