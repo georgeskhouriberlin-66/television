@@ -331,7 +331,7 @@ https://cdn10.live-tv.cloud/izod/izod-abr-lq/playlist.m3u8
 https://vgtrkregion-reg.cdnvideo.ru/vgtrk/stavropol/kavkaz24-hd/index.m3u8
 #EXTINF:-1 tvg-id="KongressTV.ru@SD" tvg-logo="https://tvcongress.ru/bitrix/templates/mbntheme/img/logo_tvc.svg" group-title="General",Kongress TV (1080p)
 https://live-3.otcnet.ru/congresstv/index.m3u8
-#EXTINF:-1 tvg-id="Kuban24.ru@SD" tvg-logo="https://i.imgur.com/atzrXcz.png" group-title="General",Kuban 24 [Geo-blocked]
+#EXTINF:-1 tvg-id="Kuban24.ru@SD" tvg-logo="https://i.imgur.com/atzrXcz.png" group-title="General",Kuban 24 SD [Geo-blocked]
 https://rt-sth-krdar-htlive.cdn.ngenix.net/hls/CH_R04_KUBAN24/variant.m3u8
 #EXTINF:-1 tvg-id="KurajTV.ru@SD" tvg-logo="https://i.imgur.com/hZXBD9F.png" group-title="General",Kuraj-TV (576p)
 https://bsttv.bonus-tv.ru/cdn/kurai/playlist.m3u8
@@ -977,7 +977,7 @@ rtmp://95.67.11.153/klive/stream
 https://ext.cdn.nashnet.tv/228.0.0.148/index.m3u8
 #EXTINF:-1 tvg-id="ObshchestvennoeNezavisimoeTelevidenie.ua@SD" tvg-logo="https://i.imgur.com/jFP50g2.png" group-title="News",Obshchestvennoe Nezavisimoe Televidenie (576p)
 http://85.238.112.40:8810/hls_sec/239.33.75.33-.m3u8
-#EXTINF:-1 tvg-id="OplotTV.ru@SD" tvg-logo="https://i.imgur.com/RvUkId2.png" group-title="News",Oplot TV (1080p) [Geo-blocked]
+#EXTINF:-1 tvg-id="OplotTV.ru@SD" tvg-logo="https://i.imgur.com/RvUkId2.png" group-title="News",Oplot TV SD (1080p) [Geo-blocked]
 http://31.131.139.253:9002/oplot_hd/index.m3u8
 #EXTINF:-1 tvg-id="PershiyXTVMedia.ua@SD" tvg-logo="https://i.imgur.com/M7oDym3.png" group-title="News",Pershiy XTV Media (576p)
 https://hls.xtvmedia.pp.ua:8443/hls/trk1tv.m3u8
