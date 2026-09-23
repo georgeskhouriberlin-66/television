@@ -1149,7 +1149,7 @@ $('video-bg').addEventListener('click',e=>{if(e.detail===1&&setup.classList.cont
 let setupCards=[],setupSelIdx=0,setupTail=[];
 const CARD_COLS=4;
 let scAdvOpen=false;
-function scAdvToggle(){scAdvOpen=!scAdvOpen;$('sc-adv-b').style.display=scAdvOpen?'':'none';$('sc-adv-ico').textContent=scAdvOpen?'▾':'▸';setupFocusInit()}
+function scAdvToggle(){scAdvOpen=!scAdvOpen;$('sc-adv-b').style.display=scAdvOpen?'':'none';$('sc-adv-ico').textContent=scAdvOpen?'▾':'▸';setupTargets();const hi=setupTail.indexOf($('sc-adv-h'));setupSelIdx=hi>=0?setupCards.length+hi:0;setupFocus(setupSelIdx)}
 function setupTargets(){
   setupCards=[...builtinGrid.querySelectorAll('.sc-card')];
   setupTail=[$('btn-sel-all'),$('btn-sel-none'),$('sc-adv-h'),...savedWrap.querySelectorAll('.saved-row'),$('iname'),$('iurl'),$('iepg'),$('setup-start')].filter(el=>el&&visRect(el));
@@ -1322,7 +1322,7 @@ function buildMainMenu(){
     const t=document.createElement('div');
     const plCls=(pl.id.startsWith('c_')||pl.id.startsWith('auto_'))?'custom':pl.id;
     t.className='mm-card card-pl-'+plCls+(pl.id===activePlId?' active-pl':'');
-    t.innerHTML=`<span class="card-ico">${plIco(pl.id)}</span><span class="card-name">${esc(pl.name)}</span>`;
+    t.innerHTML=`<span class="card-ico">${plIco(pl.id)}</span><span class="card-name">${esc(pl.name.replace(/^[^\p{L}\p{N}]+/u,''))}</span>`;
     const _cnt=(gs('pl_counts')||{})[pl.id];
     if(_cnt)t.innerHTML+=`<span class="card-badge">${_cnt}</span>`;
     t.dataset.plId=pl.id;
