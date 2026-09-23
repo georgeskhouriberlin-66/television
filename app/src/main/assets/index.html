@@ -305,6 +305,11 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 .ci-badge.geo{color:#ff8a80;border-color:rgba(255,138,128,.5);background:rgba(255,138,128,.08)}
 .ci-badge.part{color:#ffd54a;border-color:rgba(255,213,74,.45);background:rgba(255,213,74,.07)}
 
+/* ── Setup Erweitert-Toggle ── */
+#sc-adv-h{cursor:pointer;outline:none}
+#sc-adv-h.focused{color:#fff}
+#sc-adv-h.focused #sc-adv-ico{color:var(--acc)}
+
 /* ── Menu Btn ── */
 #menu-btn{display:none;position:fixed;top:12px;left:12px;z-index:35;width:48px;height:48px;background:rgba(8,11,20,.92);border:1.5px solid rgba(255,255,255,.14);border-radius:var(--phz-r-lg);color:#fff;font-size:24px;cursor:pointer;align-items:center;justify-content:center;transition:opacity var(--phz-dur-med),border-color var(--phz-dur-fast);outline:none;-webkit-tap-highlight-color:transparent}
 #menu-btn:active{border-color:var(--acc)}
@@ -484,12 +489,8 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   <div class="sp-hd">Einstellungen</div>
   <div class="si" id="sp-pl"><span class="si-ico">📋</span><span class="si-lbl">Playlisten</span><span class="si-val" id="sp-pln">—</span></div>
   <div class="si" id="sp-epg"><span class="si-ico">📺</span><span class="si-lbl">EPG anzeigen</span><div class="tog" id="tg-epg"></div></div>
-  <div class="si" id="sp-epg-reload"><span class="si-ico">📡</span><span class="si-lbl">EPG neu laden</span><span class="si-val">Aktualisieren</span></div>
   <div class="si" id="sp-sub"><span class="si-ico">💬</span><span class="si-lbl">Untertitel</span><div class="tog" id="tg-sub"></div></div>
-  <div class="si" id="sp-fav"><span class="si-ico">★</span><span class="si-lbl">Nur Favoriten</span><div class="tog" id="tg-fav"></div></div>
-  <div class="si" id="sp-fs"><span class="si-ico">⛶</span><span class="si-lbl">Vollbild</span><span class="si-val">F2 · Doppelklick</span></div>
   <div class="si" id="sp-upd"><span class="si-ico">🔄</span><span class="si-lbl">Playlist aktualisieren</span><span class="si-val" id="sp-upd-v">—</span></div>
-  <div class="si" id="sp-clr"><span class="si-ico">🧹</span><span class="si-lbl">Tote Streams zurücksetzen</span><span class="si-val">Cache leeren</span></div>
   <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.5.2</span></div>
   <div class="sp-v">Phoenicia Television v2.5.2</div>
 </div>
@@ -589,7 +590,8 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
   </div>
 
   <div class="sc-section">
-    <div class="sc-lbl">Eigene Playlisten</div>
+    <div class="sc-lbl sc-acc" id="sc-adv-h" tabindex="0">Erweitert: Eigene Playlisten <span id="sc-adv-ico">▸</span></div>
+    <div id="sc-adv-b" style="display:none">
     <div id="saved-wrap"></div>
     <div class="inp-wrap">
       <span class="inp-lbl">Name</span>
@@ -602,6 +604,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
     <div class="inp-wrap">
       <span class="inp-lbl">EPG-URL (optional)</span>
       <input class="inp inp-url" id="iepg" type="url" placeholder="https://example.com/epg.xml" autocomplete="off" spellcheck="false">
+    </div>
     </div>
   </div>
 
@@ -730,7 +733,7 @@ const ui=$('ui'), sp=$('sp');
 const chList=$('ch-list');
 const setup=$('setup'), setupStart=$('setup-start'), scSt=$('sc-st');
 const builtinGrid=$('builtin-grid'), savedWrap=$('saved-wrap');
-const tgEpg=$('tg-epg'), tgSub=$('tg-sub'), tgFav=$('tg-fav');
+const tgEpg=$('tg-epg'), tgSub=$('tg-sub');
 const chNumOv=$('ch-num-ov'), chNumDigits=$('ch-num-digits');
 const startup=$('startup'), startupVid=$('startup-vid');
 
@@ -1106,12 +1109,8 @@ function spActivate(){const items=spItems();if(spFocusIdx>=0&&spFocusIdx<items.l
 document.addEventListener('click',e=>{if(spOpen&&!sp.contains(e.target))closeSP()});
 $('sp-pl').addEventListener('click',()=>{closeSP();hideUI();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();triggerCardIn(builtinGrid,'.sc-card')});
 $('sp-epg').addEventListener('click',()=>{epgOn=!epgOn;ss(LS.EPG,epgOn);tgEpg.classList.toggle('on',epgOn);toast(epgOn?'EPG aktiv':'EPG aus')});
-$('sp-epg-reload').addEventListener('click',()=>{const pl=allPls.find(p=>p.id===activePlId);const epgUrl=pl?.epgUrl||BUILTIN.find(p=>p.id===activePlId)?.epgUrl||'';if(epgUrl)loadEPG(epgUrl);else toast('Keine EPG-Quelle für aktuelle Playlist')});
 $('sp-sub').addEventListener('click',()=>{subOn=!subOn;ss(LS.SUB,subOn);tgSub.classList.toggle('on',subOn);toggleSubs();toast(subOn?'Untertitel an':'Untertitel aus')});
-$('sp-fav').addEventListener('click',()=>{showFavs=!showFavs;tgFav.classList.toggle('on',showFavs);renderList()});
-$('sp-fs').addEventListener('click',()=>{closeSP();toggleFS()});
-$('sp-upd').addEventListener('click',()=>{closeSP();const pl=allPls.find(p=>p.id===activePlId);if(pl)loadPlaylist(pl);toast('🔄 Aktualisiere…')});
-$('sp-clr').addEventListener('click',()=>{ss(LS.DEAD,{});closeSP();toast('🧹 Tote-Streams-Cache geleert')});
+$('sp-upd').addEventListener('click',()=>{ss(LS.DEAD,{});closeSP();const pl=allPls.find(p=>p.id===activePlId);if(pl)loadPlaylist(pl);toast('🔄 Aktualisiere…')});
 $('sp-appupd').addEventListener('click',()=>{if(typeof Android!=='undefined'&&Android.checkForUpdate){$('sp-appupd-v').textContent='Suche…';Android.checkForUpdate()}else toast('⚠ Update-Check nicht verfügbar')});
 try{if(typeof Android!=='undefined'&&Android.getAppVersion){const av=Android.getAppVersion();if(av){$('sp-appupd-v').textContent='v'+av;const sv=document.querySelector('.sp-v');if(sv)sv.textContent='Phoenicia Television v'+av;}}}catch(e){}
 document.getElementById('menu-btn').addEventListener('click',()=>{showUI();openSidebar()});
@@ -1149,9 +1148,11 @@ $('video-bg').addEventListener('click',e=>{if(e.detail===1&&setup.classList.cont
 /* ── Setup Fokus-Navigation (Fernbedienung) ── */
 let setupCards=[],setupSelIdx=0,setupTail=[];
 const CARD_COLS=4;
+let scAdvOpen=false;
+function scAdvToggle(){scAdvOpen=!scAdvOpen;$('sc-adv-b').style.display=scAdvOpen?'':'none';$('sc-adv-ico').textContent=scAdvOpen?'▾':'▸';setupFocusInit()}
 function setupTargets(){
   setupCards=[...builtinGrid.querySelectorAll('.sc-card')];
-  setupTail=[$('btn-sel-all'),$('btn-sel-none'),...savedWrap.querySelectorAll('.saved-row'),$('iname'),$('iurl'),$('iepg'),$('setup-start')].filter(Boolean);
+  setupTail=[$('btn-sel-all'),$('btn-sel-none'),$('sc-adv-h'),...savedWrap.querySelectorAll('.saved-row'),$('iname'),$('iurl'),$('iepg'),$('setup-start')].filter(el=>el&&visRect(el));
   const inameEl=$('iname');
   setupScrollIdx=inameEl?setupTail.indexOf(inameEl):0;
 }
@@ -1240,6 +1241,7 @@ function focusSetupEl(el){
   if(window.Android&&window.Android.showKeyboard)window.Android.showKeyboard(el.tagName==='INPUT');
 }
 function setupFocusInit(){setupTargets();setupSelIdx=0;setupFocus(0)}
+$('sc-adv-h').addEventListener('click',()=>scAdvToggle());
 
 
 /* ── Keyboard ── */
@@ -1320,7 +1322,7 @@ function buildMainMenu(){
     const t=document.createElement('div');
     const plCls=(pl.id.startsWith('c_')||pl.id.startsWith('auto_'))?'custom':pl.id;
     t.className='mm-card card-pl-'+plCls+(pl.id===activePlId?' active-pl':'');
-    t.innerHTML=`<span class="card-ico">${plIcon(pl.name,pl.id)}</span><span class="card-name">${esc(pl.name)}</span>`;
+    t.innerHTML=`<span class="card-ico">${plIco(pl.id)}</span><span class="card-name">${esc(pl.name)}</span>`;
     const _cnt=(gs('pl_counts')||{})[pl.id];
     if(_cnt)t.innerHTML+=`<span class="card-badge">${_cnt}</span>`;
     t.dataset.plId=pl.id;
@@ -1601,15 +1603,13 @@ const SYM_SVG={
   radio:`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><rect x="2" y="8" width="12" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 4l4-2v5l-4 2z" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="5.5" cy="10.5" r="1" fill="currentColor"/></svg>`
 };
 const FLAG_CDN={usa:'us',germany:'de',libanon:'lb',ar_ae:'ae',ar_bh:'bh',ar_dz:'dz',ar_eg:'eg',ar_iq:'iq',ar_ir:'ir',ar_jo:'jo',ar_kw:'kw',ar_ly:'ly',ar_ma:'ma',ar_om:'om',ar_ps:'ps',ar_qa:'qa',ar_sa:'sa',ar_sy:'sy',ar_us:'us'};
-function plIcon(name,id){
+function plIco(id){
   const key=id.replace(/^(auto_)?/,'');
   const svg=SYM_SVG[key];
-  if(svg)return svg+esc(name.replace(/^[^\p{L}\p{N}]+/u,''));
+  if(svg)return svg;
   const cdn=FLAG_CDN[key];
-  if(cdn)return `<img src="https://flagcdn.com/16x12/${cdn}.png" alt="" style="width:16px;height:12px;vertical-align:middle;margin-right:5px">${esc(name.replace(/^[^\p{L}\p{N}]+/u,''))}`;
-  const generic=`<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><path d="M8 13V8M8 8L4.5 4.5M8 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><circle cx="8" cy="13.8" r="1" fill="currentColor"/><path d="M5.2 5.5a3.8 3.8 0 0 1 5.6 0" fill="none" stroke="currentColor" stroke-width="1"/></svg>`;
-  const clean=(name.codePointAt(0)||0)>0x1F000?name.replace(/^[\u{10000}-\u{10FFFF}]+\s*/u,''):name;
-  return generic+esc(clean);
+  if(cdn)return `<img src="https://flagcdn.com/16x12/${cdn}.png" alt="" style="width:16px;height:12px;vertical-align:middle;margin-right:5px">`;
+  return `<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><path d="M8 13V8M8 8L4.5 4.5M8 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><circle cx="8" cy="13.8" r="1" fill="currentColor"/><path d="M5.2 5.5a3.8 3.8 0 0 1 5.6 0" fill="none" stroke="currentColor" stroke-width="1"/></svg>`;
 }
 
 setupStart.addEventListener('click',async()=>{
