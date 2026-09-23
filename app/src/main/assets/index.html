@@ -23,7 +23,7 @@ html,body{height:100%;overflow:hidden;background:#000;color:var(--txt);font-fami
 
 /* ── Video ── */
 #video-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;background:#000}
-video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;display:block;background:#000;transform:scale(1.04)}
+video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#000;transform:scale(1.04);transform-origin:center}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
@@ -74,7 +74,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 .sb-nav-hint{display:flex;align-items:center;gap:6px;padding:8px 14px;color:rgba(255,255,255,.45);font-size:11px;cursor:pointer;transition:color .2s;flex-shrink:0}
 .sb-nav-hint:hover,.sb-nav-hint:focus{color:var(--phz-c-gold)}
 /* Search overlay */
-#search-ov{position:fixed;inset:0;z-index:95;background:rgba(6,10,20,.98);display:none;flex-direction:column;backdrop-filter:blur(16px)}
+#search-ov{position:fixed;inset:0;z-index:95;background:rgba(6,10,20,.98);display:none;flex-direction:column}
 #search-ov.open{display:flex}
 .so-head{display:flex;align-items:center;gap:12px;padding:20px 24px}
 #so-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;color:#fff;font-size:18px;outline:none}
@@ -189,7 +189,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 #ui-right{flex:1}
 
 /* ── Settings Panel ── */
-#sp{position:fixed;top:20px;left:25%;bottom:20px;z-index:40;width:50%;background:rgba(8,12,22,.98);border:1px solid rgba(255,255,255,.1);border-radius:var(--phz-r-lg);backdrop-filter:blur(24px);box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(-8px) scale(.97);opacity:0;pointer-events:none;transition:transform var(--phz-dur-med) cubic-bezier(.16,1,.3,1),opacity var(--phz-dur-fast);overflow-y:auto;display:flex;flex-direction:column}
+#sp{position:fixed;top:20px;left:25%;bottom:20px;z-index:40;width:50%;background:rgba(8,12,22,.98);border:1px solid rgba(255,255,255,.1);border-radius:var(--phz-r-lg);box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(-8px) scale(.97);opacity:0;pointer-events:none;transition:transform var(--phz-dur-med) cubic-bezier(.16,1,.3,1),opacity var(--phz-dur-fast);overflow-y:auto;display:flex;flex-direction:column}
 #sp.open{transform:none;opacity:1;pointer-events:all}
 .sp-hd{padding:20px 26px 16px;font-size:14px;font-family:var(--fm);letter-spacing:.18em;text-transform:uppercase;color:var(--txt2);border-bottom:1px solid rgba(255,255,255,.07)}
 .si{display:flex;align-items:center;gap:16px;padding:18px 26px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);transition:background var(--phz-dur-fast);outline:none;opacity:0}
@@ -314,7 +314,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 /* ══════════════════════════
    MAIN MENU OVERLAY
 ════════════════════════ */
-#main-menu{position:fixed;inset:0;z-index:90;background:rgba(6,10,20,.98);display:none;flex-direction:column;align-items:center;justify-content:flex-start;backdrop-filter:blur(16px);animation:fadeIn .25s ease;overflow-y:auto;overflow-x:hidden;padding:40px 5% 40px}
+#main-menu{position:fixed;inset:0;z-index:90;background:rgba(6,10,20,.98);display:none;flex-direction:column;align-items:center;justify-content:flex-start;animation:fadeIn .25s ease;overflow-y:auto;overflow-x:hidden;padding:40px 5% 40px}
 #main-menu.open{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .mm-header{display:flex;align-items:center;gap:16px;margin-bottom:32px}
@@ -654,8 +654,8 @@ function nativeFetch(url) {
 }
 
 const BUILTIN = [
-  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u'},
-  {id:'christian',            name:'✝️ Christian',            url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christian.m3u'},
+  {id:'libanon',              name:'🇱🇧 Libanon',              url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/libanon.m3u', epgUrl:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/epg-lb.xml'},
+  {id:'christian',            name:'✝️ Christian',            url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/christian.m3u', epgUrl:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/epg-lb.xml'},
   {id:'christliche_sender',   name:'⛪ Alle Christlichen',    url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/alle_christlichen_sender.m3u'},
   {id:'gulf',                 name:'🌴 Gulf',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/gulf.m3u'},
   {id:'ar_iq',                name:'🇮🇶 Irak',                 url:'https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/ar_iq.m3u'},
@@ -800,17 +800,16 @@ function parseM3U(text){
 /* ── Fetch ── */
 function corsify(u){const e=encodeURIComponent(u);return[`https://api.allorigins.win/raw?url=${e}`,`https://corsproxy.io/?${e}`]}
 function buildUrls(raw){
-  const url=raw.trim(),out=[];
+  const url=raw.trim(),out=[url];
   const gr=url.match(/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)/);
   if(gr)out.push(`https://cdn.jsdelivr.net/gh/${gr[1]}/${gr[2]}@${gr[3]}/${gr[4]}`);
-  out.push(url,...corsify(url));
+  out.push(...corsify(url));
   return[...new Set(out)];
 }
 async function fetchText(url,timeoutMs=12000,fresh=false){
   const log=window._dbg||[];
   const all=buildUrls(url);
-  const ordered=fresh?[url,...all.filter(u=>u!==url)]:all;
-  for(const u of ordered){
+  for(const u of all){
     const t0=Date.now();
     try{
       const direct=u===url;
@@ -870,7 +869,7 @@ async function loadPlaylist(pl,autoPlay=true){
     try{const pc=gs('pl_counts')||{};pc[pl.id]=channels.length;ss('pl_counts',pc)}catch(_){}
     activePlId=pl.id;
     ss(LS.CPL,pl.id);
-    const epgUrl=m3uEpg||(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||'';
+    const epgUrl=(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||m3uEpg||'';
     if(epgUrl&&epgOn)loadEPG(epgUrl);
     $('sp-pln').textContent=pl.name;
     $('sp-upd-v').textContent=pl.name;
@@ -951,7 +950,8 @@ function renderTiles(dir){
     }
     wrap.querySelector('.cn-name').textContent=ch.name;
     const epg=(isFocused||isNear)&&epgOn?getCurrentEPG(ch.tvgId):null;
-    const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const fmt=t=>{if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};const time=s&&e?`${fmt(s)}–${fmt(e)} `:'';return time+epg.title})():'';
+    const epgNext=(!epg&&(isFocused||isNear)&&epgOn)?getNextEPG(ch.tvgId):null;
+    const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const time=s&&e?`${fmtEPGTime(s)}–${fmtEPGTime(e)} `:'';return time+epg.title})():(epgNext?(()=>{const s=parseET(epgNext.start);return`▸ ${fmtEPGTime(s)} ${epgNext.title}`})():'');
     wrap.querySelector('.cn-epg').textContent=epgText;
     const chIdx=flatCh.indexOf(ch);
     wrap.querySelector('.cn-num').textContent=chIdx>=0?chIdx+1:'';
@@ -990,7 +990,7 @@ function showRadioLogo(ch){
   el.classList.add('show');vid.style.display='none';
 }
 function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback').style.display='none';$('radio-logo-img').style.display='none';vid.style.display=''}
-function showVideoOnFirstFrame(){clearTimeout(vid._showT);vid.addEventListener('playing',()=>{clearTimeout(vid._showT);vid._showT=setTimeout(()=>{vid.style.opacity='1'},350)},{once:true})}
+function showVideoOnFirstFrame(){clearTimeout(vid._showT);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);vid._showT=setTimeout(()=>{vid.style.opacity='1';loadOv.classList.remove('show')},350)},{once:true})}
 
 /* ── Player ── */
 function playChannel(ch){
@@ -1004,8 +1004,6 @@ function playChannel(ch){
   showChInfo(ch);
   console.log('PVTV PLAY: startupDone='+startupDone);
   if(!startupDone){vid.muted=true;return}
-  console.log('PVTV PLAY: before fullscreen');
-  vid.requestFullscreen?.().catch(()=>{});
   console.log('PVTV PLAY: calling tryStream');
   tryStream(ch,0);
   lastTuneTs=Date.now();
@@ -1016,11 +1014,14 @@ function showChInfo(ch){
   const epg=getCurrentEPG(ch.tvgId);
   if(epg){
     const s=parseET(epg.start),e=parseET(epg.stop);
-    const fmt=t=>{if(!t)return'';const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
-    const time=s&&e?`${fmt(s)}–${fmt(e)}`:'';
-    const next=epgData[ch.tvgId]?epgData[ch.tvgId].find(p=>{const ps=parseET(p.start);return ps&&ps>Date.now()})||null:null;
+    const time=s&&e?`${fmtEPGTime(s)}–${fmtEPGTime(e)}`:'';
+    const next=getNextEPG(ch.tvgId);
     ciEpg.innerHTML=`${time?`<span style="color:var(--acc)">${time}</span> `:''}${esc(epg.title)}${next?` <span style="color:var(--txt3);margin-left:8px">→ ${esc(next.title)}</span>`:''}`;
-  }else{ciEpg.textContent=''}
+  }else{
+    const next=getNextEPG(ch.tvgId);
+    if(next){const s=parseET(next.start);ciEpg.innerHTML=`<span style="color:var(--txt3)">Demnächst ${fmtEPGTime(s)}:</span> ${esc(next.title)}`}
+    else{ciEpg.textContent=''}
+  }
   chInfo.classList.add('show');clearTimeout(chInfoTimer);if(!uiOpen)chInfoTimer=setTimeout(()=>chInfo.classList.remove('show'),4000);
 }
 
@@ -1045,7 +1046,7 @@ function tryStream(ch,idx){
   const url=v[idx];
   clearTimeout(vid._showT);
   clearTimeout(tryStream._watchdog);
-  const armWatchdog=()=>{clearTimeout(tryStream._watchdog);tryStream._watchdog=setTimeout(()=>{console.log('PVTV TRY: watchdog 6s, next variant');try{vid.pause()}catch(_){}tryStream(ch,idx+1)},6000)};
+  const armWatchdog=(ms)=>{clearTimeout(tryStream._watchdog);tryStream._watchdog=setTimeout(()=>{console.log('PVTV TRY: watchdog, next variant');try{vid.pause()}catch(_){}tryStream(ch,idx+1)},ms||6000)};
   nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');vid.style.opacity='0';
   let domain='';try{domain=new URL(url).hostname}catch(e){domain=url.substring(0,30)}$('load-text').textContent=`📡 ${domain}`;$('load-count').textContent=`Versuch ${idx+1}/${total}`;
   if(hls){hls.destroy();hls=null}
@@ -1054,21 +1055,23 @@ function tryStream(ch,idx){
   try{
   if(isHLS&&typeof Hls!=='undefined'&&Hls.isSupported()){
     console.log('PVTV TRY: HLS detected, creating instance for '+url);
-    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:60,maxMaxBufferLength:120,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
+    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:120,maxMaxBufferLength:240,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);armWatchdog();
+    const pvHls=hls;
+    hls.on(Hls.Events.LEVEL_SWITCHED,(_,d)=>{console.log('PVTV TRY: LEVEL_SWITCHED level='+d.level)});
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
-      clearTimeout(tryStream._watchdog);
       console.log('PVTV TRY: MANIFEST_PARSED');
-      tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});loadOv.classList.remove('show');
+      tryStream._skipCount=0;hideRadioLogo();armWatchdog(15000);showVideoOnFirstFrame();
+      setTimeout(()=>{try{if(hls===pvHls&&hls){hls.autoLevelEnabled=false;console.log('PVTV TRY: level locked at '+hls.currentLevel)}}catch(e){}},20000);vid.play().catch(e=>{if(e&&e.name==='NotAllowedError'){vid.muted=true;vid.play().catch(()=>{});toast('🔇 Klick oder Taste für Ton',6000);document.addEventListener('click',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true});document.addEventListener('keydown',()=>{vid.muted=false;vid.play().catch(()=>{})},{once:true})}else{setTimeout(()=>{try{vid.muted=false;vid.volume=1;vid.play().catch(()=>{})}catch(_){}},300)}});
       let tries=0;const poll=()=>{let f=false;for(let i=0;i<vid.textTracks.length;i++){const t=vid.textTracks[i];if(t.kind==='captions'||t.kind==='subtitles'){t.mode=subOn?'showing':'hidden';f=true}}if(!f&&tries++<10)setTimeout(poll,500)};
       poll();
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     });
-    hls.on(Hls.Events.ERROR,(_,d)=>{console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type);if(d.fatal){clearTimeout(tryStream._watchdog);hls.destroy();hls=null;tryStream(ch,idx+1)}});
+    hls.on(Hls.Events.ERROR,(_,d)=>{let u='';try{u=d.frag&&d.frag.url?d.frag.url:(d.context&&d.context.url?d.context.url:'')}catch(_){}let c='';try{c=d.response&&d.response.code!==undefined?d.response.code:''}catch(_){}console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type+' details='+(d.details||'')+' code='+c+' url='+u);if(d.fatal){clearTimeout(tryStream._watchdog);hls.destroy();hls=null;tryStream(ch,idx+1)}});
   }else if(isHLS&&typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(isHLS&&vid.canPlayType('application/vnd.apple.mpegurl')){
-    vid.src=url;armWatchdog();    vid.addEventListener('loadedmetadata',()=>{clearTimeout(tryStream._watchdog);tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();vid.play().catch(()=>{});loadOv.classList.remove('show')},{once:true});
+    vid.src=url;armWatchdog();    vid.addEventListener('loadedmetadata',()=>{clearTimeout(tryStream._watchdog);tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();vid.play().catch(()=>{});},{once:true});
     vid.addEventListener('error',()=>{clearTimeout(tryStream._watchdog);tryStream(ch,idx+1)},{once:true});
-  }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();loadOv.classList.remove('show')}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture');showRadioLogo(ch)}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
+  }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame();}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture');showRadioLogo(ch)}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
   }catch(e){console.log('PVTV TRY: EXCEPTION: '+e.message);$('load-text').textContent='❌ '+e.message;$('load-count').textContent='';loadOv.classList.add('show')}
 }
 
@@ -1097,7 +1100,7 @@ function openSP(){navHistory.push('settings');spOpen=true;spFocusIdx=-1;sp.class
 function closeSP(){spOpen=false;spFocusIdx=-1;sp.classList.remove('open');sp.querySelectorAll('.si').forEach(s=>s.classList.remove('focused'));navHistory=navHistory.filter(s=>s!=='settings')}
 function toggleSP(e){e?.stopPropagation();spOpen?closeSP():openSP()}
 function spItems(){return Array.from(sp.querySelectorAll('.si'))}
-function spFocusUpdate(){const items=spItems();items.forEach((s,i)=>{s.classList.toggle('focused',i===spFocusIdx);if(i===spFocusIdx)s.scrollIntoView({block:'nearest',behavior:'smooth'})})}
+function spFocusUpdate(){const items=spItems();items.forEach((s,i)=>{s.classList.toggle('focused',i===spFocusIdx);if(i===spFocusIdx)s.scrollIntoView({block:'nearest'})})}
 function spFocusDir(dir){const items=spItems();if(!items.length)return;if(spFocusIdx<0)spFocusIdx=0;else spFocusIdx=Math.max(0,Math.min(items.length-1,spFocusIdx+dir));spFocusUpdate()}
 function spActivate(){const items=spItems();if(spFocusIdx>=0&&spFocusIdx<items.length)items[spFocusIdx].click()}
 document.addEventListener('click',e=>{if(spOpen&&!sp.contains(e.target))closeSP()});
@@ -1360,7 +1363,7 @@ function closeMainMenu(){mainMenu.classList.remove('open');clearZoneFocus();if(!
 function mmFocus(){mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>{
   const focused=si===mmSecIdx&&ii===mmItemIdx;
   el.classList.toggle('focused',focused);
-  if(focused)el.scrollIntoView({block:'nearest',behavior:'smooth'});
+  if(focused)el.scrollIntoView({block:'nearest'});
 }))}
 function mmEls(){const els=[];mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>els.push({el,si,ii})));return els}
 function mmMove(dir){
@@ -1516,6 +1519,9 @@ async function loadEPG(url){
 }
 function parseXMLTV(xml){const data={},doc=new DOMParser().parseFromString(xml,'text/xml');doc.querySelectorAll('programme').forEach(p=>{const ch=p.getAttribute('channel');if(!ch)return;if(!data[ch])data[ch]=[];data[ch].push({start:p.getAttribute('start'),stop:p.getAttribute('stop'),title:(p.querySelector('title')||{}).textContent||''})});return data}
 function getCurrentEPG(tvgId){if(!epgOn||!tvgId)return null;const ids=[tvgId];const m=/^(.+)@[^@]+$/.exec(tvgId);if(m)ids.push(m[1]);const now=Date.now();for(const id of ids){const l=epgData[id];if(!l)continue;const f=l.find(p=>{const s=parseET(p.start),e=parseET(p.stop);return s&&e&&now>=s&&now<=e});if(f)return f}return null}
+function epgIds(tvgId){const ids=[tvgId];const m=/^(.+)@[^@]+$/.exec(tvgId||'');if(m)ids.push(m[1]);return ids}
+function getNextEPG(tvgId){if(!epgOn||!tvgId)return null;const now=Date.now();for(const id of epgIds(tvgId)){const l=epgData[id];if(!l)continue;const f=l.find(p=>{const s=parseET(p.start);return s&&s>now});if(f)return f}return null}
+function fmtEPGTime(t){if(!t)return'';try{const p=new Intl.DateTimeFormat('de-DE',{timeZone:'Asia/Beirut',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date(t));const g=k=>{const x=p.find(y=>y.type===k);return x?x.value:'00'};return`${g('hour')}:${g('minute')}`}catch(e){const d=new Date(t);return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}}
 function parseET(t){if(!t)return null;const m=t.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s*([+-]\d{4})?/);if(!m)return null;return new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${m[7]||'+0000'}`).getTime()}
 
 /* ── Card-in animation helper (transition-based, Fire OS compatible) ── */

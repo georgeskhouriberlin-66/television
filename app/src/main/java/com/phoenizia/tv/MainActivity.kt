@@ -234,7 +234,7 @@ class MainActivity : ComponentActivity() {
                     val code = conn.responseCode
                     if (code != 200) {
                         conn.disconnect()
-                        val err = "HTTP $code from $url"
+                        val err = ("HTTP $code from $url").replace(Regex("[\\\\'\\r\\n]"), " ")
                         android.util.Log.e("PVTV", err)
                         activity.runOnUiThread {
                             activity.webView.evaluateJavascript(
@@ -262,14 +262,13 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     } else {
-                        val body = bytes.toString(Charsets.UTF_8)
-                        val escaped = body.replace("\\", "\\\\")
-                            .replace("'", "\\'")
-                            .replace("\n", "\\n")
-                            .replace("\r", "")
+                        // Base64 statt inline-String: String.replace() ohne Regex ersetzt nur
+                        // das ERSTE Vorkommen -> mehrzeilige Inhalte haben den JS-Callback
+                        // still sterben lassen (SyntaxError, kein Log). Die JS-Seite kann b64.
+                        val b64 = android.util.Base64.encodeToString(bytes, android.util.Base64.NO_WRAP)
                         activity.runOnUiThread {
                             activity.webView.evaluateJavascript(
-                                "window.__fetchResult && window.__fetchResult('$callbackId','$escaped',null)",
+                                "window.__fetchResult && window.__fetchResult('$callbackId',{b64:'$b64'},null)",
                                 null
                             )
                         }
@@ -277,7 +276,7 @@ class MainActivity : ComponentActivity() {
                 } catch (e: Exception) {
                     val msg = e.message ?: "unknown error"
                     android.util.Log.e("PVTV", "fetchUrl error: $msg (url=$url)")
-                    val safe = msg.replace("\\", "\\\\").replace("'", "\\'")
+                    val safe = msg.replace(Regex("[\\\\'\\r\\n]"), " ")
                     activity.runOnUiThread {
                         activity.webView.evaluateJavascript(
                             "window.__fetchResult && window.__fetchResult('$callbackId',null,'$safe')",
