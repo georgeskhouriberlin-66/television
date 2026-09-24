@@ -102,11 +102,13 @@ jobs:
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           cp app/src/main/assets/index.html /tmp/pv-index.html
           cp app/src/main/assets/hls.min.js /tmp/pv-hls.min.js
+          cp app/src/main/assets/logo.png /tmp/pv-logo.png
           git fetch origin gh-pages
           git checkout gh-pages
           cp /tmp/pv-index.html index.html
           cp /tmp/pv-hls.min.js hls.min.js
-          git add index.html hls.min.js
+          cp /tmp/pv-logo.png logo.png
+          git add index.html hls.min.js logo.png
           if git diff --quiet && git diff --staged --quiet; then
             echo "Pages aktuell"
             exit 0
