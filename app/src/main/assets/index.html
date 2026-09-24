@@ -1567,7 +1567,7 @@ function buildBuiltinGrid(){
     const isSel=sel.includes(pl.id)||!!loadedPl[pl.id];
     card.className='sc-card card-'+pl.id+(isSel?' sel':'');card.dataset.id=pl.id;card.tabIndex=0;
     const ico=icons[pl.id]||'\u{1F4FA}';
-    card.innerHTML='<div class="card-ico">'+ico+'</div><div class="card-name">'+esc(pl.name)+'</div><div class="card-chk">\u2713</div>';
+    card.innerHTML='<div class="card-ico">'+ico+'</div><div class="card-name">'+esc(pl.name.replace(/^[^\p{L}\p{N}]+/u,''))+'</div><div class="card-chk">\u2713</div>';
     card.addEventListener('click',()=>{card.classList.toggle('sel');updateChCounter();updateProgress()});
     builtinGrid.appendChild(card);
   });
