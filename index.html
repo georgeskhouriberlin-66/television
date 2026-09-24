@@ -108,8 +108,11 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 #ch-list{flex:1;overflow:hidden;display:flex;flex-direction:column;padding:10px 4%;gap:6px;justify-content:center}
 
 .ci{position:relative;display:flex;align-items:center;gap:10px;padding:16px 16px;cursor:pointer;outline:none;background:rgba(8,11,20,.92);border:1px solid rgba(255,255,255,.14);border-radius:var(--phz-r-md);opacity:1;flex-shrink:0;min-height:96px;width:100%;transition:background var(--phz-dur-fast),border-color var(--phz-dur-fast),min-height var(--phz-dur-med);overflow:hidden}
-.ci:hover{background:rgba(8,11,20,.97)}
+.ci:hover{background:rgba(8,11,20,.97);border-color:rgba(255,215,0,.45)}
 .ci.active{border-color:rgba(0,212,255,.22)}
+.ci.active:hover{border-color:rgba(0,212,255,.6)}
+.ci.near:hover{background:rgba(14,18,30,.98);border-color:rgba(255,215,0,.45)}
+.ci.far:hover{background:rgba(14,18,30,.96);border-color:rgba(255,215,0,.4)}
 .ci.near{background:rgba(8,11,20,.9);min-height:102px!important;padding:10px 16px}
 .ci.near .cn-name{font-size:17px}
 .ci.near .cl{width:44px;height:32px}
@@ -316,7 +319,7 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 #menu-btn:active{border-color:var(--acc)}
 #menu-btn.hidden{opacity:0;pointer-events:none}
 /* ── Web-Modus (Browser ohne Android-Bridge): Cursor an, Menü-Button sichtbar ── */
-body.webmode,body.webmode *{cursor:auto}
+body.webmode{cursor:auto}
 body.webmode #menu-btn{display:flex}
 #menu-btn svg{width:24px;height:24px}
 
@@ -1161,6 +1164,31 @@ $('video-bg').addEventListener('touchend',e=>{
   document.dispatchEvent(new KeyboardEvent('keydown',{key:dx<0?'ArrowRight':'ArrowLeft',bubbles:true,cancelable:true}));
 });
 $('video-bg').addEventListener('click',e=>{if(e.detail===1&&setup.classList.contains('off'))setTimeout(()=>{if(e.detail===1)toggleUI()},200)});
+
+/* ── Touchpad-Wheel: über Video = zappen, über offene Sidebar = Liste navigieren.
+   Überlays (Menü/Settings) lassen natives Scrollen zu. Throttle gegen Wild-Zappen. */
+let wheelAcc=0,wheelLock=0;
+document.addEventListener('wheel',e=>{
+  if(!setup.classList.contains('off'))return;
+  if(spOpen||mainMenu.classList.contains('open')||searchOv.classList.contains('open'))return;
+  const sb=document.getElementById('sidebar');
+  const overSidebar=sb.contains(e.target)&&sb.classList.contains('sb-open');
+  let dy=e.deltaY;
+  if(e.deltaMode===1)dy*=16;
+  else if(e.deltaMode===2)dy*=100;
+  wheelAcc+=dy;
+  const now=Date.now();
+  if(Math.abs(wheelAcc)<60||now<wheelLock)return;
+  wheelLock=now+350;
+  const dir=wheelAcc>0?1:-1;
+  wheelAcc=0;
+  e.preventDefault();
+  if(overSidebar){
+    document.dispatchEvent(new KeyboardEvent('keydown',{key:dir>0?'ArrowDown':'ArrowUp',bubbles:true,cancelable:true}));
+  }else{
+    document.dispatchEvent(new KeyboardEvent('keydown',{key:dir>0?'ArrowRight':'ArrowLeft',bubbles:true,cancelable:true}));
+  }
+},{passive:false});
 
 /* ── Setup Fokus-Navigation (Fernbedienung) ── */
 let setupCards=[],setupSelIdx=0,setupTail=[];
