@@ -25,6 +25,7 @@ html,body{height:100%;overflow:hidden;background:#000;color:var(--txt);font-fami
 /* ── Video ── */
 #video-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;background:#000;touch-action:none}
 video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#000;transform:scale(1.04);transform-origin:center}
+video.stretch{object-fit:fill}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
@@ -1003,9 +1004,18 @@ function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback
 function showVideoOnFirstFrame(){clearTimeout(vid._showT);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);vid._showT=setTimeout(()=>{vid.style.opacity='1';loadOv.classList.remove('show')},350)},{once:true})}
 
 /* ── Player ── */
+/* Sender, die seitlich gestreckt werden (4:3 → randlos). Einträge: Name- oder
+   tvgId-Teilstring, case-insensitive. */
+const stretchChannels=['tele liban','teleliban'];
+function isStretchCh(ch){
+  if(!ch)return false;
+  const hay=((ch.name||'')+' '+(ch.tvgId||'')).toLowerCase();
+  return stretchChannels.some(s=>hay.includes(s));
+}
 function playChannel(ch){
   console.log('PVTV PLAY: name='+(ch?ch.name:'null')+' urls='+(ch&&ch.urls?ch.urls.length:0));
   activeCh=ch;ch._v=null;vid.muted=false;aud.pause();aud.src='';if(typeof Android!=='undefined')Android.stopAudio();
+  vid.classList.toggle('stretch',isStretchCh(ch));
   $('radio-logo').classList.remove('show');
   ss(LS.CCH,{plId:activePlId,url:ch.urls[0]});
   focusIdx=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);
