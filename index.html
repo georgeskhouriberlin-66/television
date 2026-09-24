@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#000">
+<link rel="icon" href="logo.png">
 <title>Phoenicia Television</title>
 <script src="hls.min.js"></script>
 <style>
@@ -1032,7 +1033,9 @@ function showChInfo(ch){
 }
 
 function buildVariants(ch){
-  return [...ch.urls];
+  const base=[...ch.urls];
+  if(typeof WEBMODE!=='undefined'&&WEBMODE){const up=[];for(const u of base){if(typeof u==='string'&&u.startsWith('http://'))up.push(u.replace('http://','https://'));up.push(u)}return up}
+  return base;
 }
 
 function tryStream(ch,idx){
