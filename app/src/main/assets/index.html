@@ -195,7 +195,7 @@ video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
 
 /* ── Settings Panel ── */
 #sp{position:fixed;top:20px;left:25%;bottom:20px;z-index:40;width:50%;background:rgba(8,12,22,.98);border:1px solid rgba(255,255,255,.1);border-radius:var(--phz-r-lg);box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(-8px) scale(.97);opacity:0;pointer-events:none;transition:transform var(--phz-dur-med) cubic-bezier(.16,1,.3,1),opacity var(--phz-dur-fast);overflow-y:auto;display:flex;flex-direction:column}
-#sp.open{transform:none;opacity:1;pointer-events:all}
+#sp.open{transform:none;opacity:1;pointer-events:all;z-index:70}
 .sp-hd{padding:20px 26px 16px;font-size:14px;font-family:var(--fm);letter-spacing:.18em;text-transform:uppercase;color:var(--txt2);border-bottom:1px solid rgba(255,255,255,.07)}
 .si{display:flex;align-items:center;gap:16px;padding:18px 26px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);transition:background var(--phz-dur-fast);outline:none;opacity:0}
 .si:last-child{border:none}
@@ -899,7 +899,7 @@ async function loadPlaylist(pl,autoPlay=true){
     setScSt('err','⚠ '+e.message);
     showSidebarError('Playlist „'+pl.name+'“ konnte nicht geladen werden.<br>'+e.message);
     uiOpen=true;ui.classList.add('show');
-    if(!WEBMODE&&!TOUCHY)document.getElementById('menu-btn').classList.add('hidden');
+    if(!WEBMODE||TOUCHY)document.getElementById('menu-btn').classList.add('hidden');
     else{menuBtn.classList.remove('hidden');if(fsBtn)fsBtn.classList.remove('hidden');if(TOUCHY)openSidebar()}
     clearTimeout(window._hideUITimer);
   }
@@ -1072,6 +1072,7 @@ function appendMobileMore(){
 }
 function tileLongStart(e){
   if(!TOUCHY)return;
+  lastTouchTs=Date.now();
   const wrap=e.target&&e.target.closest?e.target.closest('.ci'):null;
   if(!wrap||!wrap._ch)return;
   const ch=wrap._ch;
@@ -1218,7 +1219,7 @@ const TOUCHY=(window.matchMedia&&matchMedia('(pointer:coarse)').matches||navigat
 if(TOUCHY)document.body.classList.add('touchy');
 const MOBILE_CHUNK=80;
 let mobileCap=MOBILE_CHUNK,listVer=0;
-let tapSuppressUntil=0,lastTapTs=0,mTapTimer=0,tchTimer=0,tchSX=0,tchSY=0,tchLong=false,tileLongTimer=0;
+let tapSuppressUntil=0,lastTapTs=0,mTapTimer=0,tchTimer=0,tchSX=0,tchSY=0,tchLong=false,tileLongTimer=0,lastTouchTs=0;
 const menuBtn=document.getElementById('menu-btn'),fsBtn=document.getElementById('fs-btn');
 function uiBlocked(){return spOpen||mainMenu.classList.contains('open')||document.getElementById('sidebar').classList.contains('sb-open')}
 function armUIHide(ms){clearTimeout(uiTimer);uiTimer=setTimeout(()=>{if(!uiBlocked())hideUI()},ms)}
@@ -1226,8 +1227,8 @@ let deskBtnTimer=0;
 function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||!WEBMODE||TOUCHY)return;menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');clearTimeout(deskBtnTimer);deskBtnTimer=setTimeout(()=>{menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')},3000)}
 
 /* ── UI ── */
-function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE&&!TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();if(!spOpen)armUIHide(4000)}
-function hideUI(){if(spOpen||mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE&&!TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
+function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();if(!spOpen)armUIHide(4000)}
+function hideUI(){if(spOpen||mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE||TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
 function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open')}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen&&!spOpen)armUIHide(4000)}
 function toggleUI(){uiOpen?hideUI():showUI()}
@@ -1335,6 +1336,7 @@ function stageTap(){
 }
 function stageTouchstart(e){
   if(e.touches.length!==1)return;
+  lastTouchTs=Date.now();
   if(e.target.closest&&e.target.closest('#sidebar'))return;
   if(!setup.classList.contains('off'))return;
   tchSX=e.touches[0].clientX;tchSY=e.touches[0].clientY;tchLong=false;
@@ -1762,6 +1764,8 @@ window.__dpad = function(k, code, kc){
 
 /* ── Maus-Auto-Hide ── */
 document.addEventListener('mousemove',()=>{
+  if(TOUCHY)return;
+  if(Date.now()-lastTouchTs<1500)return;
   if(setup.classList.contains('off')&&!spOpen){
     if(!uiOpen)showUI();else{armUIHide(4000)}pokeDeskBtns()}
 });
