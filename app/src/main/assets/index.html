@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#000">
 <link rel="icon" href="logo.png">
@@ -439,12 +440,25 @@ body.touchy{cursor:auto;-webkit-user-select:none;user-select:none;-webkit-touch-
 body.touchy input{-webkit-user-select:text;user-select:text}
 body.touchy #ui-right{display:none}
 body.touchy #ui{background:transparent}
-body.touchy #sidebar{position:fixed;left:0;right:0;bottom:0;top:auto;width:100vw;height:70vh;border-radius:18px 18px 0 0;background:rgba(4,7,14,.93);box-shadow:0 -12px 44px rgba(0,0,0,.7);transform:translateY(100%);transition:transform var(--phz-dur-slow) cubic-bezier(.16,1,.3,1);z-index:70}
+body.touchy #sidebar{position:fixed;left:0;right:0;bottom:0;top:auto;width:100vw;height:70vh;border-radius:18px 18px 0 0;background:rgba(4,7,14,.88);box-shadow:0 -12px 44px rgba(0,0,0,.7);transform:translateY(100%);transition:transform var(--phz-dur-slow) cubic-bezier(.16,1,.3,1);z-index:70}
 body.touchy #sidebar.sb-open{transform:translateY(0);pointer-events:all}
 body.touchy #sidebar::before{content:'';display:block;flex-shrink:0;width:44px;height:4px;border-radius:2px;background:rgba(255,255,255,.25);margin:10px auto 4px}
 body.touchy .sb-nav-hint{display:none}
 body.touchy #ch-list{flex:1;overflow-y:auto;overflow-x:hidden;justify-content:flex-start;padding:8px 3%;gap:6px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 body.touchy .ci{padding:12px;min-height:82px;gap:10px}
+body.touchy .ci.focused{min-height:104px}
+body.touchy .ci.focused .cn-name{font-size:16px;font-weight:800}
+body.touchy .ci.focused .cl{width:40px;height:28px}
+body.touchy .ci.focused .clf{font-size:16px}
+body.touchy .ci.focused .cn-num{font-size:22px;font-weight:800}
+body.touchy .ci.near{min-height:70px}
+body.touchy .ci.near .cn-name{font-size:14px}
+body.touchy .ci.near .cl{width:32px;height:22px}
+body.touchy .ci.far{min-height:52px;padding:8px 12px}
+body.touchy .ci.far .cn-name{font-size:12px;font-weight:400}
+body.touchy .ci.far .cl{width:26px;height:18px}
+body.touchy .ci.far .clf{font-size:11px}
+body.touchy .ci.far .cn-epg{display:none}
 body.touchy .cn-name{font-size:14px}
 body.touchy .cl{width:36px;height:26px;border-radius:var(--phz-r-sm)}
 body.touchy .clf{font-size:14px}
@@ -476,7 +490,7 @@ body.touchy .ns-ico{font-size:48px}
 body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16px;text-align:center}
 </style>
 </head>
-<body>
+<body translate="no">
 <div id="video-bg">
   <video id="vid" tabindex="-1" playsinline webkit-playsinline x5-playsinline autoplay></video>
   <audio id="aud" preload="auto"></audio>
@@ -1006,11 +1020,20 @@ function mobileEpgText(ch){
   if(nx){const s=parseET(nx.start);return'▸ '+fmtEPGTime(s)+' '+nx.title}
   return'';
 }
+function mobileTileCls(idx,chFav,isActive){
+  let cls='ci';
+  if(idx===focusIdx)cls+=' focused';
+  else if(Math.abs(idx-focusIdx)===1)cls+=' near';
+  else cls+=' far';
+  if(chFav)cls+=' fav';
+  if(isActive)cls+=' active';
+  return cls;
+}
 function makeMobileTile(ch,idx){
   const wrap=document.createElement('div');
   const chFav=isFav(ch.urls[0]);
   const isActive=!!(activeCh&&activeCh.urls[0]===ch.urls[0]);
-  wrap.className='ci'+(chFav?' fav':'')+(isActive?' active':'');
+  wrap.className=mobileTileCls(idx,chFav,isActive);
   wrap.dataset.url=ch.urls[0];wrap._ch=ch;
   const logo=document.createElement('div');logo.className='cl';
   const logoSrc=ch.logo?proxyLogo(ch.logo):'';
@@ -1023,32 +1046,36 @@ function makeMobileTile(ch,idx){
   }else{const fb=document.createElement('span');fb.className='clf';fb.textContent='📺';logo.appendChild(fb)}
   const cn=document.createElement('div');cn.className='cn';
   const cnName=document.createElement('div');cnName.className='cn-name';cnName.textContent=ch.name;
-  const cnEpg=document.createElement('div');cnEpg.className='cn-epg';cnEpg.textContent=mobileEpgText(ch);
+  const cnEpg=document.createElement('div');cnEpg.className='cn-epg';cnEpg.textContent=(idx===focusIdx||Math.abs(idx-focusIdx)===1)?mobileEpgText(ch):'';
   cn.appendChild(cnName);cn.appendChild(cnEpg);
   const num=document.createElement('span');num.className='cn-num';num.textContent=(idx+1);
-  const star=document.createElement('span');star.className='fs';star.textContent=chFav?'★':'☆';star.style.display=chFav?'':'none';
+  const star=document.createElement('span');star.className='fs';star.textContent=chFav?'★':'☆';star.style.display=(idx===focusIdx||chFav)?'':'none';
   const bdg=document.createElement('span');const fl=[];if(ch.geo)fl.push('Geo');if(ch.part)fl.push('Not 24/7');
   bdg.textContent=fl.join(' · ');bdg.className='ci-badge'+(ch.geo?' geo':fl.length?' part':'');
   wrap.appendChild(logo);wrap.appendChild(cn);wrap.appendChild(num);wrap.appendChild(star);wrap.appendChild(bdg);
   wrap.onclick=e=>{
     if(Date.now()<tapSuppressUntil)return;
     if(e.target===star||star.contains(e.target))return;
-    playChannel(ch);hideUI();
+    playChannel(ch);renderTiles();hideUI();
   };
   star.onclick=e=>{e.stopPropagation();togFav(ch.urls[0]);const on=isFav(ch.urls[0]);star.textContent=on?'★':'☆';star.style.display=on?'':'none';wrap.classList.toggle('fav',on);toast(on?'★ Favorit':'☆ Entfernt')};
   return wrap;
 }
 function refreshMobileTiles(){
-  chList.querySelectorAll('.ci').forEach(w=>{
-    const ch=w._ch;if(!ch)return;
+  const kids=chList.children;
+  for(let i=0;i<kids.length;i++){
+    const w=kids[i];
+    if(!w.classList||!w.classList.contains('ci'))continue;
+    const ch=w._ch;if(!ch)continue;
+    const idx=flatCh.indexOf(ch);
     const on=isFav(ch.urls[0]);
-    w.classList.toggle('fav',on);
-    w.classList.toggle('active',!!(activeCh&&activeCh.urls[0]===ch.urls[0]));
+    const active=!!(activeCh&&activeCh.urls[0]===ch.urls[0]);
+    w.className=mobileTileCls(idx<0?i:idx,on,active);
     const star=w.querySelector('.fs');
-    if(star){star.textContent=on?'★':'☆';star.style.display=on?'':'none'}
+    if(star){star.textContent=on?'★':'☆';star.style.display=(idx===focusIdx||on)?'':'none'}
     const ep=w.querySelector('.cn-epg');
-    if(ep)ep.textContent=mobileEpgText(ch);
-  });
+    if(ep)ep.textContent=(idx===focusIdx||Math.abs(idx-focusIdx)===1)?mobileEpgText(ch):'';
+  }
 }
 function renderTilesMobile(){
   if(!flatCh.length){chList.innerHTML='<div style="padding:24px;text-align:center;color:var(--txt3);font-size:16px">'+(showFavs?'Keine Favoriten.':'Nichts gefunden.')+'</div>';chList._sig='';return}
@@ -1229,7 +1256,7 @@ function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||!WEBMODE||TOUCHY)return
 /* ── UI ── */
 function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();if(!spOpen)armUIHide(4000)}
 function hideUI(){if(spOpen||mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE||TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
-function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open')}
+function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open');if(TOUCHY){const f=chList.querySelector('.ci.focused');if(f)f.scrollIntoView({block:'nearest'})}}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen&&!spOpen)armUIHide(4000)}
 function toggleUI(){uiOpen?hideUI():showUI()}
 
