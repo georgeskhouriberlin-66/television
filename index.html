@@ -899,7 +899,7 @@ async function loadPlaylist(pl,autoPlay=true){
     setScSt('err','⚠ '+e.message);
     showSidebarError('Playlist „'+pl.name+'“ konnte nicht geladen werden.<br>'+e.message);
     uiOpen=true;ui.classList.add('show');
-    if(!WEBMODE)document.getElementById('menu-btn').classList.add('hidden');
+    if(!WEBMODE&&!TOUCHY)document.getElementById('menu-btn').classList.add('hidden');
     else{menuBtn.classList.remove('hidden');if(fsBtn)fsBtn.classList.remove('hidden');if(TOUCHY)openSidebar()}
     clearTimeout(window._hideUITimer);
   }
@@ -1224,8 +1224,8 @@ function uiBlocked(){return spOpen||mainMenu.classList.contains('open')||documen
 function armUIHide(ms){clearTimeout(uiTimer);uiTimer=setTimeout(()=>{if(!uiBlocked())hideUI()},ms)}
 
 /* ── UI ── */
-function showUI(){uiOpen=true;ui.classList.add('show');menuBtn.classList.add('hidden');fsBtn.classList.add('hidden');chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();if(!spOpen)armUIHide(4000)}
-function hideUI(){if(spOpen||mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
+function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE&&!TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();if(!spOpen)armUIHide(4000)}
+function hideUI(){if(spOpen||mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE&&!TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden')}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
 function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open')}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen&&!spOpen)armUIHide(4000)}
 function toggleUI(){uiOpen?hideUI():showUI()}
@@ -1646,7 +1646,7 @@ function mmAction(el){
   closeMainMenu();
   if(action==='search')showSearchOverlay();
   if(action==='favorites'){showFavs=!showFavs;ss(LS.FAV,showFavs);renderList();toast(showFavs?'Nur Favoriten':'Alle Sender')}
-  if(action==='settings')openSP();
+  if(action==='settings')setTimeout(openSP,0);
 }
 
 const searchOv=document.getElementById('search-ov');
