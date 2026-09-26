@@ -343,10 +343,14 @@ body.webmode .mm-close{display:flex}
 #main-menu{position:fixed;inset:0;z-index:90;background:rgba(6,10,20,.98);display:none;flex-direction:column;align-items:center;justify-content:flex-start;animation:fadeIn .25s ease;overflow-y:auto;overflow-x:hidden;padding:40px 5% 40px}
 #main-menu.open{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.mm-header{display:flex;align-items:center;gap:16px;margin-bottom:32px}
-.mm-logo{width:auto;height:56px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.6)}
-.mm-title{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.02em}
+.mm-header{display:flex;align-items:center;gap:18px;margin-bottom:20px;width:100%}
+.mm-logo{width:auto;height:90px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.6)}
+.mm-title{font-size:36px;font-weight:900;color:#fff;letter-spacing:-.02em}
 .mm-sub{font-size:14px;color:var(--txt2);line-height:1.4;font-weight:400;margin-top:2px}
+.mm-gear{margin-left:auto;width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:2px solid transparent;border-radius:var(--phz-r-lg);color:#fff;cursor:pointer;outline:none;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast),box-shadow var(--phz-dur-fast);-webkit-tap-highlight-color:transparent}
+.mm-gear svg{width:26px;height:26px}
+.mm-gear.focused{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.mm-gear:hover{transform:scale(1.06)}
 .mm-section{width:100%;max-width:none;margin-bottom:24px}
 .mm-section-title{font-family:var(--fc);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt2);margin-bottom:12px;padding-left:4px}
 
@@ -362,8 +366,8 @@ body.webmode .mm-close{display:flex}
   background:linear-gradient(135deg,#333 0%,#111 100%);opacity:0
 }
 .mm-card::before{content:'';position:absolute;inset:0;opacity:.18;transition:opacity var(--phz-dur-fast);pointer-events:none}
-.mm-card:hover::before{opacity:.28}
-.mm-card.focused{border-color:#fff;box-shadow:0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5);transform:scale(1.04)}
+.mm-card.focused{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.mm-card:hover{transform:scale(1.04)}
 .mm-card:active{transform:scale(0.97)}
 .mm-card .card-ico{font-size:28px;margin-bottom:6px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
 .mm-card .card-name{font-size:14px;font-weight:800;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);line-height:1.2}
@@ -386,38 +390,48 @@ body.webmode .mm-close{display:flex}
 #builtin-grid .sc-card .card-name{font-size:11px}
 #builtin-grid .sc-card .card-chk{width:20px;height:20px;font-size:11px;top:6px;right:6px}
 
-/* ── Accordion ── */
-.mm-accordion{width:100%}
-.mm-accordion-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 16px;background:rgba(255,255,255,.04);
-  border:1.5px solid rgba(255,255,255,.1);border-radius:var(--phz-r-md);
-  cursor:pointer;transition:all var(--phz-dur-fast);outline:none;
-}
-.mm-accordion-header:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
-.mm-accordion-header.focused{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc);background:rgba(0,212,255,.12)}
-.mm-accordion-header .acc-label{font-size:13px;font-weight:700;color:var(--txt2)}
-.mm-accordion-header .acc-icon{font-size:18px;color:var(--txt3);transition:transform var(--phz-dur-fast)}
-.mm-accordion-header.open .acc-icon{transform:rotate(180deg)}
-.mm-accordion-content{
-  max-height:0;overflow:hidden;transition:max-height var(--phz-dur-slow) cubic-bezier(0.23,1,0.32,1);
-  background:rgba(255,255,255,.02);border-radius:0 0 var(--phz-r-md) var(--phz-r-md);
-  border:1.5px solid transparent;border-top:none;
-}
-.mm-accordion-content.open{max-height:300px;border-color:rgba(255,255,255,.1)}
-.mm-accordion-inner{padding:12px 16px}
-.mm-categories{display:flex;flex-wrap:wrap;gap:8px}
-.mm-cat-pill{padding:8px 14px;font-size:12px;font-weight:600;border-radius:20px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);color:var(--txt2);cursor:pointer;transition:all var(--phz-dur-fast);outline:none;white-space:nowrap}
-.mm-cat-pill:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
-.mm-cat-pill.focused{background:rgba(0,212,255,.12);border-color:var(--acc);box-shadow:0 0 0 2px var(--acc);color:#fff}
-.mm-cat-pill.active{background:rgba(0,212,255,.18);border-color:var(--acc);color:#fff}
-.mm-global-row{display:flex;align-items:center;gap:10px;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,.03);border-radius:var(--phz-r-md);border:1.5px solid rgba(255,255,255,.06)}
-.mm-global-label{font-size:12px;color:var(--txt2)}
-.mm-global-chk{position:relative;width:36px;height:20px;background:rgba(255,255,255,.1);border-radius:10px;cursor:pointer;transition:background var(--phz-dur-fast);outline:none;border:1.5px solid rgba(255,255,255,.1)}
-.mm-global-chk.focused{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
-.mm-global-chk.on{background:var(--acc)}
+/* ── Kategorien-Reihe (unter Logo) ── */
+.mm-cats{display:flex;align-items:center;gap:12px;width:100%;margin-bottom:20px}
+.mm-cat-pills{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1;padding:4px 2px;-webkit-overflow-scrolling:touch}
+.mm-cat-pills::-webkit-scrollbar{display:none}
+.mm-cat-pill{padding:8px 14px;font-size:12px;font-weight:600;border-radius:20px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);color:var(--txt2);cursor:pointer;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast),box-shadow var(--phz-dur-fast);outline:none;white-space:nowrap}
+.mm-cat-pill:hover{transform:scale(1.05)}
+.mm-cat-pill.focused{background:rgba(245,194,24,.14);border-color:var(--gold);box-shadow:0 0 0 2px var(--gold);color:#fff}
+.mm-cat-pill.active{background:rgba(245,194,24,.2);border-color:var(--gold);color:#fff}
+.mm-global-chk{position:relative;width:36px;height:20px;flex-shrink:0;background:rgba(255,255,255,.1);border-radius:10px;cursor:pointer;transition:background var(--phz-dur-fast);outline:none;border:1.5px solid rgba(255,255,255,.1)}
+.mm-global-chk.focused{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.mm-global-chk.on{background:var(--gold)}
 .mm-global-chk::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform var(--phz-dur-fast)}
 .mm-global-chk.on::after{transform:translateX(16px)}
+
+/* ── 2-Spalten-Layout ── */
+.mm-cols{display:flex;gap:20px;width:100%;align-items:flex-start}
+.mm-nav{display:flex;flex-direction:column;gap:14px;flex:0 0 250px}
+.mm-main{flex:1;min-width:0}
+.mm-nav-card{display:flex;flex-direction:row;align-items:center;gap:14px;min-height:78px;border-radius:var(--phz-r-lg);padding:12px 16px;border:2px solid transparent;cursor:pointer;outline:none;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast),box-shadow var(--phz-dur-fast);-webkit-tap-highlight-color:transparent;opacity:0}
+.mm-nav-card .card-ico svg{width:30px;height:30px;display:block}
+.mm-nav-card .card-name{font-size:20px;font-weight:800;line-height:1.2}
+.mm-nav-card.card-pls{background:#F54F1B;color:#fff}
+.mm-nav-card.card-fav{background:#C8BEFA;color:#151130}
+.mm-nav-card.card-search{background:#151130;color:#fff;border-color:rgba(255,255,255,.14)}
+.mm-nav-card.focused{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.mm-nav-card:hover{transform:scale(1.03)}
+.mm-nav-card:active{transform:scale(.98)}
+.mm-cur{margin-top:16px;display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:var(--phz-r-lg);cursor:pointer;outline:none;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast)}
+.mm-cur-lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt2);font-family:var(--fc)}
+.mm-cur-name{font-size:18px;font-weight:800;color:#fff}
+.mm-cur-count{margin-left:auto;font-size:12px;font-weight:700;color:var(--txt2);border:1.5px solid rgba(255,255,255,.25);border-radius:11px;padding:2px 9px;white-space:nowrap}
+.mm-cur.focused{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.mm-cur:hover{transform:scale(1.02)}
+
+/* ── Touch: Spalten stapeln ── */
+body.touchy .mm-cols{flex-direction:column}
+body.touchy .mm-nav{flex-direction:row;flex:none;width:100%}
+body.touchy .mm-nav-card{flex:1;min-width:0;min-height:64px;padding:8px 10px;gap:8px}
+body.touchy .mm-nav-card .card-name{font-size:15px}
+body.touchy .mm-nav-card .card-ico svg{width:24px;height:24px}
+body.touchy .mm-logo{height:64px}
+body.touchy .mm-title{font-size:26px}
 .mm-hint{margin-top:16px;font-size:11px;color:var(--txt3);font-family:var(--fm);letter-spacing:.06em;text-align:center}
 
 /* ══════════════════════════
@@ -550,30 +564,21 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
       <div class="mm-title">Phoenicia Television</div>
       <div class="mm-sub">Hauptmenü</div>
     </div>
+    <button class="mm-gear" id="mm-gear" aria-label="Einstellungen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg></button>
   </div>
+  <div class="mm-cats"><div class="mm-cat-pills" id="mm-cat-pills"></div><div class="mm-global-chk" id="mm-global-chk" title="Für alle Playlisten"></div></div>
 
-  <div class="mm-section">
-    <div class="mm-section-title">Aktionen</div>
-    <div class="mm-cards" id="mm-action-cards"></div>
-  </div>
-
-  <div class="mm-section">
-    <div class="mm-section-title">Playlisten</div>
-    <div class="mm-cards" id="mm-playlist-cards"></div>
-  </div>
-
-  <div class="mm-section mm-accordion" id="mm-accordion">
-    <div class="mm-accordion-header" id="mm-accordion-header">
-      <span class="acc-label">Kategorien</span>
-      <span class="acc-icon">▾</span>
-    </div>
-    <div class="mm-accordion-content" id="mm-accordion-content">
-      <div class="mm-accordion-inner">
-        <div class="mm-categories" id="mm-categories"></div>
-        <div class="mm-global-row">
-          <span class="mm-global-label">Für alle Playlisten</span>
-          <div class="mm-global-chk" id="mm-global-chk" tabindex="0"></div>
-        </div>
+  <div class="mm-cols">
+    <div class="mm-nav" id="mm-nav-cards"></div>
+    <div class="mm-main">
+      <div class="mm-section">
+        <div class="mm-section-title">Playlisten</div>
+        <div class="mm-cards mm-pl-grid" id="mm-playlist-cards"></div>
+      </div>
+      <div class="mm-cur" id="mm-cur-panel" role="button" tabindex="0" aria-label="Aktuelle Playlist">
+        <span class="mm-cur-lbl">Aktuell Playlist</span>
+        <span class="mm-cur-name" id="mm-cur-name">–</span>
+        <span class="mm-cur-count" id="mm-cur-count"></span>
       </div>
     </div>
   </div>
@@ -584,7 +589,7 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 <!-- Search Overlay -->
 <div id="search-ov">
   <div class="so-head">
-    <input type="text" id="so-input" placeholder="Sender suchen..." autocomplete="off">
+    <input type="text" id="so-input" placeholder="Sender suchen..." autocomplete="off" inputmode="search" enterkeyhint="search">
     <button class="so-close" id="so-close">✕</button>
   </div>
   <div class="so-results" id="so-results"></div>
@@ -1566,39 +1571,43 @@ function navZoneEnter(){
 
 /* ── Main Menu ── */
 const mainMenu=document.getElementById('main-menu');
-const mmActionCards=document.getElementById('mm-action-cards');
+const mmNavCards=document.getElementById('mm-nav-cards');
 const mmPlaylistCards=document.getElementById('mm-playlist-cards');
-const mmAccordionHeader=document.getElementById('mm-accordion-header');
-const mmAccordionContent=document.getElementById('mm-accordion-content');
-const mmCategories=document.getElementById('mm-categories');
+const mmCatPills=document.getElementById('mm-cat-pills');
 const mmGlobalChk=document.getElementById('mm-global-chk');
+const mmGear=document.getElementById('mm-gear');
+const mmCurPanel=document.getElementById('mm-cur-panel');
+const mmCurName=document.getElementById('mm-cur-name');
+const mmCurCount=document.getElementById('mm-cur-count');
+const ICON_MM_PLS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="4.5" cy="6" r="1.4" fill="currentColor" stroke="none"/><circle cx="4.5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="4.5" cy="18" r="1.4" fill="currentColor" stroke="none"/><path d="M10 4.5 Q12.5 6 10 7.5 Q12.5 9 10 10.5 Q12.5 12 10 13.5 Q12.5 15 10 16.5 Q12.5 18 10 19.5"/><path d="M15 4.5 Q17.5 6 15 7.5 Q17.5 9 15 10.5 Q17.5 12 15 13.5 Q17.5 15 15 16.5 Q17.5 18 15 19.5"/><path d="M20 4.5 Q22.5 6 20 7.5 Q22.5 9 20 10.5 Q22.5 12 20 13.5 Q22.5 15 20 16.5 Q22.5 18 20 19.5"/></svg>';
+const ICON_MM_FAV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.5 9.7l5.9-.8z"/></svg>';
+const ICON_MM_SEARCH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L20.5 20.5"/></svg>';
 let mmSections=[];
 let mmSecIdx=0;
 let mmItemIdx=0;
 let globalCatOn=gs('mm_global_cat')==='1';
-let mmAccordionOpen=false;
 function buildMainMenu(){
-  mmActionCards.innerHTML='';
+  mmNavCards.innerHTML='';
   mmPlaylistCards.innerHTML='';
-  mmCategories.innerHTML='';
-  const secActions=[];
+  mmCatPills.innerHTML='';
+  const secNav=[];
   const secPlaylists=[];
-  const secAccHeader=[];
   const secCats=[];
-  // Action cards
-  const actions=[
-    {icon:'🔍',name:'Suche',action:'search',cls:'card-search'},
-    {icon:'★',name:'Favoriten',action:'favorites',cls:'card-fav'},
-    {icon:'⚙',name:'Einstellungen',action:'settings',cls:'card-settings'}
+  const secCur=[mmCurPanel];
+  // Nav cards
+  const navDefs=[
+    {icon:ICON_MM_PLS,name:'Playlisten',nav:'playlists',cls:'card-pls'},
+    {icon:ICON_MM_FAV,name:'Nur Favoriten',nav:'favorites',cls:'card-fav'},
+    {icon:ICON_MM_SEARCH,name:'Suche',nav:'search',cls:'card-search'}
   ];
-  actions.forEach(a=>{
+  navDefs.forEach(a=>{
     const t=document.createElement('div');
-    t.className='mm-card '+a.cls;
+    t.className='mm-nav-card '+a.cls;
     t.innerHTML=`<span class="card-ico">${a.icon}</span><span class="card-name">${a.name}</span>`;
-    t.dataset.action=a.action;
+    t.dataset.nav=a.nav;
     t.addEventListener('click',()=>mmAction(t));
-    mmActionCards.appendChild(t);
-    secActions.push(t);
+    mmNavCards.appendChild(t);
+    secNav.push(t);
   });
   // Playlist cards (filtered by LS.SEL)
   const sel=gs(LS.SEL)||BUILTIN.map(p=>p.id);
@@ -1622,11 +1631,7 @@ function buildMainMenu(){
     mmPlaylistCards.appendChild(t);
     secPlaylists.push(t);
   });
-  // Accordion header
-  secAccHeader.push(mmAccordionHeader);
-  mmAccordionHeader.classList.toggle('open',mmAccordionOpen);
-  mmAccordionContent.classList.toggle('open',mmAccordionOpen);
-  // Categories (inside accordion)
+  // Categories (top row, under logo)
   const source=showFavs?allCh.filter(c=>isFav(c.urls[0])):allCh;
   const groups=[...new Set(source.map(c=>c.group||'Weitere'))].sort();
   groups.forEach(g=>{
@@ -1634,25 +1639,23 @@ function buildMainMenu(){
     pill.className='mm-cat-pill'+(activeCat===g?' active':'');
     pill.textContent=g;
     pill.dataset.cat=g;
-    pill.addEventListener('click',()=>{
-      activeCat=activeCat===g?'':g;
-      buildMainMenu();
-      renderList();
-    });
-    mmCategories.appendChild(pill);
+    pill.addEventListener('click',()=>mmAction(pill));
+    mmCatPills.appendChild(pill);
     secCats.push(pill);
   });
   mmGlobalChk.classList.toggle('on',globalCatOn);
-  mmGlobalChk.onclick=()=>{globalCatOn=!globalCatOn;ss('mm_global_cat',globalCatOn?'1':'0');mmGlobalChk.classList.toggle('on',globalCatOn)};
+  mmGlobalChk.onclick=()=>mmAction(mmGlobalChk);
   secCats.push(mmGlobalChk);
-  mmAccordionHeader.onclick=()=>{mmAccordionOpen=!mmAccordionOpen;buildMainMenu()};
-  // Build sections: actions | playlists | accordion-header | (accordion-content if open)
-  mmSections=[secActions,secPlaylists,secAccHeader];
-  if(mmAccordionOpen&&secCats.length>0)mmSections.push(secCats);
+  // Aktuell-Panel
+  const curPl=allPls.find(p=>p.id===activePlId)||allPls[0];
+  mmCurName.textContent=curPl?curPl.name.replace(/^[^\p{L}\p{N}]+/u,''):'–';
+  const _curCnt=curPl?((gs('pl_counts')||{})[curPl.id]||flatCh.length):0;
+  mmCurCount.textContent=_curCnt?(_curCnt+' Sender'):'';
+  mmSections=[secNav,secCats,secPlaylists,secCur];
   if(mmSecIdx>=mmSections.length)mmSecIdx=mmSections.length-1;
   if(mmItemIdx>=mmSections[mmSecIdx].length)mmItemIdx=mmSections[mmSecIdx].length-1;
 }
-function openMainMenu(){navHistory.push('menu');buildMainMenu();mainMenu.classList.add('open');mmSecIdx=0;mmItemIdx=0;mmFocus();triggerCardIn(mmActionCards,'.mm-card');triggerCardIn(mmPlaylistCards,'.mm-card')}
+function openMainMenu(){navHistory.push('menu');buildMainMenu();mainMenu.classList.add('open');mmSecIdx=0;mmItemIdx=0;mmFocus();triggerCardIn(mmNavCards,'.mm-nav-card');triggerCardIn(mmPlaylistCards,'.mm-card')}
 function closeMainMenu(){mainMenu.classList.remove('open');clearZoneFocus();if(!uiOpen)showUI();else if(!uiBlocked())armUIHide(4000);navZone='list';renderTiles();navHistory=navHistory.filter(s=>s!=='menu')}
 function mmFocus(){mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>{
   const focused=si===mmSecIdx&&ii===mmItemIdx;
@@ -1670,17 +1673,21 @@ function mmMove(dir){
   mmSecIdx=target.si;mmItemIdx=target.ii;mmFocus();
 }
 function mmAction(el){
+  if(!el)return;
   if(el===mmGlobalChk){globalCatOn=!globalCatOn;ss('mm_global_cat',globalCatOn?'1':'0');mmGlobalChk.classList.toggle('on',globalCatOn);return}
-  if(el===mmAccordionHeader){mmAccordionOpen=!mmAccordionOpen;buildMainMenu();return}
+  if(el===mmGear){closeMainMenu();setTimeout(openSP,0);return}
+  if(el===mmCurPanel){closeMainMenu();return}
   if(el.dataset.plId){closeMainMenu();const pl=allPls.find(p=>p.id===el.dataset.plId);if(pl)loadPlaylist(pl).catch(e=>{console.error('loadPlaylist failed:',e)});return}
-  if(el.dataset.cat){activeCat=activeCat===el.dataset.cat?'':el.dataset.cat;buildMainMenu();renderList();return}
-  const action=el.dataset.action;
-  if(!action)return;
+  if(el.dataset.cat){activeCat=activeCat===el.dataset.cat?'':el.dataset.cat;buildMainMenu();mmFocus();renderList();return}
+  const nav=el.dataset.nav;
+  if(!nav)return;
+  if(nav==='playlists'){const lastPlId=gs(LS.CPL)||(allPls[0]&&allPls[0].id);const pl=allPls.find(p=>p.id===lastPlId)||allPls[0];closeMainMenu();if(pl)loadPlaylist(pl).catch(e=>{console.error('loadPlaylist failed:',e)});return}
   closeMainMenu();
-  if(action==='search')showSearchOverlay();
-  if(action==='favorites'){showFavs=!showFavs;ss(LS.FAV,showFavs);renderList();toast(showFavs?'Nur Favoriten':'Alle Sender')}
-  if(action==='settings')setTimeout(openSP,0);
+  if(nav==='search')showSearchOverlay();
+  if(nav==='favorites'){showFavs=!showFavs;ss(LS.FAV,showFavs);renderList();toast(showFavs?'Nur Favoriten':'Alle Sender')}
 }
+mmGear.addEventListener('click',()=>mmAction(mmGear));
+mmCurPanel.addEventListener('click',()=>mmAction(mmCurPanel));
 
 const searchOv=document.getElementById('search-ov');
 const soInput=document.getElementById('so-input');
