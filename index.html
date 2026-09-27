@@ -36,7 +36,7 @@ video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
 #radio-logo .rl-name{font-size:28px;font-weight:700;color:var(--txt1);text-shadow:0 2px 12px rgba(0,0,0,.8);text-align:center;max-width:80vw}
 #radio-logo .rl-group{font-size:16px;color:var(--txt3);font-family:var(--fm)}
 #radio-logo .rl-fallback{width:180px;height:180px;border-radius:24px;background:linear-gradient(135deg,#1a5c6b 0%,#0d3a4a 100%);display:none;align-items:center;justify-content:center;font-size:80px;box-shadow:0 4px 40px rgba(0,0,0,.6)}
-#load-ov{position:fixed;inset:0;z-index:15;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.85)}
+#load-ov{position:fixed;inset:0;z-index:15;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.85);pointer-events:none}
 #load-ov.show{display:flex}
 #load-text{font-size:22px;font-weight:600;color:var(--txt2);animation:pulse 1.2s ease-in-out infinite;letter-spacing:.02em}
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
@@ -1669,13 +1669,13 @@ function mmMove(dir){
 function mmAction(el){
   if(!el)return;
   if(el===mmGlobalChk){globalCatOn=!globalCatOn;ss('mm_global_cat',globalCatOn?'1':'0');mmGlobalChk.classList.toggle('on',globalCatOn);return}
-  if(el===mmGear){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();const _se=$('sc-settings');if(_se)_se.scrollIntoView();return}
+  if(el===mmGear){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();triggerCardIn(builtinGrid,'.sc-card');const _se=$('sc-settings');if(_se)_se.scrollIntoView();return}
   if(el===mmCurPanel){closeMainMenu();return}
   if(el.dataset.plId){if(pendingCat!==null){activeCat=pendingCat;pendingCat=null;if(!globalCatOn){globalCatOn=true;ss('mm_global_cat','1')}}closeMainMenu();const pl=allPls.find(p=>p.id===el.dataset.plId);if(pl)loadPlaylist(pl).catch(e=>{console.error('loadPlaylist failed:',e)});return}
   if(el.dataset.cat){pendingCat=(pendingCat===el.dataset.cat)?null:el.dataset.cat;buildMainMenu();mmFocus();return}
   const nav=el.dataset.nav;
   if(!nav)return;
-  if(el.dataset.nav==='playlists'){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();setup.scrollTop=0;return}
+  if(el.dataset.nav==='playlists'){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();triggerCardIn(builtinGrid,'.sc-card');setup.scrollTop=0;return}
   if(nav==='search'){closeMainMenu();showSearchOverlay();return}
   if(nav==='favorites'){showFavs=!showFavs;ss(LS.FAV,showFavs);const _ic=el.querySelector('.card-ico');if(_ic)_ic.innerHTML=showFavs?ICON_STAR_ON:ICON_MM_FAV;renderList();toast(showFavs?'Nur Favoriten':'Alle Sender');return}
 }
