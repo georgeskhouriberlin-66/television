@@ -184,7 +184,7 @@ video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
 /* ── Category Bar ── */
 /* #cat-bar and .cat-pill styles removed */
 /* .pl-tab.focused and .cat-pill.focused removed */
-.btn-go-focused,.si.focused{background:rgba(255,255,255,.08);box-shadow:0 0 0 2px var(--acc)}
+.btn-go-focused,.sc-set-card.focused{background:rgba(255,255,255,.08);box-shadow:0 0 0 2px var(--acc)}
 
 /* Channel Number Overlay */
 #ch-num-ov{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:45;background:rgba(0,0,0,.85);border:1.5px solid var(--gold);border-radius:var(--phz-r-md);padding:12px 28px;display:none;align-items:center;gap:10px;font-family:var(--fc);font-size:28px;color:#fff;letter-spacing:.12em;backdrop-filter:blur(12px)}
@@ -195,19 +195,22 @@ video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
 #ui-right{flex:1}
 
 /* ── Settings Panel ── */
-#sp{position:fixed;top:20px;left:25%;bottom:20px;z-index:40;width:50%;background:rgba(8,12,22,.98);border:1px solid rgba(255,255,255,.1);border-radius:var(--phz-r-lg);box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(-8px) scale(.97);opacity:0;pointer-events:none;transition:transform var(--phz-dur-med) cubic-bezier(.16,1,.3,1),opacity var(--phz-dur-fast);overflow-y:auto;display:flex;flex-direction:column}
-#sp.open{transform:none;opacity:1;pointer-events:all;z-index:70}
-.sp-hd{padding:20px 26px 16px;font-size:14px;font-family:var(--fm);letter-spacing:.18em;text-transform:uppercase;color:var(--txt2);border-bottom:1px solid rgba(255,255,255,.07)}
-.si{display:flex;align-items:center;gap:16px;padding:18px 26px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);transition:background var(--phz-dur-fast);outline:none;opacity:0}
-.si:last-child{border:none}
-.si:hover{background:rgba(255,255,255,.05)}
-.si-ico{font-size:22px;width:30px;text-align:center;flex-shrink:0}
-.si-lbl{flex:1;font-size:19px;font-weight:600}
-.si-val{font-size:15px;color:var(--txt3);font-family:var(--fm)}
 .tog{width:48px;height:28px;border-radius:var(--phz-r-md);background:rgba(255,255,255,.15);position:relative;flex-shrink:0;transition:background var(--phz-dur-med);cursor:pointer}
 .tog::after{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;top:4px;left:4px;transition:transform var(--phz-dur-med)}
 .tog.on{background:var(--acc)}.tog.on::after{transform:translateX(20px)}
-.sp-v{padding:16px 26px 20px;font-size:14px;color:var(--txt3);font-family:var(--fm);text-align:right;flex-shrink:0}
+
+/* ── Setup Einstellungs-Cards ── */
+.sc-set-card{display:flex;align-items:center;gap:14px;min-height:64px;border-radius:var(--phz-r-lg);padding:10px 16px;margin-top:10px;border:2px solid transparent;cursor:pointer;outline:none;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast),box-shadow var(--phz-dur-fast);-webkit-tap-highlight-color:transparent}
+.sc-set-card .sc-set-ico svg{width:28px;height:28px;display:block}
+.sc-set-card .sc-set-lbl{flex:1;font-size:17px;font-weight:700;line-height:1.2}
+.sc-set-card .sc-set-val{font-size:14px;font-family:var(--fm);opacity:.75}
+.sc-set-orange{background:#F54F1B;color:#fff}
+.sc-set-olive{background:#566700;color:#fff}
+.sc-set-navy{background:#151130;color:#fff;border-color:rgba(255,255,255,.14)}
+.sc-set-lav{background:#C8BEFA;color:#151130}
+.sc-set-card.focused{border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.sc-set-card:hover{transform:scale(1.02)}
+.sc-set-card:active{transform:scale(.99)}
 
 /* ══════════════════════════
    SETUP SCREEN
@@ -489,10 +492,8 @@ body.touchy #ch-info{padding:6px 14px 12px}
 body.touchy #ch-info .ci-name{font-size:18px}
 body.touchy .ci-dot{width:7px;height:7px}
 body.touchy .ci-epg{font-size:12px}
-body.touchy #sp{width:calc(100vw - 40px);left:20px;top:20px;bottom:20px;overflow-y:auto}
-body.touchy .sp-hd{padding:14px 18px 10px;font-size:11px}
-body.touchy .si{padding:12px 18px}
-body.touchy .si-lbl{font-size:15px}
+body.touchy .sc-set-card{min-height:58px;padding:8px 14px}
+body.touchy .sc-set-card .sc-set-lbl{font-size:15px}
 body.touchy #err-msg{font-size:16px;max-width:280px}
 body.touchy .sc{padding:24px 18px;width:calc(100vw - 24px);max-height:100%;overflow-y:auto}
 body.touchy .sc-title{font-size:22px}
@@ -522,17 +523,6 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 </div>
 
 <div id="err-ov"><div style="font-size:44px">⚠️</div><div id="err-msg">Stream nicht verfügbar.</div></div>
-
-<!-- Settings Panel -->
-<div id="sp">
-  <div class="sp-hd">Einstellungen</div>
-  <div class="si" id="sp-pl"><span class="si-ico">📋</span><span class="si-lbl">Playlisten</span><span class="si-val" id="sp-pln">—</span></div>
-  <div class="si" id="sp-epg"><span class="si-ico">📺</span><span class="si-lbl">EPG anzeigen</span><div class="tog" id="tg-epg"></div></div>
-  <div class="si" id="sp-sub"><span class="si-ico">💬</span><span class="si-lbl">Untertitel</span><div class="tog" id="tg-sub"></div></div>
-  <div class="si" id="sp-upd"><span class="si-ico">🔄</span><span class="si-lbl">Playlist aktualisieren</span><span class="si-val" id="sp-upd-v">—</span></div>
-  <div class="si" id="sp-appupd"><span class="si-ico">🔄</span><span class="si-lbl">App-Update prüfen</span><span class="si-val" id="sp-appupd-v">v2.5.3</span></div>
-  <div class="sp-v">Phoenicia Television v2.5.3</div>
-</div>
 
 <!-- Startup Screen -->
 <div id="startup">
@@ -647,6 +637,14 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 
 
   </div>
+
+  <div class="sc-section" id="sc-settings">
+    <div class="sc-lbl">Einstellungen</div>
+    <div class="sc-set-card sc-set-orange" id="sp-appupd"><span class="sc-set-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg></span><span class="sc-set-lbl">Update</span><span class="sc-set-val" id="sp-appupd-v">v2.5.3</span></div>
+    <div class="sc-set-card sc-set-olive" id="sp-upd"><span class="sc-set-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span><span class="sc-set-lbl">Playlist aktualisieren</span><span class="sc-set-val" id="sp-upd-v">—</span></div>
+    <div class="sc-set-card sc-set-navy" id="sp-epg"><span class="sc-set-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></span><span class="sc-set-lbl">EPG</span><div class="tog" id="tg-epg"></div></div>
+    <div class="sc-set-card sc-set-lav" id="sp-sub"><span class="sc-set-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 12h10M7 15.5h6"/></svg></span><span class="sc-set-lbl">Untertitel</span><div class="tog" id="tg-sub"></div></div>
+  </div>
 </div>
 
 <div id="portrait-lock"><div class="pl-ico">🔄</div><div class="pl-txt">Bitte drehen</div><div class="pl-sub">Phoenicia Television braucht Querformat</div></div>
@@ -754,16 +752,16 @@ window._dbgPush=(msg)=>{window._dbg.push(msg);if(window._dbg.length>50)window._d
 
 let allCh=[], flatCh=[], hls=null, activeCh=null, activePlId=null, activeCat='';
 let lastTuneTs=0,lastAutoFix=0;
-let showFavs=false, epgOn=true, subOn=false, focusIdx=0, uiOpen=false, spOpen=false, navDir='next';
+let showFavs=false, epgOn=true, subOn=false, focusIdx=0, uiOpen=false, navDir='next';
 let chInfoTimer=null, epgData={}, loadedPl={}, customPl=[], allPls=[], uiTimer=null;
-let chNumInput='', chNumTimer=null, spFocusIdx=-1, navHistory=[];
+let chNumInput='', chNumTimer=null, navHistory=[];
 const CH_NUM_DELAY=800;
 
 const $=id=>document.getElementById(id);
 const vid=$('vid'), aud=$('aud'), nosig=$('nosig'), loadOv=$('load-ov');
 const chInfo=$('ch-info'), ciName=$('ci-name'), ciEpg=$('ci-epg');
 const errOv=$('err-ov'), errMsg=$('err-msg');
-const ui=$('ui'), sp=$('sp');
+const ui=$('ui');
 const chList=$('ch-list');
 const setup=$('setup'), setupStart=$('setup-start'), scSt=$('sc-st');
 const builtinGrid=$('builtin-grid'), savedWrap=$('saved-wrap');
@@ -908,7 +906,7 @@ async function loadPlaylist(pl,autoPlay=true){
     ss(LS.CPL,pl.id);
     const epgUrl=(BUILTIN.find(p=>p.id===pl.id)?.epgUrl)||m3uEpg||'';
     if(epgUrl&&epgOn)loadEPG(epgUrl);
-    $('sp-pln').textContent=pl.name;
+    const _pln=$('sp-pln');if(_pln)_pln.textContent=pl.name;
     $('sp-upd-v').textContent=pl.name;
     allCh=channels;if(!globalCatOn)activeCat='';else if(activeCat){const grps=new Set(channels.map(c=>c.group||'Weitere'));if(!grps.has(activeCat))activeCat='';}
     renderList();
@@ -1255,31 +1253,23 @@ const MOBILE_CHUNK=80;
 let mobileCap=MOBILE_CHUNK,listVer=0;
 let tapSuppressUntil=0,lastTapTs=0,mTapTimer=0,tchTimer=0,tchSX=0,tchSY=0,tchLong=false,tileLongTimer=0,lastTouchTs=0;
 const menuBtn=document.getElementById('menu-btn'),fsBtn=document.getElementById('fs-btn');
-function uiBlocked(){return spOpen||mainMenu.classList.contains('open')||document.getElementById('sidebar').classList.contains('sb-open')}
+function uiBlocked(){return mainMenu.classList.contains('open')||document.getElementById('sidebar').classList.contains('sb-open')}
 function armUIHide(ms){clearTimeout(uiTimer);uiTimer=setTimeout(()=>{if(!uiBlocked())hideUI()},ms)}
 let deskBtnTimer=0;
 function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||!WEBMODE||TOUCHY)return;menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');clearTimeout(deskBtnTimer);deskBtnTimer=setTimeout(()=>{menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')},3000)}
 
 /* ── UI ── */
-function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();if(!spOpen)armUIHide(4000)}
-function hideUI(){if(spOpen||mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE||TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
+function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();armUIHide(4000)}
+function hideUI(){if(mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE||TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
 function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open');if(TOUCHY){const f=chList.querySelector('.ci.focused');if(f)f.scrollIntoView({block:'nearest'})}}
-function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen&&!spOpen)armUIHide(4000)}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen)armUIHide(4000)}
 function toggleUI(){uiOpen?hideUI():showUI()}
 
 /* ── Settings ── */
-function openSP(){navHistory.push('settings');spOpen=true;spFocusIdx=-1;sp.classList.add('open');spFocusUpdate();triggerCardIn(sp,'.si')}
-function closeSP(){spOpen=false;spFocusIdx=-1;sp.classList.remove('open');sp.querySelectorAll('.si').forEach(s=>s.classList.remove('focused'));navHistory=navHistory.filter(s=>s!=='settings')}
-function toggleSP(e){e?.stopPropagation();spOpen?closeSP():openSP()}
-function spItems(){return Array.from(sp.querySelectorAll('.si'))}
-function spFocusUpdate(){const items=spItems();items.forEach((s,i)=>{s.classList.toggle('focused',i===spFocusIdx);if(i===spFocusIdx)s.scrollIntoView({block:'nearest'})})}
-function spFocusDir(dir){const items=spItems();if(!items.length)return;if(spFocusIdx<0)spFocusIdx=0;else spFocusIdx=Math.max(0,Math.min(items.length-1,spFocusIdx+dir));spFocusUpdate()}
-function spActivate(){const items=spItems();if(spFocusIdx>=0&&spFocusIdx<items.length)items[spFocusIdx].click()}
-document.addEventListener('click',e=>{if(spOpen&&!sp.contains(e.target))closeSP()});
-$('sp-pl').addEventListener('click',()=>{closeSP();hideUI();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();triggerCardIn(builtinGrid,'.sc-card')});
+/* ── Settings (auf Setup-Seite) ── */
 $('sp-epg').addEventListener('click',()=>{epgOn=!epgOn;ss(LS.EPG,epgOn);tgEpg.classList.toggle('on',epgOn);toast(epgOn?'EPG aktiv':'EPG aus')});
 $('sp-sub').addEventListener('click',()=>{subOn=!subOn;ss(LS.SUB,subOn);tgSub.classList.toggle('on',subOn);toggleSubs();toast(subOn?'Untertitel an':'Untertitel aus')});
-$('sp-upd').addEventListener('click',()=>{ss(LS.DEAD,{});closeSP();const pl=allPls.find(p=>p.id===activePlId);if(pl)loadPlaylist(pl);toast('🔄 Aktualisiere…')});
+$('sp-upd').addEventListener('click',()=>{ss(LS.DEAD,{});const pl=allPls.find(p=>p.id===activePlId);if(pl)loadPlaylist(pl);toast('🔄 Aktualisiere…')});
 $('sp-appupd').addEventListener('click',()=>{if(typeof Android!=='undefined'&&Android.checkForUpdate){$('sp-appupd-v').textContent='Suche…';Android.checkForUpdate()}else toast('⚠ Update-Check nicht verfügbar')});
 try{if(typeof Android!=='undefined'&&Android.getAppVersion){const av=Android.getAppVersion();if(av){$('sp-appupd-v').textContent='v'+av;const sv=document.querySelector('.sp-v');if(sv)sv.textContent='Phoenicia Television v'+av;}}}catch(e){}
 const WEBMODE=(typeof Android==='undefined');
@@ -1424,7 +1414,7 @@ ui.addEventListener('click',e=>{
 let wheelAcc=0,wheelLock=0;
 document.addEventListener('wheel',e=>{
   if(!setup.classList.contains('off'))return;
-  if(spOpen||mainMenu.classList.contains('open')||searchOv.classList.contains('open'))return;
+  if(mainMenu.classList.contains('open')||searchOv.classList.contains('open'))return;
   const sb=document.getElementById('sidebar');
   const overSidebar=sb.contains(e.target)&&sb.classList.contains('sb-open');
   let dy=e.deltaY;
@@ -1451,7 +1441,7 @@ let scAdvOpen=false;
 function scAdvToggle(){scAdvOpen=!scAdvOpen;$('sc-adv-b').style.display=scAdvOpen?'':'none';$('sc-adv-ico').textContent=scAdvOpen?'▾':'▸';setupTargets();const hi=setupTail.indexOf($('sc-adv-h'));setupSelIdx=hi>=0?setupCards.length+hi:0;setupFocus(setupSelIdx)}
 function setupTargets(){
   setupCards=[...builtinGrid.querySelectorAll('.sc-card')];
-  setupTail=[$('btn-sel-all'),$('btn-sel-none'),$('sc-adv-h'),...savedWrap.querySelectorAll('.saved-row'),$('iname'),$('iurl'),$('iepg'),$('setup-start')].filter(el=>el&&visRect(el));
+  setupTail=[$('btn-sel-all'),$('btn-sel-none'),$('sc-adv-h'),...savedWrap.querySelectorAll('.saved-row'),$('iname'),$('iurl'),$('iepg'),$('setup-start'),$('sp-appupd'),$('sp-upd'),$('sp-epg'),$('sp-sub')].filter(el=>el&&visRect(el));
   const inameEl=$('iname');
   setupScrollIdx=inameEl?setupTail.indexOf(inameEl):0;
 }
@@ -1584,6 +1574,7 @@ const mmCurCount=document.getElementById('mm-cur-count');
 const ICON_MM_PLS='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="2.9" y="2.9" width="4.6" height="4.6" rx="1.2"/><rect x="9.7" y="2.9" width="4.6" height="4.6" rx="1.2"/><rect x="16.5" y="2.9" width="4.6" height="4.6" rx="1.2"/><rect x="2.9" y="9.7" width="4.6" height="4.6" rx="1.2"/><rect x="9.7" y="9.7" width="4.6" height="4.6" rx="1.2"/><rect x="16.5" y="9.7" width="4.6" height="4.6" rx="1.2"/><rect x="2.9" y="16.5" width="4.6" height="4.6" rx="1.2"/><rect x="9.7" y="16.5" width="4.6" height="4.6" rx="1.2"/><rect x="16.5" y="16.5" width="4.6" height="4.6" rx="1.2"/></svg>';
 const ICON_MM_FAV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.5 9.7l5.9-.8z"/></svg>';
 const ICON_MM_SEARCH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L20.5 20.5"/></svg>';
+const ICON_STAR_ON='<svg viewBox="0 0 24 24" fill="#f5c218" stroke="#f5c218" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.5 9.7l5.9-.8z"/></svg>';
 let mmSections=[];
 let mmSecIdx=0;
 let mmItemIdx=0;
@@ -1600,7 +1591,7 @@ function buildMainMenu(){
   // Nav cards
   const navDefs=[
     {icon:ICON_MM_PLS,name:'Playlisten',nav:'playlists',cls:'card-pls'},
-    {icon:ICON_MM_FAV,name:'Nur Favoriten',nav:'favorites',cls:'card-fav'},
+    {icon:showFavs?ICON_STAR_ON:ICON_MM_FAV,name:'Nur Favoriten',nav:'favorites',cls:'card-fav'},
     {icon:ICON_MM_SEARCH,name:'Suche',nav:'search',cls:'card-search'}
   ];
   navDefs.forEach(a=>{
@@ -1678,16 +1669,15 @@ function mmMove(dir){
 function mmAction(el){
   if(!el)return;
   if(el===mmGlobalChk){globalCatOn=!globalCatOn;ss('mm_global_cat',globalCatOn?'1':'0');mmGlobalChk.classList.toggle('on',globalCatOn);return}
-  if(el===mmGear){closeMainMenu();setTimeout(openSP,0);return}
+  if(el===mmGear){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();const _se=$('sc-settings');if(_se)_se.scrollIntoView();return}
   if(el===mmCurPanel){closeMainMenu();return}
   if(el.dataset.plId){if(pendingCat!==null){activeCat=pendingCat;pendingCat=null;if(!globalCatOn){globalCatOn=true;ss('mm_global_cat','1')}}closeMainMenu();const pl=allPls.find(p=>p.id===el.dataset.plId);if(pl)loadPlaylist(pl).catch(e=>{console.error('loadPlaylist failed:',e)});return}
   if(el.dataset.cat){pendingCat=(pendingCat===el.dataset.cat)?null:el.dataset.cat;buildMainMenu();mmFocus();return}
   const nav=el.dataset.nav;
   if(!nav)return;
-  if(nav==='playlists'){const lastPlId=gs(LS.CPL)||(allPls[0]&&allPls[0].id);const pl=allPls.find(p=>p.id===lastPlId)||allPls[0];if(pendingCat!==null){activeCat=pendingCat;pendingCat=null;if(!globalCatOn){globalCatOn=true;ss('mm_global_cat','1')}}closeMainMenu();if(pl)loadPlaylist(pl).catch(e=>{console.error('loadPlaylist failed:',e)});return}
-  closeMainMenu();
-  if(nav==='search')showSearchOverlay();
-  if(nav==='favorites'){showFavs=!showFavs;ss(LS.FAV,showFavs);renderList();toast(showFavs?'Nur Favoriten':'Alle Sender')}
+  if(el.dataset.nav==='playlists'){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();setup.scrollTop=0;return}
+  if(nav==='search'){closeMainMenu();showSearchOverlay();return}
+  if(nav==='favorites'){showFavs=!showFavs;ss(LS.FAV,showFavs);const _ic=el.querySelector('.card-ico');if(_ic)_ic.innerHTML=showFavs?ICON_STAR_ON:ICON_MM_FAV;renderList();toast(showFavs?'Nur Favoriten':'Alle Sender');return}
 }
 mmGear.addEventListener('click',()=>mmAction(mmGear));
 mmCurPanel.addEventListener('click',()=>mmAction(mmCurPanel));
@@ -1728,7 +1718,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'||e.key==='Backspace'||e.keyCode===93){
     e.preventDefault();
     if(searchOv.classList.contains('open')){closeSearchOv();return}
-    if(spOpen){closeSP();return}
     if(mainMenu.classList.contains('open')){closeMainMenu();return}
   }
   if(searchOv.classList.contains('open')){
@@ -1742,13 +1731,6 @@ document.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight'){mmMove('right');return}
     if(e.key==='ArrowLeft'){mmMove('left');return}
     if(e.key==='Enter'||e.keyCode===13){const sec=mmSections[mmSecIdx];if(sec&&sec[mmItemIdx])mmAction(sec[mmItemIdx]);return}
-    return;
-  }
-  if(spOpen){
-    e.preventDefault();
-    if(e.key==='ArrowDown'){spFocusDir(1);return}
-    if(e.key==='ArrowUp'){spFocusDir(-1);return}
-    if(e.key==='Enter'||e.keyCode===13){spActivate();return}
     return;
   }
   if(e.key==='m'||e.key==='M'){e.preventDefault();openMainMenu();return}
@@ -1803,7 +1785,7 @@ window.__dpad = function(k, code, kc){
 document.addEventListener('mousemove',()=>{
   if(TOUCHY)return;
   if(Date.now()-lastTouchTs<1500)return;
-  if(setup.classList.contains('off')&&!spOpen){
+  if(setup.classList.contains('off')){
     if(!uiOpen)showUI();else{armUIHide(4000)}pokeDeskBtns()}
 });
 
