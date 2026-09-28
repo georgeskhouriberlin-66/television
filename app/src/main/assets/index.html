@@ -1143,7 +1143,7 @@ function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback
 function showVideoOnFirstFrame(){clearTimeout(vid._showT);clearInterval(vid._showI);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);clearInterval(vid._showI);let n=0;const reveal=()=>{clearTimeout(vid._showT);clearInterval(vid._showI);vid.style.opacity='1';loadOv.classList.remove('show');syncMuteBadge()};vid._showI=setInterval(()=>{try{const b=vid.buffered;const ahead=b.length?b.end(b.length-1)-vid.currentTime:0;if(ahead>2||++n>=14)reveal()}catch(_){reveal()}},250);vid._showT=setTimeout(reveal,4000)},{once:true})}
 function syncMuteBadge(){const b=$('mute-badge');if(!b)return;const show=setup.classList.contains('off')&&vid.muted&&!vid.paused&&!vid.ended;if(b._on===show)return;b._on=show;b.style.display=show?'flex':'none'}
 vid.addEventListener('volumechange',()=>{syncMuteBadge();console.log('PVTV AUDIO: muted='+vid.muted+' volume='+vid.volume)});
-vid.addEventListener('playing',()=>{try{const b=vid.buffered;console.log('PVTV AUDIO: playing muted='+vid.muted+' buffered Ranges='+b.length+' ahead='+(b.length?(b.end(b.length-1)-vid.currentTime).toFixed(2):0))}catch(_){}});
+vid.addEventListener('playing',()=>{try{const b=vid.buffered;let drop='';try{const q=vid.getVideoPlaybackQuality();drop=' dropped='+q.droppedVideoFrames+'/'+q.totalVideoFrames}catch(_){}let lvl='';try{lvl=' lvl='+(hls?hls.currentLevel:'na')}catch(_){}console.log('PVTV AUDIO: playing muted='+vid.muted+' bufferedRanges='+b.length+' ahead='+(b.length?(b.end(b.length-1)-vid.currentTime).toFixed(2):0)+lvl+drop)}catch(_){}});
 
 /* ── Player ── */
 /* Sender, die seitlich gestreckt werden (4:3 → randlos). Einträge: Name- oder
@@ -1219,7 +1219,7 @@ function tryStream(ch,idx){
   try{
   if(isHLS&&typeof Hls!=='undefined'&&Hls.isSupported()){
     console.log('PVTV TRY: HLS detected, creating instance for '+url);
-    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:120,maxMaxBufferLength:240,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
+    hls=new Hls({enableWorker:true,lowLatencyMode:false,capLevelToPlayerSize:true,backBufferLength:30,maxBufferLength:120,maxMaxBufferLength:240,maxAudioFramesDrift:32,startLevel:-1,fragLoadingMaxRetry:2,manifestLoadingMaxRetry:2,levelLoadingMaxRetry:2,subtitleDisplay:subOn});if(!subOn){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     hls.attachMedia(vid);hls.loadSource(url);armWatchdog();
     const pvHls=hls;
     hls.on(Hls.Events.LEVEL_SWITCHED,(_,d)=>{console.log('PVTV TRY: LEVEL_SWITCHED level='+d.level)});
