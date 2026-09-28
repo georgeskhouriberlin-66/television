@@ -306,6 +306,7 @@ video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
 
 /* Toast */
 #toast{position:fixed;top:36px;right:44px;z-index:99;background:rgba(8,12,22,.97);border:1px solid rgba(0,212,255,.25);color:#fff;font-size:16px;padding:12px 22px;border-radius:var(--phz-r-md);opacity:0;transition:opacity var(--phz-dur-med);pointer-events:none;font-family:var(--fm)}
+#mute-badge{position:fixed;left:12px;bottom:12px;z-index:58;display:none;align-items:center;justify-content:center;width:44px;height:44px;font-size:22px;background:rgba(8,11,20,.85);border:1.5px solid rgba(255,255,255,.2);border-radius:var(--phz-r-lg);pointer-events:none}
 #toast.show{opacity:1}
 
 /* ── Sidebar-Tile Badges (Geo / Not 24/7) ── */
@@ -650,6 +651,7 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 <div id="portrait-lock"><div class="pl-ico">🔄</div><div class="pl-txt">Bitte drehen</div><div class="pl-sub">Phoenicia Television braucht Querformat</div></div>
 
 <div id="toast"></div>
+<div id="mute-badge" aria-hidden="true">🔇</div>
 
 <script>
 console.log('PVTV-BOOT: script executing at ' + Date.now());
@@ -1138,7 +1140,10 @@ function showRadioLogo(ch){
   el.classList.add('show');vid.style.display='none';
 }
 function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback').style.display='none';$('radio-logo-img').style.display='none';vid.style.display=''}
-function showVideoOnFirstFrame(){clearTimeout(vid._showT);clearInterval(vid._showI);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);clearInterval(vid._showI);let n=0;const reveal=()=>{clearTimeout(vid._showT);clearInterval(vid._showI);vid.style.opacity='1';loadOv.classList.remove('show')};vid._showI=setInterval(()=>{try{const b=vid.buffered;const ahead=b.length?b.end(b.length-1)-vid.currentTime:0;if(ahead>2||++n>=14)reveal()}catch(_){reveal()}},250);vid._showT=setTimeout(reveal,4000)},{once:true})}
+function showVideoOnFirstFrame(){clearTimeout(vid._showT);clearInterval(vid._showI);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);clearInterval(vid._showI);let n=0;const reveal=()=>{clearTimeout(vid._showT);clearInterval(vid._showI);vid.style.opacity='1';loadOv.classList.remove('show');syncMuteBadge()};vid._showI=setInterval(()=>{try{const b=vid.buffered;const ahead=b.length?b.end(b.length-1)-vid.currentTime:0;if(ahead>2||++n>=14)reveal()}catch(_){reveal()}},250);vid._showT=setTimeout(reveal,4000)},{once:true})}
+function syncMuteBadge(){const b=$('mute-badge');if(!b)return;const show=setup.classList.contains('off')&&vid.muted&&!vid.paused&&!vid.ended;if(b._on===show)return;b._on=show;b.style.display=show?'flex':'none'}
+vid.addEventListener('volumechange',()=>{syncMuteBadge();console.log('PVTV AUDIO: muted='+vid.muted+' volume='+vid.volume)});
+vid.addEventListener('playing',()=>{try{const b=vid.buffered;console.log('PVTV AUDIO: playing muted='+vid.muted+' buffered Ranges='+b.length+' ahead='+(b.length?(b.end(b.length-1)-vid.currentTime).toFixed(2):0))}catch(_){}});
 
 /* ── Player ── */
 /* Sender, die seitlich gestreckt werden (4:3 → randlos). Einträge: Name- oder
@@ -1601,6 +1606,7 @@ function buildMainMenu(){
     t.dataset.nav=a.nav;
     t.addEventListener('click',()=>mmAction(t));
     mmNavCards.appendChild(t);
+    t.style.opacity='1';
     secNav.push(t);
   });
   // Playlist cards (filtered by LS.SEL)
@@ -1623,6 +1629,7 @@ function buildMainMenu(){
     t.dataset.plId=pl.id;
     t.addEventListener('click',()=>mmAction(t));
     mmPlaylistCards.appendChild(t);
+    t.style.opacity='1';
     secPlaylists.push(t);
   });
   // Categories (top row, under logo)
@@ -1654,7 +1661,7 @@ function closeMainMenu(){pendingCat=null;mainMenu.classList.remove('open');clear
 function mmFocus(){mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>{
   const focused=si===mmSecIdx&&ii===mmItemIdx;
   el.classList.toggle('focused',focused);
-  if(focused)el.scrollIntoView({block:'nearest'});
+  if(focused&&!TOUCHY)el.scrollIntoView({block:'nearest'});
 }))}
 function mmEls(){const els=[];mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>els.push({el,si,ii})));return els}
 function mmMove(dir){
