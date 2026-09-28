@@ -15,5 +15,41 @@
       { "name": "Daystar", "url": "https://live-mcl.cdn01.net/smarttv/48vy43564/playlist.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/en/9/93/Daystar_TV.PNG", "group": "Christian TV" },
       { "name": "3ABN", "url": "https://3abn.bozztv.com/3abn2/3abn_live/smil:3abn_live.smil/playlist.m3u8", "tvgLogo": "https://3abn.org/img/logos/tv/3ABN.png", "group": "Christian TV" }
     ]
+  },
+  "turkey": {
+    "output": "turkiye.m3u",
+    "channels": [
+      { "name": "TRT 1", "url": "https://tv-trt1.medya.trt.com.tr/master.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TRT_1_logo_%282021-%29.svg/960px-TRT_1_logo_%282021-%29.svg.png", "tvgId": "TRT1.tr@SD", "group": "Turkish TV" },
+      { "name": "TRT Haber", "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png", "tvgId": "TRTHaber.tr@SD", "group": "Turkish TV" },
+      { "name": "TRT Turk", "url": "https://tv-trtturk.medya.trt.com.tr/master.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/TRT_T%C3%BCrk_logo.svg/960px-TRT_T%C3%BCrk_logo.svg.png", "tvgId": "TRTTurk.tr@SD", "group": "Turkish TV" },
+      { "name": "TRT Avaz", "url": "https://tv-trtavaz.medya.trt.com.tr/master.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TRT_Avaz_logo.svg/960px-TRT_Avaz_logo.svg.png", "tvgId": "TRTAvaz.tr@SD", "group": "Turkish TV" },
+      { "name": "TRT Cocuk", "url": "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png", "tvgId": "TRTCocuk.tr@SD", "group": "Turkish TV" },
+      { "name": "TRT Muzik", "url": "https://tv-trtmuzik.medya.trt.com.tr/master.m3u8", "tvgLogo": "https://i.imgur.com/JgUzRH8.png", "tvgId": "TRTMuzik.tr@SD", "group": "Turkish TV" },
+      { "name": "TRT 3", "url": "https://tv-trt3.live.trt.com.tr/master.m3u8", "tvgLogo": "https://i.imgur.com/JrWFwBd.png", "tvgId": "TRT3.tr@SD", "group": "Turkish TV" },
+      { "name": "ATV (Turkiye)", "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8", "tvgLogo": "https://i.imgur.com/HyVUwFC.png", "tvgId": "ATV.tr@SD", "group": "Turkish TV" },
+      { "name": "A Haber", "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png", "tvgId": "AHaber.tr@SD", "group": "Turkish TV" },
+      { "name": "A Spor SD", "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8", "tvgLogo": "https://i.imgur.com/ZhkZzLf.png", "tvgId": "ASpor.tr@SD", "group": "Turkish TV" },
+      { "name": "Kanal D (Turkiye)", "url": "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3", "tvgLogo": "https://i.imgur.com/9o1atM6.png", "tvgId": "KanalD.tr@SD", "group": "Turkish TV" },
+      { "name": "NTV (Turkiye)", "url": "https://dogus.daioncdn.net/ntv/ntv.m3u8?app=ntv_web", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png", "tvgId": "NTV.tr@SD", "group": "Turkish TV" },
+      { "name": "Star TV (Turkiye)", "url": "https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5", "tvgLogo": "https://i.imgur.com/9O3DHRB.png", "tvgId": "StarTV.tr@SD", "group": "Turkish TV" },
+      { "name": "TV8 (Turkiye)", "url": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3", "tvgLogo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png", "tvgId": "TV8.tr@SD", "group": "Turkish TV" },
+      { "name": "NOW TV", "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8", "tvgLogo": "https://i.imgur.com/5EYjWK7.png", "tvgId": "NOWTV.tr@SD", "group": "Turkish TV" },
+      { "name": "Halk TV SD", "url": "https://halktv-live.daioncdn.net/halktv/halktv.m3u8", "tvgLogo": "https://i.imgur.com/xM0HA30.png", "tvgId": "HalkTV.tr@SD", "group": "Turkish TV" },
+      { "name": "Tele 1", "url": "https://tele1-live.ercdn.net/tele1/tele1.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/tr/4/43/Tele1_logosu.png", "tvgId": "Tele1.tr@SD", "group": "Turkish TV" },
+      { "name": "TGRT Haber", "url": "https://canli.tgrthaber.com/tgrt.m3u8", "tvgLogo": "https://i.imgur.com/PrxwKDw.png", "tvgId": "TGRTHaber.tr@SD", "group": "Turkish TV" },
+      { "name": "CNBC-e", "url": "https://hnpsechtsc.turknet.ercdn.net/xpnvudnlsv/cnbc-e/cnbc-e.m3u8", "tvgLogo": "https://s.cnbce.com/dist/images/logo-nav.png", "tvgId": "CNBCe.tr@SD", "group": "Turkish TV" },
+      { "name": "24 TV", "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8", "tvgLogo": "https://i.imgur.com/8FO41es.png", "tvgId": "24TV.tr@SD", "group": "Turkish TV" },
+      { "name": "TVNET (Turkiye)", "url": "https://tvnet-live.lg.mncdn.com/tvnet/tvnet/playlist.m3u8", "tvgLogo": "https://i.imgur.com/mQo8yWQ.png", "tvgId": "TVNET.tr@SD", "group": "Turkish TV" },
+      { "name": "Minika Go", "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago/minikago.m3u8", "tvgLogo": "https://i.imgur.com/qIoipDq.png", "tvgId": "MinikaGo.tr@SD", "group": "Turkish TV" },
+      { "name": "Minika Cocuk", "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago_cocuk/minikago_cocuk.m3u8", "tvgLogo": "https://i.imgur.com/VCywMTv.png", "tvgId": "MinikaCocuk.tr@SD", "group": "Turkish TV" },
+      { "name": "Dream Turk", "url": "https://live.duhnet.tv/S2/HLS_LIVE/dreamturknp/playlist.m3u8", "tvgLogo": "https://i.imgur.com/vJ8VaZi.png", "tvgId": "DreamTurk.tr@SD", "group": "Turkish TV" },
+      { "name": "Kral Pop TV", "url": "https://dogus-live.daioncdn.net/kralpoptv/playlist.m3u8", "tvgLogo": "https://i.imgur.com/ch365lh.png", "tvgId": "KralPopTV.tr@SD", "group": "Turkish TV" },
+      { "name": "Number 1 TV", "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e17cd59e8b.smil/playlist.m3u8", "tvgLogo": "https://i.imgur.com/02cDIBi.png", "tvgId": "Number1TV.tr@SD", "group": "Turkish TV" },
+      { "name": "Ekoturk", "url": "https://cdn.ekoturk.net/hls/master.m3u8", "tvgLogo": "https://www.dsmart.com.tr/epg/images/0x60/5ffc18c6cfef0b15933a8b65", "tvgId": "Ekoturk.tr@SD", "group": "Turkish TV" },
+      { "name": "TBMM TV", "url": "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8", "tvgLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/TBMM_TV_logo.svg/960px-TBMM_TV_logo.svg.png", "tvgId": "TBMMTV.tr@SD", "group": "Turkish TV" },
+      { "name": "PowerTurk TV", "url": "https://live.artidijitalmedya.com/artidijital_powerturktv/powerturktv/playlist.m3u8", "tvgLogo": "https://i.imgur.com/9OPoXQG.png", "tvgId": "PowerTurkTV.tr@SD", "group": "Turkish TV" },
+      { "name": "TV 4", "url": "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8", "tvgLogo": "https://i.imgur.com/UpsQsbd.png", "tvgId": "TV4.tr@SD", "group": "Turkish TV" },
+      { "name": "Kanal 12", "url": "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/playlist.m3u8", "tvgLogo": "https://i.imgur.com/51xCkXG.png", "tvgId": "Kanal12.tr@SD", "group": "Turkish TV" }
+    ]
   }
 }

@@ -6,3 +6,8 @@
 #
 # 2026-09-17: 17 recherchierte URLs geprueft, alle tot (Parkseiten/404/DNS),
 # wieder entfernt. Nur verifizierte Eintraege hier ablegen.
+#
+# 2026-09-28: Al Ittihad Zweit-URL (https, TLS ok, CORS *, im Browser verifiziert spielend).
+# Gleiche tvg-id wie Haupteintrag -> App mergt als Fallback-URL.
+#EXTINF:-1 tvg-id="AlIttihadTV.lb@SD" tvg-logo="https://i.imgur.com/QMUjPXx.png" group-title="General",Al Ittihad TV (552p) [Not 24/7]
+https://live.alittihad.tv:444/ittihad/index.m3u8
