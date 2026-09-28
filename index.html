@@ -1138,7 +1138,7 @@ function showRadioLogo(ch){
   el.classList.add('show');vid.style.display='none';
 }
 function hideRadioLogo(){$('radio-logo').classList.remove('show');$('rl-fallback').style.display='none';$('radio-logo-img').style.display='none';vid.style.display=''}
-function showVideoOnFirstFrame(){clearTimeout(vid._showT);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);vid._showT=setTimeout(()=>{vid.style.opacity='1';loadOv.classList.remove('show')},350)},{once:true})}
+function showVideoOnFirstFrame(){clearTimeout(vid._showT);clearInterval(vid._showI);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);clearInterval(vid._showI);let n=0;const reveal=()=>{clearTimeout(vid._showT);clearInterval(vid._showI);vid.style.opacity='1';loadOv.classList.remove('show')};vid._showI=setInterval(()=>{try{const b=vid.buffered;const ahead=b.length?b.end(b.length-1)-vid.currentTime:0;if(ahead>2||++n>=14)reveal()}catch(_){reveal()}},250);vid._showT=setTimeout(reveal,4000)},{once:true})}
 
 /* ── Player ── */
 /* Sender, die seitlich gestreckt werden (4:3 → randlos). Einträge: Name- oder
