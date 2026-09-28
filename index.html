@@ -1690,7 +1690,7 @@ function mmAction(el){
   if(el===mmGear){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();triggerCardIn(builtinGrid,'.sc-card');const _se=$('sc-settings');if(_se)_se.scrollIntoView();return}
   if(el===mmCurPanel){closeMainMenu();return}
   if(el.dataset.plId){if(pendingCat!==null){activeCat=pendingCat;pendingCat=null;if(!globalCatOn){globalCatOn=true;ss('mm_global_cat','1')}}closeMainMenu();const pl=allPls.find(p=>p.id===el.dataset.plId);if(pl)loadPlaylist(pl).catch(e=>{console.error('loadPlaylist failed:',e)});return}
-  if(el.dataset.cat){pendingCat=(pendingCat===el.dataset.cat)?null:el.dataset.cat;buildMainMenu();mmFocus();return}
+  if(el.dataset.cat){if(el.dataset.cat===activeCat){activeCat='';pendingCat=null;buildMainMenu();mmFocus();renderList();toast('Alle Kategorien');return}pendingCat=(pendingCat===el.dataset.cat)?null:el.dataset.cat;buildMainMenu();mmFocus();return}
   const nav=el.dataset.nav;
   if(!nav)return;
   if(el.dataset.nav==='playlists'){closeMainMenu();buildBuiltinGrid();renderSaved();setup.classList.remove('off');setupFocusInit();triggerCardIn(builtinGrid,'.sc-card');setup.scrollTop=0;return}
