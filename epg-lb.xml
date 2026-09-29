@@ -187,4 +187,6 @@
   <programme start="20261001090000 +0300" stop="20261001101500 +0300" channel="MTVLebanon.lb"><title>برنامج بيروت اليوم</title></programme>
   <programme start="20261002000000 +0300" stop="20261002003000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
   <programme start="20261002003000 +0300" stop="20261002013000 +0300" channel="MTVLebanon.lb"><title>برنامج صحافة</title></programme>
+  <programme start="20261002013000 +0300" stop="20261002020000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
+  <programme start="20261002021000 +0300" stop="20261002023500 +0300" channel="MTVLebanon.lb"><title>فقرة غنائية</title></programme>
 </tv>
