@@ -340,16 +340,19 @@ body.webmode #fs-btn{display:flex}
 .mm-close:active{border-color:var(--acc)}
 body.webmode .mm-close{display:flex}
 #portrait-lock{display:none;position:fixed;inset:0;z-index:120;background:#04070e;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px}
-.pl-anim{width:220px;height:230px;display:flex;align-items:center;justify-content:center}
-.pl-phone{width:100px;height:170px;border:4px solid #fff;border-radius:18px;position:relative;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.6);animation:pl-rot 6s ease-in-out infinite}
-.pl-screen{position:absolute;inset:9px;background:#0a1628;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.pl-word{white-space:nowrap;font-size:14px;font-weight:800;letter-spacing:.02em;color:#fff;animation:pl-word 6s ease-in-out infinite}
-.pl-notch{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:36px;height:6px;border-radius:3px;background:rgba(255,255,255,.35)}
+.pl-anim{width:340px;max-width:94vw;height:360px;position:relative;display:flex;align-items:center;justify-content:center}
+.pl-arrow{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;animation:pl-pulse 6s ease-in-out infinite}
+.pl-arrow svg{width:340px;max-width:100%;height:340px}
+.pl-phone{width:170px;height:290px;border:7px solid #fff;border-radius:30px;position:relative;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.6);animation:pl-rot 6s ease-in-out infinite;z-index:1}
+.pl-screen{position:absolute;inset:14px;background:#0a1628;border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pl-word{white-space:nowrap;font-size:22px;font-weight:800;letter-spacing:.02em;color:#fff;animation:pl-word 6s ease-in-out infinite}
+.pl-notch{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:60px;height:10px;border-radius:5px;background:rgba(255,255,255,.35)}
 @keyframes pl-rot{0%,15%{transform:rotate(0deg)}35%,65%{transform:rotate(-90deg)}85%,100%{transform:rotate(0deg)}}
 @keyframes pl-word{0%,15%{transform:rotate(0deg)}35%,65%{transform:rotate(90deg)}85%,100%{transform:rotate(0deg)}}
-.pl-txt{font-size:26px;font-weight:800;color:#fff}
-.pl-sub{font-size:15px;color:var(--txt3);font-family:var(--fm)}
-@media (prefers-reduced-motion:reduce){.pl-phone{animation:none;transform:rotate(-90deg)}.pl-word{animation:none;transform:rotate(90deg)}}
+@keyframes pl-pulse{0%,15%{opacity:.45}35%,65%{opacity:.8}85%,100%{opacity:.45}}
+.pl-txt{font-size:32px;font-weight:800;color:#fff}
+.pl-sub{font-size:17px;color:var(--txt3);font-family:var(--fm)}
+@media (prefers-reduced-motion:reduce){.pl-phone{animation:none;transform:rotate(-90deg)}.pl-word{animation:none;transform:rotate(90deg)}.pl-arrow{animation:none;opacity:.6}}
 @media (pointer:coarse) and (orientation:portrait) and (max-width:1100px){#portrait-lock{display:flex}}
 
 /* ══════════════════════════
@@ -660,7 +663,7 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 </div>
 </div>
 
-<div id="portrait-lock"><div class="pl-anim"><div class="pl-phone"><div class="pl-screen"><div class="pl-word">Phoenicia Television</div></div><div class="pl-notch"></div></div></div><div class="pl-txt">Bitte drehen</div><div class="pl-sub">Handy quer halten</div></div>
+<div id="portrait-lock"><div class="pl-anim"><div class="pl-arrow"><svg viewBox="0 0 340 340" fill="none"><circle cx="170" cy="170" r="160" stroke="#fff" stroke-width="5" opacity=".45"/><polygon points="156,10 170,2 170,18" fill="#fff"/></svg></div><div class="pl-phone"><div class="pl-screen"><div class="pl-word">Phoenicia Television</div></div><div class="pl-notch"></div></div></div><div class="pl-txt">Bitte drehen</div><div class="pl-sub">Handy quer halten</div></div>
 
 <div id="toast"></div>
 <div id="mute-badge" aria-hidden="true">🔇</div>
