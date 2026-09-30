@@ -6,7 +6,12 @@
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#000">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
 <title>Phoenicia Television</title>
 <script src="hls.min.js"></script>
 <style>
@@ -348,7 +353,7 @@ body.webmode .mm-close{display:flex}
 @keyframes pl-rot{0%,15%{transform:rotate(0deg)}35%,65%{transform:rotate(-90deg)}85%,100%{transform:rotate(0deg)}}
 @keyframes pl-word{0%,15%{transform:rotate(0deg)}35%,65%{transform:rotate(90deg)}85%,100%{transform:rotate(0deg)}}
 @keyframes pl-word{0%,15%{transform:rotate(0deg)}35%,65%{transform:rotate(90deg)}85%,100%{transform:rotate(0deg)}}
-.pl-txt{font-size:44px;font-weight:800;color:#fff;letter-spacing:9px;margin-right:-9px;white-space:nowrap}
+.pl-txt{font-size:34px;font-weight:800;color:#fff;letter-spacing:6.5px;margin-right:-6.5px;white-space:nowrap}
 .pl-sub{font-size:24px;color:var(--gold);font-family:var(--fm);letter-spacing:7px;margin-right:-7px;white-space:nowrap}
 @media (prefers-reduced-motion:reduce){.pl-phone{animation:none;transform:rotate(-90deg)}.pl-word{animation:none;transform:rotate(90deg)}}
 @media (pointer:coarse) and (orientation:portrait) and (max-width:1100px){#portrait-lock{display:flex}}
@@ -661,7 +666,7 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 </div>
 </div>
 
-<div id="portrait-lock"><div class="pl-anim"><div class="pl-phone"><div class="pl-screen"><div class="pl-word">Phoenicia Television</div></div><div class="pl-notch"></div></div></div><div class="pl-txt">Bitte drehen</div><div class="pl-sub">Handy quer halten</div></div>
+<div id="portrait-lock"><div class="pl-anim"><div class="pl-phone"><div class="pl-screen"><div class="pl-word">Phoenicia Television</div></div><div class="pl-notch"></div></div></div><div class="pl-txt">Dreh dein Handy</div><div class="pl-sub">Handy quer halten</div></div>
 
 <div id="toast"></div>
 <div id="mute-badge" aria-hidden="true">🔇</div>
