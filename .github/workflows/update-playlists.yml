@@ -103,12 +103,20 @@ jobs:
           cp app/src/main/assets/index.html /tmp/pv-index.html
           cp app/src/main/assets/hls.min.js /tmp/pv-hls.min.js
           cp app/src/main/assets/logo.png /tmp/pv-logo.png
+          cp app/src/main/assets/manifest.webmanifest /tmp/pv-manifest.webmanifest
+          cp app/src/main/assets/icon-192.png /tmp/pv-icon-192.png
+          cp app/src/main/assets/icon-512.png /tmp/pv-icon-512.png
+          cp app/src/main/assets/apple-touch-icon.png /tmp/pv-apple-touch-icon.png
           git fetch origin gh-pages
           git checkout gh-pages
           cp /tmp/pv-index.html index.html
           cp /tmp/pv-hls.min.js hls.min.js
           cp /tmp/pv-logo.png logo.png
-          git add index.html hls.min.js logo.png
+          cp /tmp/pv-manifest.webmanifest manifest.webmanifest
+          cp /tmp/pv-icon-192.png icon-192.png
+          cp /tmp/pv-icon-512.png icon-512.png
+          cp /tmp/pv-apple-touch-icon.png apple-touch-icon.png
+          git add index.html hls.min.js logo.png manifest.webmanifest icon-192.png icon-512.png apple-touch-icon.png
           if git diff --quiet && git diff --staged --quiet; then
             echo "Pages aktuell"
             exit 0
