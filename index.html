@@ -342,9 +342,9 @@ body.webmode .mm-close{display:flex}
 #portrait-lock{display:none;position:fixed;inset:0;z-index:120;background:#04070e;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px}
 .pl-anim{width:360px;max-width:96vw;height:400px;position:relative;display:flex;align-items:center;justify-content:center}
 .pl-arrow{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none}
-.pl-arrow svg{width:380px;height:380px;flex-shrink:0}
+.pl-arrow svg{width:410px;height:410px;flex-shrink:0}
 .pl-sweep{transform-origin:190px 190px;animation:pl-sweep 6s ease-in-out infinite}
-.pl-tail{stroke-dasharray:534;stroke-dashoffset:534;animation:pl-dash 6s ease-in-out infinite}
+.pl-tail{stroke-dasharray:691;stroke-dashoffset:691;animation:pl-dash 6s ease-in-out infinite}
 .pl-phone{width:210px;height:360px;border:9px solid #fff;border-radius:36px;position:relative;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.6);animation:pl-rot 6s ease-in-out infinite;z-index:1}
 .pl-screen{position:absolute;inset:17px;background:#0a1628;border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .pl-word{white-space:nowrap;font-size:27px;font-weight:800;letter-spacing:.02em;color:#fff;animation:pl-word 6s ease-in-out infinite}
@@ -352,7 +352,7 @@ body.webmode .mm-close{display:flex}
 @keyframes pl-rot{0%,15%{transform:rotate(0deg)}35%,65%{transform:rotate(-90deg)}85%,100%{transform:rotate(0deg)}}
 @keyframes pl-word{0%,15%{transform:rotate(0deg)}35%,65%{transform:rotate(90deg)}85%,100%{transform:rotate(0deg)}}
 @keyframes pl-sweep{0%{transform:rotate(0deg);opacity:0}10%{transform:rotate(0deg);opacity:1}50%{transform:rotate(-180deg);opacity:1}53%{transform:rotate(-180deg);opacity:.35}56%{transform:rotate(-180deg);opacity:1}59%{transform:rotate(-180deg);opacity:.35}62%{transform:rotate(-180deg);opacity:1}65%{transform:rotate(-180deg);opacity:1}70%,100%{transform:rotate(0deg);opacity:0}}
-@keyframes pl-dash{0%,10%{stroke-dashoffset:534;opacity:0}12%{opacity:1}50%{stroke-dashoffset:0;opacity:1}65%{stroke-dashoffset:534;opacity:1}70%,100%{stroke-dashoffset:534;opacity:0}}
+@keyframes pl-dash{0%,10%{stroke-dashoffset:691;opacity:0}12%{opacity:1}50%{stroke-dashoffset:0;opacity:1}65%{stroke-dashoffset:-691;opacity:1}70%,100%{stroke-dashoffset:691;opacity:0}}
 .pl-txt{font-size:40px;font-weight:800;color:#fff}
 .pl-sub{font-size:21px;color:var(--gold);font-family:var(--fm)}
 @media (prefers-reduced-motion:reduce){.pl-phone{animation:none;transform:rotate(-90deg)}.pl-word{animation:none;transform:rotate(90deg)}.pl-arrow{display:none}}
@@ -666,7 +666,7 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 </div>
 </div>
 
-<div id="portrait-lock"><div class="pl-anim"><div class="pl-arrow"><svg viewBox="0 0 380 380" fill="none"><path class="pl-tail" d="M360,190 A170,170 0 0 0 10,190" stroke="#f5c218" stroke-width="6" stroke-linecap="round"/><g class="pl-sweep"><polygon points="360,174 351,190 369,190" fill="#f5c218"/></g></svg></div><div class="pl-phone"><div class="pl-screen"><div class="pl-word">Phoenicia Television</div></div><div class="pl-notch"></div></div></div><div class="pl-txt">Bitte drehen</div><div class="pl-sub">Handy quer halten</div></div>
+<div id="portrait-lock"><div class="pl-anim"><div class="pl-arrow"><svg viewBox="-45 -45 470 470" fill="none"><path class="pl-tail" d="M410,190 A220,220 0 0 0 -30,190" stroke="#f5c218" stroke-width="6" stroke-linecap="round"/><g class="pl-sweep"><polygon points="410,174 401,190 419,190" fill="#f5c218"/></g></svg></div><div class="pl-phone"><div class="pl-screen"><div class="pl-word">Phoenicia Television</div></div><div class="pl-notch"></div></div></div><div class="pl-txt">Bitte drehen</div><div class="pl-sub">Handy quer halten</div></div>
 
 <div id="toast"></div>
 <div id="mute-badge" aria-hidden="true">🔇</div>
