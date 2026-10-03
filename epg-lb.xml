@@ -3,11 +3,6 @@
   <channel id="AlJadeed.lb"><display-name>Al Jadeed</display-name></channel>
   <channel id="SAT7Arabic.us"><display-name>SAT-7 Arabic</display-name></channel>
   <channel id="MTVLebanon.lb"><display-name>MTV Lebanon</display-name></channel>
-  <programme start="20261002125000 +0300" stop="20261002134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20261002134500 +0300" stop="20261002143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
-  <programme start="20261002144500 +0300" stop="20261002153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
-  <programme start="20261002173000 +0300" stop="20261002175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
-  <programme start="20261003125000 +0300" stop="20261003134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
   <programme start="20261003010000 +0300" stop="20261003012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
   <programme start="20261003012500 +0300" stop="20261003013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
   <programme start="20261003013000 +0300" stop="20261003023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
@@ -25,7 +20,6 @@
   <programme start="20261003144500 +0300" stop="20261003163000 +0300" channel="AlJadeed.lb"><title>Masaha Khassa</title></programme>
   <programme start="20261003163000 +0300" stop="20261003173000 +0300" channel="AlJadeed.lb"><title>Hekayati Ana</title></programme>
   <programme start="20261003173000 +0300" stop="20261003175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
-  <programme start="20261004125000 +0300" stop="20261004134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
   <programme start="20261004012500 +0300" stop="20261004013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
   <programme start="20261004013000 +0300" stop="20261004023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
   <programme start="20261004023000 +0300" stop="20261004043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
@@ -35,52 +29,27 @@
   <programme start="20261004083000 +0300" stop="20261004090000 +0300" channel="AlJadeed.lb"><title>Midday News Bulletin</title></programme>
   <programme start="20261004090000 +0300" stop="20261004100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
   <programme start="20261004113000 +0300" stop="20261004114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
+  <programme start="20261004125000 +0300" stop="20261004134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
   <programme start="20261004134500 +0300" stop="20261004143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261004153000 +0300" stop="20261004173000 +0300" channel="AlJadeed.lb"><title>W Halla’ Shu?</title></programme>
   <programme start="20261004173000 +0300" stop="20261004175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
-  <programme start="20261002222000 +0300" stop="20261003001500 +0300" channel="SAT7Arabic.us"><title>October Baby</title></programme>
-  <programme start="20261002001500 +0300" stop="20261002021500 +0300" channel="SAT7Arabic.us"><title>نسيج</title></programme>
-  <programme start="20261002021500 +0300" stop="20261002025500 +0300" channel="SAT7Arabic.us"><title>Encounter</title></programme>
-  <programme start="20261002025500 +0300" stop="20261002031500 +0300" channel="SAT7Arabic.us"><title>Eyewitness Bible Series - Kings and Prophets S05</title></programme>
-  <programme start="20261002031500 +0300" stop="20261002032500 +0300" channel="SAT7Arabic.us"><title>و أنتم من تقولون أنى أنا؟</title></programme>
-  <programme start="20261002032500 +0300" stop="20261002033500 +0300" channel="SAT7Arabic.us"><title>انجيل مرقس</title></programme>
-  <programme start="20261002033500 +0300" stop="20261002035000 +0300" channel="SAT7Arabic.us"><title>يلا نرنم</title></programme>
-  <programme start="20261002035000 +0300" stop="20261002040000 +0300" channel="SAT7Arabic.us"><title>انجيل مرقس</title></programme>
-  <programme start="20261002040000 +0300" stop="20261002041500 +0300" channel="SAT7Arabic.us"><title>أساسيات الكتاب المقدس (فيلبي)</title></programme>
-  <programme start="20261002041500 +0300" stop="20261002044500 +0300" channel="SAT7Arabic.us"><title>كما في السماء</title></programme>
-  <programme start="20261002044500 +0300" stop="20261002050000 +0300" channel="SAT7Arabic.us"><title>انجيل مرقس</title></programme>
-  <programme start="20261002050000 +0300" stop="20261002053000 +0300" channel="SAT7Arabic.us"><title>عظة الميتروبوليتان إلياس عودة</title></programme>
-  <programme start="20261002053000 +0300" stop="20261002054500 +0300" channel="SAT7Arabic.us"><title>يشجعني</title></programme>
-  <programme start="20261002054500 +0300" stop="20261002060000 +0300" channel="SAT7Arabic.us"><title>النصف الآخر</title></programme>
-  <programme start="20261002060000 +0300" stop="20261002073000 +0300" channel="SAT7Arabic.us"><title>صباح الخير من بيروت</title></programme>
-  <programme start="20261002073000 +0300" stop="20261002074500 +0300" channel="SAT7Arabic.us"><title>يشجعني</title></programme>
-  <programme start="20261002074500 +0300" stop="20261002080000 +0300" channel="SAT7Arabic.us"><title>مع الدكتور القس أندريه زكي</title></programme>
-  <programme start="20261002080000 +0300" stop="20261002100000 +0300" channel="SAT7Arabic.us"><title>الاجتماع الأسبوعي من كنيسة قصر الدوبارة</title></programme>
-  <programme start="20261002100000 +0300" stop="20261002103000 +0300" channel="SAT7Arabic.us"><title>رسالة لكم</title></programme>
-  <programme start="20261002103000 +0300" stop="20261002105000 +0300" channel="SAT7Arabic.us"><title>لالة مولاتي</title></programme>
-  <programme start="20261002105000 +0300" stop="20261002110500 +0300" channel="SAT7Arabic.us"><title>إشكون انا؟</title></programme>
-  <programme start="20261002110500 +0300" stop="20261002111500 +0300" channel="SAT7Arabic.us"><title>انجيل مرقس، باللهجة المغربية</title></programme>
-  <programme start="20261002111500 +0300" stop="20261002120000 +0300" channel="SAT7Arabic.us"><title>الطب والحياة الروشتة</title></programme>
-  <programme start="20261002120000 +0300" stop="20261002123000 +0300" channel="SAT7Arabic.us"><title>اكتشاف الكتاب المقدس</title></programme>
-  <programme start="20261002123000 +0300" stop="20261002130000 +0300" channel="SAT7Arabic.us"><title>شباب 2 شباب</title></programme>
-  <programme start="20261002130000 +0300" stop="20261002131000 +0300" channel="SAT7Arabic.us"><title>أساسيات الكتاب المقدس (فيلبي)</title></programme>
-  <programme start="20261002131000 +0300" stop="20261002132500 +0300" channel="SAT7Arabic.us"><title>و أنتم من تقولون أنى أنا؟</title></programme>
-  <programme start="20261002132500 +0300" stop="20261002150000 +0300" channel="SAT7Arabic.us"><title>Meant To Be</title></programme>
-  <programme start="20261002150000 +0300" stop="20261002153000 +0300" channel="SAT7Arabic.us"><title>إنسان عادي</title></programme>
-  <programme start="20261002153000 +0300" stop="20261002163500 +0300" channel="SAT7Arabic.us"><title>مش وحدك</title></programme>
-  <programme start="20261002163500 +0300" stop="20261002170000 +0300" channel="SAT7Arabic.us"><title>خطة سندريلا</title></programme>
-  <programme start="20261002170000 +0300" stop="20261002181500 +0300" channel="SAT7Arabic.us"><title>الحياة الأفضل خدمة المسرح - أسيوط</title></programme>
-  <programme start="20261002181500 +0300" stop="20261002190000 +0300" channel="SAT7Arabic.us"><title>بودكاست سات ٧</title></programme>
-  <programme start="20261002190000 +0300" stop="20261002194500 +0300" channel="SAT7Arabic.us"><title>Encounter</title></programme>
-  <programme start="20261002194500 +0300" stop="20261002200000 +0300" channel="SAT7Arabic.us"><title>Eyewitness Bible Series - Kings and Prophets S05</title></programme>
-  <programme start="20261002200000 +0300" stop="20261002201500 +0300" channel="SAT7Arabic.us"><title>نافذة السماء</title></programme>
-  <programme start="20261002201500 +0300" stop="20261002204500 +0300" channel="SAT7Arabic.us"><title>رسالة لكم</title></programme>
-  <programme start="20261002204500 +0300" stop="20261002210500 +0300" channel="SAT7Arabic.us"><title>لالة مولاتي</title></programme>
-  <programme start="20261002210500 +0300" stop="20261002212000 +0300" channel="SAT7Arabic.us"><title>إشكون انا؟</title></programme>
-  <programme start="20261002212000 +0300" stop="20261002213000 +0300" channel="SAT7Arabic.us"><title>انجيل مرقس، باللهجة المغربية</title></programme>
-  <programme start="20261002213000 +0300" stop="20261002221500 +0300" channel="SAT7Arabic.us"><title>الطب والحياة الروشتة</title></programme>
-  <programme start="20261002221500 +0300" stop="20261002235000 +0300" channel="SAT7Arabic.us"><title>Meant To Be</title></programme>
-  <programme start="20261002235000 +0300" stop="20261003001500 +0300" channel="SAT7Arabic.us"><title>اكتشاف الكتاب المقدس</title></programme>
+  <programme start="20261005010000 +0300" stop="20261005012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
+  <programme start="20261005012500 +0300" stop="20261005013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
+  <programme start="20261005013000 +0300" stop="20261005023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
+  <programme start="20261005023000 +0300" stop="20261005043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
+  <programme start="20261005043000 +0300" stop="20261005044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
+  <programme start="20261005050000 +0300" stop="20261005060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
+  <programme start="20261005060000 +0300" stop="20261005061000 +0300" channel="AlJadeed.lb"><title>12:00 PM News Brief</title></programme>
+  <programme start="20261005073000 +0300" stop="20261005083000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
+  <programme start="20261005083000 +0300" stop="20261005090000 +0300" channel="AlJadeed.lb"><title>Midday News Bulletin</title></programme>
+  <programme start="20261005090000 +0300" stop="20261005100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
+  <programme start="20261005100000 +0300" stop="20261005123000 +0300" channel="AlJadeed.lb"><title>W Halla’ Shu?</title></programme>
+  <programme start="20261005113000 +0300" stop="20261005114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
+  <programme start="20261005125000 +0300" stop="20261005134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
+  <programme start="20261005134500 +0300" stop="20261005143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
+  <programme start="20261005144500 +0300" stop="20261005153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
+  <programme start="20261005153000 +0300" stop="20261005173000 +0300" channel="AlJadeed.lb"><title>Bil toul Wil aard</title></programme>
+  <programme start="20261005173000 +0300" stop="20261005175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
   <programme start="20261003235000 +0300" stop="20261004001500 +0300" channel="SAT7Arabic.us"><title>اكتشاف الكتاب المقدس</title></programme>
   <programme start="20261003001500 +0300" stop="20261003012000 +0300" channel="SAT7Arabic.us"><title>الحياة الأفضل خدمة المسرح - أسيوط</title></programme>
   <programme start="20261003012000 +0300" stop="20261003014000 +0300" channel="SAT7Arabic.us"><title>خطة سندريلا</title></programme>
@@ -152,6 +121,46 @@
   <programme start="20261004213500 +0300" stop="20261004221500 +0300" channel="SAT7Arabic.us"><title>ازيك عامل إيه؟</title></programme>
   <programme start="20261004221500 +0300" stop="20261005000000 +0300" channel="SAT7Arabic.us"><title>Claire and Francis</title></programme>
   <programme start="20261004000000 +0300" stop="20261004013000 +0300" channel="SAT7Arabic.us"><title>صباح الخير من بيروت</title></programme>
+  <programme start="20261005221500 +0300" stop="20261006000000 +0300" channel="SAT7Arabic.us"><title>Claire and Francis</title></programme>
+  <programme start="20261005000000 +0300" stop="20261005013000 +0300" channel="SAT7Arabic.us"><title>صباح الخير من بيروت</title></programme>
+  <programme start="20261005013000 +0300" stop="20261005020000 +0300" channel="SAT7Arabic.us"><title>خطوط عريضة</title></programme>
+  <programme start="20261005020000 +0300" stop="20261005021500 +0300" channel="SAT7Arabic.us"><title>بودكاست شو بتقول؟</title></programme>
+  <programme start="20261005021500 +0300" stop="20261005024500 +0300" channel="SAT7Arabic.us"><title>بنوك مثل غروس الزيتون</title></programme>
+  <programme start="20261005024500 +0300" stop="20261005030000 +0300" channel="SAT7Arabic.us"><title>و أنتم من تقولون أنى أنا؟</title></programme>
+  <programme start="20261005030000 +0300" stop="20261005031500 +0300" channel="SAT7Arabic.us"><title>الموعظة على الجبل</title></programme>
+  <programme start="20261005031500 +0300" stop="20261005034500 +0300" channel="SAT7Arabic.us"><title>يلا نرنم</title></programme>
+  <programme start="20261005034500 +0300" stop="20261005040000 +0300" channel="SAT7Arabic.us"><title>الموعظة على الجبل</title></programme>
+  <programme start="20261005040000 +0300" stop="20261005041500 +0300" channel="SAT7Arabic.us"><title>أساسيات الكتاب المقدس (فيلبي)</title></programme>
+  <programme start="20261005041500 +0300" stop="20261005044500 +0300" channel="SAT7Arabic.us"><title>كما في السماء</title></programme>
+  <programme start="20261005044500 +0300" stop="20261005050000 +0300" channel="SAT7Arabic.us"><title>الموعظة على الجبل</title></programme>
+  <programme start="20261005050000 +0300" stop="20261005053000 +0300" channel="SAT7Arabic.us"><title>بنوك مثل غروس الزيتون</title></programme>
+  <programme start="20261005053000 +0300" stop="20261005060000 +0300" channel="SAT7Arabic.us"><title>إنسان عادي</title></programme>
+  <programme start="20261005060000 +0300" stop="20261005070000 +0300" channel="SAT7Arabic.us"><title>خارج النص</title></programme>
+  <programme start="20261005070000 +0300" stop="20261005072000 +0300" channel="SAT7Arabic.us"><title>خطوط عريضة</title></programme>
+  <programme start="20261005072000 +0300" stop="20261005081000 +0300" channel="SAT7Arabic.us"><title>Encounter</title></programme>
+  <programme start="20261005081000 +0300" stop="20261005083000 +0300" channel="SAT7Arabic.us"><title>Eyewitness Bible Series - Kings and Prophets S05</title></programme>
+  <programme start="20261005083000 +0300" stop="20261005085000 +0300" channel="SAT7Arabic.us"><title>شباب 2 شباب</title></programme>
+  <programme start="20261005085000 +0300" stop="20261005092500 +0300" channel="SAT7Arabic.us"><title>إن جيت للحق</title></programme>
+  <programme start="20261005092500 +0300" stop="20261005095500 +0300" channel="SAT7Arabic.us"><title>الرب يسوع والكتب المقدسة</title></programme>
+  <programme start="20261005095500 +0300" stop="20261005101000 +0300" channel="SAT7Arabic.us"><title>يشجعني</title></programme>
+  <programme start="20261005101000 +0300" stop="20261005111000 +0300" channel="SAT7Arabic.us"><title>كنيستي</title></programme>
+  <programme start="20261005111000 +0300" stop="20261005112500 +0300" channel="SAT7Arabic.us"><title>انجيل مرقس، باللهجة المغربية</title></programme>
+  <programme start="20261005112500 +0300" stop="20261005120500 +0300" channel="SAT7Arabic.us"><title>الطب والحياة الروشتة</title></programme>
+  <programme start="20261005120500 +0300" stop="20261005130500 +0300" channel="SAT7Arabic.us"><title>خارج النص</title></programme>
+  <programme start="20261005130500 +0300" stop="20261005132000 +0300" channel="SAT7Arabic.us"><title>أساسيات الكتاب المقدس (فيلبي)</title></programme>
+  <programme start="20261005132000 +0300" stop="20261005133500 +0300" channel="SAT7Arabic.us"><title>و أنتم من تقولون أنى أنا؟</title></programme>
+  <programme start="20261005133500 +0300" stop="20261005153000 +0300" channel="SAT7Arabic.us"><title>Comenius</title></programme>
+  <programme start="20261005153000 +0300" stop="20261005160500 +0300" channel="SAT7Arabic.us"><title>إن جيت للحق</title></programme>
+  <programme start="20261005160500 +0300" stop="20261005163000 +0300" channel="SAT7Arabic.us"><title>شباب 2 شباب</title></programme>
+  <programme start="20261005163000 +0300" stop="20261005183000 +0300" channel="SAT7Arabic.us"><title>اجتماع الحرية</title></programme>
+  <programme start="20261005183000 +0300" stop="20261005191000 +0300" channel="SAT7Arabic.us"><title>ازيك عامل إيه؟</title></programme>
+  <programme start="20261005191000 +0300" stop="20261005195500 +0300" channel="SAT7Arabic.us"><title>Encounter</title></programme>
+  <programme start="20261005195500 +0300" stop="20261005201500 +0300" channel="SAT7Arabic.us"><title>Eyewitness Bible Series - Kings and Prophets S05</title></programme>
+  <programme start="20261005201500 +0300" stop="20261005211500 +0300" channel="SAT7Arabic.us"><title>كنيستي</title></programme>
+  <programme start="20261005211500 +0300" stop="20261005213000 +0300" channel="SAT7Arabic.us"><title>انجيل مرقس، باللهجة المغربية</title></programme>
+  <programme start="20261005213000 +0300" stop="20261005222500 +0300" channel="SAT7Arabic.us"><title>المحبة فعالة</title></programme>
+  <programme start="20261005222500 +0300" stop="20261006000000 +0300" channel="SAT7Arabic.us"><title>Comenius</title></programme>
+  <programme start="20261005000000 +0300" stop="20261005020000 +0300" channel="SAT7Arabic.us"><title>اجتماع الحرية</title></programme>
   <programme start="20261003000000 +0300" stop="20261003003000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
   <programme start="20261003003000 +0300" stop="20261003013000 +0300" channel="MTVLebanon.lb"><title>برنامج صحافة</title></programme>
   <programme start="20261003013000 +0300" stop="20261003020000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
