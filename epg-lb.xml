@@ -3,21 +3,10 @@
   <channel id="AlJadeed.lb"><display-name>Al Jadeed</display-name></channel>
   <channel id="SAT7Arabic.us"><display-name>SAT-7 Arabic</display-name></channel>
   <channel id="MTVLebanon.lb"><display-name>MTV Lebanon</display-name></channel>
-  <programme start="20261007010000 +0300" stop="20261007012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
-  <programme start="20261007012500 +0300" stop="20261007013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
-  <programme start="20261007013000 +0300" stop="20261007023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
-  <programme start="20261007023000 +0300" stop="20261007043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
-  <programme start="20261007043000 +0300" stop="20261007044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
-  <programme start="20261007050000 +0300" stop="20261007060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
-  <programme start="20261007060000 +0300" stop="20261007061000 +0300" channel="AlJadeed.lb"><title>12:00 PM News Brief</title></programme>
-  <programme start="20261007073000 +0300" stop="20261007083000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20261007083000 +0300" stop="20261007090000 +0300" channel="AlJadeed.lb"><title>Midday News Bulletin</title></programme>
-  <programme start="20261007090000 +0300" stop="20261007100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
-  <programme start="20261007113000 +0300" stop="20261007114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
-  <programme start="20261007125000 +0300" stop="20261007134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
   <programme start="20261007134500 +0300" stop="20261007143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261007144500 +0300" stop="20261007153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
   <programme start="20261007173000 +0300" stop="20261007175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
+  <programme start="20261008134500 +0300" stop="20261008143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261008010000 +0300" stop="20261008012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
   <programme start="20261008012500 +0300" stop="20261008013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
   <programme start="20261008013000 +0300" stop="20261008023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
@@ -30,9 +19,9 @@
   <programme start="20261008090000 +0300" stop="20261008100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
   <programme start="20261008113000 +0300" stop="20261008114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
   <programme start="20261008125000 +0300" stop="20261008134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20261008134500 +0300" stop="20261008143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261008144500 +0300" stop="20261008153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
   <programme start="20261008173000 +0300" stop="20261008175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
+  <programme start="20261009134500 +0300" stop="20261009143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261009010000 +0300" stop="20261009012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
   <programme start="20261009012500 +0300" stop="20261009013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
   <programme start="20261009013000 +0300" stop="20261009023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
@@ -45,8 +34,6 @@
   <programme start="20261009090000 +0300" stop="20261009100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
   <programme start="20261009113000 +0300" stop="20261009114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
   <programme start="20261009125000 +0300" stop="20261009134000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20261009134500 +0300" stop="20261009143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
-  <programme start="20261009144500 +0300" stop="20261009153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
   <programme start="20261009173000 +0300" stop="20261009175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
   <programme start="20261007220000 +0300" stop="20261008000000 +0300" channel="SAT7Arabic.us"><title>Fearless Faith</title></programme>
   <programme start="20261007000000 +0300" stop="20261007013000 +0300" channel="SAT7Arabic.us"><title>زاوية تانية</title></programme>
@@ -174,17 +161,6 @@
   <programme start="20261009213000 +0300" stop="20261009221000 +0300" channel="SAT7Arabic.us"><title>الطب والحياة الروشتة</title></programme>
   <programme start="20261009221000 +0300" stop="20261010001000 +0300" channel="SAT7Arabic.us"><title>Miss Virginia</title></programme>
   <programme start="20261009000000 +0300" stop="20261009005000 +0300" channel="SAT7Arabic.us"><title>الحياة الأفضل - سان مارك</title></programme>
-  <programme start="20261007003000 +0300" stop="20261007013000 +0300" channel="MTVLebanon.lb"><title>برنامج صحافة</title></programme>
-  <programme start="20261007013000 +0300" stop="20261007020000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
-  <programme start="20261007021000 +0300" stop="20261007023500 +0300" channel="MTVLebanon.lb"><title>فقرة غنائية</title></programme>
-  <programme start="20261007023500 +0300" stop="20261007031500 +0300" channel="MTVLebanon.lb"><title>برنامج ALIVE</title></programme>
-  <programme start="20261007032500 +0300" stop="20261007040000 +0300" channel="MTVLebanon.lb"><title>فترة دينية</title></programme>
-  <programme start="20261007040000 +0300" stop="20261007050000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261007050000 +0300" stop="20261007060000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261007060000 +0300" stop="20261007070000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261007070000 +0300" stop="20261007080000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261007080000 +0300" stop="20261007090000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
-  <programme start="20261007090000 +0300" stop="20261007101500 +0300" channel="MTVLebanon.lb"><title>برنامج بيروت اليوم</title></programme>
   <programme start="20261008000000 +0300" stop="20261008003000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
   <programme start="20261008003000 +0300" stop="20261008013000 +0300" channel="MTVLebanon.lb"><title>برنامج صحافة</title></programme>
   <programme start="20261008013000 +0300" stop="20261008020000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
@@ -212,4 +188,5 @@
   <programme start="20261009080000 +0300" stop="20261009090000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
   <programme start="20261009090000 +0300" stop="20261009101500 +0300" channel="MTVLebanon.lb"><title>برنامج بيروت اليوم</title></programme>
   <programme start="20261009101500 +0300" stop="20261009124500 +0300" channel="MTVLebanon.lb"><title>فقرة رياضية</title></programme>
+  <programme start="20261010000000 +0300" stop="20261010003000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
 </tv>
