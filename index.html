@@ -1214,9 +1214,12 @@ function showChInfo(ch){
 
 function buildVariants(ch){
   const base=[...ch.urls];
-  if(typeof WEBMODE!=='undefined'&&WEBMODE){const up=[];for(const u of base){if(typeof u==='string'&&u.startsWith('http://'))up.push(u.replace('http://','https://'));up.push(u)}return up}
+  if(typeof WEBMODE!=='undefined'&&WEBMODE){const up=[];for(const u of base){if(typeof u==='string'&&u.startsWith('http://'))up.push(u.replace('http://','https://'));if(typeof u==='string'&&u.startsWith('http://')&&typeof HLS_PROXY!=='undefined'&&HLS_PROXY)up.push(HLS_PROXY+encodeURIComponent(u));up.push(u)}return up}
   return base;
 }
+/* HTTPS-Proxy für http://-Streams (Cloudflare Worker, siehe worker/proxy.js).
+   Leer lassen = Proxy-Variante wird übersprungen. Muss auf '.../?url=' enden. */
+const HLS_PROXY='';
 
 function tryStream(ch,idx){
   console.log('PVTV TRY: idx='+idx+' name='+(ch?ch.name:'null'));
