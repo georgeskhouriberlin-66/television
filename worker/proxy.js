@@ -78,7 +78,12 @@ export default {
     const proxyBase = new URL(request.url).origin +
       new URL(request.url).pathname + '?' + PROXY_PARAM + '=';
 
-    const fwd = { 'User-Agent': BROWSER_UA };
+    const fwd = {
+      'User-Agent': BROWSER_UA,
+      Accept: '*/*',
+      'Accept-Language': 'de-DE,de;q=0.9,en;q=0.8,ar;q=0.7',
+      Referer: target.origin + '/'
+    };
     const range = request.headers.get('range');
     if (range) fwd['Range'] = range;
 

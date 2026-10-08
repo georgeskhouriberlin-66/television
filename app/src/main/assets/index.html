@@ -1219,7 +1219,7 @@ function buildVariants(ch){
 }
 /* HTTPS-Proxy für http://-Streams (Cloudflare Worker, siehe worker/proxy.js).
    Leer lassen = Proxy-Variante wird übersprungen. Muss auf '.../?url=' enden. */
-const HLS_PROXY='';
+const HLS_PROXY='https://phoenicia-hls.georges-khouri-berlin.workers.dev/?url=';
 
 function tryStream(ch,idx){
   console.log('PVTV TRY: idx='+idx+' name='+(ch?ch.name:'null'));
