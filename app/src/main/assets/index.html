@@ -340,6 +340,7 @@ video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
 body.webmode{cursor:auto}
 body.webmode #menu-btn{display:flex}
 body.webmode #fs-btn{display:flex}
+body.idlecur,body.idlecur *{cursor:none!important}
 #menu-btn svg{width:24px;height:24px}
 .mm-close{display:none;position:fixed;top:12px;right:12px;z-index:91;width:44px;height:44px;background:rgba(8,11,20,.92);border:1.5px solid rgba(255,255,255,.14);border-radius:var(--phz-r-lg);color:#fff;font-size:20px;cursor:pointer;align-items:center;justify-content:center;outline:none;-webkit-tap-highlight-color:transparent}
 .mm-close:active{border-color:var(--acc)}
@@ -1290,7 +1291,8 @@ const menuBtn=document.getElementById('menu-btn'),fsBtn=document.getElementById(
 function uiBlocked(){return mainMenu.classList.contains('open')||document.getElementById('sidebar').classList.contains('sb-open')}
 function armUIHide(ms){clearTimeout(uiTimer);uiTimer=setTimeout(()=>{if(!uiBlocked())hideUI()},ms)}
 let deskBtnTimer=0;
-function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||!WEBMODE||TOUCHY)return;menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');clearTimeout(deskBtnTimer);deskBtnTimer=setTimeout(()=>{menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')},3000)}
+function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||!WEBMODE)return;document.body.classList.remove('idlecur');if(!TOUCHY||!uiOpen){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden')}clearTimeout(deskBtnTimer);deskBtnTimer=setTimeout(()=>{document.body.classList.add('idlecur');menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')},3000)}
+['mousemove','mousedown','touchstart','keydown','wheel'].forEach(t=>document.addEventListener(t,()=>pokeDeskBtns(),{passive:true}));
 
 /* ── UI ── */
 function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();armUIHide(4000)}
