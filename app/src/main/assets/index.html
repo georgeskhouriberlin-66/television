@@ -1744,6 +1744,17 @@ soInput.addEventListener('input',renderSearchResults);
 document.getElementById('so-close').addEventListener('click',closeSearchOv);
 
 document.addEventListener('keydown',e=>{
+  // Textfelder (eigene Playlisten, Suche) nie kapern: Löschen/Bestätigen/Caret nativ lassen.
+  // TV-Fernbedienung bleibt heil: Escape/Up/Down + Backspace im leeren Feld + Pfeile an Feldgrenzen fallen weiter unten in setupNav/mmMove.
+  const ae=document.activeElement;
+  if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA')){
+    if(e.key==='Backspace'||e.key==='Delete'){if(ae.value)return}
+    else if(e.key==='Enter')return;
+    else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
+      try{const v=ae.value||'',s=(typeof ae.selectionStart==='number')?ae.selectionStart:v.length,n=(typeof ae.selectionEnd==='number')?ae.selectionEnd:v.length;if(s!==n)return;if(e.key==='ArrowLeft'&&s>0)return;if(e.key==='ArrowRight'&&s<v.length)return}catch(_){}
+    }
+    else if(e.key!=='Escape'&&e.key!=='ArrowUp'&&e.key!=='ArrowDown')return;
+  }
   if(!setup.classList.contains('off')){
     // Setup screen keyboard navigation
     if(e.key==='Escape'||e.key==='Backspace'||e.keyCode===93){e.preventDefault();setup.classList.add('off');return}
