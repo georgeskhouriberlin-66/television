@@ -3,9 +3,6 @@
   <channel id="AlJadeed.lb"><display-name>Al Jadeed</display-name></channel>
   <channel id="SAT7Arabic.us"><display-name>SAT-7 Arabic</display-name></channel>
   <channel id="MTVLebanon.lb"><display-name>MTV Lebanon</display-name></channel>
-  <programme start="20261013013000 +0300" stop="20261013023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
-  <programme start="20261013023000 +0300" stop="20261013043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
-  <programme start="20261013043000 +0300" stop="20261013044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
   <programme start="20261013050000 +0300" stop="20261013060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
   <programme start="20261013060000 +0300" stop="20261013061000 +0300" channel="AlJadeed.lb"><title>12:00 PM News Brief</title></programme>
   <programme start="20261013073000 +0300" stop="20261013083000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
@@ -16,9 +13,9 @@
   <programme start="20261013134500 +0300" stop="20261013143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261013144500 +0300" stop="20261013153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
   <programme start="20261013173000 +0300" stop="20261013175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
-  <programme start="20261014013000 +0300" stop="20261014023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
   <programme start="20261014010000 +0300" stop="20261014012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
   <programme start="20261014012500 +0300" stop="20261014013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
+  <programme start="20261014013000 +0300" stop="20261014023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
   <programme start="20261014023000 +0300" stop="20261014043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
   <programme start="20261014043000 +0300" stop="20261014044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
   <programme start="20261014050000 +0300" stop="20261014060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
@@ -31,9 +28,9 @@
   <programme start="20261014134500 +0300" stop="20261014143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261014144500 +0300" stop="20261014153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
   <programme start="20261014173000 +0300" stop="20261014175900 +0300" channel="AlJadeed.lb"><title>Nightly News Bulletin</title></programme>
-  <programme start="20261015013000 +0300" stop="20261015023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
   <programme start="20261015010000 +0300" stop="20261015012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
   <programme start="20261015012500 +0300" stop="20261015013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
+  <programme start="20261015013000 +0300" stop="20261015023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
   <programme start="20261015023000 +0300" stop="20261015043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
   <programme start="20261015043000 +0300" stop="20261015044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
   <programme start="20261015050000 +0300" stop="20261015060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
@@ -177,12 +174,6 @@
   <programme start="20261015211500 +0300" stop="20261015221500 +0300" channel="SAT7Arabic.us"><title>خارج النص</title></programme>
   <programme start="20261015221500 +0300" stop="20261016000000 +0300" channel="SAT7Arabic.us"><title>Wish You Well</title></programme>
   <programme start="20261015000000 +0300" stop="20261015020000 +0300" channel="SAT7Arabic.us"><title>نسيج</title></programme>
-  <programme start="20261013013000 +0300" stop="20261013020000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
-  <programme start="20261013021000 +0300" stop="20261013023500 +0300" channel="MTVLebanon.lb"><title>فقرة غنائية</title></programme>
-  <programme start="20261013023500 +0300" stop="20261013025000 +0300" channel="MTVLebanon.lb"><title>برنامج ALIVE</title></programme>
-  <programme start="20261013025000 +0300" stop="20261013031500 +0300" channel="MTVLebanon.lb"><title>برنامج مشوار</title></programme>
-  <programme start="20261013032500 +0300" stop="20261013040000 +0300" channel="MTVLebanon.lb"><title>فترة دينية</title></programme>
-  <programme start="20261013040000 +0300" stop="20261013043000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
   <programme start="20261013043000 +0300" stop="20261013050000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
   <programme start="20261013050000 +0300" stop="20261013060000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
   <programme start="20261013060000 +0300" stop="20261013070000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
