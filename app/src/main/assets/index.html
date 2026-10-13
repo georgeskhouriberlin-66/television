@@ -1386,7 +1386,6 @@ async function tryAutoFS(){
   if(!TOUCHY||fsUserExited||document.fullscreenElement||document.webkitFullscreenElement)return;
   const ok=await enterFS();
   if(ok){fsRetry=false;return}
-  if(!fsHintShown){fsHintShown=true;toast('Tippe für Vollbild ⛶',5000)}
   fsRetry=true;
 }
 fsBtn.addEventListener('click',()=>{toggleFS()});
