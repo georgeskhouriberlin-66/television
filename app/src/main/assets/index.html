@@ -1663,6 +1663,7 @@ function buildMainMenu(){
   const secPlaylists=[];
   const secCats=[];
   const secCur=[mmCurPanel];
+  const secGear=[mmGear];
   // Nav cards
   const navDefs=[
     {icon:ICON_MM_PLS,name:'Playlisten',nav:'playlists',cls:'card-pls'},
@@ -1722,7 +1723,7 @@ function buildMainMenu(){
   mmCurName.textContent=curPl?curPl.name.replace(/^[^\p{L}\p{N}]+/u,''):'–';
   const _curCnt=curPl?((gs('pl_counts')||{})[curPl.id]||flatCh.length):0;
   mmCurCount.textContent=_curCnt?(_curCnt+' Sender'):'';
-  mmSections=[secNav,secCats,secPlaylists,secCur];
+  mmSections=[secNav,secCats,secPlaylists,secCur,secGear];
   if(mmSecIdx>=mmSections.length)mmSecIdx=mmSections.length-1;
   if(mmItemIdx>=mmSections[mmSecIdx].length)mmItemIdx=mmSections[mmSecIdx].length-1;
 }
@@ -1794,7 +1795,7 @@ document.addEventListener('keydown',e=>{
   }
   if(!setup.classList.contains('off')){
     // Setup screen keyboard navigation
-    if(e.key==='Escape'||e.key==='Backspace'||e.keyCode===93){e.preventDefault();setup.classList.add('off');return}
+    if(e.key==='Escape'||e.key==='Backspace'||e.keyCode===93){e.preventDefault();if(!gs('fs_done')&&!allPls.length){applySetupAndStart()}else{setup.classList.add('off')}return}
     if(e.key==='ArrowDown'){e.preventDefault();setupNav(1,0);return}
     if(e.key==='ArrowUp'){e.preventDefault();setupNav(-1,0);return}
     if(e.key==='ArrowRight'){e.preventDefault();setupNav(0,1);return}
@@ -1989,13 +1990,13 @@ function plIco(id){
   return `<svg viewBox="0 0 16 16" width="16" height="16" style="vertical-align:middle;margin-right:5px"><path d="M8 13V8M8 8L4.5 4.5M8 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><circle cx="8" cy="13.8" r="1" fill="currentColor"/><path d="M5.2 5.5a3.8 3.8 0 0 1 5.6 0" fill="none" stroke="currentColor" stroke-width="1"/></svg>`;
 }
 
-setupStart.addEventListener('click',async()=>{
+async function applySetupAndStart(){
   const selBuiltin=[...builtinGrid.querySelectorAll('.sc-card.sel')].map(b=>b.dataset.id);
   ss(LS.SEL,selBuiltin);
   const url=($('iurl').value||'').trim(),name=($('iname').value||'').trim()||'Eigene',epgUrl=($('iepg').value||'').trim();
   if(url){customPl=gs(LS.CUSTOM)||[];if(!customPl.find(p=>p.url===url)){customPl.push({id:'c_'+Date.now(),name,url,epgUrl});ss(LS.CUSTOM,customPl)}$('iurl').value='';$('iname').value='';$('iepg').value='';renderSaved()}
   buildAllPls(selBuiltin);
-  if(!allPls.length){setScSt('err','Bitte mindestens eine Playlist wählen.');return}
+  if(!allPls.length){setScSt('err','Bitte mindestens eine Playlist wählen.');return false}
   setupStart.disabled=true;
   await loadPlaylist(allPls[0],false);
   ss('fs_done',true);
@@ -2004,7 +2005,9 @@ setupStart.addEventListener('click',async()=>{
   updateChCounterTotal();
   showUI();armUIHide(5000);if(TOUCHY)tryAutoFS();pokeDeskBtns();
   setupStart.disabled=false;
-});
+  return true;
+}
+setupStart.addEventListener('click',()=>{applySetupAndStart()});
 
 /* ── Helpers ── */
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
