@@ -629,6 +629,7 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
       <button class="sc-sel-btn" id="btn-sel-all">Alles auswählen</button>
       <button class="sc-sel-btn" id="btn-sel-none">Nichts auswählen</button>
     </div>
+  </div>
 
   <div class="sc-section">
     <div class="sc-lbl sc-acc" id="sc-adv-h" tabindex="0">Erweitert: Eigene Sender <span id="sc-adv-ico">▸</span></div>
@@ -820,6 +821,7 @@ function updateChCounterTotal(){
 /* ── Startup ── */
 let startupDone=false;
 function hideStartup(){
+  try{const sv0=$('startup-vid');if(sv0){sv0.pause();sv0.removeAttribute('src');sv0.load()}}catch(_){}
   if(startupDone)return;startupDone=true;
   if(!startup)return;
   startup.classList.add('hide');
@@ -1523,7 +1525,7 @@ let setupCards=[],setupSelIdx=0,setupTail=[];
 const CARD_COLS=4;
 let scAdvOpen=false;
 function scAdvToggle(){scAdvOpen=!scAdvOpen;$('sc-adv-b').style.display=scAdvOpen?'':'none';$('sc-adv-ico').textContent=scAdvOpen?'▾':'▸';setupTargets();const hi=setupTail.indexOf($('sc-adv-h'));setupSelIdx=hi>=0?setupCards.length+hi:0;setupFocus(setupSelIdx)}
-function showSetupPage(w){$('sc-page-lists').style.display=w==='lists'?'':'none';$('sc-page-settings').style.display=w==='settings'?'':'none';setup.classList.remove('off');setup.scrollTop=0;setupFocusInit()}
+function showSetupPage(w){$('sc-page-lists').style.display=w==='lists'?'':'none';$('sc-page-settings').style.display=w==='settings'?'':'none';setup.classList.remove('off');setup.scrollTop=0;setupFocusInit();try{void setup.offsetHeight;const pg=$(w==='lists'?'sc-page-lists':'sc-page-settings');if(pg){pg.style.opacity='0.99';requestAnimationFrame(()=>{try{pg.style.opacity=''}catch(_){}})}}catch(_){}}
 function setupTargets(){
   setupCards=[...builtinGrid.querySelectorAll('.sc-card')];
   setupTail=[$('btn-sel-all'),$('btn-sel-none'),$('sc-adv-h'),...savedWrap.querySelectorAll('.saved-row'),$('iname'),$('iurl'),$('iepg'),$('setup-start'),$('sp-appupd'),$('sp-upd'),$('sp-epg'),$('sp-sub')].filter(el=>el&&visRect(el));
@@ -2019,6 +2021,7 @@ async function init(){
   startupDone=true;
   if(!done){buildBuiltinGrid();renderSaved();showSetupPage('lists');triggerCardIn(builtinGrid,'.sc-card');const sv=document.getElementById('startup-vid');if(sv){sv.pause();sv.removeAttribute('src');sv.load()}startup.style.display='none';ui.classList.add('show');console.log('PVTV DEBUG: setup classes='+setup.className+' ui classes='+ui.className+' cards='+builtinGrid.children.length+' setup display='+getComputedStyle(setup).display+' ui opacity='+getComputedStyle(ui).opacity);return}
   startup.style.display='none';
+  try{const sv0=$('startup-vid');if(sv0){sv0.pause();sv0.removeAttribute('src');sv0.load()}}catch(_){}
   setup.classList.add('off');
   ui.classList.add('show');
   const selBuiltin=gs(LS.SEL)||BUILTIN.map(p=>p.id);
