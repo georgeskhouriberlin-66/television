@@ -1013,8 +1013,8 @@ function renderTiles(dir){
     }
     wrap.querySelector('.cn-name').textContent=ch.name;
     const epg=(isFocused||isNear)&&epgOn?getCurrentEPG(ch.tvgId):null;
-    const epgNext=(!epg&&(isFocused||isNear)&&epgOn)?getNextEPG(ch.tvgId):null;
-    const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const time=s&&e?`${fmtEPGTime(s)}–${fmtEPGTime(e)} `:'';return time+epg.title})():(epgNext?(()=>{const s=parseET(epgNext.start);return`▸ ${fmtEPGTime(s)} ${epgNext.title}`})():'');
+    const epgNext=((isFocused||(isNear&&!epg))&&epgOn)?getNextEPG(ch.tvgId):null;
+    const epgText=epg?(()=>{const s=parseET(epg.start),e=parseET(epg.stop);const time=s&&e?`${fmtEPGTime(s)}–${fmtEPGTime(e)} `:'';let t=time+epg.title;if(isFocused&&epgNext)t+=` ▸ ${epgNext.title}`;return t})():(epgNext?(()=>{const s=parseET(epgNext.start);return`▸ ${fmtEPGTime(s)} ${epgNext.title}`})():'');
     wrap.querySelector('.cn-epg').textContent=epgText;
     const chIdx=flatCh.indexOf(ch);
     wrap.querySelector('.cn-num').textContent=chIdx>=0?chIdx+1:'';
@@ -1043,10 +1043,10 @@ function renderTiles(dir){
   }
 }
 
-function mobileEpgText(ch){
+function mobileEpgText(ch,focused){
   if(!epgOn)return'';
   const epg=getCurrentEPG(ch.tvgId);
-  if(epg){const s=parseET(epg.start),e=parseET(epg.stop);const time=s&&e?fmtEPGTime(s)+'–'+fmtEPGTime(e)+' ':'';return time+epg.title}
+  if(epg){const s=parseET(epg.start),e=parseET(epg.stop);const time=s&&e?fmtEPGTime(s)+'–'+fmtEPGTime(e)+' ':'';let t=time+epg.title;if(focused){const nx2=getNextEPG(ch.tvgId);if(nx2)t+=' ▸ '+nx2.title}return t}
   const nx=getNextEPG(ch.tvgId);
   if(nx){const s=parseET(nx.start);return'▸ '+fmtEPGTime(s)+' '+nx.title}
   return'';
@@ -1077,7 +1077,7 @@ function makeMobileTile(ch,idx){
   }else{const fb=document.createElement('span');fb.className='clf';fb.textContent='📺';logo.appendChild(fb)}
   const cn=document.createElement('div');cn.className='cn';
   const cnName=document.createElement('div');cnName.className='cn-name';cnName.textContent=ch.name;
-  const cnEpg=document.createElement('div');cnEpg.className='cn-epg';cnEpg.textContent=(idx===focusIdx||Math.abs(idx-focusIdx)===1)?mobileEpgText(ch):'';
+  const cnEpg=document.createElement('div');cnEpg.className='cn-epg';cnEpg.textContent=(idx===focusIdx||Math.abs(idx-focusIdx)===1)?mobileEpgText(ch,idx===focusIdx):'';
   cn.appendChild(cnName);cn.appendChild(cnEpg);
   const num=document.createElement('span');num.className='cn-num';num.textContent=(idx+1);
   const star=document.createElement('span');star.className='fs';star.textContent=chFav?'★':'☆';star.style.display=(idx===focusIdx||chFav)?'':'none';
@@ -1105,7 +1105,7 @@ function refreshMobileTiles(){
     const star=w.querySelector('.fs');
     if(star){star.textContent=on?'★':'☆';star.style.display=(idx===focusIdx||on)?'':'none'}
     const ep=w.querySelector('.cn-epg');
-    if(ep)ep.textContent=(idx===focusIdx||Math.abs(idx-focusIdx)===1)?mobileEpgText(ch):'';
+    if(ep)ep.textContent=(idx===focusIdx||Math.abs(idx-focusIdx)===1)?mobileEpgText(ch,idx===focusIdx):'';
   }
 }
 function renderTilesMobile(){
