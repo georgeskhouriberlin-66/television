@@ -1275,7 +1275,8 @@ function tryStream(ch,idx){
   const armWatchdog=(ms)=>{clearTimeout(tryStream._watchdog);tryStream._watchdog=setTimeout(()=>{console.log('PVTV TRY: watchdog, next variant');try{vid.pause()}catch(_){}tryStream(ch,idx+1)},ms||6000)};
   nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');vid.style.opacity='0';
   if(idx===0){$('load-text').textContent=(ch&&ch.name)||'Verbinde …';}$('load-count').textContent='';
-  if(hls){hls.destroy();hls=null}
+  if(hls){try{hls.destroy()}catch(_){}hls=null}
+  try{vid.pause();vid.removeAttribute('src');vid.load()}catch(_){}
   clearInterval(window._dropGuard);window._dropLast=null;clearInterval(avMon);
   aud.pause();aud.src='';if(typeof Android!=='undefined')Android.stopAudio();
   const isHLS=/\.(m3u8)(\?|$)/i.test(url);
