@@ -1339,7 +1339,8 @@ function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||(!WEBMODE&&typeof Andro
 /* ── UI ── */
 function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();armUIHide(4000)}
 function hideUI(){if(mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE||TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
-function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open');if(TOUCHY){const f=chList.querySelector('.ci.focused');if(f)f.scrollIntoView({block:'nearest'})}}
+function scrollFocusedTile(){try{const f=chList.querySelector('.ci.focused');if(f)f.scrollIntoView({block:'nearest'})}catch(_){}}
+function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open');scrollFocusedTile()}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen)armUIHide(4000)}
 function toggleUI(){uiOpen?hideUI():showUI()}
 
@@ -1522,7 +1523,7 @@ let setupCards=[],setupSelIdx=0,setupTail=[];
 const CARD_COLS=4;
 let scAdvOpen=false;
 function scAdvToggle(){scAdvOpen=!scAdvOpen;$('sc-adv-b').style.display=scAdvOpen?'':'none';$('sc-adv-ico').textContent=scAdvOpen?'▾':'▸';setupTargets();const hi=setupTail.indexOf($('sc-adv-h'));setupSelIdx=hi>=0?setupCards.length+hi:0;setupFocus(setupSelIdx)}
-function showSetupPage(w){$('sc-page-lists').style.display=w==='lists'?'':'none';$('sc-page-settings').style.display=w==='settings'?'':'none';setup.classList.remove('off');setupFocusInit()}
+function showSetupPage(w){$('sc-page-lists').style.display=w==='lists'?'':'none';$('sc-page-settings').style.display=w==='settings'?'':'none';setup.classList.remove('off');setup.scrollTop=0;setupFocusInit()}
 function setupTargets(){
   setupCards=[...builtinGrid.querySelectorAll('.sc-card')];
   setupTail=[$('btn-sel-all'),$('btn-sel-none'),$('sc-adv-h'),...savedWrap.querySelectorAll('.saved-row'),$('iname'),$('iurl'),$('iepg'),$('setup-start'),$('sp-appupd'),$('sp-upd'),$('sp-epg'),$('sp-sub')].filter(el=>el&&visRect(el));
@@ -1532,32 +1533,18 @@ function setupTargets(){
 let setupPrevZone='cards',setupScrollIdx=0;
 function setupFocus(idx){
   document.querySelectorAll('#setup .focused').forEach(el=>el.classList.remove('focused'));
-  if(!setupCards.length&&!setupTail.length)return;
-  const totalEls=setupCards.length+setupTail.length;
-  if(idx<0)idx=totalEls-1;
-  if(idx>=totalEls)idx=0;
+  const els=setupAllEls();
+  if(!els.length)return;
+  if(idx<0)idx=els.length-1;
+  if(idx>=els.length)idx=0;
   setupSelIdx=idx;
-  let el;
-  const inCards=idx<setupCards.length;
-  if(inCards)el=setupCards[idx];
-  else el=setupTail[idx-setupCards.length];
+  const el=els[idx];
   if(!el)return;
   el.classList.add('focused');
-  const inScrollZone=idx>=setupCards.length+setupScrollIdx;
-  const newZone=inScrollZone?'scroll':'top';
-  const sc=document.getElementById('setup');
-  if(newZone!==setupPrevZone){
-    if(!inScrollZone){sc.scrollTop=0}
-    else{
-      const scR=sc.getBoundingClientRect();
-      const eR=el.getBoundingClientRect();
-      sc.scrollTop+=eR.top-scR.top-12;
-    }
-    setupPrevZone=newZone;
-  }
+  try{el.scrollIntoView({block:'nearest'})}catch(_){}
   if(el.focus)el.focus({preventScroll:true});
   if(window.Android&&window.Android.showKeyboard)window.Android.showKeyboard(el.tagName==='INPUT');
-  if(inCards){
+  if(el.classList&&el.classList.contains('sc-card')){
     const strip=builtinGrid;
     const sR=strip.getBoundingClientRect();
     const eR=el.getBoundingClientRect();
@@ -1599,9 +1586,8 @@ function setupNav(dr,dc){
   setupFocus(els.indexOf(next));
 }
 function setupEnter(){
-  let el;
-  if(setupSelIdx<setupCards.length)el=setupCards[setupSelIdx];
-  else el=setupTail[setupSelIdx-setupCards.length];
+  const els=setupAllEls();
+  const el=els[setupSelIdx];
   if(!el)return;
   if(el.tagName==='INPUT'){focusSetupEl(el);return}
   el.click();
@@ -1845,7 +1831,7 @@ document.addEventListener('keydown',e=>{
     if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list';return}
     armUIHide(4000);
     if(TOUCHY&&document.getElementById('sidebar').classList.contains('sb-open')){chList.scrollBy({top:e.key==='ArrowDown'?90:-90});return}
-    focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);clearZoneFocus();renderTiles(navDir);return}
+    focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);clearZoneFocus();renderTiles(navDir);scrollFocusedTile();return}
   if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
     e.preventDefault();
     if(flatCh.length===0)return;
@@ -1854,8 +1840,8 @@ document.addEventListener('keydown',e=>{
     playChannel(flatCh[next]);
     showUI();armUIHide(3000);
     return}
-  if(e.key==='PageDown'){e.preventDefault();navDir='next';focusIdx=Math.min(focusIdx+7,flatCh.length-1);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
-  if(e.key==='PageUp'){e.preventDefault();navDir='prev';focusIdx=Math.max(focusIdx-7,0);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
+  if(e.key==='PageDown'){e.preventDefault();navDir='next';focusIdx=Math.min(focusIdx+7,flatCh.length-1);renderTiles();scrollFocusedTile();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
+  if(e.key==='PageUp'){e.preventDefault();navDir='prev';focusIdx=Math.max(focusIdx-7,0);renderTiles();scrollFocusedTile();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
 });
 
 /* ── Green-Plane-Watchdog: Resize mitten in der Wiedergabe = Hardware-Ebene
