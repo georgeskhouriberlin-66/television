@@ -753,6 +753,8 @@ https://stream.smotrim.ru/hls2/static/playlist_4.m3u8
 http://stream.mcquack.net/421/index.m3u8
 #EXTINF:-1 tvg-id="Prokino.ua@SD" tvg-logo="https://i.imgur.com/Vm9nbi8.png" group-title="Movies",Prokino (360p)
 http://dtv.vol.net.ua/ProKino/index.m3u8
+#EXTINF:-1 tvg-id="Quadro.ru@4K" tvg-logo="https://i.imgur.com/P4c53HA.png" group-title="Movies",Quadro (2160p)
+http://57.128.231.171:8080/316/index.m3u8
 #EXTINF:-1 tvg-id="RodnoeKino.ru@SD" tvg-logo="https://i.imgur.com/H70LxoZ.png" group-title="Movies",Rodnoe Kino (576p)
 http://stream.mcquack.net/242/index.m3u8
 #EXTINF:-1 tvg-id="RusskiyBestseller.ru@SD" tvg-logo="https://i.imgur.com/w0ZE9QJ.png" group-title="Movies",Russkiy Bestseller (576p)

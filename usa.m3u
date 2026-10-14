@@ -501,6 +501,8 @@ https://amc-absolutereality-1-us.plex.wurl.tv/playlist.m3u8
 https://c.streamhoster.com/link/hls/W5s3fS/inLo5pcsHjo/iqg9wps0m1x_5/playlist.m3u8
 #EXTINF:-1 tvg-id="AceTV.us@KCKSLD" tvg-logo="https://i.imgur.com/KtXQeeZ.png" group-title="Entertainment",Ace TV KCKS-LD (720p)
 https://2-fss-1.streamhoster.com/pl_154/amlst:205432-2055980/playlist.m3u8
+#EXTINF:-1 tvg-id="AdultSwim.us@West" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Adult_Swim_2003_logo.svg/960px-Adult_Swim_2003_logo.svg.png" group-title="Entertainment",Adult Swim West [Not 24/7;Geo-blocked]
+https://turnerlive.warnermediacdn.com/hls/live/2023185/aswest/noslate/VIDEO_1_5128000.m3u8
 #EXTINF:-1 tvg-id="AfroLandTV.us@SD" tvg-logo="https://i.imgur.com/jvnkrEF.png" group-title="Entertainment",AfroLandTV (1080p)
 https://alt-al.otteravision.com/alt/al/al.m3u8
 #EXTINF:-1 tvg-id="ALLBLKGems.us@SD" tvg-logo="https://i.imgur.com/gnkepQJ.png" group-title="Entertainment",ALLBLK Gems (720p)
@@ -1247,6 +1249,8 @@ https://cdn.whiplash.cc/whiplash/index.m3u8
 https://cdn.whiplash.cc/whiplash-2/index.m3u8
 #EXTINF:-1 tvg-id="WHOHTV.us@SD" tvg-logo="https://i.imgur.com/jTD9nLE.png" group-title="General",WHOH-TV (360p)
 https://stream.swagit.com/live-edge/hastingsonhudsonny/smil:std-4x3-1-a/playlist.m3u8
+#EXTINF:-1 tvg-id="WillametteFallsMediaCenter.us@SD" tvg-logo="https://i.imgur.com/KwlFyem.png" group-title="General",Willamette Falls Media Center
+https://reflect-greater-clackamas-county-tv.cablecast.tv/live-7/live/stream-4/live.m3u8
 #EXTINF:-1 tvg-id="WITN22.us@SD" tvg-logo="https://i.imgur.com/Esu8PyB.png" group-title="General",WITN22 (1080p) [Not 24/7]
 https://witn.cablecast.tv/live-4/live/live.m3u8
 #EXTINF:-1 tvg-id="ZarinTV.us@SD" group-title="General",Zarin TV (1080p)
@@ -1781,8 +1785,6 @@ http://tvsen7.aynascope.net/hbo2/index.m3u8
 http://23.237.104.106:8080/USA_HBO_ZONE/index.m3u8
 #EXTINF:-1 tvg-id="OuterSphere.us@SD" tvg-logo="https://provider-static.plex.tv/epg/cms/production/f162df8b-6532-43fe-9202-83a658090651/OuterSphere_1500x1000_Logo_Dark_-_Chris_Connors__1_.png" group-title="Movies;Series",OuterSphere (1080p)
 https://d3o593mz1glx8d.cloudfront.net/OuterSphere_US.m3u8
-#EXTINF:-1 tvg-id="ParamountNetwork.us@East" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Paramount_Network.svg/960px-Paramount_Network.svg.png" group-title="Movies;Series",Paramount Network (432p)
-http://193.254.245.162/PARAMOUNT-CHANNEL/index.m3u8
 #EXTINF:-1 tvg-id="PlutoTVHorror.us@US" tvg-logo="https://images.pluto.tv/channels/569546031a619b8f07ce6e25/colorLogoPNG.png" group-title="Movies;Series",Pluto TV Horror (United States)
 https://jmp2.uk/plu-569546031a619b8f07ce6e25.m3u8
 #EXTINF:-1 tvg-id="PlutoTVRomance.us@US" tvg-logo="https://i.imgur.com/GJBxfyf.png" group-title="Movies;Series",Pluto TV Romance (United States)
@@ -1885,8 +1887,6 @@ https://d1hf773q57zx9s.cloudfront.net/Vevo_R_B.m3u8
 https://d2lyea6if8kkz9.cloudfront.net/playlist/amg00056-vevotv-vevoretrorockau-samsungau/playlist.m3u8
 #EXTINF:-1 tvg-id="VevoTrueSchoolHipHop.us@SD" tvg-logo="https://i.imgur.com/owUXUih.png" group-title="Music",Vevo True School Hip-Hop
 https://jmp2.uk/plu-61d4c2817a823d00070ba53e.m3u8
-#EXTINF:-1 tvg-id="VH1.us@East" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/VH1_logonew.svg/960px-VH1_logonew.svg.png" group-title="Music",VH1 (432p)
-http://193.254.245.162/VH1/index.m3u8
 #EXTINF:-1 tvg-id="VideoMixTV.us@SD" tvg-logo="https://i.imgur.com/nyLrIPP.png" group-title="Music",Video Mix TV
 https://2-fss-2.streamhoster.com/pl_118/206436-3189488-1/playlist.m3u8
 #EXTINF:-1 tvg-id="WVCULP.us@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/en/0/0f/WVCU-LP_2015.PNG" group-title="Music",WVCU-LP (1080p)
@@ -1983,6 +1983,8 @@ https://tvsen6.aynaott.com/cnn/index.m3u8
 http://190.110.96.238:8000/play/a0f5/index.m3u8
 #EXTINF:-1 tvg-id="CNNenEspanol.us@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Logo_de_CNN_en_Espa%C3%B1ol_%282010-2015%29.svg/960px-Logo_de_CNN_en_Espa%C3%B1ol_%282010-2015%29.svg.png" group-title="News",CNN en Espanol (1080p)
 https://streaming.onnethn.com/CNN_ESPANOL/playlist.m3u8
+#EXTINF:-1 tvg-id="CNN.us@HD" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/CNN.png" group-title="News",CNN HD (720p) [Geo-blocked]
+http://212.5.144.156:8080/cnn/index.m3u8
 #EXTINF:-1 tvg-id="CNNOriginals.us@SD" tvg-logo="https://provider-static.plex.tv/epg/cms/production/f351d697-1e1f-4e7d-86c7-5995698e593f/CNN_Originals_ChannelLogo_Dark_1500x1000_2025_-_Grace_Hartwig.png" group-title="News",CNN Originals (1080p)
 https://amg01918-cnnus-amg01918c2-vizio-us-9192.playouts.now.amagi.tv/playlist/amg01918-cnnus-cnnoriginals-vizious/playlist.m3u8
 #EXTINF:-1 tvg-id="DidgahTV.us@SD" tvg-logo="https://i.imgur.com/3SeAyBS.png" group-title="News",Didgah TV (576p)
@@ -2003,6 +2005,8 @@ https://iranefardalive.com/stream/live.m3u8
 https://rumble.com/live-hls/6v67mu/playlist.m3u8
 #EXTINF:-1 tvg-id="LiveNOWfromFOX.us@SD" tvg-logo="https://i.imgur.com/1JnyzHv.png" group-title="News",LiveNOW from FOX (720p)
 https://fox-foxnewsnow-vizio.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="MSNOW.us@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/MS_NOW_logo.svg/960px-MS_NOW_logo.svg.png" group-title="News",MS NOW (432p)
+https://tvsen6.aynaott.com/msnbc/index.m3u8
 #EXTINF:-1 tvg-id="NBCNewsNOW.us@SD" tvg-logo="https://i.imgur.com/JZt2qh5.png" group-title="News",NBC News NOW (1080p)
 https://d1si3n1st4nkgb.cloudfront.net/10502/88896001/hls/master.m3u8?ads.xumo_channelId=88896001
 #EXTINF:-1 tvg-id="NewsoftheWorld.us@Arabic" tvg-logo="https://i.imgur.com/MfyRQCs.png" group-title="News",News of the World Arabic (720p)

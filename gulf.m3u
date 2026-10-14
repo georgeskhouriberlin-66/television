@@ -55,6 +55,8 @@ https://hlspackager.akamaized.net/live/DB/ALYAUM_TV/HLS/ALYAUM_TV.m3u8
 https://ghaasiflu.online/alhqeqa/index.m3u8
 #EXTINF:-1 tvg-id="AltaghierTV.jo@SD" tvg-logo="https://i.imgur.com/YTyCBvB.png" group-title="News",Altaghier TV (1080p)
 https://jmc-live.ercdn.net/altaghier/altaghier.m3u8
+#EXTINF:-1 tvg-id="CNNNews18.in@SD" tvg-logo="https://dtil.tmsimg.com/assets/s142747_ld_h15_aa.png?lock=720x540" group-title="News",CNN News 18 (1080p)
+https://n18syndication.akamaized.net/bpk-tv/CNN_News18_NW18_MOB/output01/master.m3u8
 #EXTINF:-1 tvg-id="LibyaAlAhrarTV.qa@SD" tvg-logo="https://i.imgur.com/xkQKVGi.png" group-title="News",Libya Al Ahrar TV (1080p)
 https://stream-hls.castr.net/64490fcefe045f1b63012886/live_22d9a1f0c69c11ee9441219c2cc6d61f/index.fmp4.m3u8
 #EXTINF:-1 tvg-id="AlMaarefTV.qa@SD" tvg-logo="https://i.imgur.com/QFnztgo.png" group-title="Religious",Al Maaref TV (1080p)
