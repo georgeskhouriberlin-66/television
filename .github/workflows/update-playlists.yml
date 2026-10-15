@@ -40,7 +40,14 @@ jobs:
           fi
           git commit -m "chore: update playlists [skip ci]"
           git pull --rebase origin main
-          git push
+          pushed=0
+          for i in 1 2 3; do
+            if git push; then pushed=1; break; fi
+            echo "Push-Race mit Parallel-Job, Retry $i/3 in 10s"
+            sleep 10
+            git pull --rebase origin main
+          done
+          if [ "$pushed" = "0" ]; then echo "Push nach 3 Versuchen fehlgeschlagen"; exit 1; fi
 
   epg:
     runs-on: ubuntu-latest
@@ -71,7 +78,14 @@ jobs:
           fi
           git commit -m "chore: update EPG [skip ci]"
           git pull --rebase origin main
-          git push
+          pushed=0
+          for i in 1 2 3; do
+            if git push; then pushed=1; break; fi
+            echo "Push-Race mit Parallel-Job, Retry $i/3 in 10s"
+            sleep 10
+            git pull --rebase origin main
+          done
+          if [ "$pushed" = "0" ]; then echo "Push nach 3 Versuchen fehlgeschlagen"; exit 1; fi
 
       - name: Alarm bei leerem EPG
         if: failure()
