@@ -3,17 +3,6 @@
   <channel id="AlJadeed.lb"><display-name>Al Jadeed</display-name></channel>
   <channel id="SAT7Arabic.us"><display-name>SAT-7 Arabic</display-name></channel>
   <channel id="MTVLebanon.lb"><display-name>MTV Lebanon</display-name></channel>
-  <programme start="20261015010000 +0300" stop="20261015012500 +0300" channel="AlJadeed.lb"><title>Ghofran</title></programme>
-  <programme start="20261015012500 +0300" stop="20261015013000 +0300" channel="AlJadeed.lb"><title>Soura W Naghmeh Men Lebnen</title></programme>
-  <programme start="20261015013000 +0300" stop="20261015023000 +0300" channel="AlJadeed.lb"><title>Morning News Bulletin</title></programme>
-  <programme start="20261015023000 +0300" stop="20261015043000 +0300" channel="AlJadeed.lb"><title>Morning Show</title></programme>
-  <programme start="20261015043000 +0300" stop="20261015044000 +0300" channel="AlJadeed.lb"><title>News Brief 10:30 AM</title></programme>
-  <programme start="20261015050000 +0300" stop="20261015060000 +0300" channel="AlJadeed.lb"><title>Al Hadath</title></programme>
-  <programme start="20261015060000 +0300" stop="20261015061000 +0300" channel="AlJadeed.lb"><title>12:00 PM News Brief</title></programme>
-  <programme start="20261015073000 +0300" stop="20261015083000 +0300" channel="AlJadeed.lb"><title>Al ghourour</title></programme>
-  <programme start="20261015083000 +0300" stop="20261015090000 +0300" channel="AlJadeed.lb"><title>Midday News Bulletin</title></programme>
-  <programme start="20261015090000 +0300" stop="20261015100000 +0300" channel="AlJadeed.lb"><title>Hona Beirut</title></programme>
-  <programme start="20261015113000 +0300" stop="20261015114000 +0300" channel="AlJadeed.lb"><title>News Brief 05:30 PM</title></programme>
   <programme start="20261015125000 +0300" stop="20261015134000 +0300" channel="AlJadeed.lb"><title>The Romantic Doctor</title></programme>
   <programme start="20261015134500 +0300" stop="20261015143000 +0300" channel="AlJadeed.lb"><title>Evening News Bulletin</title></programme>
   <programme start="20261015144500 +0300" stop="20261015153000 +0300" channel="AlJadeed.lb"><title>Qate'e Wareed</title></programme>
@@ -173,18 +162,6 @@
   <programme start="20261017211500 +0300" stop="20261017220000 +0300" channel="SAT7Arabic.us"><title>تروما توكس</title></programme>
   <programme start="20261017220000 +0300" stop="20261018000000 +0300" channel="SAT7Arabic.us"><title>Listen to Your Heart</title></programme>
   <programme start="20261017000000 +0300" stop="20261017013000 +0300" channel="SAT7Arabic.us"><title>النهارده قبل بكرا</title></programme>
-  <programme start="20261015000000 +0300" stop="20261015003000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
-  <programme start="20261015003000 +0300" stop="20261015013000 +0300" channel="MTVLebanon.lb"><title>برنامج صحافة</title></programme>
-  <programme start="20261015013000 +0300" stop="20261015020000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
-  <programme start="20261015021000 +0300" stop="20261015023500 +0300" channel="MTVLebanon.lb"><title>فقرة غنائية</title></programme>
-  <programme start="20261015023500 +0300" stop="20261015030000 +0300" channel="MTVLebanon.lb"><title>برنامج ALIVE</title></programme>
-  <programme start="20261015030000 +0300" stop="20261015040000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261015040000 +0300" stop="20261015050000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261015050000 +0300" stop="20261015060000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261015060000 +0300" stop="20261015070000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261015070000 +0300" stop="20261015080000 +0300" channel="MTVLebanon.lb"><title>برنامج</title></programme>
-  <programme start="20261015080000 +0300" stop="20261015090000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
-  <programme start="20261015090000 +0300" stop="20261015104500 +0300" channel="MTVLebanon.lb"><title>برنامج بيروت اليوم</title></programme>
   <programme start="20261016000000 +0300" stop="20261016003000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
   <programme start="20261016003000 +0300" stop="20261016013000 +0300" channel="MTVLebanon.lb"><title>برنامج صحافة</title></programme>
   <programme start="20261016013000 +0300" stop="20261016020000 +0300" channel="MTVLebanon.lb"><title>أخبار</title></programme>
