@@ -92,40 +92,64 @@ class MainActivity : ComponentActivity() {
             setBackgroundColor(android.graphics.Color.BLACK)
             addJavascriptInterface(KeyboardBridge(this@MainActivity), "Android")
             val extFile = java.io.File(filesDir, "index.html")
-            val assetVersion = readAssetVersion()
-            val extVersion = if (extFile.exists()) readFileVersion(extFile) else ""
-            if (extFile.exists() && extVersion >= assetVersion) {
-                android.util.Log.i("PVTV", "Loading from filesDir (v$extVersion)")
-                loadUrl("file://" + extFile.absolutePath)
-            } else {
-                if (extFile.exists() && assetVersion > extVersion) {
-                    android.util.Log.i("PVTV", "Assets v$assetVersion > filesDir v$extVersion, overwriting")
-                    assets.open("index.html").use { input -> extFile.outputStream().use { input.copyTo(it) } }
-                }
-                android.util.Log.i("PVTV", "Loading from assets (v$assetVersion)")
+            val assetBytes = try {
+                assets.open("index.html").use { it.readBytes() }
+            } catch (e: Exception) {
+                android.util.Log.e("PVTV", "assets index.html unreadable: $e")
+                null
+            }
+            if (assetBytes == null) {
                 loadUrl("file:///android_asset/index.html")
+            } else {
+                Thread {
+                    val extUpToDate = extFile.exists() &&
+                        runCatching { extFile.readBytes().contentEquals(assetBytes) }.getOrDefault(false)
+                    var adjacentOk = true
+                    for (name in arrayOf(
+                        "hls.min.js", "logo.png", "manifest.webmanifest", "apple-touch-icon.png",
+                        "icon-192.png", "icon-512.png"
+                    )) {
+                        val dst = java.io.File(filesDir, name)
+                        val bytes = runCatching { assets.open(name).use { it.readBytes() } }.getOrNull()
+                        if (bytes == null) {
+                            android.util.Log.e("PVTV", "adjacent asset $name unreadable")
+                            adjacentOk = false
+                            continue
+                        }
+                        val same = dst.exists() && runCatching { dst.readBytes().contentEquals(bytes) }.getOrDefault(false)
+                        if (!same) {
+                            val ok = runCatching { dst.outputStream().use { out -> out.write(bytes) } }
+                                .onFailure { android.util.Log.e("PVTV", "adjacent asset $name failed: $it") }
+                                .isSuccess
+                            if (!ok) adjacentOk = false
+                        }
+                    }
+                    val useFilesDir = extUpToDate && adjacentOk
+                    runOnUiThread {
+                        if (useFilesDir) {
+                            android.util.Log.i("PVTV", "Loading from filesDir (content matches assets)")
+                            loadUrl("file://" + extFile.absolutePath)
+                        } else {
+                            if (extUpToDate && !adjacentOk) {
+                                android.util.Log.e("PVTV", "adjacent asset sync incomplete, falling back to assets")
+                            }
+                            if (!extUpToDate) {
+                                if (extFile.exists()) {
+                                    android.util.Log.i("PVTV", "filesDir index.html differs from assets, overwriting")
+                                }
+                                runCatching { extFile.outputStream().use { out -> out.write(assetBytes) } }
+                                    .onFailure { android.util.Log.e("PVTV", "overwrite failed: $it") }
+                            }
+                            android.util.Log.i("PVTV", "Loading from assets")
+                            loadUrl("file:///android_asset/index.html")
+                        }
+                    }
+                }.start()
             }
         }
 
         setContentView(webView)
         webView.requestFocus()
-    }
-
-    private fun readAssetVersion(): String {
-        return try {
-            assets.open("index.html").bufferedReader().use { extractVersion(it.readText()) }
-        } catch (_: Exception) { "" }
-    }
-
-    private fun readFileVersion(file: java.io.File): String {
-        return try {
-            file.bufferedReader().use { extractVersion(it.readText()) }
-        } catch (_: Exception) { "" }
-    }
-
-    private fun extractVersion(html: String): String {
-        val m = Regex("""Phoenicia Television v(\d+\.\d+\.\d+)""").find(html)
-        return m?.groupValues?.get(1) ?: ""
     }
 
     private fun dpad(key: String, code: String, keyCode: Int): Boolean {
