@@ -548,7 +548,7 @@ http://stream.mcquack.net/271/index.m3u8
 #EXTINF:-1 tvg-id="O.ru@SD" tvg-logo="https://i.imgur.com/pDc665V.png" group-title="Kids",O! (576p)
 http://stream.mcquack.net/60/index.m3u8
 #EXTINF:-1 tvg-id="O.ru@International" tvg-logo="https://i.imgur.com/pDc665V.png" group-title="Kids",O! International (720p)
-http://88.212.15.17/live/test_telekanal_o/playlist.m3u8
+http://88.212.15.50/live/test_telekanal_o/playlist.m3u8
 #EXTINF:-1 tvg-id="PixelTV.ua@SD" tvg-logo="https://i.imgur.com/ECro8Ah.png" group-title="Kids",Pixel TV (1080p)
 http://stream.mcquack.net/323/index.m3u8
 #EXTINF:-1 tvg-id="RadostMoya.ru@SD" tvg-logo="https://i.imgur.com/B5FA62o.png" group-title="Kids",Radost Moya (576p)
@@ -1245,6 +1245,8 @@ http://hls127.freeott.top:8080/HCTV/video.m3u8
 http://hls127.freeott.top:8080/NTV_PRAVO_TV/video.m3u8
 #EXTINF:-1 tvg-id="OceanTV.ru@SD" tvg-logo="https://i.imgur.com/zswzDZS.png" group-title="Undefined",Ocean-TV (576p)
 http://hls127.freeott.top:8080/Ocean_TV/video.m3u8
+#EXTINF:-1 tvg-id="Oplot2.ru@SD" tvg-logo="https://nettv.live/uploads/allimg/21/1-210123195A80-L.jpg" group-title="Undefined",Oplot 2 (720p) [Geo-blocked]
+http://91.224.16.9:7779/Oplot_2/index.m3u8
 #EXTINF:-1 tvg-id="OTV.ua@SD" tvg-logo="https://i.imgur.com/TkGGGAj.png" group-title="Undefined",OTV (Ukraine)
 https://stream.otv.ua/memfs/028e5947-073f-4b4e-a47f-70e59ca3ee36.m3u8
 #EXTINF:-1 tvg-id="PravdaTUT.ua@SD" tvg-logo="https://i.imgur.com/gvgFoFB.png" group-title="Undefined",PravdaTUT (720p)

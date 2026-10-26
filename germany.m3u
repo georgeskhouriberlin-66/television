@@ -247,6 +247,8 @@ https://wdrlokalzeit.akamaized.net/hls/live/2018028-b/wdrlz_wuppertal/master.m3u
 https://live.yoltv.com/hls/stream.m3u8
 #EXTINF:-1 tvg-id="DisneyChannel.de@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Kids",Disney Channel (Germany) (576p)
 https://s6.hopslan.com/disneyX/index.m3u8
+#EXTINF:-1 tvg-id="DisneyChannel.de@HD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Kids",Disney Channel (Germany) HD
+http://109.85.181.77:9981/stream/channelid/652495718?profile=pass
 #EXTINF:-1 tvg-id="DrakeJosh.de@DACH" tvg-logo="https://images.pluto.tv/channels/65a67c494a10d800085cab06/colorLogoPNG.png" group-title="Kids",Drake & Josh
 https://jmp2.uk/plu-65a67c494a10d800085cab06.m3u8
 #EXTINF:-1 tvg-id="KiKA.de@SD" tvg-logo="https://i.imgur.com/vZdNp5S.png" group-title="Kids",KiKA (1080p) [Not 24/7]
