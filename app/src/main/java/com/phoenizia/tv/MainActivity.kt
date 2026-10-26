@@ -92,16 +92,18 @@ class MainActivity : ComponentActivity() {
             setBackgroundColor(android.graphics.Color.BLACK)
             addJavascriptInterface(KeyboardBridge(this@MainActivity), "Android")
             val extFile = java.io.File(filesDir, "index.html")
-            val assetBytes = try {
-                assets.open("index.html").use { it.readBytes() }
-            } catch (e: Exception) {
-                android.util.Log.e("PVTV", "assets index.html unreadable: $e")
-                null
-            }
-            if (assetBytes == null) {
-                loadUrl("file:///android_asset/index.html")
-            } else {
-                Thread {
+            Thread {
+                runCatching {
+                    val assetBytes = try {
+                        assets.open("index.html").use { it.readBytes() }
+                    } catch (e: Exception) {
+                        android.util.Log.e("PVTV", "assets index.html unreadable: $e")
+                        null
+                    }
+                    if (assetBytes == null) {
+                        runOnUiThread { if (!isDestroyed) loadUrl("file:///android_asset/index.html") }
+                        return@runCatching
+                    }
                     val extUpToDate = extFile.exists() &&
                         runCatching { extFile.readBytes().contentEquals(assetBytes) }.getOrDefault(false)
                     var adjacentOk = true
@@ -126,6 +128,7 @@ class MainActivity : ComponentActivity() {
                     }
                     val useFilesDir = extUpToDate && adjacentOk
                     runOnUiThread {
+                        if (isDestroyed) return@runOnUiThread
                         if (useFilesDir) {
                             android.util.Log.i("PVTV", "Loading from filesDir (content matches assets)")
                             loadUrl("file://" + extFile.absolutePath)
@@ -144,8 +147,11 @@ class MainActivity : ComponentActivity() {
                             loadUrl("file:///android_asset/index.html")
                         }
                     }
-                }.start()
-            }
+                }.onFailure {
+                    android.util.Log.e("PVTV", "loader failed: $it")
+                    runOnUiThread { if (!isDestroyed) loadUrl("file:///android_asset/index.html") }
+                }
+            }.start()
         }
 
         setContentView(webView)
