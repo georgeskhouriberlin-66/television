@@ -79,8 +79,6 @@ https://live.kwikmotion.com/smc1live/smc1tv.smil/playlist.m3u8
 https://jrtv-live.ercdn.net/jordansporthd/jordansporthd.m3u8
 #EXTINF:-1 tvg-id="SharjahSports.ae@SD" tvg-logo="https://i.imgur.com/CsEElsJ.png" group-title="Sports",Sharjah Sports (1080p) [Geo-blocked]
 https://svs.itworkscdn.net/smc4sportslive/smc4tv.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="beINSports9.qa@MENA" tvg-logo="https://assets.bein.com/mena/sites/3/2023/09/logos-_beINSPORTS9.png" group-title="Undefined",beIN Sports 9 (1080p)
-http://primetv.cc.cd/beinfhd99/tracks-v1a1/mono.tbin.m3u8
 #EXTINF:-1 tvg-id="JordanArchive.jo@SD" tvg-logo="https://i.imgur.com/8UrCl4k.png" group-title="Undefined",Jordan Archive (1080p)
 https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Archive/playlist.m3u8
 #EXTINF:-1 tvg-id="JordanDrama.jo@SD" tvg-logo="https://i.imgur.com/gvIAEsJ.png" group-title="Undefined",Jordan Drama (1080p)
