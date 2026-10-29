@@ -117,7 +117,7 @@ video.stretch{object-fit:fill}
 .sb-search::placeholder{color:var(--txt3)}
 
 /* ── Kacheln ── */
-#ch-list{flex:1;overflow:hidden;display:flex;flex-direction:column;padding:10px 4%;gap:6px;justify-content:center}
+#ch-list{flex:1;overflow:hidden;display:flex;flex-direction:column;padding:10px 4%;gap:6px;justify-content:center;overflow-anchor:none}
 
 .ci{position:relative;display:flex;align-items:center;gap:10px;padding:16px 16px;cursor:pointer;outline:none;background:rgba(8,11,20,.92);border:1px solid rgba(255,255,255,.14);border-radius:var(--phz-r-md);opacity:1;flex-shrink:0;min-height:96px;width:100%;transition:background var(--phz-dur-fast),border-color var(--phz-dur-fast),min-height var(--phz-dur-med);overflow:hidden}
 .ci:hover{background:rgba(8,11,20,.97);border-color:rgba(255,215,0,.45)}
@@ -485,17 +485,19 @@ body.touchy #sidebar{position:fixed;top:0;left:0;bottom:0;right:auto;width:42vw;
 body.touchy #sidebar.sb-open{transform:translateX(0);pointer-events:all}
 body.touchy #sidebar::before{display:none}
 body.touchy .sb-nav-hint{display:none}
-body.touchy #ch-list{flex:1;overflow-y:auto;overflow-x:hidden;justify-content:flex-start;padding:8px 3%;gap:6px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-body.touchy .ci{padding:12px;min-height:82px;gap:10px}
-body.touchy .ci.focused{min-height:104px}
+body.touchy #ch-list{flex:1;overflow-y:auto;overflow-x:hidden;justify-content:flex-start;padding:8px 3%;gap:6px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;overflow-anchor:none}
+body.touchy .ci{padding:12px;min-height:82px;gap:10px;transition:none}
+body.touchy .ci.focused{min-height:104px;animation:none}
+body.touchy .ci .cl,body.touchy .ci .cn-name,body.touchy .ci .cn-epg,body.touchy .ci .cn-grp{animation:none}
+body.touchy .ci .cl{transition:none}
 body.touchy .ci.focused .cn-name{font-size:16px;font-weight:800}
 body.touchy .ci.focused .cl{width:40px;height:28px}
 body.touchy .ci.focused .clf{font-size:16px}
 body.touchy .ci.focused .cn-num{font-size:22px;font-weight:800}
-body.touchy .ci.near{min-height:70px}
+body.touchy .ci.near{min-height:70px!important}
 body.touchy .ci.near .cn-name{font-size:14px}
 body.touchy .ci.near .cl{width:32px;height:22px}
-body.touchy .ci.far{min-height:52px;padding:8px 12px}
+body.touchy .ci.far{min-height:56px!important;padding:8px 12px}
 body.touchy .ci.far .cn-name{font-size:12px;font-weight:400}
 body.touchy .ci.far .cl{width:26px;height:18px}
 body.touchy .ci.far .clf{font-size:11px}
@@ -1131,7 +1133,7 @@ function renderTilesMobile(){
   chList._sig=sig;
 }
 function appendMobileMore(){
-  if(!flatCh.length||mobileCap>=flatCh.length)return;
+  if(!TOUCHY||!flatCh.length||mobileCap>=flatCh.length)return;
   const from=mobileCap;
   mobileCap=Math.min(flatCh.length,mobileCap+MOBILE_CHUNK);
   const frag=document.createDocumentFragment();
@@ -1341,7 +1343,10 @@ function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||(!WEBMODE&&typeof Andro
 /* ── UI ── */
 function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();armUIHide(4000)}
 function hideUI(){if(mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE||TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
-function scrollFocusedTile(){try{const f=chList.querySelector('.ci.focused');if(f)f.scrollIntoView({block:'nearest'})}catch(_){}}
+function ensureListPad(){try{const f=chList.querySelector('.ci.focused');if(!f)return;const fh=f.getBoundingClientRect().height;const pad=Math.max(0,(chList.clientHeight-fh)/2);if(Math.abs((parseFloat(chList.style.paddingTop)||0)-pad)>1){chList.style.paddingTop=pad+'px';chList.style.paddingBottom=pad+'px'}}catch(_){}}
+function scrollFocusedTile(){if(!TOUCHY)return;try{ensureListPad();const f=chList.querySelector('.ci.focused');if(!f)return;const cr=chList.getBoundingClientRect(),fr=f.getBoundingClientRect();chList.scrollTop+=(fr.top-cr.top)-(cr.height-fr.height)/2}catch(_){}}
+window.addEventListener('resize',()=>{if(TOUCHY)scrollFocusedTile()});
+window.addEventListener('orientationchange',()=>{if(TOUCHY)setTimeout(scrollFocusedTile,250)});
 function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open');scrollFocusedTile()}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen)armUIHide(4000)}
 function toggleUI(){uiOpen?hideUI():showUI()}
@@ -1872,8 +1877,7 @@ document.addEventListener('keydown',e=>{
       focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);
       if(focusIdx+2>=mobileCap)appendMobileMore();
       clearZoneFocus();renderTiles(navDir);
-      const f=chList.querySelector('.ci.focused');
-      if(f)f.scrollIntoView({block:'center'});
+      scrollFocusedTile();
       return}
     focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);clearZoneFocus();renderTiles(navDir);return}
   if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
@@ -1882,10 +1886,13 @@ document.addEventListener('keydown',e=>{
     const dir=e.key==='ArrowRight'?1:-1;navDir=dir>0?'next':'prev';
     let next=(focusIdx+dir+flatCh.length)%flatCh.length;
     playChannel(flatCh[next]);
-    showUI();armUIHide(3000);
+    if(TOUCHY&&focusIdx+2>=mobileCap)appendMobileMore();
+    showUI();
+    if(TOUCHY&&document.getElementById('sidebar').classList.contains('sb-open'))scrollFocusedTile();
+    armUIHide(3000);
     return}
-  if(e.key==='PageDown'){e.preventDefault();navDir='next';focusIdx=Math.min(focusIdx+7,flatCh.length-1);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
-  if(e.key==='PageUp'){e.preventDefault();navDir='prev';focusIdx=Math.max(focusIdx-7,0);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
+  if(e.key==='PageDown'){e.preventDefault();navDir='next';focusIdx=Math.min(focusIdx+7,flatCh.length-1);if(focusIdx+2>=mobileCap)appendMobileMore();renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{scrollFocusedTile();armUIHide(4000)}return}
+  if(e.key==='PageUp'){e.preventDefault();navDir='prev';focusIdx=Math.max(focusIdx-7,0);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{scrollFocusedTile();armUIHide(4000)}return}
 });
 
 /* ── Green-Plane-Watchdog: Resize mitten in der Wiedergabe = Hardware-Ebene
