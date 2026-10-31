@@ -46,11 +46,14 @@ https://s1.viastreaming.net:7040/stream
 #EXTINF:-1 tvg-name="Al Orthodoxiya" tvg-id="AlOrthodoxiya.jo" group-title="Arabisch" tvg-logo="https://orthodoxiya.net/favicons/3cbb7d70-319c-4bbc-b9a9-9bf7eec5d5da/favicon-180x180.png",Al Orthodoxiya
 http://s5.viastreaming.net:7040/
 
+#EXTINF:-1 tvg-name="Sancta Maria Radio" tvg-id="SanctaMaria.int" group-title="Libanon" tvg-logo="https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/logos/sancta-maria-radio.png",Sancta Maria Radio
+https://streaming.radio.co/sa7e0251a2/listen
+
 ##############################
 # International – Englisch (Christian Radio)
 ##############################
 
-#EXTINF:-1 tvg-name="BBN" tvg-id="BBN.us" group-title="Englisch" tvg-logo="https://bbn1.bbnradio.org/english/wp-content/uploads/sites/2/2019/01/BBNEnglish.png",BBN (Bible Broadcasting Network)
+#EXTINF:-1 tvg-name="BBN" tvg-id="BBN.us" group-title="Englisch" tvg-logo="https://bbn1.bbnradio.org/english/wp-content/uploads/sites/2/2019/01/BBNEnglish.png",Bible Broadcasting Network
 https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f
 
 #EXTINF:-1 tvg-name="Radio Maria Belgium" tvg-id="RadioMaria.be" group-title="Englisch" tvg-logo="https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/logos/Radio_Maria.png",Radio Maria Belgium
@@ -59,16 +62,13 @@ http://stream.radiomaria.be:8000/RadioMaria-96
 #EXTINF:-1 tvg-name="RadioMv English" tvg-id="RadioMv.en" group-title="Englisch" tvg-logo="https://en.radiomv.com/wp-content/uploads/2022/08/RadioMv-newlogo-800w-4.png",RadioMv English
 https://m3u8.radiomv.com/english-hq.m3u8
 
-#EXTINF:-1 tvg-name="Orthodox Christian Network" tvg-id="OCN.us" group-title="Englisch" tvg-logo="https://myocn.net/wp-content/uploads/2023/04/blk-logo-copy.png",Orthodox Christian Network
+#EXTINF:-1 tvg-name="Orthodox Christian Network" tvg-id="OCN.us" group-title="Englisch-Griecchisch" tvg-logo="https://myocn.net/wp-content/uploads/2023/04/blk-logo-copy.png",Orthodox Christian Network
 https://stream.radiojar.com/48cz219puzzuv
 
-#EXTINF:-1 tvg-name="Voice of Charity" tvg-id="VoiceOfCharity" group-title="Englisch" tvg-logo="https://charityradiotv.org/images/general/voc.png",Voice of Charity
+#EXTINF:-1 tvg-name="Voice of Charity" tvg-id="VoiceOfCharity" group-title="Arabisch" tvg-logo="https://charityradiotv.org/images/general/voc.png",Voice of Charity
 http://cassini.shoutca.st:9496/xstream
 
-#EXTINF:-1 tvg-name="Sancta Maria Radio" tvg-id="SanctaMaria.int" group-title="Englisch" tvg-logo="https://raw.githubusercontent.com/georgeskhouriberlin-66/television/main/logos/sancta-maria-radio.png",Sancta Maria Radio
-https://streaming.radio.co/sa7e0251a2/listen
-
-#EXTINF:-1 tvg-name="Voice of Hope Middle East" tvg-id="VoiceOfHope.me" group-title="Englisch" tvg-logo="https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg",Voice of Hope Middle East
+#EXTINF:-1 tvg-name="Voice of Hope Middle East" tvg-id="VoiceOfHope.me" group-title="Arabisch" tvg-logo="https://www.voiceofhope.com/images/VoiceOfHope_logo_final_long_454x102.jpg",Voice of Hope Middle East
 http://ice9.securenetsystems.net/VOH
 
 ##############################

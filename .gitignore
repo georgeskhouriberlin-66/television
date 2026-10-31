@@ -23,3 +23,5 @@ screenshot*.png
 radio-logo-test*.png
 commit_msg.txt
 release_notes.txt
+.swarm/
+ruvector.db
