@@ -23,6 +23,20 @@ class MainActivity : ComponentActivity() {
     private lateinit var webView: WebView
     private var mediaPlayer: android.media.MediaPlayer? = null
 
+    /* Nativer Video-Player (MediaPlayer + TextureView) hinter dem WebView.
+       Grund: im WebView laeuft Video als eigenes Surface, das CSS nur vertikal
+       skaliert. 4:3-Sender mit eingebackenen Balken lassen sich dort nicht
+       randlos ziehen. Die TextureView skaliert dagegen per Matrix. */
+    private lateinit var rootLayout: android.widget.FrameLayout
+    private var nativeView: android.view.TextureView? = null
+    private var nativePlayer: android.media.MediaPlayer? = null
+    private var nativePendingUrl: String? = null
+    private var nativeStretch = 1f
+    private var nativePaused = false
+    private var nativeSurface: android.view.Surface? = null
+    private var nativeToken = 0
+    private var nativeUrl: String? = null
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +47,34 @@ class MainActivity : ComponentActivity() {
                 dpad("Escape", "Escape", 27)
             }
         })
+
+        rootLayout = android.widget.FrameLayout(this)
+        nativeView = android.view.TextureView(this).apply {
+            layoutParams = android.widget.FrameLayout.LayoutParams(
+                android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+                android.widget.FrameLayout.LayoutParams.MATCH_PARENT
+            )
+            visibility = android.view.View.GONE
+            surfaceTextureListener = object : android.view.TextureView.SurfaceTextureListener {
+                override fun onSurfaceTextureAvailable(st: android.graphics.SurfaceTexture, w: Int, h: Int) {
+                    // Surface kann waehrend laufender Wiedergabe neu entstehen (z.B. Home-Taste);
+                    // dann mit der letzten URL wieder aufsetzen, sonst bleibt das Bild schwarz.
+                    val again = nativePendingUrl ?: nativeUrl
+                    if (again != null && nativePlayer == null) openNativePlayer(again)
+                    applyNativeStretch()
+                }
+                override fun onSurfaceTextureSizeChanged(st: android.graphics.SurfaceTexture, w: Int, h: Int) {
+                    applyNativeStretch()
+                }
+                override fun onSurfaceTextureDestroyed(st: android.graphics.SurfaceTexture): Boolean {
+                    releaseNativePlayer()
+                    return true
+                }
+                override fun onSurfaceTextureUpdated(st: android.graphics.SurfaceTexture) {}
+            }
+            addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> applyNativeStretch() }
+        }
+        rootLayout.addView(nativeView)
 
         webView = WebView(this).apply {
             layoutParams = android.widget.FrameLayout.LayoutParams(
@@ -154,8 +196,126 @@ class MainActivity : ComponentActivity() {
             }.start()
         }
 
-        setContentView(webView)
+        rootLayout.addView(webView)
+        setContentView(rootLayout)
         webView.requestFocus()
+    }
+
+    /* ── Nativer Video-Player ── */
+
+    private fun js(call: String) {
+        if (!::webView.isInitialized || isDestroyed || isFinishing) return
+        webView.evaluateJavascript("window.$call", null)
+    }
+
+    private fun startNativeVideo(url: String, stretch: Float, token: Int) {
+        runOnUiThread {
+            val view = nativeView ?: return@runOnUiThread
+            releaseNativePlayer()
+            nativeToken = token
+            nativeStretch = if (stretch.isFinite() && stretch > 1f) stretch else 1f
+            nativePaused = false
+            nativePendingUrl = url
+            nativeUrl = url
+            view.visibility = android.view.View.VISIBLE
+            if (::webView.isInitialized) webView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+            android.util.Log.i("PVTV", "native: start $url stretch=$nativeStretch token=$token available=${view.isAvailable}")
+            if (view.isAvailable) openNativePlayer(url) else applyNativeStretch()
+        }
+    }
+
+    private fun openNativePlayer(url: String) {
+        val view = nativeView ?: return
+        val surfaceTexture = view.surfaceTexture
+        if (surfaceTexture == null) {
+            android.util.Log.w("PVTV", "native: no surfaceTexture yet")
+            return
+        }
+        releaseNativePlayer()
+        runCatching {
+            val mp = android.media.MediaPlayer()
+            val surface = android.view.Surface(surfaceTexture)
+            nativeSurface = surface
+            mp.setDataSource(url)
+            mp.setAudioAttributes(
+                android.media.AudioAttributes.Builder()
+                    .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
+                    .setContentType(android.media.AudioAttributes.CONTENT_TYPE_MOVIE)
+                    .build()
+            )
+            @Suppress("DEPRECATION")
+            mp.setSurface(surface)
+            mp.setOnPreparedListener { p ->
+                if (p !== nativePlayer) {
+                    android.util.Log.w("PVTV", "native: prepared eines alten Players ignoriert")
+                    return@setOnPreparedListener
+                }
+                android.util.Log.i("PVTV", "native: prepared, starting token=$nativeToken")
+                nativePendingUrl = null
+                runCatching { p.start() }
+                applyNativeStretch()
+                js("__onNativeVideoReady && window.__onNativeVideoReady($nativeToken)")
+            }
+            mp.setOnVideoSizeChangedListener { p, w, h ->
+                if (p === nativePlayer) {
+                    android.util.Log.i("PVTV", "native: video size ${w}x$h")
+                    applyNativeStretch()
+                }
+            }
+            mp.setOnErrorListener { p, what, extra ->
+                android.util.Log.e("PVTV", "native: error what=$what extra=$extra")
+                if (p === nativePlayer) nativeFail("Player-Fehler $what/$extra")
+                true
+            }
+            nativePlayer = mp
+            mp.prepareAsync()
+        }.onFailure {
+            android.util.Log.e("PVTV", "native: start failed $it")
+            nativeFail(it.message ?: "Start fehlgeschlagen")
+        }
+    }
+
+    private fun nativeFail(message: String) {
+        releaseNativePlayer()
+        nativePendingUrl = null
+        nativeUrl = null
+        nativeView?.visibility = android.view.View.GONE
+        if (::webView.isInitialized) webView.setBackgroundColor(android.graphics.Color.BLACK)
+        val safe = message.replace(Regex("[\\\\'\\r\\n]"), " ")
+        js("__onNativeVideoError && window.__onNativeVideoError($nativeToken,'$safe')")
+    }
+
+    private fun releaseNativePlayer() {
+        val mp = nativePlayer
+        nativePlayer = null
+        if (mp != null) {
+            runCatching { if (mp.isPlaying) mp.stop() }
+            runCatching { mp.reset() }
+            runCatching { mp.release() }
+        }
+        val surface = nativeSurface
+        nativeSurface = null
+        runCatching { surface?.release() }
+    }
+
+    private fun stopNativeVideo() {
+        runOnUiThread {
+            releaseNativePlayer()
+            nativePendingUrl = null
+            nativeUrl = null
+            nativePaused = false
+            nativeView?.visibility = android.view.View.GONE
+            if (::webView.isInitialized) webView.setBackgroundColor(android.graphics.Color.BLACK)
+            android.util.Log.i("PVTV", "native: stopped")
+        }
+    }
+
+    private fun applyNativeStretch() {
+        val view = nativeView ?: return
+        if (view.width <= 0 || view.height <= 0) return
+        val m = android.graphics.Matrix()
+        m.setScale(nativeStretch, 1f, view.width / 2f, view.height / 2f)
+        view.setTransform(m)
     }
 
     private fun dpad(key: String, code: String, keyCode: Int): Boolean {
@@ -217,9 +377,17 @@ class MainActivity : ComponentActivity() {
         if (::webView.isInitialized) {
             webView.onResume()
         }
+        if (nativePaused) {
+            nativePaused = false
+            runCatching { nativePlayer?.start() }
+        }
     }
 
     override fun onPause() {
+        if (nativePlayer?.isPlaying == true) {
+            nativePaused = true
+            runCatching { nativePlayer?.pause() }
+        }
         if (::webView.isInitialized) {
             webView.onPause()
         }
@@ -227,6 +395,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        releaseNativePlayer()
         if (::webView.isInitialized) {
             webView.stopLoading()
             webView.removeJavascriptInterface("Android")
@@ -413,6 +582,8 @@ class MainActivity : ComponentActivity() {
             android.util.Log.i("PVTV", "MediaPlayer: playAudio $url")
             activity.runOnUiThread {
                 try {
+                    activity.stopNativeVideo()
+                    activity.js("__onNativeVideoStopped && window.__onNativeVideoStopped()")
                     activity.mediaPlayer?.release()
                     val mp = android.media.MediaPlayer()
                     mp.setDataSource(url)
@@ -458,6 +629,17 @@ class MainActivity : ComponentActivity() {
         @JavascriptInterface
         fun isAudioPlaying(): Boolean {
             return activity.mediaPlayer?.isPlaying == true
+        }
+
+        @JavascriptInterface
+        fun playNativeVideo(url: String, stretch: Float, token: Int) {
+            android.util.Log.i("PVTV", "native: playNativeVideo $url ($stretch) token=$token")
+            activity.startNativeVideo(url, stretch, token)
+        }
+
+        @JavascriptInterface
+        fun stopNativeVideo() {
+            activity.stopNativeVideo()
         }
 
         @JavascriptInterface

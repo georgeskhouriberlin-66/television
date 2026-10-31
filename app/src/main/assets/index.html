@@ -35,6 +35,14 @@ video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;obj
 body.touchy video,body.native video{object-fit:cover}
 body.touchy video.stretch,body.native video.stretch{object-fit:fill}
 video.stretch{object-fit:fill}
+/* Nativer Video-Player (MediaPlayer + TextureView) liegt hinter dem WebView.
+   Solange er laeuft, muss die Seite komplett durchsichtig sein (auch <html>,
+   sonst deckt deren Hintergrund das Video zu); Sidebar/Ticker bleiben als
+   WebView-Ebene darueber. */
+html.native-video,html.native-video body,html.native-video #video-bg{background:transparent}
+html.native-video #vid{display:none}
+/* Ohne Video-Surface liegt der Chromium-Fokusring (Amazon-Orange) am Rand frei. */
+html:focus,body:focus,html:focus-visible,body:focus-visible,#video-bg:focus{outline:none!important}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
@@ -1195,10 +1203,68 @@ function isStretchCh(ch){
   const hay=((ch.name||'')+' '+(ch.tvgId||'')).toLowerCase();
   return stretchChannels.some(s=>hay.includes(s));
 }
+/* ── Nativer Player (Fire TV) ──
+   Der Amazon-WebView rendert Video als eigenes Surface: die Breite folgt dem
+   Viewport, die Hoehe der Element-Box, object-fit wird ignoriert. 4:3-Sender
+   mit eingebackenen Balken lassen sich dort nicht randlos ziehen (nur vertikal
+   skaliert etwas). Deshalb laeuft fuer solche Sender ein MediaPlayer auf einer
+   TextureView hinter dem WebView; die Matrix zieht das Bild auf 16:9. */
+const NATIVE_STRETCH=1.3334;
+let nativeToken=0;
+function nativeVideoReady(){
+  return typeof Android!=='undefined'&&Android&&typeof Android.playNativeVideo==='function';
+}
+function stopNativeVideo(){
+  clearTimeout(startNativeVideo._t);startNativeVideo._t=0;
+  nativeToken++;
+  document.documentElement.classList.remove('native-video');
+  if(nativeVideoReady()){try{Android.stopNativeVideo()}catch(_){}}
+}
+window.__onNativeVideoReady=(tok)=>{
+  if(tok!==nativeToken)return;
+  clearTimeout(startNativeVideo._t);startNativeVideo._t=0;
+  console.log('PVTV NATIVE: ready');
+  tryStream._skipCount=0;clearTimeout(tryStream._watchdog);
+  loadOv.classList.remove('show');errOv.classList.remove('show');nosig.style.display='none';
+};
+window.__onNativeVideoError=(tok,msg)=>{
+  if(tok!==nativeToken)return;
+  console.log('PVTV NATIVE: error '+msg);
+  const ch=activeCh;
+  stopNativeVideo();loadOv.classList.remove('show');
+  if(ch)tryStream(ch,0);
+};
+window.__onNativeVideoStopped=()=>{
+  clearTimeout(startNativeVideo._t);startNativeVideo._t=0;
+  nativeToken++;
+  document.documentElement.classList.remove('native-video');
+};
+function startNativeVideo(ch){
+  if(!ch||!ch.urls||!ch.urls[0])return false;
+  const url=ch.urls[0];
+  if(!/\.(m3u8)(\?|$)/i.test(url)){console.log('PVTV NATIVE: kein HLS, WebView-Pfad');return false}
+  if(hls){try{hls.destroy()}catch(_){}hls=null}
+  try{vid.pause();vid.removeAttribute('src');vid.load()}catch(_){}
+  document.documentElement.classList.add('native-video');
+  nosig.style.display='none';errOv.classList.remove('show');
+  loadOv.classList.add('show');$('load-text').textContent=ch.name||'Verbinde …';$('load-count').textContent='';
+  const tok=++nativeToken;
+  console.log('PVTV NATIVE: play '+url+' stretch='+NATIVE_STRETCH+' tok='+tok);
+  try{Android.playNativeVideo(url,NATIVE_STRETCH,tok)}
+  catch(e){console.log('PVTV NATIVE: bridge fail '+e.message);stopNativeVideo();return false}
+  clearTimeout(startNativeVideo._t);
+  startNativeVideo._t=setTimeout(()=>{
+    if(tok!==nativeToken)return;
+    console.log('PVTV NATIVE: watchdog, zurueck zu WebView');
+    const cur=activeCh;
+    stopNativeVideo();loadOv.classList.remove('show');
+    if(cur)tryStream(cur,0);
+  },12000);
+  return true;
+}
 function playChannel(ch){
   console.log('PVTV PLAY: name='+(ch?ch.name:'null')+' urls='+(ch&&ch.urls?ch.urls.length:0));
   prewarmToken++;activeCh=ch;ch._v=null;vid.muted=false;aud.pause();aud.src='';if(typeof Android!=='undefined')Android.stopAudio();
-  vid.classList.toggle('stretch',isStretchCh(ch));
   $('radio-logo').classList.remove('show');
   ss(LS.CCH,{plId:activePlId,url:ch.urls[0]});
   focusIdx=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);
@@ -1207,6 +1273,8 @@ function playChannel(ch){
   showChInfo(ch);
   console.log('PVTV PLAY: startupDone='+startupDone);
   if(!startupDone){vid.muted=true;return}
+  if(isStretchCh(ch)&&nativeVideoReady()&&startNativeVideo(ch)){lastTuneTs=Date.now();return}
+  stopNativeVideo();
   console.log('PVTV PLAY: calling tryStream');
   tryStream(ch,0);
   lastTuneTs=Date.now();
