@@ -41,6 +41,8 @@ https://jmp2.uk/plu-69b968ca1c36025fd0a3d92d.m3u8
 https://jmp2.uk/plu-622f40c901d4b70007ad7609.m3u8
 #EXTINF:-1 tvg-id="TakeshisCastle.de@DACH" tvg-logo="https://images.pluto.tv/channels/6054a9f4bc8a5f000771504c/colorLogoPNG.png" group-title="Comedy",Takeshi's Castle
 https://jmp2.uk/plu-6054a9f4bc8a5f000771504c.m3u8
+#EXTINF:-1 tvg-id="NickComedyCentralPlus1.de@SD" tvg-logo="https://i.imgur.com/08ZUI9k.png" group-title="Comedy;Kids",Nick/Comedy Central +1
+http://90.183.52.46:4000/play/a046/index.m3u8
 #EXTINF:-1 tvg-id="PlutoTVKultComedies.de@DACH" tvg-logo="https://images.pluto.tv/channels/66337de656fc840008ff7a65/colorLogoPNG.png" group-title="Comedy;Movies",Pluto TV Kult Comedies
 https://jmp2.uk/plu-66337de656fc840008ff7a65.m3u8
 #EXTINF:-1 tvg-id="PlutoTVSitcoms.de@DACH" tvg-logo="https://images.pluto.tv/channels/5d767ab2b456c8cf265ce921/colorLogoPNG.png" group-title="Comedy;Series",Pluto TV Sitcoms
