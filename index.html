@@ -31,10 +31,18 @@ html,body{height:100%;overflow:hidden;background:#000;color:var(--txt);font-fami
 
 /* ── Video ── */
 #video-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;background:#000;touch-action:none}
-video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#000;transform:scale(1.04);transform-origin:center}
+video{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#000}
 body.touchy video,body.native video{object-fit:cover}
 body.touchy video.stretch,body.native video.stretch{object-fit:fill}
-video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
+video.stretch{object-fit:fill}
+/* Nativer Video-Player (MediaPlayer + TextureView) liegt hinter dem WebView.
+   Solange er laeuft, muss die Seite komplett durchsichtig sein (auch <html>,
+   sonst deckt deren Hintergrund das Video zu); Sidebar/Ticker bleiben als
+   WebView-Ebene darueber. */
+html.native-video,html.native-video body,html.native-video #video-bg{background:transparent}
+html.native-video #vid{display:none}
+/* Ohne Video-Surface liegt der Chromium-Fokusring (Amazon-Orange) am Rand frei. */
+html:focus,body:focus,html:focus-visible,body:focus-visible,#video-bg:focus{outline:none!important}
 #nosig{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000}
 .ns-ico{font-size:72px;opacity:.06}
 .ns-title{font-family:var(--fc);font-size:28px;color:rgba(255,255,255,.1);letter-spacing:.3em}
@@ -117,7 +125,7 @@ video.stretch{object-fit:fill;transform:scale(1.37,1.04)}
 .sb-search::placeholder{color:var(--txt3)}
 
 /* ── Kacheln ── */
-#ch-list{flex:1;overflow:hidden;display:flex;flex-direction:column;padding:10px 4%;gap:6px;justify-content:center}
+#ch-list{flex:1;overflow:hidden;display:flex;flex-direction:column;padding:10px 4%;gap:6px;justify-content:center;overflow-anchor:none}
 
 .ci{position:relative;display:flex;align-items:center;gap:10px;padding:16px 16px;cursor:pointer;outline:none;background:rgba(8,11,20,.92);border:1px solid rgba(255,255,255,.14);border-radius:var(--phz-r-md);opacity:1;flex-shrink:0;min-height:96px;width:100%;transition:background var(--phz-dur-fast),border-color var(--phz-dur-fast),min-height var(--phz-dur-med);overflow:hidden}
 .ci:hover{background:rgba(8,11,20,.97);border-color:rgba(255,215,0,.45)}
@@ -485,17 +493,19 @@ body.touchy #sidebar{position:fixed;top:0;left:0;bottom:0;right:auto;width:42vw;
 body.touchy #sidebar.sb-open{transform:translateX(0);pointer-events:all}
 body.touchy #sidebar::before{display:none}
 body.touchy .sb-nav-hint{display:none}
-body.touchy #ch-list{flex:1;overflow-y:auto;overflow-x:hidden;justify-content:flex-start;padding:8px 3%;gap:6px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-body.touchy .ci{padding:12px;min-height:82px;gap:10px}
-body.touchy .ci.focused{min-height:104px}
+body.touchy #ch-list{flex:1;overflow-y:auto;overflow-x:hidden;justify-content:flex-start;padding:8px 3%;gap:6px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;overflow-anchor:none}
+body.touchy .ci{padding:12px;min-height:82px;gap:10px;transition:none}
+body.touchy .ci.focused{min-height:104px;animation:none}
+body.touchy .ci .cl,body.touchy .ci .cn-name,body.touchy .ci .cn-epg,body.touchy .ci .cn-grp{animation:none}
+body.touchy .ci .cl{transition:none}
 body.touchy .ci.focused .cn-name{font-size:16px;font-weight:800}
 body.touchy .ci.focused .cl{width:40px;height:28px}
 body.touchy .ci.focused .clf{font-size:16px}
 body.touchy .ci.focused .cn-num{font-size:22px;font-weight:800}
-body.touchy .ci.near{min-height:70px}
+body.touchy .ci.near{min-height:70px!important}
 body.touchy .ci.near .cn-name{font-size:14px}
 body.touchy .ci.near .cl{width:32px;height:22px}
-body.touchy .ci.far{min-height:52px;padding:8px 12px}
+body.touchy .ci.far{min-height:56px!important;padding:8px 12px}
 body.touchy .ci.far .cn-name{font-size:12px;font-weight:400}
 body.touchy .ci.far .cl{width:26px;height:18px}
 body.touchy .ci.far .clf{font-size:11px}
@@ -1006,9 +1016,9 @@ function renderTiles(dir){
     const offset=i-3;
     const idx=focusIdx+offset;
     if(idx<0||idx>=flatCh.length){
-      wrap.style.display='none';continue;
+      wrap.style.visibility='hidden';wrap.classList.remove('focused','near');wrap.classList.add('far');continue;
     }
-    wrap.style.display='';
+    wrap.style.visibility='';
     const ch=flatCh[idx];
     const isFocused=offset===0,isNear=Math.abs(offset)===1;
     const logoSrc=ch.logo?proxyLogo(ch.logo):'';
@@ -1131,7 +1141,7 @@ function renderTilesMobile(){
   chList._sig=sig;
 }
 function appendMobileMore(){
-  if(!flatCh.length||mobileCap>=flatCh.length)return;
+  if(!TOUCHY||!flatCh.length||mobileCap>=flatCh.length)return;
   const from=mobileCap;
   mobileCap=Math.min(flatCh.length,mobileCap+MOBILE_CHUNK);
   const frag=document.createDocumentFragment();
@@ -1179,7 +1189,7 @@ const AVDIAG=/[?&]avdiag=1/.test(location.search);
 let avMon=null,avBad=0,avLastFix=0;
 function updateAvDiag(d){if(!AVDIAG)return;const el=$('av-diag');if(!el)return;el.style.display='block';let info='';try{const q=vid.getVideoPlaybackQuality();info+=' drop='+q.droppedVideoFrames+'/'+q.totalVideoFrames}catch(_){}try{info+=' lvl='+(hls?hls.currentLevel:'na')}catch(_){}el.textContent='av-delta='+(d>=0?'+':'')+d.toFixed(2)+'s'+info}
 function armAvMonitor(){clearInterval(avMon);avBad=0;if(!vid.requestVideoFrameCallback)return;avMon=setInterval(()=>{try{if(vid.paused||vid.ended||!hls)return;vid.requestVideoFrameCallback((now,meta)=>{try{const d=meta.mediaTime-vid.currentTime;updateAvDiag(d);if(Math.abs(d)>1.5){if(++avBad>=3&&Date.now()-avLastFix>30000){avLastFix=Date.now();avBad=0;try{vid.currentTime=Math.max(0,vid.currentTime-0.5)}catch(_){}console.log('PVTV AV-FIX: seek, delta war '+d.toFixed(2))}}else avBad=0}catch(_){}})}catch(_){}},2000)}
-function showVideoOnFirstFrame(ch){if(ch)armPrewarm(ch);clearTimeout(vid._showT);clearInterval(vid._showI);vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);clearInterval(vid._showI);let n=0;const reveal=()=>{clearTimeout(vid._showT);clearInterval(vid._showI);vid.style.opacity='1';loadOv.classList.remove('show');syncMuteBadge()};vid._showI=setInterval(()=>{try{const b=vid.buffered;const ahead=b.length?b.end(b.length-1)-vid.currentTime:0;if(ahead>2||++n>=14)reveal()}catch(_){reveal()}},250);vid._showT=setTimeout(reveal,4000)},{once:true})}
+function showVideoOnFirstFrame(ch){if(ch)armPrewarm(ch);clearTimeout(vid._showT);clearInterval(vid._showI);try{if(!vid.paused&&!vid.ended&&vid.readyState>=3){clearTimeout(tryStream._watchdog);vid.style.opacity='1';loadOv.classList.remove('show');syncMuteBadge();return}}catch(_){}vid.addEventListener('playing',()=>{clearTimeout(tryStream._watchdog);clearTimeout(vid._showT);clearInterval(vid._showI);let n=0;const reveal=()=>{clearTimeout(vid._showT);clearInterval(vid._showI);vid.style.opacity='1';loadOv.classList.remove('show');syncMuteBadge()};vid._showI=setInterval(()=>{try{const b=vid.buffered;const ahead=b.length?b.end(b.length-1)-vid.currentTime:0;if(ahead>2||++n>=14)reveal()}catch(_){reveal()}},250);vid._showT=setTimeout(reveal,4000)},{once:true})}
 function syncMuteBadge(){const b=$('mute-badge');if(!b)return;const show=setup.classList.contains('off')&&vid.muted&&!vid.paused&&!vid.ended;if(b._on===show)return;b._on=show;b.style.display=show?'flex':'none'}
 vid.addEventListener('volumechange',()=>{syncMuteBadge();console.log('PVTV AUDIO: muted='+vid.muted+' volume='+vid.volume)});
 vid.addEventListener('playing',()=>{try{const b=vid.buffered;let drop='';try{const q=vid.getVideoPlaybackQuality();drop=' dropped='+q.droppedVideoFrames+'/'+q.totalVideoFrames}catch(_){}let lvl='';try{lvl=' lvl='+(hls?hls.currentLevel:'na')}catch(_){}console.log('PVTV AUDIO: playing muted='+vid.muted+' bufferedRanges='+b.length+' ahead='+(b.length?(b.end(b.length-1)-vid.currentTime).toFixed(2):0)+lvl+drop)}catch(_){}});
@@ -1193,10 +1203,68 @@ function isStretchCh(ch){
   const hay=((ch.name||'')+' '+(ch.tvgId||'')).toLowerCase();
   return stretchChannels.some(s=>hay.includes(s));
 }
+/* ── Nativer Player (Fire TV) ──
+   Der Amazon-WebView rendert Video als eigenes Surface: die Breite folgt dem
+   Viewport, die Hoehe der Element-Box, object-fit wird ignoriert. 4:3-Sender
+   mit eingebackenen Balken lassen sich dort nicht randlos ziehen (nur vertikal
+   skaliert etwas). Deshalb laeuft fuer solche Sender ein MediaPlayer auf einer
+   TextureView hinter dem WebView; die Matrix zieht das Bild auf 16:9. */
+const NATIVE_STRETCH=1.3334;
+let nativeToken=0;
+function nativeVideoReady(){
+  return typeof Android!=='undefined'&&Android&&typeof Android.playNativeVideo==='function';
+}
+function stopNativeVideo(){
+  clearTimeout(startNativeVideo._t);startNativeVideo._t=0;
+  nativeToken++;
+  document.documentElement.classList.remove('native-video');
+  if(nativeVideoReady()){try{Android.stopNativeVideo()}catch(_){}}
+}
+window.__onNativeVideoReady=(tok)=>{
+  if(tok!==nativeToken)return;
+  clearTimeout(startNativeVideo._t);startNativeVideo._t=0;
+  console.log('PVTV NATIVE: ready');
+  tryStream._skipCount=0;clearTimeout(tryStream._watchdog);
+  loadOv.classList.remove('show');errOv.classList.remove('show');nosig.style.display='none';
+};
+window.__onNativeVideoError=(tok,msg)=>{
+  if(tok!==nativeToken)return;
+  console.log('PVTV NATIVE: error '+msg);
+  const ch=activeCh;
+  stopNativeVideo();loadOv.classList.remove('show');
+  if(ch)tryStream(ch,0);
+};
+window.__onNativeVideoStopped=()=>{
+  clearTimeout(startNativeVideo._t);startNativeVideo._t=0;
+  nativeToken++;
+  document.documentElement.classList.remove('native-video');
+};
+function startNativeVideo(ch){
+  if(!ch||!ch.urls||!ch.urls[0])return false;
+  const url=ch.urls[0];
+  if(!/\.(m3u8)(\?|$)/i.test(url)){console.log('PVTV NATIVE: kein HLS, WebView-Pfad');return false}
+  if(hls){try{hls.destroy()}catch(_){}hls=null}
+  try{vid.pause();vid.removeAttribute('src');vid.load()}catch(_){}
+  document.documentElement.classList.add('native-video');
+  nosig.style.display='none';errOv.classList.remove('show');
+  loadOv.classList.add('show');$('load-text').textContent=ch.name||'Verbinde …';$('load-count').textContent='';
+  const tok=++nativeToken;
+  console.log('PVTV NATIVE: play '+url+' stretch='+NATIVE_STRETCH+' tok='+tok);
+  try{Android.playNativeVideo(url,NATIVE_STRETCH,tok)}
+  catch(e){console.log('PVTV NATIVE: bridge fail '+e.message);stopNativeVideo();return false}
+  clearTimeout(startNativeVideo._t);
+  startNativeVideo._t=setTimeout(()=>{
+    if(tok!==nativeToken)return;
+    console.log('PVTV NATIVE: watchdog, zurueck zu WebView');
+    const cur=activeCh;
+    stopNativeVideo();loadOv.classList.remove('show');
+    if(cur)tryStream(cur,0);
+  },12000);
+  return true;
+}
 function playChannel(ch){
   console.log('PVTV PLAY: name='+(ch?ch.name:'null')+' urls='+(ch&&ch.urls?ch.urls.length:0));
   prewarmToken++;activeCh=ch;ch._v=null;vid.muted=false;aud.pause();aud.src='';if(typeof Android!=='undefined')Android.stopAudio();
-  vid.classList.toggle('stretch',isStretchCh(ch));
   $('radio-logo').classList.remove('show');
   ss(LS.CCH,{plId:activePlId,url:ch.urls[0]});
   focusIdx=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);
@@ -1205,6 +1273,8 @@ function playChannel(ch){
   showChInfo(ch);
   console.log('PVTV PLAY: startupDone='+startupDone);
   if(!startupDone){vid.muted=true;return}
+  if(isStretchCh(ch)&&nativeVideoReady()&&startNativeVideo(ch)){lastTuneTs=Date.now();return}
+  stopNativeVideo();
   console.log('PVTV PLAY: calling tryStream');
   tryStream(ch,0);
   lastTuneTs=Date.now();
@@ -1280,11 +1350,11 @@ function tryStream(ch,idx){
     if(next){toast(back?'⏮ Kein Stream – zurück…':'⏭ Kein Stream – weiter…',3000);setTimeout(()=>playChannel(next),1500);return}
     tryStream._skipCount=0;$('load-text').textContent='❌ Kein Stream verfügbar';$('load-count').textContent='';loadOv.classList.remove('show');errMsg.textContent=(typeof WEBMODE!=='undefined'&&WEBMODE&&typeof ch!=='undefined'&&ch&&ch.urls[0]&&ch.urls[0].indexOf('http://')===0)?'Nur auf TV':'Alle Streams fehlgeschlagen.';errOv.classList.add('show');nosig.style.display='flex';return}
   const url=v[idx];
-  clearTimeout(vid._showT);
+  clearTimeout(vid._showT);clearInterval(vid._showI);vid.onerror=null;
   clearTimeout(tryStream._watchdog);
   const armWatchdog=(ms)=>{clearTimeout(tryStream._watchdog);tryStream._watchdog=setTimeout(()=>{console.log('PVTV TRY: watchdog, next variant');try{vid.pause()}catch(_){}tryStream(ch,idx+1)},ms||6000)};
   nosig.style.display='none';errOv.classList.remove('show');loadOv.classList.add('show');vid.style.opacity='0';
-  if(idx===0){$('load-text').textContent=(ch&&ch.name)||'Verbinde …';}$('load-count').textContent='';
+  $('load-text').textContent=idx===0?((ch&&ch.name)||'Verbinde …'):'Verbinde …';$('load-count').textContent='';
   if(hls){try{hls.destroy()}catch(_){}hls=null}
   try{vid.pause();vid.removeAttribute('src');vid.load()}catch(_){}
   clearInterval(window._dropGuard);window._dropLast=null;clearInterval(avMon);
@@ -1306,7 +1376,7 @@ function tryStream(ch,idx){
       if(!subOn&&hls){hls.subtitleTrack=-1;hls.subtitleDisplay=false}
     });
     hls.on(Hls.Events.ERROR,(_,d)=>{let u='';try{u=d.frag&&d.frag.url?d.frag.url:(d.context&&d.context.url?d.context.url:'')}catch(_){}let c='';try{c=d.response&&d.response.code!==undefined?d.response.code:''}catch(_){}console.log('PVTV TRY: HLS error fatal='+d.fatal+' type='+d.type+' details='+(d.details||'')+' code='+c+' url='+u);if(d.fatal){clearTimeout(tryStream._watchdog);hls.destroy();hls=null;tryStream(ch,idx+1)}});
-  }else if(isHLS&&typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;vid.play().then(()=>{tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show')}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(isHLS&&vid.canPlayType('application/vnd.apple.mpegurl')){
+  }else if(isHLS&&typeof Hls==='undefined'){console.log('PVTV TRY: HLS.js not loaded, trying native');vid.src=url;armWatchdog();vid.onerror=()=>{clearTimeout(tryStream._watchdog);tryStream(ch,idx+1)};vid.play().then(()=>{tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');clearTimeout(tryStream._watchdog);showVideoOnFirstFrame(ch)}).catch(()=>{tryStream._skipCount=0;$('load-text').textContent='❌ HLS.js nicht geladen';$('load-count').textContent='';loadOv.classList.add('show')})}else if(isHLS&&vid.canPlayType('application/vnd.apple.mpegurl')){
     vid.src=url;armWatchdog();    vid.addEventListener('loadedmetadata',()=>{clearTimeout(tryStream._watchdog);tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame(ch);vid.play().catch(()=>{});},{once:true});
     vid.addEventListener('error',()=>{clearTimeout(tryStream._watchdog);tryStream(ch,idx+1)},{once:true});
   }else{console.log('PVTV TRY: native fallback (audio)');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio playback started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);aud.onended=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)}}).catch((e)=>{console.log('PVTV TRY: audio blocked, trying video: '+e.message);aud.src='';vid.src=url;vid.load();vid.play().then(()=>{console.log('PVTV TRY: video playback started');tryStream._skipCount=0;hideRadioLogo();showVideoOnFirstFrame(ch);}).catch((e2)=>{console.log('PVTV TRY: video also failed, trying Android bridge: '+e2.message);aud.src='';vid.src='';if(typeof Android!=='undefined'&&Android.playAudio){window.__onAudioStart=()=>{console.log('PVTV TRY: Android MediaPlayer started');tryStream._skipCount=0;loadOv.classList.remove('show');showRadioLogo(ch);chInfo.classList.add('show');clearTimeout(chInfoTimer)};window.__onAudioError=(msg)=>{console.log('PVTV TRY: Android MediaPlayer error: '+msg);$('load-text').textContent='❌ '+msg;$('load-count').textContent='';loadOv.classList.add('show')};window.__onAudioEnd=()=>{const ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const nx=flatCh[ci+1];if(nx)playChannel(nx)};Android.playAudio(url)}else{console.log('PVTV TRY: no Android bridge available');tryStream._skipCount=0;hideRadioLogo();loadOv.classList.remove('show');const _httpOnly=(typeof WEBMODE!=='undefined'&&WEBMODE&&typeof ch!=='undefined'&&ch&&ch.urls[0]&&ch.urls[0].indexOf('http://')===0);if(_httpOnly){const _ci=flatCh.findIndex(c=>c.urls[0]===ch.urls[0]);const _back=typeof navDir!=='undefined'&&navDir==='prev';const _nx=flatCh[_back?_ci-1:_ci+1];if(_nx){toast(_back?'Nur auf TV – zurück…':'Nur auf TV – weiter…',3000);setTimeout(()=>playChannel(_nx),1500);return}$('load-text').textContent='Nur auf TV';}else{$('load-text').textContent='▶️ Klick oder Taste zum Abspielen';}$('load-count').textContent='';loadOv.classList.add('show');const tryPlay=()=>{loadOv.classList.remove('show');aud.src=url;aud.load();aud.play().then(()=>{console.log('PVTV TRY: audio started after user gesture');showRadioLogo(ch)}).catch(()=>{vid.play().catch(()=>{})})};document.addEventListener('click',tryPlay,{once:true});document.addEventListener('keydown',tryPlay,{once:true})}})})}
@@ -1341,7 +1411,10 @@ function pokeDeskBtns(){if(typeof WEBMODE==='undefined'||(!WEBMODE&&typeof Andro
 /* ── UI ── */
 function showUI(){uiOpen=true;ui.classList.add('show');if(!WEBMODE||TOUCHY){menuBtn.classList.add('hidden');fsBtn.classList.add('hidden')}chInfo.classList.add('show');clearTimeout(chInfoTimer);renderTiles();armUIHide(4000)}
 function hideUI(){if(mainMenu.classList.contains('open'))return;uiOpen=false;ui.classList.remove('show');document.getElementById('sidebar').classList.remove('sb-open');chInfo.classList.remove('show');if(!WEBMODE||TOUCHY){menuBtn.classList.remove('hidden');fsBtn.classList.remove('hidden');pokeDeskBtns()}clearTimeout(uiTimer);clearTimeout(chInfoTimer)}
-function scrollFocusedTile(){try{const f=chList.querySelector('.ci.focused');if(f)f.scrollIntoView({block:'nearest'})}catch(_){}}
+function ensureListPad(){try{const f=chList.querySelector('.ci.focused');if(!f)return;const fh=f.getBoundingClientRect().height;const pad=Math.max(0,(chList.clientHeight-fh)/2);if(Math.abs((parseFloat(chList.style.paddingTop)||0)-pad)>1){chList.style.paddingTop=pad+'px';chList.style.paddingBottom=pad+'px'}}catch(_){}}
+function scrollFocusedTile(){if(!TOUCHY)return;try{ensureListPad();const f=chList.querySelector('.ci.focused');if(!f)return;const cr=chList.getBoundingClientRect(),fr=f.getBoundingClientRect();chList.scrollTop+=(fr.top-cr.top)-(cr.height-fr.height)/2}catch(_){}}
+window.addEventListener('resize',()=>{if(TOUCHY)scrollFocusedTile()});
+window.addEventListener('orientationchange',()=>{if(TOUCHY)setTimeout(scrollFocusedTile,250)});
 function openSidebar(){clearTimeout(uiTimer);document.getElementById('sidebar').classList.add('sb-open');scrollFocusedTile()}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('sb-open');if(uiOpen)armUIHide(4000)}
 function toggleUI(){uiOpen?hideUI():showUI()}
@@ -1555,10 +1628,11 @@ function setupFocus(idx){
   }
 }
 function visRect(el){const r=el.getBoundingClientRect();return(r.width>0&&r.height>0)?r:null}
-function findDir(current,dir,els){
+function findDir(current,dir,els,offW){
   const cr=visRect(current);if(!cr)return null;
   const cx=cr.left+cr.width/2,cy=cr.top+cr.height/2;
   let best=null,bd=Infinity;
+  const w=offW||1.5;
   for(const el of els){
     if(el===current)continue;
     const r=visRect(el);if(!r)continue;
@@ -1570,7 +1644,7 @@ function findDir(current,dir,els){
     else if(dir==='right'&&dx>0)ok=true;
     else if(dir==='left'&&dx<0)ok=true;
     if(!ok)continue;
-    const d=dir==='down'||dir==='up'?Math.abs(dx)*1.5+Math.abs(dy):Math.abs(dy)*1.5+Math.abs(dx);
+    const d=dir==='down'||dir==='up'?Math.abs(dx)*w+Math.abs(dy):Math.abs(dy)*w+Math.abs(dx);
     if(d<bd){bd=d;best=el}
   }
   return best;
@@ -1733,10 +1807,20 @@ function mmFocus(){mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>{
 }))}
 function mmEls(){const els=[];mmSections.forEach((sec,si)=>sec.forEach((el,ii)=>els.push({el,si,ii})));return els}
 function mmMove(dir){
+  const horizontal=(dir==='left'||dir==='right');
+  const rowFlow=mmSecIdx===1||(mmSecIdx===0&&TOUCHY);
+  if(horizontal&&rowFlow){
+    const sec=mmSections[mmSecIdx];
+    if(!sec||!sec.length)return;
+    let ni=mmItemIdx+(dir==='right'?1:-1);
+    if(ni<0)ni=sec.length-1;
+    if(ni>=sec.length)ni=0;
+    mmItemIdx=ni;mmFocus();return;
+  }
   const els=mmEls().filter(o=>visRect(o.el));
   if(!els.length)return;
   const cur=els.find(o=>o.si===mmSecIdx&&o.ii===mmItemIdx)||els[0];
-  const next=findDir(cur.el,dir,els.map(o=>o.el));
+  const next=findDir(cur.el,dir,els.map(o=>o.el),3);
   const target=next?els.find(o=>o.el===next):els[(dir==='down'||dir==='right')?0:els.length-1];
   if(!target)return;
   mmSecIdx=target.si;mmItemIdx=target.ii;mmFocus();
@@ -1761,8 +1845,10 @@ const searchOv=document.getElementById('search-ov');
 const soInput=document.getElementById('so-input');
 const soResults=document.getElementById('so-results');
 let soIdx=-1;
-function showSearchOverlay(){navHistory.push('search');searchOv.classList.add('open');soInput.value='';soIdx=-1;soResults.innerHTML='<div style="color:rgba(255,255,255,.35);padding:20px;text-align:center">Tippe zum Suchen</div>';setTimeout(()=>soInput.focus(),50)}
-function closeSearchOv(){searchOv.classList.remove('open');soInput.value='';navHistory=navHistory.filter(s=>s!=='search')}
+let soKbOpen=false;
+function soHideKb(){soKbOpen=false;if(window.Android&&Android.showKeyboard)Android.showKeyboard(false)}
+function showSearchOverlay(){navHistory.push('search');searchOv.classList.add('open');soInput.value='';soIdx=-1;soKbOpen=true;soResults.innerHTML='<div style="color:rgba(255,255,255,.35);padding:20px;text-align:center">Tippe zum Suchen</div>';setTimeout(()=>{soInput.focus();if(window.Android&&Android.showKeyboard)Android.showKeyboard(true)},50)}
+function closeSearchOv(){searchOv.classList.remove('open');soInput.value='';soInput.blur();soHideKb();navHistory=navHistory.filter(s=>s!=='search')}
 function renderSearchResults(){
   const q=soInput.value.trim().toLowerCase();
   if(!q){soResults.innerHTML='<div style="color:rgba(255,255,255,.35);padding:20px;text-align:center">Tippe zum Suchen</div>';soIdx=-1;return}
@@ -1776,6 +1862,26 @@ function renderSearchResults(){
   soResults.querySelectorAll('.so-result').forEach(r=>{r.addEventListener('click',()=>{const idx=+r.dataset.chIdx;playChannel(flatCh[idx]);closeSearchOv()})});
 }
 soInput.addEventListener('input',renderSearchResults);
+soInput.addEventListener('focus',()=>{if(!soKbOpen){soKbOpen=true;if(window.Android&&Android.showKeyboard)Android.showKeyboard(true)}});
+function soMove(d){
+  const items=soResults.querySelectorAll('.so-result');
+  if(!items.length)return;
+  let n=soIdx+d;
+  if(n<0)n=0;
+  if(n>items.length-1)n=items.length-1;
+  if(items[soIdx])items[soIdx].classList.remove('focused');
+  soIdx=n;
+  items[soIdx].classList.add('focused');
+  items[soIdx].scrollIntoView({block:'nearest'});
+}
+function soPlay(){
+  const items=soResults.querySelectorAll('.so-result');
+  const el=(soIdx>=0&&items[soIdx])?items[soIdx]:items[0];
+  if(!el)return;
+  const idx=+el.dataset.chIdx;
+  if(flatCh[idx])playChannel(flatCh[idx]);
+  closeSearchOv();
+}
 document.getElementById('so-close').addEventListener('click',closeSearchOv);
 
 document.addEventListener('keydown',e=>{
@@ -1784,7 +1890,7 @@ document.addEventListener('keydown',e=>{
   const ae=document.activeElement;
   if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA')){
     if(e.key==='Backspace'||e.key==='Delete'){if(ae.value)return}
-    else if(e.key==='Enter')return;
+    else if(e.key==='Enter'){if(searchOv.classList.contains('open')){e.preventDefault();const items=soResults.querySelectorAll('.so-result');if(soKbOpen&&items.length>1){soHideKb();return}soPlay()}return}
     else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
       try{const v=ae.value||'',s=(typeof ae.selectionStart==='number')?ae.selectionStart:v.length,n=(typeof ae.selectionEnd==='number')?ae.selectionEnd:v.length;if(s!==n)return;if(e.key==='ArrowLeft'&&s>0)return;if(e.key==='ArrowRight'&&s<v.length)return}catch(_){}
     }
@@ -1807,6 +1913,9 @@ document.addEventListener('keydown',e=>{
     if(mainMenu.classList.contains('open')){closeMainMenu();return}
   }
   if(searchOv.classList.contains('open')){
+    if(e.key==='ArrowDown'){e.preventDefault();soMove(1);return}
+    if(e.key==='ArrowUp'){e.preventDefault();soMove(-1);return}
+    if(e.key==='Enter'||e.keyCode===13){e.preventDefault();soPlay();return}
     e.preventDefault();
     return;
   }
@@ -1832,18 +1941,26 @@ document.addEventListener('keydown',e=>{
     e.preventDefault();navDir=e.key==='ArrowDown'?'next':'prev';
     if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list';return}
     armUIHide(4000);
-    if(TOUCHY&&document.getElementById('sidebar').classList.contains('sb-open')){chList.scrollBy({top:e.key==='ArrowDown'?90:-90});return}
-    focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);clearZoneFocus();renderTiles(navDir);scrollFocusedTile();return}
+    if(TOUCHY&&document.getElementById('sidebar').classList.contains('sb-open')){
+      focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);
+      if(focusIdx+2>=mobileCap)appendMobileMore();
+      clearZoneFocus();renderTiles(navDir);
+      scrollFocusedTile();
+      return}
+    focusIdx=e.key==='ArrowDown'?Math.min(focusIdx+1,flatCh.length-1):Math.max(focusIdx-1,0);clearZoneFocus();renderTiles(navDir);return}
   if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
     e.preventDefault();
     if(flatCh.length===0)return;
     const dir=e.key==='ArrowRight'?1:-1;navDir=dir>0?'next':'prev';
     let next=(focusIdx+dir+flatCh.length)%flatCh.length;
     playChannel(flatCh[next]);
-    showUI();armUIHide(3000);
+    if(TOUCHY&&focusIdx+2>=mobileCap)appendMobileMore();
+    showUI();
+    if(TOUCHY&&document.getElementById('sidebar').classList.contains('sb-open'))scrollFocusedTile();
+    armUIHide(3000);
     return}
-  if(e.key==='PageDown'){e.preventDefault();navDir='next';focusIdx=Math.min(focusIdx+7,flatCh.length-1);renderTiles();scrollFocusedTile();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
-  if(e.key==='PageUp'){e.preventDefault();navDir='prev';focusIdx=Math.max(focusIdx-7,0);renderTiles();scrollFocusedTile();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{armUIHide(4000)}return}
+  if(e.key==='PageDown'){e.preventDefault();navDir='next';focusIdx=Math.min(focusIdx+7,flatCh.length-1);if(focusIdx+2>=mobileCap)appendMobileMore();renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{scrollFocusedTile();armUIHide(4000)}return}
+  if(e.key==='PageUp'){e.preventDefault();navDir='prev';focusIdx=Math.max(focusIdx-7,0);renderTiles();if(!uiOpen||!document.getElementById('sidebar').classList.contains('sb-open')){showUI();openSidebar();navZone='list'}else{scrollFocusedTile();armUIHide(4000)}return}
 });
 
 /* ── Green-Plane-Watchdog: Resize mitten in der Wiedergabe = Hardware-Ebene
