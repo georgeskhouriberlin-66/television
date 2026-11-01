@@ -328,6 +328,10 @@ class MainActivity : ComponentActivity() {
         return true
     }
 
+    /* ComponentActivity.dispatchKeyEvent ist in androidx als @RestrictTo markiert; der
+       Override ist bei einer eigenen Activity trotzdem der vorgesehene Weg. Lint
+       bewertet den super-Aufruf konservativ, daher hier unterdrueckt. */
+    @SuppressLint("RestrictedApi")
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
         if (event.action == KeyEvent.ACTION_DOWN) {
             when (event.keyCode) {
