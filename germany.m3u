@@ -437,6 +437,8 @@ https://qvcde-live.akamaized.net/hls/live/2097104/qps/master.m3u8
 https://jmp2.uk/plu-64b67f0424ade50008a3be17.m3u8
 #EXTINF:-1 tvg-id="DAZNHeldinnenxPlutoTV.de@DACH" tvg-logo="https://images.pluto.tv/channels/64afe50c5dc16600087f3227/colorLogoPNG.png" group-title="Sports",DAZN Heldinnen x Pluto TV
 https://jmp2.uk/plu-64afe50c5dc16600087f3227.m3u8
+#EXTINF:-1 tvg-id="Eurosport1.fr@Germany" tvg-logo="https://i.imgur.com/olQJgm7.png" group-title="Sports",Eurosport 1 Germany
+http://90.183.52.46:4000/play/a06v/index.m3u8
 #EXTINF:-1 tvg-id="FIFAPlus.uk@German" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/FIFA%2B_(2025).svg/960px-FIFA%2B_(2025).svg.png" group-title="Sports",FIFA+ German (720p)
 https://4397879b.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWRlX0ZJRkFQbHVzR2VybWFuX0hMUw/playlist.m3u8
 #EXTINF:-1 tvg-id="MoreThanSportsTV.de@SD" tvg-logo="https://i.imgur.com/SLrjImc.png" group-title="Sports",More Than Sports TV (1080p)
@@ -505,8 +507,12 @@ https://stream.rockantenne.de/rockantenne/stream/mp3
 https://live.creacast.com/rockland-radio/smil:rockland-radio.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="RTL.de@SD" tvg-logo="https://i.imgur.com/94K94k2.png" group-title="Undefined",RTL (Germany)
 https://dash4.antik.sk/live/test_rtl_ger_tizen/playlist.m3u8
+#EXTINF:-1 tvg-id="RTLSuper.de@HD" tvg-logo="https://i.imgur.com/KbdK8t9.png" group-title="Undefined",RTL Super HD (576p)
+https://s6.hopslan.com/superX/index.m3u8
 #EXTINF:-1 tvg-id="RTLZwei.de@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/RTLZWEI_Logo_2019.svg/960px-RTLZWEI_Logo_2019.svg.png" group-title="Undefined",RTL Zwei
 https://dash4.antik.sk/live/test_rtl_zwei_tizen/playlist.m3u8
+#EXTINF:-1 tvg-id="RTLZwei.de@HD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/RTLZWEI_Logo_2019.svg/960px-RTLZWEI_Logo_2019.svg.png" group-title="Undefined",RTL Zwei HD (576p)
+https://s6.hopslan.com/rtl2q/index.m3u8
 #EXTINF:-1 tvg-id="SaarlandFernsehen1.de@SD" tvg-logo="https://i.imgur.com/OodehFV.png" group-title="Undefined",Saarland Fernsehen 1 (1080p)
 https://saarland1.iptv-playoutcenter.de/saarland1/saarland1.stream_1/playlist.m3u8
 #EXTINF:-1 tvg-id="SaarlandFernsehen2.de@SD" tvg-logo="https://i.imgur.com/Yv7j4ia.png" group-title="Undefined",Saarland Fernsehen 2 (720p) [Not 24/7]
