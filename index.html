@@ -52,8 +52,11 @@ html:focus,body:focus,html:focus-visible,body:focus-visible,#video-bg:focus{outl
 #radio-logo .rl-name{font-size:28px;font-weight:700;color:var(--txt1);text-shadow:0 2px 12px rgba(0,0,0,.8);text-align:center;max-width:80vw}
 #radio-logo .rl-group{font-size:16px;color:var(--txt3);font-family:var(--fm)}
 #radio-logo .rl-fallback{width:180px;height:180px;border-radius:24px;background:linear-gradient(135deg,#1a5c6b 0%,#0d3a4a 100%);display:none;align-items:center;justify-content:center;font-size:80px;box-shadow:0 4px 40px rgba(0,0,0,.6)}
-#load-ov{position:fixed;inset:0;z-index:15;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.85);pointer-events:none}
-#load-ov.show{display:flex}
+/* Deckend statt rgba(.85): beim Senderwechsel schien der letzte Videoframe
+   zu 15% durch und sah wie ein Geisterbild aus. */
+#load-ov{position:fixed;inset:0;z-index:15;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#04070e;pointer-events:none}
+#load-ov.show{display:flex;animation:loFade .18s ease}
+@keyframes loFade{from{opacity:0}to{opacity:1}}
 #load-text{font-size:22px;font-weight:600;color:var(--txt2);animation:pulse 1.2s ease-in-out infinite;letter-spacing:.02em}
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
 #load-count{font-size:14px;color:var(--txt3);font-family:var(--fm)}
@@ -78,7 +81,6 @@ html:focus,body:focus,html:focus-visible,body:focus-visible,#video-bg:focus{outl
 ══════════════════════════ */
 #startup{position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;background:#000;transition:opacity .6s ease;opacity:1}
 #startup.hide{opacity:0;pointer-events:none}
-#startup-vid{width:100%;height:100%;background:#000}
 
 /* ══════════════════════════
    HAUPT-UI
@@ -202,7 +204,6 @@ html:focus,body:focus,html:focus-visible,body:focus-visible,#video-bg:focus{outl
 /* ── Category Bar ── */
 /* #cat-bar and .cat-pill styles removed */
 /* .pl-tab.focused and .cat-pill.focused removed */
-.btn-go-focused,.sc-set-card.focused{background:rgba(255,255,255,.08);box-shadow:0 0 0 2px var(--acc)}
 
 /* Channel Number Overlay */
 #ch-num-ov{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:45;background:rgba(0,0,0,.85);border:1.5px solid var(--gold);border-radius:var(--phz-r-md);padding:12px 28px;display:none;align-items:center;gap:10px;font-family:var(--fc);font-size:28px;color:#fff;letter-spacing:.12em;backdrop-filter:blur(12px)}
@@ -226,7 +227,7 @@ html:focus,body:focus,html:focus-visible,body:focus-visible,#video-bg:focus{outl
 .sc-set-olive{background:#566700;color:#fff}
 .sc-set-navy{background:#151130;color:#fff;border-color:rgba(255,255,255,.14)}
 .sc-set-lav{background:#C8BEFA;color:#151130}
-.sc-set-card.focused{border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.sc-set-card.focused{background:rgba(255,255,255,.08);border-color:var(--acc);transform:scale(1.02);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5)}
 .sc-set-card:hover{transform:scale(1.02)}
 .sc-set-card:active{transform:scale(.99)}
 
@@ -307,7 +308,7 @@ html:focus,body:focus,html:focus-visible,body:focus-visible,#video-bg:focus{outl
 
 /* ── Start button (compact) ── */
 .btn-go{width:100%;max-width:320px;margin:16px auto 0;display:block;background:var(--acc);color:#000;border:none;border-radius:var(--phz-r-md);padding:12px 24px;font-family:var(--f);font-weight:800;font-size:15px;cursor:pointer;transition:all var(--phz-dur-fast);box-shadow:0 4px 16px rgba(0,212,255,.2);outline:none}
-.btn-go.focused{filter:brightness(1.15);box-shadow:0 0 0 2px #000,0 0 0 4px var(--acc),0 4px 16px rgba(0,212,255,.4)}
+.btn-go.focused{filter:brightness(1.15);transform:scale(1.03);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5)}
 .btn-go:hover{filter:brightness(1.1)}
 .btn-go:disabled{opacity:.4;cursor:not-allowed}
 
@@ -382,7 +383,7 @@ body.webmode .mm-close{display:flex}
 .mm-sub{font-size:14px;color:var(--txt2);line-height:1.4;font-weight:400;margin-top:2px}
 .mm-gear{margin-left:auto;width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:2px solid transparent;border-radius:var(--phz-r-lg);color:#fff;cursor:pointer;outline:none;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast),box-shadow var(--phz-dur-fast);-webkit-tap-highlight-color:transparent}
 .mm-gear svg{width:26px;height:26px}
-.mm-gear.focused{border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.mm-gear.focused{border-color:var(--acc);transform:scale(1.06);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5)}
 .mm-gear:hover{transform:scale(1.06)}
 .mm-section{width:100%;max-width:none;margin-bottom:24px}
 .mm-section-title{font-family:var(--fc);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt2);margin-bottom:12px;padding-left:4px}
@@ -399,13 +400,16 @@ body.webmode .mm-close{display:flex}
   background:linear-gradient(135deg,#333 0%,#111 100%);opacity:0
 }
 .mm-card::before{content:'';position:absolute;inset:0;opacity:.18;transition:opacity var(--phz-dur-fast);pointer-events:none}
-.mm-card.focused{border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+/* Fokus = Cyan (hier steht der Cursor), Gold = geladene Playlist (siehe .active-pl).
+   Ist eine Kachel beides, liegen beide Ringe uebereinander: Gold innen, Cyan aussen. */
+.mm-card.focused{border-color:var(--acc);transform:scale(1.05);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5)}
 .mm-card:hover{transform:scale(1.04)}
 .mm-card:active{transform:scale(0.97)}
 .mm-card .card-ico{font-size:28px;margin-bottom:6px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
 .mm-card .card-name{font-size:14px;font-weight:800;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);line-height:1.2}
 .mm-card .card-badge{position:absolute;top:8px;right:8px;min-width:22px;height:22px;border-radius:11px;background:rgba(0,0,0,.5);border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;padding:0 5px}
 .mm-card.active-pl{border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.mm-card.active-pl.focused{transform:scale(1.05);border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 2.5px var(--gold),0 0 0 4px #04070e,0 0 0 6px var(--acc),0 8px 32px rgba(0,0,0,.5)}
 
 /* Einheitlich: alle Kacheln gleiche Farbe (keine Farben pro Playlist/Aktion) */
 
@@ -429,12 +433,12 @@ body.webmode .mm-close{display:flex}
 .mm-cat-pills::-webkit-scrollbar{display:none}
 .mm-cat-pill{padding:8px 14px;font-size:12px;font-weight:600;border-radius:20px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);color:var(--txt2);cursor:pointer;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast),box-shadow var(--phz-dur-fast);outline:none;white-space:nowrap}
 .mm-cat-pill:hover{transform:scale(1.05)}
-.mm-cat-pill.focused{background:rgba(245,194,24,.14);border-color:var(--gold);box-shadow:0 0 0 1px #04070e,0 0 0 2px var(--gold);color:#fff}
+.mm-cat-pill.focused{background:rgba(0,212,255,.14);border-color:var(--acc);box-shadow:0 0 0 1px #04070e,0 0 0 2px var(--acc);color:#fff}
 .mm-cat-pill.active{background:rgba(245,194,24,.2);border-color:var(--gold);color:#fff}
 .mm-cat-pill.pending{border-style:dashed;border-color:var(--gold);color:#fff}
 .mm-global-label{font-size:12px;color:var(--txt2);white-space:nowrap}
 .mm-global-chk{position:relative;width:36px;height:20px;flex-shrink:0;background:rgba(255,255,255,.1);border-radius:10px;cursor:pointer;transition:background var(--phz-dur-fast);outline:none;border:1.5px solid rgba(255,255,255,.1)}
-.mm-global-chk.focused{border-color:var(--gold);box-shadow:0 0 0 1px #04070e,0 0 0 2px var(--gold)}
+.mm-global-chk.focused{border-color:var(--acc);box-shadow:0 0 0 1px #04070e,0 0 0 2px var(--acc)}
 .mm-global-chk.on{background:var(--gold)}
 .mm-global-chk::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform var(--phz-dur-fast)}
 .mm-global-chk.on::after{transform:translateX(16px)}
@@ -449,18 +453,23 @@ body.webmode .mm-close{display:flex}
 .mm-nav-card.card-pls{background:#F54F1B;color:#fff}
 .mm-nav-card.card-fav{background:#C8BEFA;color:#151130}
 .mm-nav-card.card-search{background:#151130;color:#fff;border-color:rgba(255,255,255,.14)}
-.mm-nav-card.focused{border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+.mm-nav-card.focused{border-color:var(--acc);transform:scale(1.03);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5)}
 .mm-nav-card:hover{transform:scale(1.03)}
 .mm-nav-card:active{transform:scale(.98)}
 .mm-cur{margin-top:16px;display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:var(--phz-r-lg);cursor:pointer;outline:none;transition:transform var(--phz-dur-fast),border-color var(--phz-dur-fast)}
 .mm-cur-lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt2);font-family:var(--fc)}
 .mm-cur-name{font-size:18px;font-weight:800;color:#fff}
 .mm-cur-count{margin-left:auto;font-size:12px;font-weight:700;color:var(--txt2);border:1.5px solid rgba(255,255,255,.25);border-radius:11px;padding:2px 9px;white-space:nowrap}
-.mm-cur.focused{border-color:var(--gold);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--gold),0 8px 32px rgba(0,0,0,.5)}
+/* Kein scale(): das Panel laeuft ueber die volle Breite und wuerde ueber den Rand ragen. */
+.mm-cur.focused{border-color:var(--acc);box-shadow:0 0 0 1.5px #04070e,0 0 0 3px var(--acc),0 8px 32px rgba(0,0,0,.5)}
 .mm-cur:hover{transform:scale(1.02)}
+/* Der Touchy-WebView laesst :hover nach einem Tap kleben; das Panel ist bewusst ohne Scale. */
+body.touchy .mm-cur:hover{transform:none}
 
 /* ── Touch: Spalten stapeln ── */
-body.touchy .mm-cols{flex-direction:column}
+/* align-items:stretch ist hier Pflicht: in einer Spalte wuerde flex-start .mm-main
+   auf Inhaltsbreite zusammendruecken, dann passen nur 2 Playlist-Kacheln pro Zeile. */
+body.touchy .mm-cols{flex-direction:column;align-items:stretch}
 body.touchy .mm-nav{flex-direction:row;flex:none;width:100%}
 body.touchy .mm-nav-card{flex:1;min-width:0;min-height:64px;padding:8px 10px;gap:8px}
 body.touchy .mm-nav-card .card-name{font-size:15px}
@@ -558,7 +567,9 @@ body.touchy #toast{top:70px;right:14px;left:14px;font-size:13px;padding:10px 16p
 
 <!-- Startup Screen -->
 <div id="startup">
-  <video id="startup-vid" tabindex="-1" src="https://github.com/georgeskhouriberlin-66/television/releases/download/startup-v5/startup_full.mp4" playsinline muted autoplay></video>
+  <!-- ANIM-SLOT: hier kommt die Startup-Animation (Lottie/SVG) rein.
+       Bewusst kein <video>: ein zweiter Decoder beim Kaltstart war Teil der Boot-Probleme. -->
+
 </div>
 
 <!-- Haupt-UI -->
@@ -807,7 +818,7 @@ const setup=$('setup'), setupStart=$('setup-start'), scSt=$('sc-st');
 const builtinGrid=$('builtin-grid'), savedWrap=$('saved-wrap');
 const tgEpg=$('tg-epg'), tgSub=$('tg-sub');
 const chNumOv=$('ch-num-ov'), chNumDigits=$('ch-num-digits');
-const startup=$('startup'), startupVid=$('startup-vid');
+const startup=$('startup');
 
 /* ── Channel Counter ── */
 const chCounter=$('ch-counter'),chCounterNum=$('ch-counter-num');
@@ -828,25 +839,9 @@ function updateChCounterTotal(){
   if(n>0){chCounter.style.display='flex';chCounterNum.textContent=n;if(lbl)lbl.textContent=flatCh.length?' Sender':' ausgewählt'}
 }
 
-/* ── Startup ── */
-let startupDone=false;
-function hideStartup(){
-  try{const sv0=$('startup-vid');if(sv0){sv0.pause();sv0.removeAttribute('src');sv0.load()}}catch(_){}
-  if(startupDone)return;startupDone=true;
-  if(!startup)return;
-  startup.classList.add('hide');
-  setTimeout(()=>{startup.style.display='none'},600);
-  if(activeCh){tryStream(activeCh,0)}
-}
-startupVid?.addEventListener('ended',hideStartup);
-startupVid?.addEventListener('error',()=>{console.warn('startup video error');hideStartup()});
-try{
-  startupVid.preload='auto';
-  const tryPlay=()=>{try{const p=startupVid&&startupVid.play();if(p&&p.catch)p.catch(()=>hideStartup())}catch(e){hideStartup()}};
-  if(startupVid.readyState>=2)tryPlay();
-  else startupVid.addEventListener('canplay',tryPlay,{once:true});
-  setTimeout(tryPlay,1500);
-}catch(e){hideStartup()}
+/* ── Startup-Overlay ──
+   Kein Video mehr: #startup ist nur noch der schwarze Grund, der beim ersten Paint
+   gesetzt ist und in init() ausgeblendet wird. Hier kommt die Animation rein. */
 
 /* ── M3U Parser ── */
 function parseM3U(text){
@@ -1271,8 +1266,6 @@ function playChannel(ch){
   if(focusIdx<0)focusIdx=0;
   document.querySelectorAll('.ci').forEach(el=>el.classList.toggle('active',el.dataset.url===ch.urls[0]));
   showChInfo(ch);
-  console.log('PVTV PLAY: startupDone='+startupDone);
-  if(!startupDone){vid.muted=true;return}
   if(isStretchCh(ch)&&nativeVideoReady()&&startNativeVideo(ch)){lastTuneTs=Date.now();return}
   stopNativeVideo();
   console.log('PVTV PLAY: calling tryStream');
@@ -2135,10 +2128,8 @@ async function init(){
   tgSub.classList.toggle('on',subOn);
   refreshFavSet();
   const done=gs('fs_done');
-  startupDone=true;
-  if(!done){buildBuiltinGrid();renderSaved();showSetupPage('lists');triggerCardIn(builtinGrid,'.sc-card');const sv=document.getElementById('startup-vid');if(sv){sv.pause();sv.removeAttribute('src');sv.load()}startup.style.display='none';ui.classList.add('show');console.log('PVTV DEBUG: setup classes='+setup.className+' ui classes='+ui.className+' cards='+builtinGrid.children.length+' setup display='+getComputedStyle(setup).display+' ui opacity='+getComputedStyle(ui).opacity);return}
+  if(!done){buildBuiltinGrid();renderSaved();showSetupPage('lists');triggerCardIn(builtinGrid,'.sc-card');startup.style.display='none';ui.classList.add('show');console.log('PVTV DEBUG: setup classes='+setup.className+' ui classes='+ui.className+' cards='+builtinGrid.children.length+' setup display='+getComputedStyle(setup).display+' ui opacity='+getComputedStyle(ui).opacity);return}
   startup.style.display='none';
-  try{const sv0=$('startup-vid');if(sv0){sv0.pause();sv0.removeAttribute('src');sv0.load()}}catch(_){}
   setup.classList.add('off');
   ui.classList.add('show');
   const selBuiltin=gs(LS.SEL)||BUILTIN.map(p=>p.id);
