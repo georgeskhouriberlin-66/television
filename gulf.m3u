@@ -87,6 +87,8 @@ https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Archive/playlist.m3u8
 https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Drama/playlist.m3u8
 #EXTINF:-1 tvg-id="JordanTourism.jo@SD" tvg-logo="https://i.imgur.com/gpeIoU9.png" group-title="Undefined",Jordan Tourism (1080p)
 https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Tourism/playlist.m3u8
+#EXTINF:-1 tvg-id="beINSports9.qa@MENA" tvg-logo="https://assets.bein.com/mena/sites/3/2023/09/logos-_beINSPORTS9.png" group-title="Undefined",like Gecko) Chrome/156.0.0.0 Safari/537.36" group-title="Undefined",beIN Sports 9
+http://86.192.195.47:9034/stream/10/index.m3u8
 #EXTINF:-1 tvg-id="Pulse95Radio.ae@SD" tvg-logo="https://maraya.faulio.com/storage/mediagallery/60/26/fullhd_d5c3c81b0562a76bc63f073a5e0947f309b0215b.png" group-title="Undefined",Pulse95 Radio (1080p)
 https://svs.itworkscdn.net/pulse95live/pulse96/playlist.m3u8
 #EXTINF:-1 tvg-id="RadioFannJordanStudio.jo@SD" tvg-logo="https://cdn-profiles.tunein.com/s142626/images/logod.jpg" group-title="Undefined",Radio Fann Jordan Studio (1080p) [Not 24/7]

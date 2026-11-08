@@ -1037,6 +1037,8 @@ http://31.148.48.15/A2/index.m3u8
 https://cdn-dvr.ntv.ru/Balabol/index.m3u8
 #EXTINF:-1 tvg-id="CityEdenTeleNovella.ru@HD" tvg-logo="https://i.imgur.com/mT5liTh.png" group-title="Series",City Eden TeleNovella [Not 24/7]
 https://cityeden.catcast.tv/content/46209/index.m3u8
+#EXTINF:-1 tvg-id="CTVDlaCiebieTV.ee@SD" tvg-logo="https://ukrtvr.org/images/%D0%A1%D1%83%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D0%B5/CTV%20-%20Dla%20Ciebie%20TV.png" group-title="Series",CTV Dla Ciebie TV
+http://90.183.52.46:4000/play/a065/index.m3u8
 #EXTINF:-1 tvg-id="FoxLife.ru@SD" tvg-logo="https://i.imgur.com/O2miSLA.png" group-title="Series",Fox Life (576p)
 http://stream.mcquack.net/129/index.m3u8
 #EXTINF:-1 tvg-id="Tviyserial.ua@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Tviy_Serial.svg/250px-Tviy_Serial.svg.png" group-title="Series",like Gecko) Chrome/149.0.0.0 Safari/537.36" group-title="Series",Tviy serial (1080p)
